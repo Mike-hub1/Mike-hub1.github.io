@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>美加墨世界杯</title>
+    <script>window.WC26_ARCHIVE_CONFIG = {
+  "enabled": true,
+  "generatedAt": "2026-07-19T23:06:22Z",
+  "stopAt": "2026-07-20T02:00:00Z",
+  "stopLabel": "2026-07-20 10:00 北京时间",
+  "archiveAt": "2026-07-20T02:10:00Z",
+  "archiveLabel": "2026-07-20 10:10 北京时间",
+  "apiIndexUrl": "/static/api/v1/index.json",
+  "counts": {
+    "matches": 104,
+    "teams": 48,
+    "players": 1247,
+    "paths": 1846
+  },
+  "note": "Static archive mode: no realtime API, no provider sync, no self-heal writes."
+};
+</script>
+    <script>
+      window.WC26_BOOT_API_PROMISES = new Map();
+      (() => {
+        if (window.WC26_ARCHIVE_CONFIG?.enabled) return;
+        const queue = (path) => {
+          if (!path || window.WC26_BOOT_API_PROMISES.has(path)) return;
+          const request = fetch(`/api/v1${path}`, { headers: { Accept: "application/json" }, priority: "high" })
+            .then(async (response) => ({ ok: response.ok, status: response.status, data: await response.json() }))
+            .catch((error) => ({ ok: false, error }));
+          window.WC26_BOOT_API_PROMISES.set(path, request);
+        };
+        const raw = location.hash.replace(/^#/, "") || "/";
+        const [routePath, query = ""] = raw.split("?");
+        const params = new URLSearchParams(query);
+        const segments = routePath.split("/").filter(Boolean);
+        if (routePath === "/") queue("/matches?pageSize=8");
+        if (routePath === "/knockout") {
+          queue("/competitions/world-cup-2026");
+          queue("/matches?pageSize=120&competition=world-cup-2026");
+          queue("/predictions/knockout");
+        }
+        if (segments[0] === "matches" && segments[1]) {
+          const aliases = { source: "timeline", prediction: "score-prediction", spm: "score-prediction" };
+          const requested = aliases[params.get("tab")] || params.get("tab") || "timeline";
+          const includeByTab = {
+            "score-prediction": ["source"],
+            timeline: ["events", "source"],
+            lineups: ["events", "stats", "source", "lineups"],
+            stats: ["events", "stats", "source"],
+            h2h: ["h2h", "source"],
+          };
+          const include = includeByTab[requested] || includeByTab.timeline;
+          queue(`/matches/${encodeURIComponent(segments[1])}?${new URLSearchParams({ include: include.join(",") })}`);
+          if (requested === "lineups") queue("/formation-specs");
+          if (requested === "score-prediction") queue("/predictions/knockout");
+        }
+        if (segments[0] === "teams" && segments[1]) queue(`/teams/${encodeURIComponent(segments[1])}`);
+        if (segments[0] === "players" && segments[1]) queue(`/players/${encodeURIComponent(segments[1])}`);
+        if (segments[0] === "competitions" && segments[1]) {
+          const slug = encodeURIComponent(segments[1]);
+          queue("/teams");
+          queue(`/competitions/${slug}`);
+          if (segments[1] !== "world-cup-2026") {
+            const filters = Object.fromEntries(params.entries());
+            queue(`/matches?${new URLSearchParams({ pageSize: "80", competition: segments[1], ...filters })}`);
+          }
+        }
+        if (segments[0] === "leaderboards" && segments[1]) {
+          const metric = segments[1];
+          const limits = { players: 50, goals: 10, assists: 10, market_values: 50, teams: 32 };
+          if (limits[metric]) {
+            queue(`/leaderboards/${metric}?${new URLSearchParams({ limit: String(limits[metric]), ...Object.fromEntries(params.entries()) })}`);
+          }
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="/static/styles.min.css?v=280" />
+    <script defer src="/static/app.min.js?v=280"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark">26</span>
+          <span>
+            <strong>美加墨世界杯</strong>
+            <small>2026 国际足球赛</small>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="主导航">
+          <a href="/" data-nav-root="/">首页</a>
+          <a href="#/competitions/world-cup-2026" data-nav-root="/competitions">小组赛</a>
+          <a href="#/knockout" data-nav-root="/knockout">淘汰赛</a>
+          <a href="#/leaderboards/players" data-nav-root="/leaderboards">榜单</a>
+        </nav>
+        <form id="global-search" class="global-search" autocomplete="off">
+          <input id="global-search-input" type="search" placeholder="搜索球队、球员、小组赛" aria-label="搜索" />
+          <button type="submit" title="搜索" aria-label="搜索">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="m15.5 15.5 4 4" />
+            </svg>
+          </button>
+        </form>
+        <button class="notify-button" type="button" aria-label="通知" title="赛程提醒" data-notify>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16l-2-2Z" />
+            <path d="M9.5 20a2.7 2.7 0 0 0 5 0" />
+          </svg>
+        </button>
+      </header>
+      <main id="app" class="main" tabindex="-1" aria-busy="true">
+        <div class="route-loader" role="status" aria-live="polite">
+          <span class="route-loader-mark" aria-hidden="true"></span>
+          <span>正在载入赛事数据</span>
+        </div>
+      </main>
+    </div>
+
+    <div id="modal-root" class="modal-root" hidden></div>
+    <div id="toast" class="toast" hidden></div>
+
+  </body>
+</html>
