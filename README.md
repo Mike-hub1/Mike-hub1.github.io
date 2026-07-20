@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="https://mike-hub1.github.io/"><img src="readme-home.png" width="760" alt="2026 美加墨世界杯数据档案首页"></a>
+  <a href="https://mike-hub1.github.io/"><img src="readme-home.jpg" width="760" alt="2026 美加墨世界杯数据档案首页"></a>
 </p>
 
 ## 项目简介
