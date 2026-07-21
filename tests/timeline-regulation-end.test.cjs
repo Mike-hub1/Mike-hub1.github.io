@@ -118,6 +118,12 @@ const unsortedEvents = [
 ];
 const unsortedMatch = { ...extraTimeMatch, events: unsortedEvents };
 
+const kickoffHtml = context.renderTimelineEvent(unsortedEvents[1], unsortedMatch);
+assert.match(kickoffHtml, /timeline-event-time">0'/);
+assert.doesNotMatch(kickoffHtml, /timeline-event-time">上半场/);
+const preMatchHtml = context.renderTimelineEvent(unsortedEvents[0], unsortedMatch);
+assert.match(preMatchHtml, /timeline-event-time">-/);
+assert.doesNotMatch(preMatchHtml, /timeline-event-time">赛前/);
 assert.equal(context.timelineEffectivePeriod(unsortedEvents[8], unsortedMatch), "extra_time_first_half");
 assert.equal(context.timelineEffectivePeriod(unsortedEvents[10], unsortedMatch), "extra_time_second_half");
 const extraTimeAddedHtml = context.renderTimelineEvent(unsortedEvents[8], unsortedMatch);

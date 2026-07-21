@@ -6031,7 +6031,9 @@ function renderTimelineBoundary(kind, match = {}, events = []) {
 
 function renderTimelineEvent(event, match = {}) {
   const type = event.eventType || event.type || "";
-  const time = event.minute ? `${event.minute}${type !== "added_time" && event.extraMinute ? `+${event.extraMinute}` : ""}'` : "";
+  const minute = Number(event.minute);
+  const hasMinute = event.minute !== null && event.minute !== undefined && event.minute !== "" && Number.isFinite(minute);
+  const time = hasMinute ? `${minute}${type !== "added_time" && event.extraMinute ? `+${event.extraMinute}` : ""}'` : "";
   const side = timelineEventSide(event, match);
   const isRegulationEnd = timelineIsRegulationEnd(event, match);
   const label = timelineEventLabel(event, match);
@@ -6050,7 +6052,7 @@ function renderTimelineEvent(event, match = {}) {
   return `
     <article class="timeline-event ${escapeHtml(side)} ${escapeHtml(type)}">
       <div class="timeline-event-rail">
-        <span class="timeline-event-time">${escapeHtml(time || timelinePeriodLabel(timelineEffectivePeriod(event, match)) || "-")}</span>
+        <span class="timeline-event-time">${escapeHtml(time || "-")}</span>
         <span class="timeline-event-dot">${escapeHtml(isRegulationEnd ? "90" : shortEvent(type))}</span>
       </div>
       <div class="timeline-event-card">
