@@ -1,0 +1,363 @@
+{
+  "reviewedAt": "2026-07-21T14:00:00Z",
+  "method": "FIFA official match reports cross-checked against FIFA official timelines and the archived ESPN public play-by-play",
+  "entries": [
+    {
+      "matchId": "fifa_match_400021543",
+      "minute": 96,
+      "playerId": "fifa_player_447855",
+      "teamSide": "home",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段米克尔·梅里诺犯规",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Nico Williams had a goal disallowed after a foul by Mikel Merino in the attacking phase.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/spain-argentina-final-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021543",
+      "minute": 113,
+      "playerId": "fifa_player_405545",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 1, "away": 0 },
+      "evidence": "Ferran Torres had a goal disallowed for offside in the 113th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/spain-argentina-final-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021542",
+      "minute": 11,
+      "playerId": "fifa_player_448196",
+      "teamSide": "away",
+      "reason": "offside",
+      "score": { "home": 0, "away": 1 },
+      "evidence": "Bukayo Saka's finish was ruled out for offside in the 11th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/france-england-report-highlights-bronze-final"
+    },
+    {
+      "matchId": "fifa_match_400021539",
+      "minute": 45,
+      "extraMinute": 4,
+      "playerId": "fifa_player_369419",
+      "teamSide": "away",
+      "reason": "offside",
+      "score": { "home": 1, "away": 1 },
+      "evidence": "Harry Kane's goal was disallowed for offside in first-half stoppage time.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/norway-england-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021539",
+      "minute": 55,
+      "playerId": "fifa_player_491244",
+      "teamSide": "home",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段哈兰德对埃利奥特·安德森犯规",
+      "score": { "home": 1, "away": 1 },
+      "evidence": "Torbjorn Heggem's goal was overturned after VAR identified Erling Haaland's foul on Elliot Anderson.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/norway-england-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021528",
+      "minute": 59,
+      "playerId": "fifa_player_483161",
+      "teamSide": "away",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段犯规",
+      "score": { "home": 0, "away": 1 },
+      "evidence": "Mostafa Zico's goal was ruled out after VAR identified an attacking foul in the build-up.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/argentina-egypt-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021517",
+      "minute": 56,
+      "playerId": "fifa_player_428886",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 1, "away": 0 },
+      "evidence": "Luis Diaz's finish was disallowed for offside in the 56th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/colombia-ghana-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021526",
+      "minute": 61,
+      "playerId": "fifa_player_201200",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 0, "away": 1 },
+      "evidence": "Cristiano Ronaldo's finish was ruled out for offside in the 61st minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/portugal-croatia-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021526",
+      "minute": 80,
+      "playerId": "fifa_player_485066",
+      "teamSide": "away",
+      "reason": "offside",
+      "score": { "home": 1, "away": 1 },
+      "evidence": "Petar Sucic's goal was disallowed for offside in the 80th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/portugal-croatia-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021526",
+      "minute": 90,
+      "extraMinute": 13,
+      "playerId": "fifa_player_448180",
+      "teamSide": "away",
+      "reason": "offside",
+      "reasonText": "进攻阶段马里奥·帕萨利奇越位",
+      "score": { "home": 2, "away": 1 },
+      "evidence": "Josko Gvardiol's stoppage-time goal was ruled out because Mario Pasalic was offside in the attacking phase.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/portugal-croatia-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021519",
+      "minute": 29,
+      "playerId": "fifa_player_430735",
+      "teamSide": "home",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段保罗·库巴尔西冲撞门将",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Marc Cucurella's goal was disallowed after Pau Cubarsi fouled the goalkeeper in the attacking phase.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/spain-austria-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021524",
+      "minute": 31,
+      "playerId": "fifa_player_466624",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Folarin Balogun's goal was disallowed for offside in the 31st minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/usa-bosnia-and-herzegovina-review-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021524",
+      "minute": 79,
+      "playerId": "fifa_player_390267",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 1, "away": 0 },
+      "evidence": "Christian Pulisic's goal was disallowed for offside in the 79th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/usa-bosnia-and-herzegovina-review-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021523",
+      "minute": 20,
+      "playerId": "fifa_player_389867",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Kylian Mbappe's finish was disallowed for offside in the 20th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/france-sweden-review-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021513",
+      "minute": 102,
+      "playerId": "fifa_player_401378",
+      "teamSide": "home",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段瓦尔德马·安东冲撞门将奥兰多·吉尔",
+      "score": { "home": 1, "away": 1 },
+      "evidence": "Jonathan Tah's goal was overturned after Waldemar Anton fouled goalkeeper Orlando Gill.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/germany-paraguay-review-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021500",
+      "minute": 1,
+      "playerId": "fifa_player_385475",
+      "teamSide": "away",
+      "reason": "offside",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Eldor Shomurodov's early finish was disallowed for offside.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/congo-dr-uzbekistan-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021500",
+      "minute": 17,
+      "playerId": "fifa_player_424119",
+      "teamSide": "home",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段犯规",
+      "score": { "home": 0, "away": 1 },
+      "evidence": "Nathanael Mbuku's goal was overturned after VAR identified an attacking foul in the build-up.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/congo-dr-uzbekistan-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021508",
+      "minute": 90,
+      "extraMinute": 1,
+      "playerId": "fifa_player_411174",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 0, "away": 2 },
+      "evidence": "Jose Fajardo's stoppage-time finish was disallowed for offside.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/panama-england-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021479",
+      "minute": 90,
+      "extraMinute": 3,
+      "playerId": "fifa_player_346743",
+      "teamSide": "away",
+      "reason": "offside",
+      "score": { "home": 1, "away": 1 },
+      "evidence": "Shoja Khalilzadeh's stoppage-time goal was disallowed for offside.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/egypt-ir-iran-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021455",
+      "minute": 22,
+      "playerId": "fifa_player_405742",
+      "teamSide": "away",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段对杰克·亨德里犯规",
+      "score": { "home": 0, "away": 1 },
+      "evidence": "Vinicius Junior's goal was overturned after an attacking foul on Jack Hendry.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/scotland-brazil-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021501",
+      "minute": 6,
+      "playerId": "fifa_player_431200",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Daniel Munoz's goal was disallowed for offside in the sixth minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/colombia-congo-dr-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021501",
+      "minute": 79,
+      "playerId": "fifa_player_428886",
+      "teamSide": "home",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段推人犯规",
+      "score": { "home": 1, "away": 0 },
+      "evidence": "Luis Diaz's first late finish was disallowed for a push in the attacking phase.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/colombia-congo-dr-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021501",
+      "minute": 80,
+      "playerId": "fifa_player_428886",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 1, "away": 0 },
+      "evidence": "Luis Diaz's second late finish was disallowed for offside.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/colombia-congo-dr-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021503",
+      "minute": 29,
+      "playerId": "fifa_player_479086",
+      "teamSide": "away",
+      "reason": "attacking_foul",
+      "reasonText": "进攻阶段犯规",
+      "score": { "home": 2, "away": 0 },
+      "evidence": "Azizjon Ganiev's goal was overturned after an attacking foul in the build-up.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/portugal-uzbekistan-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021477",
+      "minute": 25,
+      "playerId": "fifa_player_388475",
+      "teamSide": "away",
+      "reason": "offside",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Mehdi Taremi's goal was overturned for offside in the 25th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/belgium-ir-iran-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021457",
+      "minute": 78,
+      "playerId": "fifa_player_463746",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 3, "away": 0 },
+      "evidence": "Endrick's finish was disallowed for offside in the 78th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/brazil-haiti-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021502",
+      "minute": 55,
+      "playerId": "fifa_player_368649",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 1, "away": 1 },
+      "evidence": "Joao Cancelo's goal was disallowed for offside in the 55th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/portugal-congo-dr-highlights-match-report"
+    },
+    {
+      "matchId": "fifa_match_400021498",
+      "minute": 67,
+      "playerId": "fifa_player_299200",
+      "teamSide": "home",
+      "reason": "handball",
+      "reasonText": "进攻阶段斯特凡·波施手球",
+      "score": { "home": 1, "away": 1 },
+      "evidence": "Marko Arnautovic's goal was overturned after Stefan Posch handled the ball in the build-up.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/austria-jordan-highlights-match-report"
+    },
+    {
+      "matchId": "fifa_match_400021496",
+      "minute": 5,
+      "playerId": "fifa_player_229397",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Lionel Messi's early finish was disallowed for offside.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/argentina-v-algeria-highlights-match-report"
+    },
+    {
+      "matchId": "fifa_match_400021496",
+      "minute": 8,
+      "playerId": "fifa_player_477795",
+      "teamSide": "away",
+      "reason": "offside",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Fares Chaibi's goal was overturned for offside in the eighth minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/argentina-v-algeria-highlights-match-report"
+    },
+    {
+      "matchId": "fifa_match_400021458",
+      "minute": 28,
+      "playerId": "fifa_player_466624",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 1, "away": 0 },
+      "evidence": "Folarin Balogun's goal was disallowed for offside in the 28th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/usa-paraguay-highlights-match-report"
+    },
+    {
+      "matchId": "fifa_match_400021483",
+      "minute": 90,
+      "extraMinute": 2,
+      "playerId": "fifa_player_405545",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 4, "away": 0 },
+      "evidence": "Ferran Torres's stoppage-time goal was disallowed for offside.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/ferran-torres-spain-hero"
+    },
+    {
+      "matchId": "fifa_match_400021505",
+      "minute": 90,
+      "extraMinute": 1,
+      "playerId": "fifa_player_386013",
+      "teamSide": "home",
+      "reason": "offside",
+      "score": { "home": 0, "away": 0 },
+      "evidence": "Davinson Sanchez's stoppage-time goal was disallowed for offside.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/colombia-portugal-match-report-highlights"
+    },
+    {
+      "matchId": "fifa_match_400021472",
+      "minute": 44,
+      "playerId": "fifa_player_483304",
+      "teamSide": "away",
+      "reason": "offside",
+      "score": { "home": 2, "away": 0 },
+      "evidence": "Gustaf Lagerbielke's goal was disallowed for offside in the 44th minute.",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/netherlands-sweden-match-report-highlights"
+    }
+  ]
+}

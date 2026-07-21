@@ -7790,6 +7790,29 @@ body[data-subroute="group-stage"] .main {
   --event-soft: rgba(225, 29, 72, 0.1);
 }
 
+.timeline-event.goal_disallowed {
+  --event-color: #7c3aed;
+  --event-soft: rgba(124, 58, 237, 0.13);
+}
+
+.timeline-event.goal_disallowed .timeline-event-dot {
+  color: #ffffff;
+  background: repeating-linear-gradient(135deg, #6d28d9 0 7px, #c026d3 7px 14px);
+  box-shadow:
+    0 0 0 2px rgba(192, 38, 211, 0.42),
+    0 0 18px rgba(124, 58, 237, 0.34),
+    0 10px 18px rgba(15, 23, 42, 0.13);
+}
+
+.timeline-event.goal_disallowed .timeline-event-time,
+.timeline-event.goal_disallowed .timeline-event-card {
+  border-color: rgba(124, 58, 237, 0.38);
+}
+
+.timeline-event.goal_disallowed .timeline-event-label {
+  color: #6d28d9;
+}
+
 .timeline-event.yellow_card {
   --event-color: #d9a31a;
   --event-soft: rgba(217, 163, 26, 0.13);
