@@ -169,6 +169,20 @@ assert.match(disallowedGoalHtml, /进球被取消/);
 const archivedMatch = JSON.parse(
   fs.readFileSync(new URL("../static/api/v1/by-path/match-543-corrected.json", `file://${__filename}`), "utf8"),
 );
+const archivedSnapshotNames = [
+  "L21hdGNoZXMvZmlmYV9tYXRjaF80MDAwMjE1NDM.json",
+  "L21hdGNoZXMvZmlmYV9tYXRjaF80MDAwMjE1NDM_aW5jbHVkZT1ldmVudHMlMkNzdGF0cyUyQ3NvdXJjZQ.json",
+  "L21hdGNoZXMvZmlmYV9tYXRjaF80MDAwMjE1NDM_aW5jbHVkZT1ldmVudHMlMkNzdGF0cyUyQ3NvdXJjZSUyQ2gyaA.json",
+  "L21hdGNoZXMvZmlmYV9tYXRjaF80MDAwMjE1NDM_aW5jbHVkZT1ldmVudHMlMkNzdGF0cyUyQ3NvdXJjZSUyQ2gyaCUyQ2xpbmV1cHM.json",
+  "L21hdGNoZXMvZmlmYV9tYXRjaF80MDAwMjE1NDM_aW5jbHVkZT1ldmVudHMlMkNzdGF0cyUyQ3NvdXJjZSUyQ2xpbmV1cHM.json",
+];
+assert.equal(archivedMatch.eventsCount, archivedMatch.events.length);
+archivedSnapshotNames.forEach((snapshotName) => {
+  const snapshot = JSON.parse(
+    fs.readFileSync(new URL(`../static/api/v1/by-path/${snapshotName}`, `file://${__filename}`), "utf8"),
+  );
+  assert.deepEqual(snapshot, archivedMatch, `${snapshotName} must match the canonical final snapshot`);
+});
 const archivedTimelineHtml = context.renderTimelineEvents(archivedMatch.events, archivedMatch);
 const archivedPhaseHeadings = [...archivedTimelineHtml.matchAll(/timeline-period"><span>([^<]+)<\/span>/g)].map((match) => match[1]);
 assert.deepEqual(archivedPhaseHeadings, ["赛前", "上半场", "半场", "下半场", "90分钟结束", "加时上半场", "加时下半场"]);
