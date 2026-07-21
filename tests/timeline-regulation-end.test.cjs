@@ -4,6 +4,11 @@ const vm = require("node:vm");
 
 const appFile = process.env.APP_FILE || new URL("../static/app.js", `file://${__filename}`);
 const source = fs.readFileSync(appFile, "utf8");
+assert.match(
+  source,
+  /function archiveVersionParam\(\).*?ARCHIVE_CONFIG\.generatedAt.*?archive.*?encodeURIComponent/s,
+);
+assert.match(source, /cache:\s*"no-cache"/);
 const start = source.indexOf("function renderTimelineEvents");
 const end = source.indexOf("function renderLineups", start);
 assert.ok(start >= 0 && end > start, "timeline function block must be present");

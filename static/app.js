@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "280";
+const STATIC_DATA_VERSION = "286";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -507,7 +507,8 @@ function cleanHomeUrl() {
 }
 
 function archiveVersionParam() {
-  return encodeURIComponent(ARCHIVE_CONFIG.generatedAt || STATIC_DATA_VERSION);
+  const archiveStamp = ARCHIVE_CONFIG.generatedAt || "archive";
+  return encodeURIComponent(`${archiveStamp}-${STATIC_DATA_VERSION}`);
 }
 
 function withArchiveVersion(url) {
@@ -544,7 +545,7 @@ async function fetchArchiveJson(url) {
   if (!archiveApiCache.has(versionedUrl)) {
     archiveApiCache.set(
       versionedUrl,
-      fetch(versionedUrl, { cache: "force-cache" }).then((response) => {
+      fetch(versionedUrl, { cache: "no-cache" }).then((response) => {
         if (!response.ok) throw new Error(`归档快照不可用 HTTP ${response.status}`);
         return response.json();
       })
