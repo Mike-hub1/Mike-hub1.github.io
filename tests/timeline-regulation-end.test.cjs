@@ -9,7 +9,7 @@ const end = source.indexOf("function renderLineups", start);
 assert.ok(start >= 0 && end > start, "timeline function block must be present");
 
 const context = {
-  eventLabels: { full_time: "全场", goal: "进球" },
+  eventLabels: { full_time: "全场", goal: "进球", goal_disallowed: "进球无效" },
   statusLabels: { ft: "已结束" },
   escapeHtml: (value) => String(value),
   formatDate: () => "07/20 03:00",
@@ -146,12 +146,34 @@ assert.ok(timelineHtml.indexOf("90分钟常规赛结束") < timelineHtml.indexOf
 assert.ok(timelineHtml.indexOf("加时上半场补时") < timelineHtml.indexOf("加时进球"));
 assert.ok(timelineHtml.indexOf("加时进球") < timelineHtml.indexOf("加时下半场补时"));
 
+const disallowedGoal = {
+  eventType: "goal_disallowed",
+  period: "extra_time_first_half",
+  minute: 96,
+  team: homeTeam,
+  player: { name: "尼科·威廉斯" },
+  score: { home: 0, away: 0 },
+  description: "尼科·威廉斯破门，但因进攻阶段犯规，进球被取消。比分仍为 0-0。",
+};
+const disallowedGoalHtml = context.renderTimelineEvent(disallowedGoal, extraTimeMatch);
+assert.match(disallowedGoalHtml, /timeline-event-label">进球无效/);
+assert.match(disallowedGoalHtml, /timeline-event-dot">X/);
+assert.match(disallowedGoalHtml, /timeline-score-badge">0-0/);
+assert.match(disallowedGoalHtml, /进球被取消/);
+
 const archivedMatch = JSON.parse(
   fs.readFileSync(new URL("../static/api/v1/by-path/match-543-corrected.json", `file://${__filename}`), "utf8"),
 );
 const archivedTimelineHtml = context.renderTimelineEvents(archivedMatch.events, archivedMatch);
 const archivedPhaseHeadings = [...archivedTimelineHtml.matchAll(/timeline-period"><span>([^<]+)<\/span>/g)].map((match) => match[1]);
 assert.deepEqual(archivedPhaseHeadings, ["赛前", "上半场", "半场", "下半场", "90分钟结束", "加时上半场", "加时下半场"]);
+const archivedDisallowedGoals = archivedMatch.events.filter((event) => event.eventType === "goal_disallowed");
+assert.equal(archivedDisallowedGoals.length, 2);
+assert.equal(archivedDisallowedGoals.map((event) => `${event.minute}:${event.player.name}`).join(","), "96:尼科·威廉斯,113:费兰·托雷斯");
+assert.equal(archivedMatch.events.filter((event) => event.eventType === "goal").length, 1);
+assert.equal((archivedTimelineHtml.match(/timeline-event-dot">X<\/span>/g) || []).length, 2);
+assert.match(archivedTimelineHtml, /尼科·威廉斯破门，但因进攻阶段米克尔·梅里诺犯规/);
+assert.match(archivedTimelineHtml, /费兰·托雷斯破门，但因越位进球被取消/);
 assert.equal(archivedMatch.events.find((event) => event.minute === 105 && event.extraMinute === 3 && event.eventType === "added_time").period, "extra_time_first_half");
 assert.equal(archivedMatch.events.find((event) => event.minute === 120 && event.extraMinute === 5 && event.eventType === "added_time").period, "extra_time_second_half");
 assert.ok(archivedTimelineHtml.indexOf("90分钟常规赛结束") < archivedTimelineHtml.indexOf("费兰·托雷斯破门"));

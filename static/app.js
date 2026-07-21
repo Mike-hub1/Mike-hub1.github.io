@@ -136,6 +136,7 @@ const leaderboardFallbackRows = {
 
 const eventLabels = {
   goal: "进球",
+  goal_disallowed: "进球无效",
   yellow_card: "黄牌",
   red_card: "红牌",
   substitution: "换人",
@@ -6213,13 +6214,14 @@ function eventScore(event) {
 function relatedEventLabel(type) {
   if (type === "substitution") return "换下";
   if (type === "foul") return "被侵犯";
-  if (type === "shot_on_target" || type === "shot_off_target" || type === "shot_blocked" || type === "goal") return "参与";
+  if (type === "shot_on_target" || type === "shot_off_target" || type === "shot_blocked" || type === "goal" || type === "goal_disallowed") return "参与";
   return "关联";
 }
 
 function shortEvent(type) {
   return {
     goal: "G",
+    goal_disallowed: "X",
     yellow_card: "Y",
     red_card: "R",
     substitution: "S",

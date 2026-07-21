@@ -1,10 +1,10 @@
-const CACHE_VERSION = "wc26-v284";
+const CACHE_VERSION = "wc26-v285";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 
 const PRECACHE_URLS = [
   "/static/styles.min.css?v=280",
-  "/static/app.min.js?v=284",
+  "/static/app.min.js?v=285",
 ];
 
 self.addEventListener("install", (event) => {
