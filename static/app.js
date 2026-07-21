@@ -5939,7 +5939,7 @@ function renderTimelineEvents(events, match = {}) {
   let startInserted = false;
   const blocks = [];
   events.forEach((event) => {
-    const period = timelinePeriodLabel(event.period);
+    const period = timelineDisplayPeriodLabel(event, match);
     if (period && period !== currentPeriod) {
       blocks.push(`<div class="timeline-period"><span>${escapeHtml(period)}</span></div>`);
       currentPeriod = period;
@@ -5986,8 +5986,12 @@ function renderTimelineEvent(event, match = {}) {
   const time = event.minute ? `${event.minute}${event.extraMinute ? `+${event.extraMinute}` : ""}'` : "";
   const type = event.eventType || event.type || "";
   const side = timelineEventSide(event, match);
-  const label = timelineEventLabel(event);
-  const score = eventScore(event);
+  const isRegulationEnd = timelineIsRegulationEnd(event, match);
+  const label = timelineEventLabel(event, match);
+  const score = isRegulationEnd ? timelineRegulationScore(event, match) : eventScore(event);
+  const description = isRegulationEnd
+    ? `90分钟常规赛结束。 比分 ${score?.label || "待确认"}。`
+    : event.description || label;
   const teamName = event.team ? teamDisplayName(event.team, "") : "";
   const playerName = event.player?.name || "";
   const relatedName = event.relatedPlayer?.name || "";
@@ -6000,14 +6004,14 @@ function renderTimelineEvent(event, match = {}) {
     <article class="timeline-event ${escapeHtml(side)} ${escapeHtml(type)}">
       <div class="timeline-event-rail">
         <span class="timeline-event-time">${escapeHtml(time || timelinePeriodLabel(event.period) || "-")}</span>
-        <span class="timeline-event-dot">${escapeHtml(shortEvent(type))}</span>
+        <span class="timeline-event-dot">${escapeHtml(isRegulationEnd ? "90" : shortEvent(type))}</span>
       </div>
       <div class="timeline-event-card">
         <div class="timeline-event-head">
           <span class="timeline-event-label">${escapeHtml(label)}</span>
           ${score ? `<span class="timeline-score-badge">${escapeHtml(score.label)}</span>` : ""}
         </div>
-        <p>${escapeHtml(event.description || label)}</p>
+        <p>${escapeHtml(description)}</p>
         ${meta.length ? `<div class="timeline-event-meta">${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>` : ""}
       </div>
     </article>
@@ -6042,13 +6046,58 @@ function timelineHasFinished(match = {}, events = []) {
   });
 }
 
-function timelineEventLabel(event) {
+function timelineEventLabel(event, match = {}) {
   const type = event.eventType || event.type || "";
+  if (timelineIsRegulationEnd(event, match)) return "90分钟常规赛结束";
   if (type === "goal" && statsEventIsOwnGoal(event)) return "乌龙球";
   if (type === "goal" && statsEventIsPenalty(event)) return "点球进球";
   if (type === "goal" && statsEventIsDirectFreeKickGoal(event)) return "任意球破门";
   if (type === "goal" && statsEventIsSetPieceGoal(event)) return "定位球进球";
   return eventLabels[type] || type || "事件";
+}
+
+function timelineDisplayPeriodLabel(event, match = {}) {
+  if (timelineIsRegulationEnd(event, match)) return "90分钟结束";
+  return timelinePeriodLabel(event.period);
+}
+
+function timelineHasExtraTime(match = {}) {
+  const detail = String(match.statusDetail || "").toLowerCase();
+  if (detail.includes("加时") || detail.includes("extra time")) return true;
+  return (match.events || []).some((event) => [
+    "extra_time",
+    "extra_time_first_half",
+    "extra_time_second_half",
+  ].includes(String(event.period || "").toLowerCase()));
+}
+
+function timelineIsRegulationEnd(event, match = {}) {
+  const type = event.eventType || event.type || "";
+  if (type !== "full_time" || !timelineHasExtraTime(match)) return false;
+  const minute = Number(event.minute);
+  const raw = statsEventRawText(event).toLowerCase();
+  return raw.includes("second half ends") || (Number.isFinite(minute) && minute <= 90);
+}
+
+function timelineRegulationScore(event, match = {}) {
+  const raw = statsEventRawText(event);
+  const rawScore = raw.match(/second half ends,\s+.+?\s+(\d+),\s+.+?\s+(\d+)\.?$/i);
+  if (rawScore) {
+    const home = Number(rawScore[1]);
+    const away = Number(rawScore[2]);
+    return { home, away, label: `${home}-${away}` };
+  }
+
+  let home = 0;
+  let away = 0;
+  (match.events || []).forEach((item) => {
+    if ((item.eventType || item.type) !== "goal" || statsEventIsPenaltyShootout(item)) return;
+    const period = String(item.period || "").toLowerCase();
+    if (period.startsWith("extra_time") || period === "extra_time") return;
+    if (statsEventMatchesTeam(item, match.homeTeam)) home += 1;
+    else if (statsEventMatchesTeam(item, match.awayTeam)) away += 1;
+  });
+  return { home, away, label: `${home}-${away}` };
 }
 
 function timelinePeriodLabel(period) {
