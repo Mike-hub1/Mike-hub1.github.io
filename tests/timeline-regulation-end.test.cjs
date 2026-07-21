@@ -120,6 +120,9 @@ const unsortedMatch = { ...extraTimeMatch, events: unsortedEvents };
 
 assert.equal(context.timelineEffectivePeriod(unsortedEvents[8], unsortedMatch), "extra_time_first_half");
 assert.equal(context.timelineEffectivePeriod(unsortedEvents[10], unsortedMatch), "extra_time_second_half");
+const extraTimeAddedHtml = context.renderTimelineEvent(unsortedEvents[8], unsortedMatch);
+assert.match(extraTimeAddedHtml, /timeline-event-time">105'/);
+assert.doesNotMatch(extraTimeAddedHtml, /timeline-event-time">105\+3'/);
 assert.equal(
   context.timelineCanonicalEvents(unsortedEvents, unsortedMatch).map((event) => event.id || "regulation-end").join(","),
   "pre,first-start,first-stoppage,half-time,halftime-sub,second-start,regulation-end,et-foul,et1-stoppage,et-goal,et2-stoppage",

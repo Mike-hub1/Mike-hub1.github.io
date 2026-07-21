@@ -5997,7 +5997,8 @@ function timelineEventSortMinute(event = {}) {
   const minute = Number(event.minute);
   const extraMinute = Number(event.extraMinute);
   const base = Number.isFinite(minute) ? minute : -1;
-  return base + (Number.isFinite(extraMinute) ? extraMinute / 100 : 0);
+  const type = event.eventType || event.type || "";
+  return base + (type !== "added_time" && Number.isFinite(extraMinute) ? extraMinute / 100 : 0);
 }
 
 function renderEvent(event) {
@@ -6029,8 +6030,8 @@ function renderTimelineBoundary(kind, match = {}, events = []) {
 }
 
 function renderTimelineEvent(event, match = {}) {
-  const time = event.minute ? `${event.minute}${event.extraMinute ? `+${event.extraMinute}` : ""}'` : "";
   const type = event.eventType || event.type || "";
+  const time = event.minute ? `${event.minute}${type !== "added_time" && event.extraMinute ? `+${event.extraMinute}` : ""}'` : "";
   const side = timelineEventSide(event, match);
   const isRegulationEnd = timelineIsRegulationEnd(event, match);
   const label = timelineEventLabel(event, match);
