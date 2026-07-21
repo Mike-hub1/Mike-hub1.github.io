@@ -5935,23 +5935,69 @@ function renderTimelineMetric(label, value, kind) {
 }
 
 function renderTimelineEvents(events, match = {}) {
+  const timelineMatch = {
+    ...match,
+    events: Array.isArray(match.events) ? match.events : events,
+  };
+  const orderedEvents = timelineCanonicalEvents(events, timelineMatch);
   let currentPeriod = "";
   let startInserted = false;
   const blocks = [];
-  events.forEach((event) => {
-    const period = timelineDisplayPeriodLabel(event, match);
+  orderedEvents.forEach((event) => {
+    const effectivePeriod = timelineEffectivePeriod(event, timelineMatch);
+    const period = timelineDisplayPeriodLabel(event, timelineMatch);
     if (period && period !== currentPeriod) {
       blocks.push(`<div class="timeline-period"><span>${escapeHtml(period)}</span></div>`);
       currentPeriod = period;
     }
-    if (!startInserted && timelineIsMatchPlayPeriod(event.period)) {
-      blocks.push(renderTimelineBoundary("start", match, events));
+    if (!startInserted && timelineIsMatchPlayPeriod(effectivePeriod)) {
+      blocks.push(renderTimelineBoundary("start", timelineMatch, orderedEvents));
       startInserted = true;
     }
-    blocks.push(renderTimelineEvent(event, match));
+    blocks.push(renderTimelineEvent(event, timelineMatch));
   });
-  if (timelineHasFinished(match, events)) blocks.push(renderTimelineBoundary("end", match, events));
+  if (timelineHasFinished(timelineMatch, orderedEvents)) blocks.push(renderTimelineBoundary("end", timelineMatch, orderedEvents));
   return blocks.join("");
+}
+
+function timelineCanonicalEvents(events, match = {}) {
+  return (Array.isArray(events) ? events : [])
+    .map((event, sourceIndex) => ({
+      event,
+      sourceIndex,
+      period: timelineEffectivePeriod(event, match),
+    }))
+    .sort((left, right) => {
+      const phaseOrder = timelinePeriodRank(left.period) - timelinePeriodRank(right.period);
+      if (phaseOrder) return phaseOrder;
+      const minuteOrder = timelineEventSortMinute(left.event) - timelineEventSortMinute(right.event);
+      return minuteOrder || left.sourceIndex - right.sourceIndex;
+    })
+    .map(({ event }) => event);
+}
+
+function timelinePeriodRank(period) {
+  const ranks = {
+    pre_match: 0,
+    first_half: 10,
+    half_time: 20,
+    second_half: 30,
+    match: 35,
+    regulation_end: 40,
+    extra_time_first_half: 50,
+    extra_time_half_time: 60,
+    extra_time_second_half: 70,
+    penalty: 80,
+    full_time: 90,
+  };
+  return ranks[period] ?? 95;
+}
+
+function timelineEventSortMinute(event = {}) {
+  const minute = Number(event.minute);
+  const extraMinute = Number(event.extraMinute);
+  const base = Number.isFinite(minute) ? minute : -1;
+  return base + (Number.isFinite(extraMinute) ? extraMinute / 100 : 0);
 }
 
 function renderEvent(event) {
@@ -6003,7 +6049,7 @@ function renderTimelineEvent(event, match = {}) {
   return `
     <article class="timeline-event ${escapeHtml(side)} ${escapeHtml(type)}">
       <div class="timeline-event-rail">
-        <span class="timeline-event-time">${escapeHtml(time || timelinePeriodLabel(event.period) || "-")}</span>
+        <span class="timeline-event-time">${escapeHtml(time || timelinePeriodLabel(timelineEffectivePeriod(event, match)) || "-")}</span>
         <span class="timeline-event-dot">${escapeHtml(isRegulationEnd ? "90" : shortEvent(type))}</span>
       </div>
       <div class="timeline-event-card">
@@ -6057,8 +6103,28 @@ function timelineEventLabel(event, match = {}) {
 }
 
 function timelineDisplayPeriodLabel(event, match = {}) {
-  if (timelineIsRegulationEnd(event, match)) return "90分钟结束";
-  return timelinePeriodLabel(event.period);
+  return timelinePeriodLabel(timelineEffectivePeriod(event, match));
+}
+
+function timelineEffectivePeriod(event = {}, match = {}) {
+  const rawPeriod = String(event.period || "").toLowerCase();
+  const rawText = statsEventRawText(event).toLowerCase();
+  if (timelineIsRegulationEnd(event, match)) return "regulation_end";
+  if (rawText.includes("second half extra time")) return "extra_time_second_half";
+  if (rawText.includes("first half extra time")) {
+    return rawText.includes(" ends") ? "extra_time_half_time" : "extra_time_first_half";
+  }
+  if (["penalty_shootout", "penalty_shoot-out", "shootout"].includes(rawPeriod)) return "penalty";
+
+  const minute = Number(event.minute);
+  if (rawPeriod === "extra_time") {
+    return Number.isFinite(minute) && minute > 105 ? "extra_time_second_half" : "extra_time_first_half";
+  }
+  if (rawPeriod === "second_half" && timelineHasExtraTime(match) && Number.isFinite(minute)) {
+    if (minute > 105) return "extra_time_second_half";
+    if (minute > 90) return "extra_time_first_half";
+  }
+  return rawPeriod;
 }
 
 function timelineHasExtraTime(match = {}) {
@@ -6068,7 +6134,7 @@ function timelineHasExtraTime(match = {}) {
     "extra_time",
     "extra_time_first_half",
     "extra_time_second_half",
-  ].includes(String(event.period || "").toLowerCase()));
+  ].includes(String(event.period || "").toLowerCase()) || statsEventRawText(event).toLowerCase().includes("extra time"));
 }
 
 function timelineIsRegulationEnd(event, match = {}) {
@@ -6092,7 +6158,7 @@ function timelineRegulationScore(event, match = {}) {
   let away = 0;
   (match.events || []).forEach((item) => {
     if ((item.eventType || item.type) !== "goal" || statsEventIsPenaltyShootout(item)) return;
-    const period = String(item.period || "").toLowerCase();
+    const period = timelineEffectivePeriod(item, match);
     if (period.startsWith("extra_time") || period === "extra_time") return;
     if (statsEventMatchesTeam(item, match.homeTeam)) home += 1;
     else if (statsEventMatchesTeam(item, match.awayTeam)) away += 1;
@@ -6106,7 +6172,9 @@ function timelinePeriodLabel(period) {
     first_half: "上半场",
     half_time: "半场",
     second_half: "下半场",
+    regulation_end: "90分钟结束",
     extra_time_first_half: "加时上半场",
+    extra_time_half_time: "加时半场",
     extra_time_second_half: "加时下半场",
     penalty: "点球大战",
     full_time: "终场",
