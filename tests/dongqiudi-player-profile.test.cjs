@@ -138,6 +138,7 @@ assert.match(app, /function playerProfileMarketValueLabel/);
 assert.match(app, /label: "身价", value: playerProfileMarketValueLabel\(identity\)/);
 assert.match(app, /function drawPlayerAbilityRadar/);
 assert.match(app, /function drawPlayerMarketHistory/);
+assert.match(app, /function playerMarketAdaptiveLogoSizes/);
 assert.match(app, /const PLAYER_MARKET_TEAM_ASSETS = new Map/);
 assert.match(app, /function initPlayerMarketHistory/);
 assert.match(app, /function selectPlayerMarketHistoryPoint/);
@@ -175,8 +176,57 @@ const marketChartSource = app.slice(
   app.indexOf("function drawPlayerMarketHistory"),
   app.indexOf("function updatePlayerMarketSelection")
 );
-assert.match(marketChartSource, /const logoSize = selected \? 20 : 11/);
+assert.match(marketChartSource, /const logoSizes = playerMarketAdaptiveLogoSizes\(positions, selectedIndex\)/);
+assert.match(marketChartSource, /const logoSize = logoSizes\[index\]/);
 assert.doesNotMatch(marketChartSource, /context\.arc\(point\.x, point\.y/);
+
+const adaptiveLogoSizeSource = app.slice(
+  app.indexOf("function playerMarketAdaptiveLogoSizes"),
+  app.indexOf("function drawPlayerMarketHistory")
+);
+const adaptiveLogoSizeContext = {};
+vm.runInNewContext(
+  `${adaptiveLogoSizeSource}
+  this.getAdaptiveLogoSizes = playerMarketAdaptiveLogoSizes;`,
+  adaptiveLogoSizeContext
+);
+assert.deepEqual(
+  Array.from(
+    adaptiveLogoSizeContext.getAdaptiveLogoSizes(
+      [
+        { x: 0, y: 0 },
+        { x: 9, y: 0 },
+        { x: 45, y: 0 },
+      ],
+      -1
+    )
+  ),
+  [8, 8, 26]
+);
+const selectedAdaptiveSizes = Array.from(
+  adaptiveLogoSizeContext.getAdaptiveLogoSizes(
+    [
+      { x: 0, y: 0 },
+      { x: 9, y: 0 },
+      { x: 45, y: 0 },
+    ],
+    2
+  )
+);
+assert.deepEqual(selectedAdaptiveSizes, [8, 8, 30]);
+assert.ok(selectedAdaptiveSizes[0] / 2 + selectedAdaptiveSizes[1] / 2 <= 9);
+assert.deepEqual(
+  Array.from(
+    adaptiveLogoSizeContext.getAdaptiveLogoSizes(
+      [
+        { x: 0, y: 0 },
+        { x: 21, y: 21 },
+      ],
+      -1
+    )
+  ),
+  [18, 18]
+);
 
 console.log("Dongqiudi player ability and profile archive: ok");
 

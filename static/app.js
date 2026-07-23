@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "295";
+const STATIC_DATA_VERSION = "296";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10416,6 +10416,28 @@ function playerMarketLogoImage(src, redraw) {
   return image.complete && image.naturalWidth ? image : null;
 }
 
+function playerMarketAdaptiveLogoSizes(positions = [], selectedIndex = -1) {
+  const minimumSize = 8;
+  const maximumSize = 26;
+  const selectedMaximumSize = 30;
+  const collisionGap = 3;
+  const selectedCollisionGap = 1;
+  const nearestDistances = positions.map((point, index) =>
+    positions.reduce((nearest, other, otherIndex) => {
+      if (index === otherIndex) return nearest;
+      const visualDistance = Math.max(Math.abs(point.x - other.x), Math.abs(point.y - other.y));
+      return Math.min(nearest, visualDistance);
+    }, Number.POSITIVE_INFINITY)
+  );
+  return nearestDistances.map((distance, index) => {
+    const baseSize = Math.round(Math.max(minimumSize, Math.min(maximumSize, distance - collisionGap)));
+    if (index !== selectedIndex) return baseSize;
+    return Math.round(
+      Math.max(minimumSize, Math.min(selectedMaximumSize, distance - selectedCollisionGap, baseSize + 4))
+    );
+  });
+}
+
 function drawPlayerMarketHistory(canvas, history = []) {
   const points = playerMarketHistoryPoints(history);
   if (!canvas || points.length < 2) return;
@@ -10446,6 +10468,7 @@ function drawPlayerMarketHistory(canvas, history = []) {
     x: frame.left + ((dateValues[index] - minimumDate) / Math.max(1, maximumDate - minimumDate)) * width,
     y: frame.top + height - (Number(row.valueEuro) / maximum) * height,
   }));
+  const logoSizes = playerMarketAdaptiveLogoSizes(positions, selectedIndex);
   context.font = "700 10px system-ui, sans-serif";
   context.textAlign = "right";
   context.textBaseline = "middle";
@@ -10512,7 +10535,7 @@ function drawPlayerMarketHistory(canvas, history = []) {
     const row = points[index];
     const point = positions[index];
     const selected = index === selectedIndex;
-    const logoSize = selected ? 20 : 11;
+    const logoSize = logoSizes[index];
     const asset = playerMarketTeamAsset(row.team);
     const redraw = () => {
       if (canvas.isConnected) drawPlayerMarketHistory(canvas, history);
@@ -10521,7 +10544,7 @@ function drawPlayerMarketHistory(canvas, history = []) {
     context.save();
     context.globalAlpha = selected ? 1 : 0.9;
     context.shadowColor = selected ? `${asset.accent}77` : "rgba(15, 23, 42, 0.2)";
-    context.shadowBlur = selected ? 9 : 3;
+    context.shadowBlur = selected ? 9 : Math.max(2, logoSize * 0.16);
     context.shadowOffsetY = selected ? 2 : 1;
     if (logo) {
       context.drawImage(logo, point.x - logoSize / 2, point.y - logoSize / 2, logoSize, logoSize);
@@ -10541,7 +10564,8 @@ function drawPlayerMarketHistory(canvas, history = []) {
   canvas._playerMarketHitAreas = positions.map((point, index) => ({
     ...point,
     index,
-    radius: index === selectedIndex ? 16 : 10,
+    logoSize: logoSizes[index],
+    radius: Math.max(index === selectedIndex ? 16 : 10, logoSizes[index] / 2),
   }));
   canvas.dataset.renderWidth = String(cssWidth);
   canvas.dataset.renderHeight = String(cssHeight);
