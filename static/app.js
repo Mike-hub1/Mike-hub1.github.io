@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "290";
+const STATIC_DATA_VERSION = "291";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10183,7 +10183,7 @@ function renderPlayerScoutingEmptyPanel(name, title, detail, hidden = true) {
   `;
 }
 
-function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap = null) {
+function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap = null, worldCupSchedule = {}) {
   const profileAvailable = playerDongqiudiAvailable(data);
   const source = data?.sources || {};
   const worldCupSource = worldCupStats?.source && typeof worldCupStats.source === "object" ? worldCupStats.source : {};
@@ -10229,7 +10229,7 @@ function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap
             ? renderPlayerProfilePanel(data)
             : renderPlayerScoutingEmptyPanel("profile", "暂无球员资料档案", "完成第三方资料同步后，这里将展示履历、身价趋势与技术特点。")
         }
-        ${renderPlayerWorldCupStats(worldCupStats, averageHeatmap, initialTab !== "world-cup")}
+        ${renderPlayerWorldCupStats(worldCupStats, averageHeatmap, initialTab !== "world-cup", worldCupSchedule)}
       </div>
       <footer class="player-dqd-footer" data-player-dqd-profile-footer${profileAvailable ? "" : " hidden"}>
         <div>
@@ -10709,7 +10709,27 @@ function renderPlayerWorldCupAverageHeatmap(heatmap, stats = {}) {
   `;
 }
 
-function renderPlayerWorldCupStats(stats, averageHeatmap = null, hidden = true) {
+function renderPlayerWorldCupSchedule(schedule = {}) {
+  const matchRecords = Array.isArray(schedule.matchRecords) ? schedule.matchRecords : [];
+  const events = Array.isArray(schedule.events) ? schedule.events : [];
+  return `
+    <section class="player-world-cup-schedule" aria-labelledby="player-world-cup-schedule-title">
+      <div class="panel-header player-match-records-header">
+        <div>
+          <p class="eyebrow">Tournament fixtures</p>
+          <h2 id="player-world-cup-schedule-title">赛程</h2>
+          <p>世界杯完整比赛记录 · 小组赛与淘汰赛</p>
+        </div>
+        ${matchRecords.length ? `<span class="source-badge">实际出场 ${matchRecords.length} 场</span>` : ""}
+      </div>
+      <div class="panel-body">
+        ${renderPlayerRecentEventGroups(events, matchRecords, { selectedMatchId: schedule.selectedMatchId })}
+      </div>
+    </section>
+  `;
+}
+
+function renderPlayerWorldCupStats(stats, averageHeatmap = null, hidden = true, schedule = {}) {
   const data = stats && typeof stats === "object" ? stats : {};
   const status = String(data.status || "missing").toLowerCase();
   const hasValues = playerWorldCupHasValues(data);
@@ -10766,6 +10786,7 @@ function renderPlayerWorldCupStats(stats, averageHeatmap = null, hidden = true) 
             `
         }
       </div>
+      ${renderPlayerWorldCupSchedule(schedule)}
       <footer class="player-world-cup-footer">
         <div>
           <strong>第三方统计口径</strong>
@@ -10828,19 +10849,11 @@ async function renderPlayer(playerId, params = new URLSearchParams()) {
       { label: "红牌", value: player.stats.redCards },
       { label: "身价", value: marketValueLabel(player), note: marketValueNote(player) },
     ], "player-stat-grid")}
-    ${renderPlayerDongqiudiProfile(player.dongqiudiProfile, player.worldCupStats, player.worldCupHeatmap)}
-    <section class="panel player-events-panel">
-      <div class="panel-header player-match-records-header">
-        <div>
-          <h2>近期事件</h2>
-          <p>世界杯完整比赛记录 · 小组赛与淘汰赛</p>
-        </div>
-        ${worldCupMatches.length ? `<span class="source-badge">实际出场 ${worldCupMatches.length} 场</span>` : ""}
-      </div>
-      <div class="panel-body">
-        ${renderPlayerRecentEventGroups(player.recentEvents, worldCupMatches, { selectedMatchId: params.get("match") })}
-      </div>
-    </section>
+    ${renderPlayerDongqiudiProfile(player.dongqiudiProfile, player.worldCupStats, player.worldCupHeatmap, {
+      events: player.recentEvents,
+      matchRecords: worldCupMatches,
+      selectedMatchId: params.get("match"),
+    })}
   `;
   initPlayerHeatmaps(worldCupMatches, player.worldCupHeatmap);
   initPlayerDongqiudiProfile(player.dongqiudiProfile);

@@ -17537,6 +17537,21 @@ body[data-route="leaderboards"] .main {
   background: #f8fbfd;
 }
 
+.player-world-cup-schedule {
+  border-top: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.player-world-cup-schedule .player-match-records-header {
+  background:
+    linear-gradient(90deg, rgba(15, 139, 95, 0.09), transparent 52%),
+    #f8fbfa;
+}
+
+.player-world-cup-schedule .player-match-records-header .eyebrow {
+  color: #087a52;
+}
+
 .player-world-cup-header {
   align-items: flex-start;
   padding: 17px 18px;
@@ -20189,7 +20204,7 @@ body[data-route="leaderboards"] .main {
     height: 20px;
   }
 
-  .player-events-panel .panel-body {
+  .player-world-cup-schedule .panel-body {
     padding: 10px;
   }
 

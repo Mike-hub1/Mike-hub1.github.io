@@ -98,10 +98,16 @@ assert.match(app, /data-player-dqd-tab="world-cup"/);
 assert.match(app, />球员能力<\/strong>/);
 assert.match(app, />球员资料<\/strong>/);
 assert.match(app, />世界杯数据<\/strong>/);
+assert.match(app, /function renderPlayerWorldCupSchedule/);
+assert.match(app, /class="player-world-cup-schedule"/);
+assert.match(app, /id="player-world-cup-schedule-title">赛程<\/h2>/);
+assert.doesNotMatch(app, /<h2>近期事件<\/h2>/);
+assert.doesNotMatch(app, /class="panel player-events-panel"/);
 assert.match(app, /function drawPlayerAbilityRadar/);
 assert.match(app, /function drawPlayerMarketHistory/);
 assert.match(css, /\.player-dqd-panel\s*\{/);
 assert.match(css, /\.player-dqd-tabs\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3,/);
+assert.match(css, /\.player-world-cup-schedule\s*\{/);
 assert.match(css, /\.player-ability-radar-canvas\s*\{/);
 assert.match(css, /\.player-market-history-canvas\s*\{/);
 
