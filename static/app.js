@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "291";
+const STATIC_DATA_VERSION = "292";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10029,9 +10029,24 @@ function formatPlayerArchiveMarketValue(value) {
   return `${new Intl.NumberFormat("zh-CN").format(amount)}欧`;
 }
 
+const PLAYER_PROFILE_FULL_NAME_ZH = new Map([
+  ["Kylian Mbappé Lottin", "基利安·姆巴佩·洛坦"],
+]);
+
+function playerProfileFullNameLabel(identity = {}) {
+  const fullName = String(identity.fullName || "").trim();
+  return identity.fullNameZh || PLAYER_PROFILE_FULL_NAME_ZH.get(fullName) || fullName;
+}
+
+function playerProfileMarketValueLabel(identity = {}) {
+  const amount = Number(identity.marketValueEuro);
+  if (Number.isFinite(amount) && amount > 0) return formatPlayerArchiveMarketValue(amount);
+  return identity.marketValue || "";
+}
+
 function renderPlayerProfileFacts(identity = {}) {
   const facts = [
-    ["全名", identity.fullName],
+    ["全名", playerProfileFullNameLabel(identity)],
     ["国籍 / 会籍", identity.nationality],
     ["出生日期", identity.dateOfBirth],
     ["年龄", identity.age],
@@ -10042,7 +10057,7 @@ function renderPlayerProfileFacts(identity = {}) {
     ["俱乐部", identity.club],
     ["合同到期", identity.contractUntil],
     ["年薪", identity.annualSalary],
-    ["身价", identity.marketValue],
+    ["身价", playerProfileMarketValueLabel(identity)],
   ].filter(([, value]) => value);
   return `
     <dl class="player-profile-facts">

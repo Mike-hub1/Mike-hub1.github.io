@@ -1,6 +1,7 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const vm = require("node:vm");
 
 const root = path.resolve(__dirname, "..");
 const manifest = readJson(path.join(root, "tools", "dongqiudi-player-profiles.json"));
@@ -88,6 +89,25 @@ assert.equal(snapshot.profile.injuries.length, 26);
 
 const app = fs.readFileSync(path.join(root, "static", "app.js"), "utf8");
 const css = fs.readFileSync(path.join(root, "static", "styles.css"), "utf8");
+const profileLabelHelpers = app.slice(
+  app.indexOf("function formatPlayerArchiveMarketValue"),
+  app.indexOf("function renderPlayerProfileFacts")
+);
+const profileLabelContext = {};
+vm.runInNewContext(
+  `${profileLabelHelpers}
+  this.fullNameLabel = playerProfileFullNameLabel;
+  this.marketValueLabel = playerProfileMarketValueLabel;`,
+  profileLabelContext
+);
+assert.equal(
+  profileLabelContext.fullNameLabel({ fullName: "Kylian Mbappé Lottin" }),
+  "基利安·姆巴佩·洛坦"
+);
+assert.equal(
+  profileLabelContext.marketValueLabel({ marketValue: "20000万欧元", marketValueEuro: 200_000_000 }),
+  "2亿欧"
+);
 assert.match(app, /function renderPlayerDongqiudiProfile/);
 assert.match(app, /id="player-dqd-panel-ability"/);
 assert.match(app, /id="player-dqd-panel-profile"/);
@@ -103,6 +123,9 @@ assert.match(app, /class="player-world-cup-schedule"/);
 assert.match(app, /id="player-world-cup-schedule-title">赛程<\/h2>/);
 assert.doesNotMatch(app, /<h2>近期事件<\/h2>/);
 assert.doesNotMatch(app, /class="panel player-events-panel"/);
+assert.match(app, /\["Kylian Mbappé Lottin", "基利安·姆巴佩·洛坦"\]/);
+assert.match(app, /function playerProfileMarketValueLabel/);
+assert.match(app, /\["身价", playerProfileMarketValueLabel\(identity\)\]/);
 assert.match(app, /function drawPlayerAbilityRadar/);
 assert.match(app, /function drawPlayerMarketHistory/);
 assert.match(css, /\.player-dqd-panel\s*\{/);
