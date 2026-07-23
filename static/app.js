@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "288";
+const STATIC_DATA_VERSION = "289";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -9909,6 +9909,528 @@ function initPlayerHeatmaps(matchRecords = [], averageHeatmap = null) {
   window.addEventListener("resize", activePlayerHeatmapResizeHandler, { passive: true });
 }
 
+const PLAYER_ABILITY_RADAR_ORDER = ["速度", "射门", "传球", "盘带", "防守", "力量"];
+
+function playerDongqiudiAvailable(data) {
+  return Boolean(data && data.status === "available" && data.ability && data.profile);
+}
+
+function playerAbilityLevel(value) {
+  const score = Number(value);
+  if (score >= 90) return "elite";
+  if (score >= 80) return "strong";
+  if (score >= 70) return "solid";
+  if (score >= 50) return "developing";
+  return "low";
+}
+
+function playerAbilityPositionLabel(code) {
+  const labels = {
+    ST: "中锋",
+    LW: "左边锋",
+    LM: "左中场",
+    RW: "右边锋",
+    RM: "右中场",
+    CAM: "前腰",
+    CF: "影锋",
+  };
+  return labels[String(code || "").toUpperCase()] || code;
+}
+
+function renderPlayerAbilityStars(item = {}) {
+  const value = Math.max(0, Math.min(5, Math.round(Number(item.value) || 0)));
+  return `
+    <div class="player-ability-star-row" aria-label="${escapeHtml(item.name)} ${value} 星">
+      <span>${escapeHtml(item.name)}</span>
+      <b aria-hidden="true">${"★".repeat(value)}${"☆".repeat(5 - value)}</b>
+    </div>
+  `;
+}
+
+function renderPlayerAbilityCategory(group = {}, index = 0) {
+  return `
+    <section class="player-ability-category" aria-labelledby="player-ability-category-${index}">
+      <header>
+        <span>${String(index + 1).padStart(2, "0")}</span>
+        <h4 id="player-ability-category-${index}">${escapeHtml(group.name)}</h4>
+        <small>${group.metrics?.length || 0} 项</small>
+      </header>
+      <dl>
+        ${(group.metrics || [])
+          .map(
+            (metric) => `
+              <div class="player-ability-metric is-${playerAbilityLevel(metric.value)}">
+                <dt>${escapeHtml(metric.name)}</dt>
+                <dd>
+                  <span class="player-ability-meter" aria-hidden="true"><i style="--ability-value:${Math.max(0, Math.min(100, Number(metric.value) || 0))}%"></i></span>
+                  <strong>${escapeHtml(metric.value ?? "—")}</strong>
+                </dd>
+              </div>
+            `
+          )
+          .join("")}
+      </dl>
+    </section>
+  `;
+}
+
+function renderPlayerAbilityPanel(data = {}) {
+  const ability = data.ability || {};
+  const positionLabels = (ability.registeredPositions || []).map(playerAbilityPositionLabel).filter(Boolean);
+  return `
+    <div id="player-dqd-panel-ability" class="player-dqd-tab-panel player-ability-panel" data-player-dqd-panel="ability" role="tabpanel" aria-labelledby="player-dqd-tab-ability">
+      <div class="player-ability-overview">
+        <div class="player-ability-score">
+          <span>综合能力</span>
+          <strong>${escapeHtml(ability.overall ?? "—")}</strong>
+          <small>${escapeHtml(ability.version || "能力档案")}</small>
+        </div>
+        <figure class="player-ability-radar">
+          <canvas class="player-ability-radar-canvas" role="img" aria-label="球员六维能力雷达图"></canvas>
+          <figcaption>速度、射门、传球、盘带、防守与力量</figcaption>
+        </figure>
+        <div class="player-ability-essentials">
+          <div>
+            <span>惯用脚</span>
+            <strong>${escapeHtml(ability.preferredFoot || "—")}</strong>
+          </div>
+          <div>
+            <span>注册位置</span>
+            <strong>${escapeHtml(positionLabels.join(" · ") || "—")}</strong>
+          </div>
+          ${(ability.stars || []).map(renderPlayerAbilityStars).join("")}
+        </div>
+      </div>
+      <div class="player-ability-radar-values">
+        ${PLAYER_ABILITY_RADAR_ORDER.map((name) => (ability.radar || []).find((item) => item.name === name))
+          .filter(Boolean)
+          .map(
+            (metric) => `
+              <div class="is-${playerAbilityLevel(metric.value)}">
+                <span>${escapeHtml(metric.name)}</span>
+                <strong>${escapeHtml(metric.value)}</strong>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+      <div class="player-ability-category-grid">
+        ${(ability.categories || []).map(renderPlayerAbilityCategory).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function formatPlayerArchiveMarketValue(value) {
+  const amount = Number(value);
+  if (!Number.isFinite(amount)) return "—";
+  if (amount >= 100_000_000) return `${(amount / 100_000_000).toFixed(2).replace(/\.?0+$/, "")}亿欧`;
+  if (amount >= 10_000) return `${Math.round(amount / 10_000)}万欧`;
+  return `${new Intl.NumberFormat("zh-CN").format(amount)}欧`;
+}
+
+function renderPlayerProfileFacts(identity = {}) {
+  const facts = [
+    ["全名", identity.fullName],
+    ["国籍 / 会籍", identity.nationality],
+    ["出生日期", identity.dateOfBirth],
+    ["年龄", identity.age],
+    ["身高", identity.heightCm ? `${identity.heightCm} cm` : ""],
+    ["体重", identity.weightKg ? `${identity.weightKg} kg` : ""],
+    ["惯用脚", identity.preferredFoot],
+    ["位置 / 号码", [identity.position, identity.shirtNumber ? `${identity.shirtNumber}号` : ""].filter(Boolean).join(" · ")],
+    ["俱乐部", identity.club],
+    ["合同到期", identity.contractUntil],
+    ["年薪", identity.annualSalary],
+    ["身价", identity.marketValue],
+  ].filter(([, value]) => value);
+  return `
+    <dl class="player-profile-facts">
+      ${facts
+        .map(
+          ([label, value]) => `
+            <div>
+              <dt>${escapeHtml(label)}</dt>
+              <dd>${escapeHtml(value)}</dd>
+            </div>
+          `
+        )
+        .join("")}
+    </dl>
+  `;
+}
+
+function renderPlayerCharacteristicTags(items = [], className = "") {
+  return items.map((item) => `<span class="${escapeHtml(className)}">${escapeHtml(item)}</span>`).join("");
+}
+
+function renderPlayerProfileArchives(profile = {}) {
+  return `
+    <div class="player-profile-archives">
+      <details class="player-profile-archive">
+        <summary><span>转会记录</span><b>${profile.transfers?.length || 0} 条</b></summary>
+        <div class="player-profile-transfer-list">
+          ${(profile.transfers || [])
+            .map(
+              (row) => `
+                <div>
+                  <time>${escapeHtml(row.date)}</time>
+                  <strong>${escapeHtml(row.from || "青训")} <span aria-hidden="true">→</span> ${escapeHtml(row.to || "待定")}</strong>
+                  <span>${escapeHtml(row.type)} · ${escapeHtml(row.fee)}</span>
+                </div>
+              `
+            )
+            .join("")}
+        </div>
+      </details>
+      <details class="player-profile-archive">
+        <summary><span>荣誉档案</span><b>${profile.honors?.length || 0} 项</b></summary>
+        <div class="player-profile-honor-list">
+          ${(profile.honors || [])
+            .map(
+              (row) => `
+                <div>
+                  <strong>${escapeHtml(row.name)}</strong>
+                  <span>${escapeHtml(row.times ?? row.records?.length ?? 0)} 次</span>
+                  <small>${escapeHtml((row.records || []).map((record) => [record.season, record.team || record.competition].filter(Boolean).join(" · ")).filter(Boolean).join(" / ") || "赛季记录待补")}</small>
+                </div>
+              `
+            )
+            .join("")}
+        </div>
+      </details>
+      <details class="player-profile-archive">
+        <summary><span>伤病记录</span><b>${profile.injuries?.length || 0} 条</b></summary>
+        <div class="player-profile-injury-list">
+          ${(profile.injuries || [])
+            .map(
+              (row) => `
+                <div>
+                  <time>${escapeHtml([row.from, row.until].filter(Boolean).join(" - "))}</time>
+                  <strong>${escapeHtml(row.injury)}</strong>
+                  <span>${escapeHtml([
+                    row.days ? `${row.days} 天` : "",
+                    row.gamesMissed !== null && row.gamesMissed !== undefined ? `缺席 ${row.gamesMissed} 场` : "",
+                    (row.teams || []).join(" / "),
+                  ].filter(Boolean).join(" · "))}</span>
+                </div>
+              `
+            )
+            .join("")}
+        </div>
+      </details>
+    </div>
+  `;
+}
+
+function renderPlayerProfilePanel(data = {}) {
+  const profile = data.profile || {};
+  const identity = profile.identity || {};
+  const history = profile.marketValueHistory || [];
+  const first = history[0];
+  const current = history[history.length - 1];
+  const peak = history.reduce((best, row) => (!best || Number(row.valueEuro) > Number(best.valueEuro) ? row : best), null);
+  const character = profile.characteristics || {};
+  return `
+    <div id="player-dqd-panel-profile" class="player-dqd-tab-panel player-profile-panel" data-player-dqd-panel="profile" role="tabpanel" aria-labelledby="player-dqd-tab-profile" hidden>
+      ${renderPlayerProfileFacts(identity)}
+      <section class="player-market-history" aria-labelledby="player-market-history-title">
+        <header>
+          <div>
+            <span class="eyebrow">Market value history</span>
+            <h3 id="player-market-history-title">身价变化</h3>
+          </div>
+          <span class="source-badge">${history.length} 个公开节点</span>
+        </header>
+        <dl>
+          <div><dt>起始</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(first?.valueEuro))}</dd></div>
+          <div><dt>峰值</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(peak?.valueEuro))}</dd></div>
+          <div><dt>当前</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(current?.valueEuro))}</dd></div>
+        </dl>
+        <canvas class="player-market-history-canvas" role="img" aria-label="球员历年身价变化折线图"></canvas>
+      </section>
+      <section class="player-characteristics" aria-labelledby="player-characteristics-title">
+        <header>
+          <span class="eyebrow">Playing profile</span>
+          <h3 id="player-characteristics-title">技术特点</h3>
+        </header>
+        <div class="player-characteristic-styles">
+          ${renderPlayerCharacteristicTags(character.styles)}
+        </div>
+        <div class="player-characteristic-levels">
+          <div><strong>超强</strong>${renderPlayerCharacteristicTags(character.veryStrong, "very-strong")}</div>
+          <div><strong>强项</strong>${renderPlayerCharacteristicTags(character.strong, "strong")}</div>
+          <div><strong>弱项</strong>${renderPlayerCharacteristicTags(character.weak, "weak")}</div>
+          <div><strong>超弱</strong>${renderPlayerCharacteristicTags(character.veryWeak, "very-weak")}</div>
+        </div>
+      </section>
+      ${renderPlayerProfileArchives(profile)}
+    </div>
+  `;
+}
+
+function renderPlayerDongqiudiProfile(data) {
+  if (!playerDongqiudiAvailable(data)) return "";
+  const source = data.sources || {};
+  return `
+    <section class="panel player-dqd-panel" aria-labelledby="player-dqd-title">
+      <div class="panel-header player-dqd-header">
+        <div>
+          <p class="eyebrow">Player scouting file</p>
+          <h2 id="player-dqd-title">能力与资料</h2>
+          <p>公开数据快照 · 页面不实时调用第三方接口</p>
+        </div>
+        <span class="source-badge player-dqd-source">${escapeHtml(source.provider || "懂球帝 App 公开数据层")}</span>
+      </div>
+      <nav class="player-dqd-tabs" role="tablist" aria-label="球员能力与资料">
+        <button id="player-dqd-tab-ability" type="button" role="tab" aria-selected="true" aria-controls="player-dqd-panel-ability" data-player-dqd-tab="ability">能力值</button>
+        <button id="player-dqd-tab-profile" type="button" role="tab" aria-selected="false" aria-controls="player-dqd-panel-profile" data-player-dqd-tab="profile">资料</button>
+      </nav>
+      <div class="player-dqd-body">
+        ${renderPlayerAbilityPanel(data)}
+        ${renderPlayerProfilePanel(data)}
+      </div>
+      <footer class="player-dqd-footer">
+        <div>
+          <strong>数据口径</strong>
+          <span>${escapeHtml(source.note || "懂球帝公开球员资料与能力快照。")}</span>
+        </div>
+        <div>
+          <time>${escapeHtml(playerWorldCupCheckedAt(data.checkedAt))}</time>
+          ${source.playerPage ? `<a class="btn" href="${escapeHtml(source.playerPage)}" target="_blank" rel="noreferrer">查看来源</a>` : ""}
+        </div>
+      </footer>
+    </section>
+  `;
+}
+
+function playerRadarOrderedValues(ability = {}) {
+  return PLAYER_ABILITY_RADAR_ORDER.map((name) => (ability.radar || []).find((item) => item.name === name))
+    .filter(Boolean)
+    .map((item) => ({ name: item.name, value: Math.max(0, Math.min(100, Number(item.value) || 0)) }));
+}
+
+function drawPlayerAbilityRadar(canvas, ability = {}) {
+  const values = playerRadarOrderedValues(ability);
+  if (!canvas || values.length < 3) return;
+  const cssWidth = Math.round(canvas.getBoundingClientRect().width || 0);
+  if (cssWidth < 160) return;
+  const cssHeight = Math.max(270, Math.min(360, Math.round(cssWidth * 0.72)));
+  const scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+  canvas.style.height = `${cssHeight}px`;
+  canvas.width = Math.round(cssWidth * scale);
+  canvas.height = Math.round(cssHeight * scale);
+  const context = canvas.getContext("2d");
+  if (!context) return;
+  context.setTransform(scale, 0, 0, scale, 0, 0);
+  context.clearRect(0, 0, cssWidth, cssHeight);
+  const centerX = cssWidth / 2;
+  const centerY = cssHeight / 2 + 4;
+  const radius = Math.min(cssWidth * 0.31, cssHeight * 0.34);
+  const angleAt = (index) => -Math.PI / 2 + (Math.PI * 2 * index) / values.length;
+  const pointAt = (index, ratio) => ({
+    x: centerX + Math.cos(angleAt(index)) * radius * ratio,
+    y: centerY + Math.sin(angleAt(index)) * radius * ratio,
+  });
+  context.lineWidth = 1;
+  for (let ring = 1; ring <= 5; ring += 1) {
+    context.beginPath();
+    values.forEach((_, index) => {
+      const point = pointAt(index, ring / 5);
+      if (index === 0) context.moveTo(point.x, point.y);
+      else context.lineTo(point.x, point.y);
+    });
+    context.closePath();
+    context.strokeStyle = ring === 5 ? "rgba(35, 95, 206, 0.28)" : "rgba(99, 116, 139, 0.18)";
+    context.stroke();
+  }
+  values.forEach((_, index) => {
+    const point = pointAt(index, 1);
+    context.beginPath();
+    context.moveTo(centerX, centerY);
+    context.lineTo(point.x, point.y);
+    context.strokeStyle = "rgba(99, 116, 139, 0.18)";
+    context.stroke();
+  });
+  const fill = context.createLinearGradient(centerX, centerY - radius, centerX, centerY + radius);
+  fill.addColorStop(0, "rgba(27, 184, 202, 0.48)");
+  fill.addColorStop(1, "rgba(36, 95, 206, 0.28)");
+  context.beginPath();
+  values.forEach((item, index) => {
+    const point = pointAt(index, item.value / 100);
+    if (index === 0) context.moveTo(point.x, point.y);
+    else context.lineTo(point.x, point.y);
+  });
+  context.closePath();
+  context.fillStyle = fill;
+  context.fill();
+  context.strokeStyle = "#168fb4";
+  context.lineWidth = 2;
+  context.stroke();
+  values.forEach((item, index) => {
+    const point = pointAt(index, item.value / 100);
+    context.beginPath();
+    context.arc(point.x, point.y, 4, 0, Math.PI * 2);
+    context.fillStyle = "#ffffff";
+    context.fill();
+    context.strokeStyle = "#168fb4";
+    context.lineWidth = 2;
+    context.stroke();
+    const label = pointAt(index, 1.22);
+    const cosine = Math.cos(angleAt(index));
+    context.textAlign = Math.abs(cosine) < 0.25 ? "center" : cosine > 0 ? "left" : "right";
+    context.textBaseline = "middle";
+    context.fillStyle = "#5f6f84";
+    context.font = "700 12px system-ui, sans-serif";
+    context.fillText(item.name, label.x, label.y - 8);
+    context.fillStyle = "#12243d";
+    context.font = "900 15px system-ui, sans-serif";
+    context.fillText(String(item.value), label.x, label.y + 9);
+  });
+  canvas.dataset.renderWidth = String(cssWidth);
+}
+
+function drawPlayerMarketHistory(canvas, history = []) {
+  const points = (history || []).filter((row) => row.date && Number.isFinite(Number(row.valueEuro)));
+  if (!canvas || points.length < 2) return;
+  const cssWidth = Math.round(canvas.getBoundingClientRect().width || 0);
+  if (cssWidth < 220) return;
+  const cssHeight = Math.max(230, Math.min(320, Math.round(cssWidth * 0.42)));
+  const scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+  canvas.style.height = `${cssHeight}px`;
+  canvas.width = Math.round(cssWidth * scale);
+  canvas.height = Math.round(cssHeight * scale);
+  const context = canvas.getContext("2d");
+  if (!context) return;
+  context.setTransform(scale, 0, 0, scale, 0, 0);
+  context.clearRect(0, 0, cssWidth, cssHeight);
+  const frame = { left: 54, right: 16, top: 18, bottom: 38 };
+  const width = cssWidth - frame.left - frame.right;
+  const height = cssHeight - frame.top - frame.bottom;
+  const maximum = Math.max(...points.map((row) => Number(row.valueEuro)), 1);
+  const dateValues = points.map((row) => new Date(`${row.date}T00:00:00Z`).getTime());
+  const minimumDate = Math.min(...dateValues);
+  const maximumDate = Math.max(...dateValues);
+  const pointAt = (row, index) => ({
+    x: frame.left + ((dateValues[index] - minimumDate) / Math.max(1, maximumDate - minimumDate)) * width,
+    y: frame.top + height - (Number(row.valueEuro) / maximum) * height,
+  });
+  context.font = "700 10px system-ui, sans-serif";
+  context.textAlign = "right";
+  context.textBaseline = "middle";
+  for (let index = 0; index <= 4; index += 1) {
+    const ratio = index / 4;
+    const y = frame.top + height - ratio * height;
+    context.beginPath();
+    context.moveTo(frame.left, y);
+    context.lineTo(frame.left + width, y);
+    context.strokeStyle = "rgba(99, 116, 139, 0.16)";
+    context.lineWidth = 1;
+    context.stroke();
+    context.fillStyle = "#7a8798";
+    context.fillText(formatPlayerArchiveMarketValue(maximum * ratio), frame.left - 8, y);
+  }
+  const years = [...new Set(points.map((row) => row.date.slice(0, 4)))];
+  const yearStep = cssWidth < 520 ? 2 : 1;
+  context.textAlign = "center";
+  context.textBaseline = "top";
+  years.forEach((year, index) => {
+    if (index % yearStep && index !== years.length - 1) return;
+    const timestamp = new Date(`${year}-07-01T00:00:00Z`).getTime();
+    const x = frame.left + ((timestamp - minimumDate) / Math.max(1, maximumDate - minimumDate)) * width;
+    context.fillStyle = "#7a8798";
+    context.fillText(year, Math.max(frame.left, Math.min(frame.left + width, x)), frame.top + height + 12);
+  });
+  const area = context.createLinearGradient(0, frame.top, 0, frame.top + height);
+  area.addColorStop(0, "rgba(239, 114, 42, 0.22)");
+  area.addColorStop(1, "rgba(239, 114, 42, 0.01)");
+  context.beginPath();
+  points.forEach((row, index) => {
+    const point = pointAt(row, index);
+    if (index === 0) context.moveTo(point.x, point.y);
+    else context.lineTo(point.x, point.y);
+  });
+  const lastPoint = pointAt(points[points.length - 1], points.length - 1);
+  const firstPoint = pointAt(points[0], 0);
+  context.lineTo(lastPoint.x, frame.top + height);
+  context.lineTo(firstPoint.x, frame.top + height);
+  context.closePath();
+  context.fillStyle = area;
+  context.fill();
+  context.beginPath();
+  points.forEach((row, index) => {
+    const point = pointAt(row, index);
+    if (index === 0) context.moveTo(point.x, point.y);
+    else context.lineTo(point.x, point.y);
+  });
+  context.strokeStyle = "#ef722a";
+  context.lineWidth = 3;
+  context.lineJoin = "round";
+  context.lineCap = "round";
+  context.stroke();
+  points.forEach((row, index) => {
+    const point = pointAt(row, index);
+    context.beginPath();
+    context.arc(point.x, point.y, index === points.length - 1 ? 4.5 : 2.3, 0, Math.PI * 2);
+    context.fillStyle = index === points.length - 1 ? "#d94c20" : "#ffffff";
+    context.fill();
+    context.strokeStyle = "#ef722a";
+    context.lineWidth = 1.5;
+    context.stroke();
+  });
+  canvas.dataset.renderWidth = String(cssWidth);
+}
+
+let activePlayerDongqiudiResizeHandler = null;
+
+function initPlayerDongqiudiProfile(data) {
+  if (!playerDongqiudiAvailable(data)) return;
+  const tabs = Array.from(app.querySelectorAll("[data-player-dqd-tab]"));
+  const panels = Array.from(app.querySelectorAll("[data-player-dqd-panel]"));
+  const radarCanvas = app.querySelector(".player-ability-radar-canvas");
+  const marketCanvas = app.querySelector(".player-market-history-canvas");
+  const renderVisuals = (force = false) => {
+    if (radarCanvas && !radarCanvas.closest("[hidden]")) {
+      const width = Math.round(radarCanvas.getBoundingClientRect().width || 0);
+      if (force || radarCanvas.dataset.renderWidth !== String(width)) drawPlayerAbilityRadar(radarCanvas, data.ability);
+    }
+    if (marketCanvas && !marketCanvas.closest("[hidden]")) {
+      const width = Math.round(marketCanvas.getBoundingClientRect().width || 0);
+      if (force || marketCanvas.dataset.renderWidth !== String(width)) drawPlayerMarketHistory(marketCanvas, data.profile?.marketValueHistory);
+    }
+  };
+  const activate = (name) => {
+    tabs.forEach((tab) => {
+      const selected = tab.dataset.playerDqdTab === name;
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.playerDqdPanel !== name;
+    });
+    window.requestAnimationFrame(() => renderVisuals(true));
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activate(tab.dataset.playerDqdTab));
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+      event.preventDefault();
+      const step = event.key === "ArrowRight" ? 1 : -1;
+      const next = tabs[(index + step + tabs.length) % tabs.length];
+      next.focus();
+      activate(next.dataset.playerDqdTab);
+    });
+  });
+  renderVisuals(true);
+  if (activePlayerDongqiudiResizeHandler) window.removeEventListener("resize", activePlayerDongqiudiResizeHandler);
+  let resizeFrame = 0;
+  activePlayerDongqiudiResizeHandler = () => {
+    window.cancelAnimationFrame(resizeFrame);
+    resizeFrame = window.requestAnimationFrame(() => renderVisuals(true));
+  };
+  window.addEventListener("resize", activePlayerDongqiudiResizeHandler, { passive: true });
+}
+
 const playerWorldCupStatSections = [
   {
     key: "attack",
@@ -10250,6 +10772,7 @@ async function renderPlayer(playerId, params = new URLSearchParams()) {
       { label: "红牌", value: player.stats.redCards },
       { label: "身价", value: marketValueLabel(player), note: marketValueNote(player) },
     ], "player-stat-grid")}
+    ${renderPlayerDongqiudiProfile(player.dongqiudiProfile)}
     ${renderPlayerWorldCupStats(player.worldCupStats, player.worldCupHeatmap)}
     <section class="panel player-events-panel">
       <div class="panel-header player-match-records-header">
@@ -10264,6 +10787,7 @@ async function renderPlayer(playerId, params = new URLSearchParams()) {
       </div>
     </section>
   `;
+  initPlayerDongqiudiProfile(player.dongqiudiProfile);
   initPlayerWorldCupStatsNavigation();
   initPlayerHeatmaps(worldCupMatches, player.worldCupHeatmap);
 }
