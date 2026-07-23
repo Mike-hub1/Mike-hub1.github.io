@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "293";
+const STATIC_DATA_VERSION = "294";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10047,29 +10047,60 @@ function playerProfileMarketValueLabel(identity = {}) {
   return identity.marketValue || "";
 }
 
+const PLAYER_MARKET_TEAM_ASSETS = new Map([
+  ["52854", { logoUrl: "/static/assets/clubs/as-monaco.png", accent: "#d71920" }],
+  ["730", { logoUrl: "/static/assets/clubs/as-monaco.png", accent: "#d71920" }],
+  ["731", { logoUrl: "/static/assets/clubs/paris-saint-germain.png", accent: "#174a7e" }],
+  ["1755", { logoUrl: "/static/assets/clubs/real-madrid.png", accent: "#d7aa28" }],
+]);
+
+function playerMarketTeamAsset(team = {}) {
+  return (
+    PLAYER_MARKET_TEAM_ASSETS.get(String(team.id || "")) || {
+      logoUrl: "/static/assets/flags/tbd.png",
+      accent: "#64748b",
+    }
+  );
+}
+
+function formatPlayerMarketDate(value) {
+  const date = new Date(`${value || ""}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return value || "日期待补";
+  return new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
 function renderPlayerProfileFacts(identity = {}) {
   const facts = [
-    ["全名", playerProfileFullNameLabel(identity)],
-    ["国籍 / 会籍", identity.nationality],
-    ["出生日期", identity.dateOfBirth],
-    ["年龄", identity.age],
-    ["身高", identity.heightCm ? `${identity.heightCm} cm` : ""],
-    ["体重", identity.weightKg ? `${identity.weightKg} kg` : ""],
-    ["惯用脚", identity.preferredFoot],
-    ["位置 / 号码", [identity.position, identity.shirtNumber ? `${identity.shirtNumber}号` : ""].filter(Boolean).join(" · ")],
-    ["俱乐部", identity.club],
-    ["合同到期", identity.contractUntil],
-    ["年薪", identity.annualSalary],
-    ["身价", playerProfileMarketValueLabel(identity)],
-  ].filter(([, value]) => value);
+    { key: "name", label: "全名", value: playerProfileFullNameLabel(identity) },
+    { key: "nationality", label: "国籍 / 会籍", value: identity.nationality },
+    { key: "birth", label: "出生日期", value: identity.dateOfBirth },
+    { key: "age", label: "年龄", value: identity.age },
+    { key: "height", label: "身高", value: identity.heightCm ? `${identity.heightCm} cm` : "" },
+    { key: "weight", label: "体重", value: identity.weightKg ? `${identity.weightKg} kg` : "" },
+    { key: "foot", label: "惯用脚", value: identity.preferredFoot },
+    {
+      key: "position",
+      label: "位置 / 号码",
+      value: [identity.position, identity.shirtNumber ? `${identity.shirtNumber}号` : ""].filter(Boolean).join(" · "),
+    },
+    { key: "club", label: "俱乐部", value: identity.club },
+    { key: "contract", label: "合同到期", value: identity.contractUntil },
+    { key: "salary", label: "年薪", value: identity.annualSalary },
+    { key: "value", label: "身价", value: playerProfileMarketValueLabel(identity) },
+  ].filter((item) => item.value);
   return `
     <dl class="player-profile-facts">
       ${facts
         .map(
-          ([label, value]) => `
-            <div>
-              <dt>${escapeHtml(label)}</dt>
-              <dd>${escapeHtml(value)}</dd>
+          (item) => `
+            <div class="player-profile-fact is-${escapeHtml(item.key)}">
+              <dt>${escapeHtml(item.label)}</dt>
+              <dd>${escapeHtml(item.value)}</dd>
             </div>
           `
         )
@@ -10080,6 +10111,39 @@ function renderPlayerProfileFacts(identity = {}) {
 
 function renderPlayerCharacteristicTags(items = [], className = "") {
   return items.map((item) => `<span class="${escapeHtml(className)}">${escapeHtml(item)}</span>`).join("");
+}
+
+function renderPlayerCharacteristicGroup(label, items = [], className = "") {
+  return `
+    <section class="player-characteristic-card is-${escapeHtml(className)}">
+      <header>
+        <strong>${escapeHtml(label)}</strong>
+        <small>${items.length} 项</small>
+      </header>
+      <div>${renderPlayerCharacteristicTags(items, className)}</div>
+    </section>
+  `;
+}
+
+function renderPlayerMarketSelection(row = {}) {
+  const asset = playerMarketTeamAsset(row.team);
+  const teamName = row.team?.name || "球队待补";
+  return `
+    <div class="player-market-selection" data-player-market-selection aria-live="polite">
+      <span class="player-market-selection-logo" aria-hidden="true">
+        <img data-player-market-logo src="${escapeHtml(asset.logoUrl)}" alt="" />
+      </span>
+      <div class="player-market-selection-copy">
+        <span>当前节点</span>
+        <time data-player-market-date datetime="${escapeHtml(row.date || "")}">${escapeHtml(formatPlayerMarketDate(row.date))}</time>
+        <p><strong data-player-market-team>${escapeHtml(teamName)}</strong><i aria-hidden="true">·</i><span data-player-market-age>${escapeHtml(row.age !== undefined ? `${row.age}岁` : "年龄待补")}</span></p>
+      </div>
+      <div class="player-market-selection-value">
+        <span>身价</span>
+        <strong data-player-market-value>${escapeHtml(formatPlayerArchiveMarketValue(row.valueEuro))}</strong>
+      </div>
+    </div>
+  `;
 }
 
 function renderPlayerProfileArchives(profile = {}) {
@@ -10153,33 +10217,33 @@ function renderPlayerProfilePanel(data = {}) {
     <div id="player-dqd-panel-profile" class="player-dqd-tab-panel player-profile-panel" data-player-dqd-panel="profile" role="tabpanel" aria-labelledby="player-dqd-tab-profile" hidden>
       ${renderPlayerProfileFacts(identity)}
       <section class="player-market-history" aria-labelledby="player-market-history-title">
-        <header>
-          <div>
-            <span class="eyebrow">Market value history</span>
-            <h3 id="player-market-history-title">身价变化</h3>
-          </div>
-          <span class="source-badge">${history.length} 个公开节点</span>
+        <header class="player-profile-section-header">
+          <h3 id="player-market-history-title">身价变化</h3>
         </header>
-        <dl>
-          <div><dt>起始</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(first?.valueEuro))}</dd></div>
-          <div><dt>峰值</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(peak?.valueEuro))}</dd></div>
-          <div><dt>当前</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(current?.valueEuro))}</dd></div>
+        <dl class="player-market-summary">
+          <div class="is-start"><dt>起始</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(first?.valueEuro))}</dd></div>
+          <div class="is-peak"><dt>峰值</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(peak?.valueEuro))}</dd></div>
+          <div class="is-current"><dt>当前</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(current?.valueEuro))}</dd></div>
         </dl>
-        <canvas class="player-market-history-canvas" role="img" aria-label="球员历年身价变化折线图"></canvas>
+        ${renderPlayerMarketSelection(current)}
+        <div class="player-market-chart">
+          <canvas class="player-market-history-canvas" role="img" tabindex="0" aria-label="球员历年身价变化折线图，可点击队徽节点查看详情" aria-describedby="player-market-history-hint"></canvas>
+          <p id="player-market-history-hint">点击或触摸队徽节点查看当时的日期、年龄、球队与身价；键盘可使用左右方向键切换。</p>
+        </div>
       </section>
       <section class="player-characteristics" aria-labelledby="player-characteristics-title">
-        <header>
-          <span class="eyebrow">Playing profile</span>
+        <header class="player-profile-section-header">
           <h3 id="player-characteristics-title">技术特点</h3>
         </header>
         <div class="player-characteristic-styles">
-          ${renderPlayerCharacteristicTags(character.styles)}
+          <header><strong>比赛倾向</strong><small>${character.styles?.length || 0} 项</small></header>
+          <div>${renderPlayerCharacteristicTags(character.styles)}</div>
         </div>
         <div class="player-characteristic-levels">
-          <div><strong>超强</strong>${renderPlayerCharacteristicTags(character.veryStrong, "very-strong")}</div>
-          <div><strong>强项</strong>${renderPlayerCharacteristicTags(character.strong, "strong")}</div>
-          <div><strong>弱项</strong>${renderPlayerCharacteristicTags(character.weak, "weak")}</div>
-          <div><strong>超弱</strong>${renderPlayerCharacteristicTags(character.veryWeak, "very-weak")}</div>
+          ${renderPlayerCharacteristicGroup("超强", character.veryStrong, "very-strong")}
+          ${renderPlayerCharacteristicGroup("强项", character.strong, "strong")}
+          ${renderPlayerCharacteristicGroup("弱项", character.weak, "weak")}
+          ${renderPlayerCharacteristicGroup("超弱", character.veryWeak, "very-weak")}
         </div>
       </section>
       ${renderPlayerProfileArchives(profile)}
@@ -10332,13 +10396,34 @@ function drawPlayerAbilityRadar(canvas, ability = {}) {
   canvas.dataset.renderWidth = String(cssWidth);
 }
 
+const playerMarketLogoImages = new Map();
+
+function playerMarketHistoryPoints(history = []) {
+  return (history || []).filter((row) => row.date && Number.isFinite(Number(row.valueEuro)));
+}
+
+function playerMarketLogoImage(src, redraw) {
+  let image = playerMarketLogoImages.get(src);
+  if (!image) {
+    image = new Image();
+    image.decoding = "async";
+    image.addEventListener("load", redraw, { once: true });
+    image.src = src;
+    playerMarketLogoImages.set(src, image);
+  }
+  return image.complete && image.naturalWidth ? image : null;
+}
+
 function drawPlayerMarketHistory(canvas, history = []) {
-  const points = (history || []).filter((row) => row.date && Number.isFinite(Number(row.valueEuro)));
+  const points = playerMarketHistoryPoints(history);
   if (!canvas || points.length < 2) return;
   const cssWidth = Math.round(canvas.getBoundingClientRect().width || 0);
   if (cssWidth < 220) return;
-  const cssHeight = Math.max(230, Math.min(320, Math.round(cssWidth * 0.42)));
+  const cssHeight = Math.max(260, Math.min(340, Math.round(cssWidth * 0.52)));
   const scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+  const selectedValue = Number.parseInt(canvas.dataset.selectedIndex || "", 10);
+  const selectedIndex = Number.isInteger(selectedValue) && selectedValue >= 0 && selectedValue < points.length ? selectedValue : points.length - 1;
+  canvas.dataset.selectedIndex = String(selectedIndex);
   canvas.style.height = `${cssHeight}px`;
   canvas.width = Math.round(cssWidth * scale);
   canvas.height = Math.round(cssHeight * scale);
@@ -10346,17 +10431,17 @@ function drawPlayerMarketHistory(canvas, history = []) {
   if (!context) return;
   context.setTransform(scale, 0, 0, scale, 0, 0);
   context.clearRect(0, 0, cssWidth, cssHeight);
-  const frame = { left: 54, right: 16, top: 18, bottom: 38 };
+  const frame = { left: 58, right: 18, top: 31, bottom: 42 };
   const width = cssWidth - frame.left - frame.right;
   const height = cssHeight - frame.top - frame.bottom;
   const maximum = Math.max(...points.map((row) => Number(row.valueEuro)), 1);
   const dateValues = points.map((row) => new Date(`${row.date}T00:00:00Z`).getTime());
   const minimumDate = Math.min(...dateValues);
   const maximumDate = Math.max(...dateValues);
-  const pointAt = (row, index) => ({
+  const positions = points.map((row, index) => ({
     x: frame.left + ((dateValues[index] - minimumDate) / Math.max(1, maximumDate - minimumDate)) * width,
     y: frame.top + height - (Number(row.valueEuro) / maximum) * height,
-  });
+  }));
   context.font = "700 10px system-ui, sans-serif";
   context.textAlign = "right";
   context.textBaseline = "middle";
@@ -10366,7 +10451,7 @@ function drawPlayerMarketHistory(canvas, history = []) {
     context.beginPath();
     context.moveTo(frame.left, y);
     context.lineTo(frame.left + width, y);
-    context.strokeStyle = "rgba(99, 116, 139, 0.16)";
+    context.strokeStyle = "rgba(99, 116, 139, 0.14)";
     context.lineWidth = 1;
     context.stroke();
     context.fillStyle = "#7a8798";
@@ -10381,46 +10466,173 @@ function drawPlayerMarketHistory(canvas, history = []) {
     const timestamp = new Date(`${year}-07-01T00:00:00Z`).getTime();
     const x = frame.left + ((timestamp - minimumDate) / Math.max(1, maximumDate - minimumDate)) * width;
     context.fillStyle = "#7a8798";
-    context.fillText(year, Math.max(frame.left, Math.min(frame.left + width, x)), frame.top + height + 12);
+    context.fillText(year, Math.max(frame.left, Math.min(frame.left + width, x)), frame.top + height + 14);
   });
   const area = context.createLinearGradient(0, frame.top, 0, frame.top + height);
-  area.addColorStop(0, "rgba(239, 114, 42, 0.22)");
-  area.addColorStop(1, "rgba(239, 114, 42, 0.01)");
+  area.addColorStop(0, "rgba(239, 114, 42, 0.2)");
+  area.addColorStop(1, "rgba(239, 114, 42, 0.015)");
   context.beginPath();
-  points.forEach((row, index) => {
-    const point = pointAt(row, index);
+  positions.forEach((point, index) => {
     if (index === 0) context.moveTo(point.x, point.y);
     else context.lineTo(point.x, point.y);
   });
-  const lastPoint = pointAt(points[points.length - 1], points.length - 1);
-  const firstPoint = pointAt(points[0], 0);
+  const lastPoint = positions[positions.length - 1];
+  const firstPoint = positions[0];
   context.lineTo(lastPoint.x, frame.top + height);
   context.lineTo(firstPoint.x, frame.top + height);
   context.closePath();
   context.fillStyle = area;
   context.fill();
   context.beginPath();
-  points.forEach((row, index) => {
-    const point = pointAt(row, index);
+  positions.forEach((point, index) => {
     if (index === 0) context.moveTo(point.x, point.y);
     else context.lineTo(point.x, point.y);
   });
   context.strokeStyle = "#ef722a";
-  context.lineWidth = 3;
+  context.lineWidth = 2.5;
   context.lineJoin = "round";
   context.lineCap = "round";
   context.stroke();
-  points.forEach((row, index) => {
-    const point = pointAt(row, index);
+  const selectedPoint = positions[selectedIndex];
+  const selectedAsset = playerMarketTeamAsset(points[selectedIndex]?.team);
+  context.save();
+  context.setLineDash([4, 5]);
+  context.beginPath();
+  context.moveTo(selectedPoint.x, selectedPoint.y + 13);
+  context.lineTo(selectedPoint.x, frame.top + height);
+  context.strokeStyle = `${selectedAsset.accent}66`;
+  context.lineWidth = 1;
+  context.stroke();
+  context.restore();
+  const drawNode = (index) => {
+    const row = points[index];
+    const point = positions[index];
+    const selected = index === selectedIndex;
+    const radius = selected ? 13 : 8;
+    const asset = playerMarketTeamAsset(row.team);
+    const redraw = () => {
+      if (canvas.isConnected) drawPlayerMarketHistory(canvas, history);
+    };
+    const logo = playerMarketLogoImage(asset.logoUrl, redraw);
+    context.save();
+    context.shadowColor = selected ? `${asset.accent}55` : "rgba(15, 23, 42, 0.16)";
+    context.shadowBlur = selected ? 12 : 5;
+    context.shadowOffsetY = selected ? 3 : 1;
     context.beginPath();
-    context.arc(point.x, point.y, index === points.length - 1 ? 4.5 : 2.3, 0, Math.PI * 2);
-    context.fillStyle = index === points.length - 1 ? "#d94c20" : "#ffffff";
+    context.arc(point.x, point.y, radius + 2, 0, Math.PI * 2);
+    context.fillStyle = "#ffffff";
     context.fill();
-    context.strokeStyle = "#ef722a";
-    context.lineWidth = 1.5;
+    context.shadowColor = "transparent";
+    if (logo) {
+      const logoSize = radius * 1.8;
+      context.drawImage(logo, point.x - logoSize / 2, point.y - logoSize / 2, logoSize, logoSize);
+    } else {
+      context.fillStyle = asset.accent;
+      context.font = `900 ${selected ? 10 : 8}px system-ui, sans-serif`;
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText(String(row.team?.name || "队").slice(0, 1), point.x, point.y);
+    }
+    context.beginPath();
+    context.arc(point.x, point.y, radius + 2, 0, Math.PI * 2);
+    context.strokeStyle = selected ? asset.accent : `${asset.accent}aa`;
+    context.lineWidth = selected ? 2.5 : 1.25;
     context.stroke();
-  });
+    context.restore();
+  };
+  const nodeOrder = points.map((_, index) => index).filter((index) => index !== selectedIndex);
+  nodeOrder.push(selectedIndex);
+  nodeOrder.forEach(drawNode);
+  canvas._playerMarketHitAreas = positions.map((point, index) => ({
+    ...point,
+    index,
+    radius: index === selectedIndex ? 18 : 13,
+  }));
   canvas.dataset.renderWidth = String(cssWidth);
+  canvas.dataset.renderHeight = String(cssHeight);
+}
+
+function updatePlayerMarketSelection(canvas, row = {}) {
+  const section = canvas?.closest(".player-market-history");
+  if (!section) return;
+  const asset = playerMarketTeamAsset(row.team);
+  const teamName = row.team?.name || "球队待补";
+  const ageLabel = row.age !== undefined ? `${row.age}岁` : "年龄待补";
+  const valueLabel = formatPlayerArchiveMarketValue(row.valueEuro);
+  const dateLabel = formatPlayerMarketDate(row.date);
+  const logo = section.querySelector("[data-player-market-logo]");
+  const date = section.querySelector("[data-player-market-date]");
+  const team = section.querySelector("[data-player-market-team]");
+  const age = section.querySelector("[data-player-market-age]");
+  const value = section.querySelector("[data-player-market-value]");
+  if (logo) logo.src = asset.logoUrl;
+  if (date) {
+    date.textContent = dateLabel;
+    date.setAttribute("datetime", row.date || "");
+  }
+  if (team) team.textContent = teamName;
+  if (age) age.textContent = ageLabel;
+  if (value) value.textContent = valueLabel;
+  canvas.setAttribute("aria-label", `球员历年身价变化折线图，当前选择 ${dateLabel}，${teamName}，${ageLabel}，身价 ${valueLabel}`);
+}
+
+function playerMarketHitIndex(canvas, event) {
+  const areas = canvas?._playerMarketHitAreas || [];
+  const rect = canvas?.getBoundingClientRect();
+  if (!areas.length || !rect?.width || !rect?.height) return -1;
+  const x = (event.clientX - rect.left) * ((Number(canvas.dataset.renderWidth) || rect.width) / rect.width);
+  const y = (event.clientY - rect.top) * ((Number(canvas.dataset.renderHeight) || rect.height) / rect.height);
+  let nearest = -1;
+  let nearestDistance = Number.POSITIVE_INFINITY;
+  areas.forEach((area) => {
+    const distance = (area.x - x) ** 2 + (area.y - y) ** 2;
+    const threshold = Math.max(23, area.radius + 9);
+    if (distance <= threshold ** 2 && distance < nearestDistance) {
+      nearest = area.index;
+      nearestDistance = distance;
+    }
+  });
+  return nearest;
+}
+
+function selectPlayerMarketHistoryPoint(canvas, history = [], index = 0) {
+  const points = playerMarketHistoryPoints(history);
+  if (!canvas || !points.length) return;
+  const nextIndex = Math.max(0, Math.min(points.length - 1, Number(index) || 0));
+  canvas.dataset.selectedIndex = String(nextIndex);
+  updatePlayerMarketSelection(canvas, points[nextIndex]);
+  drawPlayerMarketHistory(canvas, history);
+}
+
+function initPlayerMarketHistory(canvas, history = []) {
+  const points = playerMarketHistoryPoints(history);
+  if (!canvas || points.length < 2 || canvas.dataset.marketInteractive === "true") return;
+  canvas.dataset.marketInteractive = "true";
+  canvas.dataset.selectedIndex = String(points.length - 1);
+  updatePlayerMarketSelection(canvas, points[points.length - 1]);
+  canvas.addEventListener("click", (event) => {
+    const index = playerMarketHitIndex(canvas, event);
+    if (index >= 0) selectPlayerMarketHistoryPoint(canvas, points, index);
+  });
+  canvas.addEventListener("pointermove", (event) => {
+    if (event.pointerType && event.pointerType !== "mouse" && event.pointerType !== "pen") return;
+    canvas.style.cursor = playerMarketHitIndex(canvas, event) >= 0 ? "pointer" : "default";
+  });
+  canvas.addEventListener("pointerleave", () => {
+    canvas.style.cursor = "default";
+  });
+  canvas.addEventListener("keydown", (event) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const current = Number.parseInt(canvas.dataset.selectedIndex || "", 10);
+    const next =
+      event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? points.length - 1
+          : Math.max(0, Math.min(points.length - 1, current + (event.key === "ArrowRight" ? 1 : -1)));
+    selectPlayerMarketHistoryPoint(canvas, points, next);
+  });
 }
 
 let activePlayerDongqiudiResizeHandler = null;
@@ -10442,6 +10654,7 @@ function initPlayerDongqiudiProfile(data) {
       if (force || marketCanvas.dataset.renderWidth !== String(width)) drawPlayerMarketHistory(marketCanvas, data?.profile?.marketValueHistory);
     }
   };
+  initPlayerMarketHistory(marketCanvas, data?.profile?.marketValueHistory);
   const activate = (name) => {
     if (!tabs.some((tab) => tab.dataset.playerDqdTab === name)) return;
     tabs.forEach((tab) => {

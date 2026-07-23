@@ -77,6 +77,12 @@ assert.deepEqual(
   marketHistory.map((point) => point.date).toSorted(),
   "market value history must be chronological"
 );
+for (const logoName of ["as-monaco.png", "paris-saint-germain.png", "real-madrid.png"]) {
+  const logoPath = path.join(root, "static", "assets", "clubs", logoName);
+  const logo = fs.readFileSync(logoPath);
+  assert.ok(logo.length > 1_000, `${logoName} must retain a real club crest`);
+  assert.deepEqual([...logo.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${logoName} must be a PNG`);
+}
 
 assert.equal(snapshot.profile.characteristics.styles.length, 8);
 assert.ok(snapshot.profile.characteristics.veryStrong.includes("终结能力"));
@@ -97,7 +103,9 @@ const profileLabelContext = {};
 vm.runInNewContext(
   `${profileLabelHelpers}
   this.fullNameLabel = playerProfileFullNameLabel;
-  this.marketValueLabel = playerProfileMarketValueLabel;`,
+  this.marketValueLabel = playerProfileMarketValueLabel;
+  this.marketDateLabel = formatPlayerMarketDate;
+  this.marketTeamAsset = playerMarketTeamAsset;`,
   profileLabelContext
 );
 assert.equal(
@@ -108,6 +116,8 @@ assert.equal(
   profileLabelContext.marketValueLabel({ marketValue: "20000万欧元", marketValueEuro: 200_000_000 }),
   "2亿欧"
 );
+assert.equal(profileLabelContext.marketDateLabel("2026-07-22"), "2026年7月22日");
+assert.equal(profileLabelContext.marketTeamAsset({ id: "1755" }).logoUrl, "/static/assets/clubs/real-madrid.png");
 assert.match(app, /function renderPlayerDongqiudiProfile/);
 assert.match(app, /id="player-dqd-panel-ability"/);
 assert.match(app, /id="player-dqd-panel-profile"/);
@@ -125,9 +135,20 @@ assert.doesNotMatch(app, /<h2>近期事件<\/h2>/);
 assert.doesNotMatch(app, /class="panel player-events-panel"/);
 assert.match(app, /\["Kylian Mbappé Lottin", "基利安·姆巴佩·洛坦"\]/);
 assert.match(app, /function playerProfileMarketValueLabel/);
-assert.match(app, /\["身价", playerProfileMarketValueLabel\(identity\)\]/);
+assert.match(app, /label: "身价", value: playerProfileMarketValueLabel\(identity\)/);
 assert.match(app, /function drawPlayerAbilityRadar/);
 assert.match(app, /function drawPlayerMarketHistory/);
+assert.match(app, /const PLAYER_MARKET_TEAM_ASSETS = new Map/);
+assert.match(app, /function initPlayerMarketHistory/);
+assert.match(app, /function selectPlayerMarketHistoryPoint/);
+assert.match(app, /canvas\.addEventListener\("click"/);
+assert.match(app, /canvas\.addEventListener\("keydown"/);
+assert.match(app, /data-player-market-selection/);
+assert.match(app, /class="player-profile-fact is-/);
+assert.match(app, /class="player-characteristic-card is-/);
+assert.doesNotMatch(app, /Market value history/i);
+assert.doesNotMatch(app, /Playing profile/i);
+assert.doesNotMatch(app, /个公开节点/);
 assert.match(app, /class="player-ability-fact-grid"/);
 assert.match(app, /class="player-ability-star-grid"/);
 assert.doesNotMatch(app, /<figcaption>速度、射门、传球、盘带、防守与力量<\/figcaption>/);
@@ -139,6 +160,9 @@ assert.match(css, /\.player-world-cup-schedule\s*\{/);
 assert.match(css, /\.player-ability-radar-canvas\s*\{/);
 assert.match(css, /\.player-ability-star-grid\s*\{/);
 assert.match(css, /\.player-market-history-canvas\s*\{/);
+assert.match(css, /\.player-market-selection\s*\{/);
+assert.match(css, /\.player-characteristic-card\s*\{/);
+assert.match(css, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.player-profile-facts\s*\{\s*grid-template-columns:\s*repeat\(2,/);
 assert.doesNotMatch(css, /\.player-dqd-header-meta\s*\{/);
 assert.doesNotMatch(css, /\.player-dqd-footer\s*\{/);
 

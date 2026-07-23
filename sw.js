@@ -1,10 +1,13 @@
-const CACHE_VERSION = "wc26-v293";
+const CACHE_VERSION = "wc26-v294";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 
 const PRECACHE_URLS = [
-  "/static/styles.min.css?v=293",
-  "/static/app.min.js?v=293",
+  "/static/styles.min.css?v=294",
+  "/static/app.min.js?v=294",
+  "/static/assets/clubs/as-monaco.png",
+  "/static/assets/clubs/paris-saint-germain.png",
+  "/static/assets/clubs/real-madrid.png",
 ];
 
 self.addEventListener("install", (event) => {
