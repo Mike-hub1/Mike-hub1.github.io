@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "289";
+const STATIC_DATA_VERSION = "290";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10169,34 +10169,75 @@ function renderPlayerProfilePanel(data = {}) {
   `;
 }
 
-function renderPlayerDongqiudiProfile(data) {
-  if (!playerDongqiudiAvailable(data)) return "";
-  const source = data.sources || {};
+function renderPlayerScoutingEmptyPanel(name, title, detail, hidden = true) {
+  const icon = name === "ability" ? "◎" : "▤";
   return `
-    <section class="panel player-dqd-panel" aria-labelledby="player-dqd-title">
+    <div id="player-dqd-panel-${escapeHtml(name)}" class="player-dqd-tab-panel player-dqd-empty-panel" data-player-dqd-panel="${escapeHtml(name)}" role="tabpanel" aria-labelledby="player-dqd-tab-${escapeHtml(name)}"${hidden ? " hidden" : ""}>
+      <div class="player-dqd-empty-state" role="status">
+        <span class="player-dqd-empty-icon" aria-hidden="true">${icon}</span>
+        <p class="eyebrow">Scouting data</p>
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(detail)}</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap = null) {
+  const profileAvailable = playerDongqiudiAvailable(data);
+  const source = data?.sources || {};
+  const worldCupSource = worldCupStats?.source && typeof worldCupStats.source === "object" ? worldCupStats.source : {};
+  const initialTab = profileAvailable ? "ability" : "world-cup";
+  const selected = (name) => String(initialTab === name);
+  const tabIndex = (name) => (initialTab === name ? "0" : "-1");
+  const provider = source.provider || worldCupSource.name || "世界杯公开数据";
+  return `
+    <section class="panel player-dqd-panel" data-active-tab="${escapeHtml(initialTab)}" aria-labelledby="player-dqd-title">
       <div class="panel-header player-dqd-header">
         <div>
-          <p class="eyebrow">Player scouting file</p>
-          <h2 id="player-dqd-title">能力与资料</h2>
-          <p>公开数据快照 · 页面不实时调用第三方接口</p>
+          <p class="eyebrow">Player intelligence</p>
+          <h2 id="player-dqd-title">球员数据中心</h2>
+          <p>能力模型 · 资料档案 · 世界杯表现</p>
         </div>
-        <span class="source-badge player-dqd-source">${escapeHtml(source.provider || "懂球帝 App 公开数据层")}</span>
+        <div class="player-dqd-header-meta">
+          <span class="player-dqd-view-count" aria-label="三个数据视角"><b>3</b><span>DATA VIEWS</span></span>
+          <span class="source-badge player-dqd-source">${escapeHtml(provider)}</span>
+        </div>
       </div>
-      <nav class="player-dqd-tabs" role="tablist" aria-label="球员能力与资料">
-        <button id="player-dqd-tab-ability" type="button" role="tab" aria-selected="true" aria-controls="player-dqd-panel-ability" data-player-dqd-tab="ability">能力值</button>
-        <button id="player-dqd-tab-profile" type="button" role="tab" aria-selected="false" aria-controls="player-dqd-panel-profile" data-player-dqd-tab="profile">资料</button>
+      <nav class="player-dqd-tabs" role="tablist" aria-label="球员数据中心">
+        <button id="player-dqd-tab-ability" type="button" role="tab" aria-selected="${selected("ability")}" aria-controls="player-dqd-panel-ability" tabindex="${tabIndex("ability")}" data-player-dqd-tab="ability">
+          <span class="player-dqd-tab-icon" aria-hidden="true">◎</span>
+          <span class="player-dqd-tab-copy"><strong>球员能力</strong><small>评分 · 六维雷达</small></span>
+        </button>
+        <button id="player-dqd-tab-profile" type="button" role="tab" aria-selected="${selected("profile")}" aria-controls="player-dqd-panel-profile" tabindex="${tabIndex("profile")}" data-player-dqd-tab="profile">
+          <span class="player-dqd-tab-icon" aria-hidden="true">▤</span>
+          <span class="player-dqd-tab-copy"><strong>球员资料</strong><small>履历 · 身价趋势</small></span>
+        </button>
+        <button id="player-dqd-tab-world-cup" type="button" role="tab" aria-selected="${selected("world-cup")}" aria-controls="player-dqd-panel-world-cup" tabindex="${tabIndex("world-cup")}" data-player-dqd-tab="world-cup">
+          <span class="player-dqd-tab-icon is-world-cup" aria-hidden="true">26</span>
+          <span class="player-dqd-tab-copy"><strong>世界杯数据</strong><small>表现 · 热点分布</small></span>
+        </button>
       </nav>
       <div class="player-dqd-body">
-        ${renderPlayerAbilityPanel(data)}
-        ${renderPlayerProfilePanel(data)}
+        ${
+          profileAvailable
+            ? renderPlayerAbilityPanel(data)
+            : renderPlayerScoutingEmptyPanel("ability", "暂无球员能力快照", "完成第三方球员身份匹配后，这里将展示综合评分和六维雷达。")
+        }
+        ${
+          profileAvailable
+            ? renderPlayerProfilePanel(data)
+            : renderPlayerScoutingEmptyPanel("profile", "暂无球员资料档案", "完成第三方资料同步后，这里将展示履历、身价趋势与技术特点。")
+        }
+        ${renderPlayerWorldCupStats(worldCupStats, averageHeatmap, initialTab !== "world-cup")}
       </div>
-      <footer class="player-dqd-footer">
+      <footer class="player-dqd-footer" data-player-dqd-profile-footer${profileAvailable ? "" : " hidden"}>
         <div>
-          <strong>数据口径</strong>
+          <strong>能力与资料口径</strong>
           <span>${escapeHtml(source.note || "懂球帝公开球员资料与能力快照。")}</span>
         </div>
         <div>
-          <time>${escapeHtml(playerWorldCupCheckedAt(data.checkedAt))}</time>
+          <time>${escapeHtml(playerWorldCupCheckedAt(data?.checkedAt))}</time>
           ${source.playerPage ? `<a class="btn" href="${escapeHtml(source.playerPage)}" target="_blank" rel="noreferrer">查看来源</a>` : ""}
         </div>
       </footer>
@@ -10384,22 +10425,26 @@ function drawPlayerMarketHistory(canvas, history = []) {
 let activePlayerDongqiudiResizeHandler = null;
 
 function initPlayerDongqiudiProfile(data) {
-  if (!playerDongqiudiAvailable(data)) return;
   const tabs = Array.from(app.querySelectorAll("[data-player-dqd-tab]"));
   const panels = Array.from(app.querySelectorAll("[data-player-dqd-panel]"));
+  if (!tabs.length || !panels.length) return;
+  const profileAvailable = playerDongqiudiAvailable(data);
+  const panelRoot = app.querySelector(".player-dqd-panel");
+  const profileFooter = app.querySelector("[data-player-dqd-profile-footer]");
   const radarCanvas = app.querySelector(".player-ability-radar-canvas");
   const marketCanvas = app.querySelector(".player-market-history-canvas");
   const renderVisuals = (force = false) => {
     if (radarCanvas && !radarCanvas.closest("[hidden]")) {
       const width = Math.round(radarCanvas.getBoundingClientRect().width || 0);
-      if (force || radarCanvas.dataset.renderWidth !== String(width)) drawPlayerAbilityRadar(radarCanvas, data.ability);
+      if (force || radarCanvas.dataset.renderWidth !== String(width)) drawPlayerAbilityRadar(radarCanvas, data?.ability);
     }
     if (marketCanvas && !marketCanvas.closest("[hidden]")) {
       const width = Math.round(marketCanvas.getBoundingClientRect().width || 0);
-      if (force || marketCanvas.dataset.renderWidth !== String(width)) drawPlayerMarketHistory(marketCanvas, data.profile?.marketValueHistory);
+      if (force || marketCanvas.dataset.renderWidth !== String(width)) drawPlayerMarketHistory(marketCanvas, data?.profile?.marketValueHistory);
     }
   };
   const activate = (name) => {
+    if (!tabs.some((tab) => tab.dataset.playerDqdTab === name)) return;
     tabs.forEach((tab) => {
       const selected = tab.dataset.playerDqdTab === name;
       tab.setAttribute("aria-selected", String(selected));
@@ -10408,20 +10453,31 @@ function initPlayerDongqiudiProfile(data) {
     panels.forEach((panel) => {
       panel.hidden = panel.dataset.playerDqdPanel !== name;
     });
-    window.requestAnimationFrame(() => renderVisuals(true));
+    if (panelRoot) panelRoot.dataset.activeTab = name;
+    if (profileFooter) profileFooter.hidden = !profileAvailable || name === "world-cup";
+    window.requestAnimationFrame(() => {
+      renderVisuals(true);
+      if (name === "world-cup") window.dispatchEvent(new Event("resize"));
+    });
   };
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => activate(tab.dataset.playerDqdTab));
     tab.addEventListener("keydown", (event) => {
-      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
       event.preventDefault();
-      const step = event.key === "ArrowRight" ? 1 : -1;
-      const next = tabs[(index + step + tabs.length) % tabs.length];
+      const nextIndex =
+        event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? tabs.length - 1
+            : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+      const next = tabs[nextIndex];
       next.focus();
       activate(next.dataset.playerDqdTab);
     });
   });
-  renderVisuals(true);
+  const initialTab = tabs.find((tab) => tab.getAttribute("aria-selected") === "true")?.dataset.playerDqdTab || "ability";
+  activate(initialTab);
   if (activePlayerDongqiudiResizeHandler) window.removeEventListener("resize", activePlayerDongqiudiResizeHandler);
   let resizeFrame = 0;
   activePlayerDongqiudiResizeHandler = () => {
@@ -10653,7 +10709,7 @@ function renderPlayerWorldCupAverageHeatmap(heatmap, stats = {}) {
   `;
 }
 
-function renderPlayerWorldCupStats(stats, averageHeatmap = null) {
+function renderPlayerWorldCupStats(stats, averageHeatmap = null, hidden = true) {
   const data = stats && typeof stats === "object" ? stats : {};
   const status = String(data.status || "missing").toLowerCase();
   const hasValues = playerWorldCupHasValues(data);
@@ -10669,11 +10725,11 @@ function renderPlayerWorldCupStats(stats, averageHeatmap = null) {
   ].filter(Boolean);
   const emptyCopy = playerWorldCupEmptyCopy(status);
   return `
-    <section class="panel player-world-cup-panel" aria-labelledby="player-world-cup-title">
+    <div id="player-dqd-panel-world-cup" class="player-dqd-tab-panel player-world-cup-panel player-world-cup-tab-panel" data-player-dqd-panel="world-cup" role="tabpanel" aria-labelledby="player-dqd-tab-world-cup"${hidden ? " hidden" : ""}>
       <div class="panel-header player-world-cup-header">
         <div class="player-world-cup-heading">
           <p class="eyebrow">Player performance</p>
-          <h2 id="player-world-cup-title">2026 世界杯球员数据</h2>
+          <h2 id="player-world-cup-title">2026 世界杯表现</h2>
           <p>${escapeHtml([playerWorldCupScope(data), ...participation].join(" · "))}</p>
         </div>
         <div class="player-world-cup-badges">
@@ -10721,7 +10777,7 @@ function renderPlayerWorldCupStats(stats, averageHeatmap = null) {
           ${sourceUrl ? `<a class="btn" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">查看数据来源</a>` : ""}
         </div>
       </footer>
-    </section>
+    </div>
   `;
 }
 
@@ -10772,8 +10828,7 @@ async function renderPlayer(playerId, params = new URLSearchParams()) {
       { label: "红牌", value: player.stats.redCards },
       { label: "身价", value: marketValueLabel(player), note: marketValueNote(player) },
     ], "player-stat-grid")}
-    ${renderPlayerDongqiudiProfile(player.dongqiudiProfile)}
-    ${renderPlayerWorldCupStats(player.worldCupStats, player.worldCupHeatmap)}
+    ${renderPlayerDongqiudiProfile(player.dongqiudiProfile, player.worldCupStats, player.worldCupHeatmap)}
     <section class="panel player-events-panel">
       <div class="panel-header player-match-records-header">
         <div>
@@ -10787,9 +10842,9 @@ async function renderPlayer(playerId, params = new URLSearchParams()) {
       </div>
     </section>
   `;
+  initPlayerHeatmaps(worldCupMatches, player.worldCupHeatmap);
   initPlayerDongqiudiProfile(player.dongqiudiProfile);
   initPlayerWorldCupStatsNavigation();
-  initPlayerHeatmaps(worldCupMatches, player.worldCupHeatmap);
 }
 
 async function renderSearch(params) {

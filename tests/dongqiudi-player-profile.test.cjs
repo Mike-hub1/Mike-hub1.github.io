@@ -91,9 +91,17 @@ const css = fs.readFileSync(path.join(root, "static", "styles.css"), "utf8");
 assert.match(app, /function renderPlayerDongqiudiProfile/);
 assert.match(app, /id="player-dqd-panel-ability"/);
 assert.match(app, /id="player-dqd-panel-profile"/);
+assert.match(app, /id="player-dqd-panel-world-cup"/);
+assert.match(app, /data-player-dqd-tab="ability"/);
+assert.match(app, /data-player-dqd-tab="profile"/);
+assert.match(app, /data-player-dqd-tab="world-cup"/);
+assert.match(app, />球员能力<\/strong>/);
+assert.match(app, />球员资料<\/strong>/);
+assert.match(app, />世界杯数据<\/strong>/);
 assert.match(app, /function drawPlayerAbilityRadar/);
 assert.match(app, /function drawPlayerMarketHistory/);
 assert.match(css, /\.player-dqd-panel\s*\{/);
+assert.match(css, /\.player-dqd-tabs\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3,/);
 assert.match(css, /\.player-ability-radar-canvas\s*\{/);
 assert.match(css, /\.player-market-history-canvas\s*\{/);
 
