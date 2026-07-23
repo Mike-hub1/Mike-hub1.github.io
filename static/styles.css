@@ -17216,12 +17216,36 @@ body[data-route="leaderboards"] .main {
   box-shadow: inset 0 1px 0 #ffffff;
 }
 
+.player-market-chart-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0 5px;
+  border-radius: 8px;
+  overscroll-behavior-x: contain;
+  scrollbar-color: rgba(69, 96, 124, 0.28) transparent;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.player-market-chart-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.player-market-chart-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(69, 96, 124, 0.24);
+}
+
+.player-market-chart-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .player-market-history-canvas {
   display: block;
   width: 100%;
   min-height: 260px;
   border-radius: 8px;
-  touch-action: manipulation;
+  touch-action: auto;
 }
 
 .player-market-history-canvas:focus-visible {
@@ -17652,6 +17676,8 @@ body[data-route="leaderboards"] .main {
   }
 
   .player-market-history-canvas {
+    width: 720px;
+    min-width: 720px;
     min-height: 260px;
   }
 

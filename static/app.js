@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "294";
+const STATIC_DATA_VERSION = "295";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10227,8 +10227,10 @@ function renderPlayerProfilePanel(data = {}) {
         </dl>
         ${renderPlayerMarketSelection(current)}
         <div class="player-market-chart">
-          <canvas class="player-market-history-canvas" role="img" tabindex="0" aria-label="球员历年身价变化折线图，可点击队徽节点查看详情" aria-describedby="player-market-history-hint"></canvas>
-          <p id="player-market-history-hint">点击或触摸队徽节点查看当时的日期、年龄、球队与身价；键盘可使用左右方向键切换。</p>
+          <div class="player-market-chart-scroll">
+            <canvas class="player-market-history-canvas" role="img" tabindex="0" aria-label="球员历年身价变化折线图，可点击队徽节点查看详情" aria-describedby="player-market-history-hint"></canvas>
+          </div>
+          <p id="player-market-history-hint">横向滑动查看完整走势；点击或触摸队徽节点查看日期、年龄、球队与身价，键盘可使用左右方向键切换。</p>
         </div>
       </section>
       <section class="player-characteristics" aria-labelledby="player-characteristics-title">
@@ -10419,7 +10421,9 @@ function drawPlayerMarketHistory(canvas, history = []) {
   if (!canvas || points.length < 2) return;
   const cssWidth = Math.round(canvas.getBoundingClientRect().width || 0);
   if (cssWidth < 220) return;
-  const cssHeight = Math.max(260, Math.min(340, Math.round(cssWidth * 0.52)));
+  const scrollViewport = canvas.closest(".player-market-chart-scroll");
+  const isHorizontallyScrollable = Boolean(scrollViewport && cssWidth > scrollViewport.clientWidth + 1);
+  const cssHeight = isHorizontallyScrollable ? 280 : Math.max(260, Math.min(340, Math.round(cssWidth * 0.52)));
   const scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
   const selectedValue = Number.parseInt(canvas.dataset.selectedIndex || "", 10);
   const selectedIndex = Number.isInteger(selectedValue) && selectedValue >= 0 && selectedValue < points.length ? selectedValue : points.length - 1;
@@ -10508,36 +10512,27 @@ function drawPlayerMarketHistory(canvas, history = []) {
     const row = points[index];
     const point = positions[index];
     const selected = index === selectedIndex;
-    const radius = selected ? 13 : 8;
+    const logoSize = selected ? 20 : 11;
     const asset = playerMarketTeamAsset(row.team);
     const redraw = () => {
       if (canvas.isConnected) drawPlayerMarketHistory(canvas, history);
     };
     const logo = playerMarketLogoImage(asset.logoUrl, redraw);
     context.save();
-    context.shadowColor = selected ? `${asset.accent}55` : "rgba(15, 23, 42, 0.16)";
-    context.shadowBlur = selected ? 12 : 5;
-    context.shadowOffsetY = selected ? 3 : 1;
-    context.beginPath();
-    context.arc(point.x, point.y, radius + 2, 0, Math.PI * 2);
-    context.fillStyle = "#ffffff";
-    context.fill();
-    context.shadowColor = "transparent";
+    context.globalAlpha = selected ? 1 : 0.9;
+    context.shadowColor = selected ? `${asset.accent}77` : "rgba(15, 23, 42, 0.2)";
+    context.shadowBlur = selected ? 9 : 3;
+    context.shadowOffsetY = selected ? 2 : 1;
     if (logo) {
-      const logoSize = radius * 1.8;
       context.drawImage(logo, point.x - logoSize / 2, point.y - logoSize / 2, logoSize, logoSize);
     } else {
+      context.shadowColor = "transparent";
       context.fillStyle = asset.accent;
-      context.font = `900 ${selected ? 10 : 8}px system-ui, sans-serif`;
+      context.font = `900 ${selected ? 11 : 8}px system-ui, sans-serif`;
       context.textAlign = "center";
       context.textBaseline = "middle";
       context.fillText(String(row.team?.name || "队").slice(0, 1), point.x, point.y);
     }
-    context.beginPath();
-    context.arc(point.x, point.y, radius + 2, 0, Math.PI * 2);
-    context.strokeStyle = selected ? asset.accent : `${asset.accent}aa`;
-    context.lineWidth = selected ? 2.5 : 1.25;
-    context.stroke();
     context.restore();
   };
   const nodeOrder = points.map((_, index) => index).filter((index) => index !== selectedIndex);
@@ -10546,10 +10541,17 @@ function drawPlayerMarketHistory(canvas, history = []) {
   canvas._playerMarketHitAreas = positions.map((point, index) => ({
     ...point,
     index,
-    radius: index === selectedIndex ? 18 : 13,
+    radius: index === selectedIndex ? 16 : 10,
   }));
   canvas.dataset.renderWidth = String(cssWidth);
   canvas.dataset.renderHeight = String(cssHeight);
+  if (scrollViewport) {
+    const scrollLayout = `${cssWidth}:${scrollViewport.clientWidth}`;
+    if (canvas.dataset.marketScrollLayout !== scrollLayout) {
+      canvas.dataset.marketScrollLayout = scrollLayout;
+      window.requestAnimationFrame(() => revealPlayerMarketHistoryPoint(canvas, selectedIndex));
+    }
+  }
 }
 
 function updatePlayerMarketSelection(canvas, row = {}) {
@@ -10595,6 +10597,26 @@ function playerMarketHitIndex(canvas, event) {
   return nearest;
 }
 
+function revealPlayerMarketHistoryPoint(canvas, index, smooth = false) {
+  const scrollViewport = canvas?.closest(".player-market-chart-scroll");
+  const point = canvas?._playerMarketHitAreas?.[index];
+  if (!scrollViewport || !point || scrollViewport.scrollWidth <= scrollViewport.clientWidth + 1) return;
+  const edgeSpace = 44;
+  const visibleLeft = scrollViewport.scrollLeft + edgeSpace;
+  const visibleRight = scrollViewport.scrollLeft + scrollViewport.clientWidth - edgeSpace;
+  let nextLeft = scrollViewport.scrollLeft;
+  if (point.x < visibleLeft) nextLeft = point.x - edgeSpace;
+  if (point.x > visibleRight) nextLeft = point.x - scrollViewport.clientWidth + edgeSpace;
+  const maximumLeft = Math.max(0, scrollViewport.scrollWidth - scrollViewport.clientWidth);
+  nextLeft = Math.max(0, Math.min(maximumLeft, nextLeft));
+  if (Math.abs(nextLeft - scrollViewport.scrollLeft) < 1) return;
+  const reduceMotion = typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  scrollViewport.scrollTo({
+    left: nextLeft,
+    behavior: smooth && !reduceMotion ? "smooth" : "auto",
+  });
+}
+
 function selectPlayerMarketHistoryPoint(canvas, history = [], index = 0) {
   const points = playerMarketHistoryPoints(history);
   if (!canvas || !points.length) return;
@@ -10602,6 +10624,7 @@ function selectPlayerMarketHistoryPoint(canvas, history = [], index = 0) {
   canvas.dataset.selectedIndex = String(nextIndex);
   updatePlayerMarketSelection(canvas, points[nextIndex]);
   drawPlayerMarketHistory(canvas, history);
+  revealPlayerMarketHistoryPoint(canvas, nextIndex, true);
 }
 
 function initPlayerMarketHistory(canvas, history = []) {

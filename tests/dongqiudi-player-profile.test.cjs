@@ -141,9 +141,12 @@ assert.match(app, /function drawPlayerMarketHistory/);
 assert.match(app, /const PLAYER_MARKET_TEAM_ASSETS = new Map/);
 assert.match(app, /function initPlayerMarketHistory/);
 assert.match(app, /function selectPlayerMarketHistoryPoint/);
+assert.match(app, /function revealPlayerMarketHistoryPoint/);
 assert.match(app, /canvas\.addEventListener\("click"/);
 assert.match(app, /canvas\.addEventListener\("keydown"/);
 assert.match(app, /data-player-market-selection/);
+assert.match(app, /class="player-market-chart-scroll"/);
+assert.match(app, /横向滑动查看完整走势/);
 assert.match(app, /class="player-profile-fact is-/);
 assert.match(app, /class="player-characteristic-card is-/);
 assert.doesNotMatch(app, /Market value history/i);
@@ -160,11 +163,20 @@ assert.match(css, /\.player-world-cup-schedule\s*\{/);
 assert.match(css, /\.player-ability-radar-canvas\s*\{/);
 assert.match(css, /\.player-ability-star-grid\s*\{/);
 assert.match(css, /\.player-market-history-canvas\s*\{/);
+assert.match(css, /\.player-market-chart-scroll\s*\{[\s\S]*?overflow-x:\s*auto/);
+assert.match(css, /@media \(max-width: 760px\)\s*\{[\s\S]*?\.player-market-history-canvas\s*\{[\s\S]*?min-width:\s*720px/);
 assert.match(css, /\.player-market-selection\s*\{/);
 assert.match(css, /\.player-characteristic-card\s*\{/);
 assert.match(css, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.player-profile-facts\s*\{\s*grid-template-columns:\s*repeat\(2,/);
 assert.doesNotMatch(css, /\.player-dqd-header-meta\s*\{/);
 assert.doesNotMatch(css, /\.player-dqd-footer\s*\{/);
+
+const marketChartSource = app.slice(
+  app.indexOf("function drawPlayerMarketHistory"),
+  app.indexOf("function updatePlayerMarketSelection")
+);
+assert.match(marketChartSource, /const logoSize = selected \? 20 : 11/);
+assert.doesNotMatch(marketChartSource, /context\.arc\(point\.x, point\.y/);
 
 console.log("Dongqiudi player ability and profile archive: ok");
 
