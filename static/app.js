@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "292";
+const STATIC_DATA_VERSION = "293";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -9987,18 +9987,21 @@ function renderPlayerAbilityPanel(data = {}) {
         </div>
         <figure class="player-ability-radar">
           <canvas class="player-ability-radar-canvas" role="img" aria-label="球员六维能力雷达图"></canvas>
-          <figcaption>速度、射门、传球、盘带、防守与力量</figcaption>
         </figure>
         <div class="player-ability-essentials">
-          <div>
-            <span>惯用脚</span>
-            <strong>${escapeHtml(ability.preferredFoot || "—")}</strong>
+          <div class="player-ability-fact-grid">
+            <div>
+              <span>惯用脚</span>
+              <strong>${escapeHtml(ability.preferredFoot || "—")}</strong>
+            </div>
+            <div>
+              <span>注册位置</span>
+              <strong>${escapeHtml(positionLabels.join(" · ") || "—")}</strong>
+            </div>
           </div>
-          <div>
-            <span>注册位置</span>
-            <strong>${escapeHtml(positionLabels.join(" · ") || "—")}</strong>
+          <div class="player-ability-star-grid">
+            ${(ability.stars || []).map(renderPlayerAbilityStars).join("")}
           </div>
-          ${(ability.stars || []).map(renderPlayerAbilityStars).join("")}
         </div>
       </div>
       <div class="player-ability-radar-values">
@@ -10200,23 +10203,16 @@ function renderPlayerScoutingEmptyPanel(name, title, detail, hidden = true) {
 
 function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap = null, worldCupSchedule = {}) {
   const profileAvailable = playerDongqiudiAvailable(data);
-  const source = data?.sources || {};
-  const worldCupSource = worldCupStats?.source && typeof worldCupStats.source === "object" ? worldCupStats.source : {};
   const initialTab = profileAvailable ? "ability" : "world-cup";
   const selected = (name) => String(initialTab === name);
   const tabIndex = (name) => (initialTab === name ? "0" : "-1");
-  const provider = source.provider || worldCupSource.name || "世界杯公开数据";
   return `
     <section class="panel player-dqd-panel" data-active-tab="${escapeHtml(initialTab)}" aria-labelledby="player-dqd-title">
       <div class="panel-header player-dqd-header">
-        <div>
+        <div class="player-dqd-header-copy">
           <p class="eyebrow">Player intelligence</p>
           <h2 id="player-dqd-title">球员数据中心</h2>
           <p>能力模型 · 资料档案 · 世界杯表现</p>
-        </div>
-        <div class="player-dqd-header-meta">
-          <span class="player-dqd-view-count" aria-label="三个数据视角"><b>3</b><span>DATA VIEWS</span></span>
-          <span class="source-badge player-dqd-source">${escapeHtml(provider)}</span>
         </div>
       </div>
       <nav class="player-dqd-tabs" role="tablist" aria-label="球员数据中心">
@@ -10246,16 +10242,6 @@ function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap
         }
         ${renderPlayerWorldCupStats(worldCupStats, averageHeatmap, initialTab !== "world-cup", worldCupSchedule)}
       </div>
-      <footer class="player-dqd-footer" data-player-dqd-profile-footer${profileAvailable ? "" : " hidden"}>
-        <div>
-          <strong>能力与资料口径</strong>
-          <span>${escapeHtml(source.note || "懂球帝公开球员资料与能力快照。")}</span>
-        </div>
-        <div>
-          <time>${escapeHtml(playerWorldCupCheckedAt(data?.checkedAt))}</time>
-          ${source.playerPage ? `<a class="btn" href="${escapeHtml(source.playerPage)}" target="_blank" rel="noreferrer">查看来源</a>` : ""}
-        </div>
-      </footer>
     </section>
   `;
 }
@@ -10443,9 +10429,7 @@ function initPlayerDongqiudiProfile(data) {
   const tabs = Array.from(app.querySelectorAll("[data-player-dqd-tab]"));
   const panels = Array.from(app.querySelectorAll("[data-player-dqd-panel]"));
   if (!tabs.length || !panels.length) return;
-  const profileAvailable = playerDongqiudiAvailable(data);
   const panelRoot = app.querySelector(".player-dqd-panel");
-  const profileFooter = app.querySelector("[data-player-dqd-profile-footer]");
   const radarCanvas = app.querySelector(".player-ability-radar-canvas");
   const marketCanvas = app.querySelector(".player-market-history-canvas");
   const renderVisuals = (force = false) => {
@@ -10469,7 +10453,6 @@ function initPlayerDongqiudiProfile(data) {
       panel.hidden = panel.dataset.playerDqdPanel !== name;
     });
     if (panelRoot) panelRoot.dataset.activeTab = name;
-    if (profileFooter) profileFooter.hidden = !profileAvailable || name === "world-cup";
     window.requestAnimationFrame(() => {
       renderVisuals(true);
       if (name === "world-cup") window.dispatchEvent(new Event("resize"));

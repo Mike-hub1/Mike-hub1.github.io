@@ -128,11 +128,19 @@ assert.match(app, /function playerProfileMarketValueLabel/);
 assert.match(app, /\["身价", playerProfileMarketValueLabel\(identity\)\]/);
 assert.match(app, /function drawPlayerAbilityRadar/);
 assert.match(app, /function drawPlayerMarketHistory/);
+assert.match(app, /class="player-ability-fact-grid"/);
+assert.match(app, /class="player-ability-star-grid"/);
+assert.doesNotMatch(app, /<figcaption>速度、射门、传球、盘带、防守与力量<\/figcaption>/);
+assert.doesNotMatch(app, /class="player-dqd-header-meta"/);
+assert.doesNotMatch(app, /class="player-dqd-footer"/);
 assert.match(css, /\.player-dqd-panel\s*\{/);
 assert.match(css, /\.player-dqd-tabs\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3,/);
 assert.match(css, /\.player-world-cup-schedule\s*\{/);
 assert.match(css, /\.player-ability-radar-canvas\s*\{/);
+assert.match(css, /\.player-ability-star-grid\s*\{/);
 assert.match(css, /\.player-market-history-canvas\s*\{/);
+assert.doesNotMatch(css, /\.player-dqd-header-meta\s*\{/);
+assert.doesNotMatch(css, /\.player-dqd-footer\s*\{/);
 
 console.log("Dongqiudi player ability and profile archive: ok");
 
