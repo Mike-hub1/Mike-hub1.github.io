@@ -17027,6 +17027,24 @@ body[data-route="leaderboards"] .main {
   border-bottom: 1px solid var(--line);
 }
 
+.player-profile-section-empty {
+  display: grid;
+  min-height: 88px;
+  place-items: center;
+  margin: 0;
+  padding: 18px;
+  border: 1px dashed rgba(var(--dqd-active-rgb), 0.24);
+  border-radius: 12px;
+  color: #718096;
+  background:
+    radial-gradient(circle at 100% 0, rgba(var(--dqd-active-rgb), 0.08), transparent 34%),
+    #f9fbfc;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.65;
+  text-align: center;
+}
+
 .player-profile-section-header {
   display: flex;
   align-items: center;
@@ -17588,6 +17606,21 @@ body[data-route="leaderboards"] .main {
   color: #7c8999;
   font-size: 9px;
   font-weight: 750;
+}
+
+.player-profile-archive-empty {
+  display: grid;
+  min-height: 82px;
+  place-items: center;
+  margin: 0;
+  padding: 18px;
+  color: #78879a;
+  background:
+    radial-gradient(circle at 96% 0, rgba(var(--archive-accent-rgb), 0.1), transparent 30%),
+    #fbfcfd;
+  font-size: 10px;
+  font-weight: 800;
+  text-align: center;
 }
 
 .player-profile-transfer-list {

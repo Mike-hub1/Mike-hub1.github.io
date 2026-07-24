@@ -6,8 +6,44 @@ const vm = require("node:vm");
 const root = path.resolve(__dirname, "..");
 const manifest = readJson(path.join(root, "tools", "dongqiudi-player-profiles.json"));
 const archiveIndex = readJson(path.join(root, "static", "api", "v1", "index.json"));
+const coverageReport = readJson(path.join(root, "tools", "dongqiudi-player-profile-report.json"));
+const assetRegistry = readJson(path.join(root, "tools", "player-profile-asset-registry.json"));
 
 assert.ok(manifest.players.length > 0, "at least one Dongqiudi player mapping must be retained");
+assert.equal(
+  manifest.players.length,
+  Object.keys(archiveIndex.details.players).length,
+  "every archived player must be present in the Dongqiudi manifest"
+);
+assert.equal(coverageReport.availableProfiles, coverageReport.totalPlayers);
+assert.equal(coverageReport.totalPlayers, manifest.players.length);
+assert.ok(
+  coverageReport.availableAbilities >= Math.floor(coverageReport.totalPlayers * 0.9),
+  "ability coverage must remain above 90%"
+);
+assert.ok(assetRegistry.summary.honorNames >= 400);
+assert.ok(assetRegistry.summary.honorAssetsAvailable >= 200);
+assert.ok(assetRegistry.summary.teamAssetsAvailable >= 1_000);
+assert.equal(assetRegistry.summary.honorContentCollisions, 0);
+assert.equal(assetRegistry.summary.teamContentCollisions, 0);
+
+const generatedAssetUrls = new Set(
+  [...Object.values(assetRegistry.honors), ...Object.values(assetRegistry.teams)]
+    .map((row) => row.assetUrl)
+    .filter((url) => url?.includes("/catalog/"))
+);
+for (const assetUrl of generatedAssetUrls) {
+  assert.match(assetUrl, /^\/static\/assets\/(?:clubs|trophies)\/catalog\/[a-f0-9]{20}\.(?:png|jpg|webp)$/);
+  const asset = fs.readFileSync(path.join(root, assetUrl.replace(/^\/+/, "")));
+  const maximumBytes = assetUrl.includes("/trophies/") ? 256 * 1024 : 192 * 1024;
+  assert.ok(asset.length <= maximumBytes, `${assetUrl} must remain web-sized`);
+  const isPng = asset.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  const isJpeg = asset[0] === 0xff && asset[1] === 0xd8;
+  const isWebp =
+    asset.subarray(0, 4).toString("ascii") === "RIFF" &&
+    asset.subarray(8, 12).toString("ascii") === "WEBP";
+  assert.ok(isPng || isJpeg || isWebp, `${assetUrl} must use a browser-compatible raster format`);
+}
 
 for (const entry of manifest.players) {
   const archiveUrl = archiveIndex.details.players[entry.playerId];
@@ -15,8 +51,39 @@ for (const entry of manifest.players) {
   const player = readJson(path.join(root, archiveUrl.replace(/^\/+/, "")));
   const data = player.dongqiudiProfile;
   assert.equal(data.status, "available");
+  assert.equal(data.schemaVersion, 2);
   assert.equal(data.externalPersonId, entry.personId);
   assert.equal(data.externalAbilityId, entry.abilityId);
+  assert.equal(data.coverage.profile, "available");
+  assert.ok(data.profile?.identity, `${entry.playerId} must retain a normalized profile identity`);
+  assert.ok(data.profile.identity.fullNameZh, `${entry.playerId} must retain a Chinese display name`);
+  if (data.coverage.ability === "available") {
+    assert.ok(data.ability?.radar?.length >= 3, `${entry.playerId} must retain its ability radar`);
+  } else {
+    assert.equal(data.ability, null, `${entry.playerId} must use the shared ability empty state`);
+  }
+  for (const point of data.profile.marketValueHistory || []) {
+    if (point.team?.logoStatus === "available") {
+      assert.match(point.team.logoUrl, /^\/static\/assets\/clubs\//);
+      assert.ok(
+        fs.existsSync(path.join(root, point.team.logoUrl.replace(/^\/+/, ""))),
+        `${point.team.name} must resolve to a local club crest`
+      );
+    }
+  }
+  for (const honor of data.profile.honors || []) {
+    assert.match(honor.logoSourceUrl, /^https:\/\//, `${honor.name} must retain upstream evidence`);
+    if (honor.logoUrl) {
+      assert.match(honor.logoUrl, /^\/static\/assets\/trophies\//);
+      assert.ok(
+        fs.existsSync(path.join(root, honor.logoUrl.replace(/^\/+/, ""))),
+        `${honor.name} must resolve to a local trophy asset`
+      );
+    }
+    if (honor.logoStatus === "withheld-shared-artwork") {
+      assert.equal(honor.logoUrl, "", `${honor.name} must not expose a known shared placeholder`);
+    }
+  }
   assert.equal(data.sources.runtimeCalls, false, "the archived page must not call Dongqiudi at runtime");
   assert.match(data.sources.playerPage, new RegExp(`${entry.personId}$`));
 }
@@ -49,8 +116,29 @@ assert.deepEqual(
   "position ratings must be deterministic"
 );
 
-assert.deepEqual(snapshot.profile.identity, {
+assert.deepEqual(
+  Object.fromEntries(
+    [
+      "fullName",
+      "fullNameZh",
+      "nationality",
+      "dateOfBirth",
+      "age",
+      "heightCm",
+      "weightKg",
+      "preferredFoot",
+      "position",
+      "shirtNumber",
+      "club",
+      "annualSalary",
+      "marketValue",
+      "marketValueEuro",
+      "contractUntil",
+    ].map((key) => [key, snapshot.profile.identity[key]])
+  ),
+  {
   fullName: "Kylian Mbappé Lottin",
+  fullNameZh: "基利安·姆巴佩·洛坦",
   nationality: "法国 / 喀麦隆",
   dateOfBirth: "1998-12-20",
   age: "27岁",
@@ -64,7 +152,10 @@ assert.deepEqual(snapshot.profile.identity, {
   marketValue: "20000万欧元",
   marketValueEuro: 200_000_000,
   contractUntil: "2029-06-30",
-});
+  }
+);
+assert.match(snapshot.profile.identity.clubLogoUrl, /^\/static\/assets\/clubs\//);
+assert.equal(snapshot.profile.identity.clubLogoStatus, "available");
 
 const marketHistory = snapshot.profile.marketValueHistory;
 assert.equal(marketHistory.length, 32);
@@ -123,6 +214,9 @@ assert.equal(
 assert.equal(profileLabelContext.marketDateLabel("2026-07-22"), "2026年7月22日");
 assert.equal(profileLabelContext.marketTeamAsset({ id: "1755" }).logoUrl, "/static/assets/clubs/real-madrid.png");
 assert.match(app, /function renderPlayerDongqiudiProfile/);
+assert.match(app, /function playerAbilityAvailable/);
+assert.match(app, /function playerProfileAvailable/);
+assert.match(app, /const initialTab = abilityAvailable \? "ability" : profileAvailable \? "profile" : "world-cup"/);
 assert.match(app, /id="player-dqd-panel-ability"/);
 assert.match(app, /id="player-dqd-panel-profile"/);
 assert.match(app, /id="player-dqd-panel-world-cup"/);
@@ -160,6 +254,8 @@ assert.match(app, /function groupPlayerHonors/);
 assert.match(app, /class="player-profile-transfer-item"/);
 assert.match(app, /class="player-profile-honor-groups"/);
 assert.match(app, /class="player-profile-honor-card"/);
+assert.match(app, /if \(isRecord && row\.logoUrl\)/);
+assert.match(app, /Object\.hasOwn\(row, "logoStatus"\)/);
 assert.match(app, /label: "国家队荣誉"/);
 assert.match(app, /label: "俱乐部荣誉"/);
 assert.match(app, /label: "个人奖项"/);
@@ -167,6 +263,9 @@ assert.doesNotMatch(app, /class="player-profile-honor-list"/);
 assert.doesNotMatch(app, /Market value history/i);
 assert.doesNotMatch(app, /Playing profile/i);
 assert.doesNotMatch(app, /个公开节点/);
+assert.match(app, /暂无可核验的历年身价节点/);
+assert.match(app, /暂无公开技术特点标签/);
+assert.match(app, /暂无已公开的冠军或个人奖项记录/);
 assert.match(app, /class="player-ability-fact-grid"/);
 assert.match(app, /class="player-ability-star-grid"/);
 assert.doesNotMatch(app, /<figcaption>速度、射门、传球、盘带、防守与力量<\/figcaption>/);
@@ -231,6 +330,15 @@ assert.notEqual(
   "Gerd Müller and Kopa must not reuse the same upstream icon"
 );
 assert.equal(archiveHelperContext.honorAsset("未核验奖项").kind, "fallback");
+assert.equal(
+  archiveHelperContext.honorAsset({
+    name: "年度最佳球员",
+    logoUrl: "",
+    logoStatus: "withheld-shared-artwork",
+  }).kind,
+  "fallback",
+  "a scoped or shared upstream placeholder must not fall back to a globally named trophy"
+);
 
 const archiveRenderSource = app.slice(
   app.indexOf("const PLAYER_PROFILE_CLUB_ASSETS"),

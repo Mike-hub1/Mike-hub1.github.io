@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "301";
+const STATIC_DATA_VERSION = "302";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -9911,8 +9911,12 @@ function initPlayerHeatmaps(matchRecords = [], averageHeatmap = null) {
 
 const PLAYER_ABILITY_RADAR_ORDER = ["速度", "射门", "传球", "盘带", "防守", "力量"];
 
-function playerDongqiudiAvailable(data) {
-  return Boolean(data && data.status === "available" && data.ability && data.profile);
+function playerAbilityAvailable(data) {
+  return Boolean(data && data.status === "available" && data.ability);
+}
+
+function playerProfileAvailable(data) {
+  return Boolean(data && data.status === "available" && data.profile);
 }
 
 function playerAbilityLevel(value) {
@@ -9974,11 +9978,11 @@ function renderPlayerAbilityCategory(group = {}, index = 0) {
   `;
 }
 
-function renderPlayerAbilityPanel(data = {}) {
+function renderPlayerAbilityPanel(data = {}, hidden = false) {
   const ability = data.ability || {};
   const positionLabels = (ability.registeredPositions || []).map(playerAbilityPositionLabel).filter(Boolean);
   return `
-    <div id="player-dqd-panel-ability" class="player-dqd-tab-panel player-ability-panel" data-player-dqd-panel="ability" role="tabpanel" aria-labelledby="player-dqd-tab-ability">
+    <div id="player-dqd-panel-ability" class="player-dqd-tab-panel player-ability-panel" data-player-dqd-panel="ability" role="tabpanel" aria-labelledby="player-dqd-tab-ability"${hidden ? " hidden" : ""}>
       <div class="player-ability-overview">
         <div class="player-ability-score">
           <span>综合能力</span>
@@ -10054,13 +10058,20 @@ const PLAYER_MARKET_TEAM_ASSETS = new Map([
   ["1755", { logoUrl: "/static/assets/clubs/real-madrid.png", accent: "#d7aa28" }],
 ]);
 
+function playerTeamAccent(team = {}) {
+  const palette = ["#167f76", "#276e9e", "#7857a7", "#b86624", "#b24a47", "#397955"];
+  const key = String(team.id || team.name || "team");
+  const hash = Array.from(key).reduce((total, character) => (total * 31 + character.codePointAt(0)) >>> 0, 0);
+  return palette[hash % palette.length];
+}
+
 function playerMarketTeamAsset(team = {}) {
-  return (
-    PLAYER_MARKET_TEAM_ASSETS.get(String(team.id || "")) || {
-      logoUrl: "/static/assets/flags/tbd.png",
-      accent: "#64748b",
-    }
-  );
+  const curated = PLAYER_MARKET_TEAM_ASSETS.get(String(team.id || ""));
+  if (curated) return curated;
+  return {
+    logoUrl: team.logoUrl || "/static/assets/flags/tbd.png",
+    accent: playerTeamAccent(team),
+  };
 }
 
 function formatPlayerMarketDate(value) {
@@ -10208,13 +10219,14 @@ function playerProfileClubInitial(name = "") {
   return Array.from(normalized || "队").slice(0, 1).join("");
 }
 
-function renderPlayerTransferClub(name = "") {
+function renderPlayerTransferClub(name = "", logoUrl = "") {
   const label = name || "待定";
   const asset = playerProfileClubAsset(label);
+  const resolvedLogoUrl = logoUrl || asset?.logoUrl || "";
   return `
     <span class="player-transfer-club">
-      <span class="player-transfer-club-logo${asset ? " has-image" : ""}" aria-hidden="true">
-        ${asset ? `<img src="${escapeHtml(asset.logoUrl)}" alt="" loading="lazy" decoding="async" />` : escapeHtml(playerProfileClubInitial(label))}
+      <span class="player-transfer-club-logo${resolvedLogoUrl ? " has-image" : ""}" aria-hidden="true">
+        ${resolvedLogoUrl ? `<img src="${escapeHtml(resolvedLogoUrl)}" alt="" loading="lazy" decoding="async" />` : escapeHtml(playerProfileClubInitial(label))}
       </span>
       <strong>${escapeHtml(label)}</strong>
     </span>
@@ -10270,20 +10282,33 @@ function groupPlayerHonors(honors = []) {
   return Array.from(byName.values()).sort((left, right) => right.importance - left.importance);
 }
 
-function playerHonorCategory(name = "") {
+function playerHonorCategory(row = "") {
+  const name = typeof row === "object" ? String(row?.name || "") : String(row || "");
+  const declaredCategory = typeof row === "object" ? String(row?.category || "") : "";
+  if (["national", "club", "individual"].includes(declaredCategory)) return declaredCategory;
   if (PLAYER_HONOR_NATIONAL_NAMES.has(name)) return "national";
   if (PLAYER_HONOR_CLUB_NAMES.has(name)) return "club";
   return "individual";
 }
 
-function playerHonorAsset(name = "") {
-  return (
-    PLAYER_HONOR_ASSETS.get(String(name)) || {
-      url: "",
-      source: "图标待核验",
-      kind: "fallback",
-    }
-  );
+function playerHonorAsset(row = "") {
+  const isRecord = row && typeof row === "object";
+  const name = isRecord ? String(row.name || "") : String(row || "");
+  if (isRecord && row.logoUrl) {
+    return {
+      url: row.logoUrl,
+      source: row.logoSource || "懂球帝 App 公开数据层",
+      kind: "trophy",
+    };
+  }
+  if (isRecord && Object.hasOwn(row, "logoStatus")) {
+    return { url: "", source: row.logoSource || "图标待核验", kind: "fallback" };
+  }
+  return PLAYER_HONOR_ASSETS.get(name) || {
+    url: "",
+    source: "图标待核验",
+    kind: "fallback",
+  };
 }
 
 function playerHonorRecordGroups(records = []) {
@@ -10299,7 +10324,7 @@ function playerHonorRecordGroups(records = []) {
 
 function renderPlayerHonorCard(row = {}) {
   const recordGroups = playerHonorRecordGroups(row.records || []);
-  const asset = playerHonorAsset(row.name);
+  const asset = playerHonorAsset(row);
   return `
     <article class="player-profile-honor-card">
       <figure class="is-${escapeHtml(asset.kind)}">
@@ -10400,32 +10425,36 @@ function renderPlayerProfileArchives(profile = {}) {
           </span>
           <span class="player-profile-archive-count"><b>${transfers.length}</b><small>条记录</small></span>
         </summary>
-        <ol class="player-profile-transfer-list">
-          ${transfers
-            .map(
-              (row, index) => {
-                const date = playerTransferDateParts(row.date);
-                return `
-                  <li class="player-profile-transfer-item">
-                    <time datetime="${escapeHtml(row.date)}"><strong>${escapeHtml(date.year)}</strong><span>${escapeHtml(date.shortDate)}</span></time>
-                    <span class="player-profile-transfer-track" aria-hidden="true"><i>${index + 1}</i></span>
-                    <article>
-                      <header>
-                        <span class="player-transfer-type is-${escapeHtml(playerTransferTypeClass(row.type))}">${escapeHtml(row.type)}</span>
-                        <b>${escapeHtml(playerTransferFeeLabel(row.fee))}</b>
-                      </header>
-                      <div class="player-transfer-route">
-                        ${renderPlayerTransferClub(row.from || "青训")}
-                        <span class="player-transfer-arrow" aria-hidden="true">→</span>
-                        ${renderPlayerTransferClub(row.to || "待定")}
-                      </div>
-                    </article>
-                  </li>
-                `;
-              }
-            )
-            .join("")}
-        </ol>
+        ${
+          transfers.length
+            ? `<ol class="player-profile-transfer-list">
+                ${transfers
+                  .map(
+                    (row, index) => {
+                      const date = playerTransferDateParts(row.date);
+                      return `
+                        <li class="player-profile-transfer-item">
+                          <time datetime="${escapeHtml(row.date)}"><strong>${escapeHtml(date.year)}</strong><span>${escapeHtml(date.shortDate)}</span></time>
+                          <span class="player-profile-transfer-track" aria-hidden="true"><i>${index + 1}</i></span>
+                          <article>
+                            <header>
+                              <span class="player-transfer-type is-${escapeHtml(playerTransferTypeClass(row.type))}">${escapeHtml(row.type)}</span>
+                              <b>${escapeHtml(playerTransferFeeLabel(row.fee))}</b>
+                            </header>
+                            <div class="player-transfer-route">
+                              ${renderPlayerTransferClub(row.from || "青训", row.fromLogoUrl)}
+                              <span class="player-transfer-arrow" aria-hidden="true">→</span>
+                              ${renderPlayerTransferClub(row.to || "待定", row.toLogoUrl)}
+                            </div>
+                          </article>
+                        </li>
+                      `;
+                    }
+                  )
+                  .join("")}
+              </ol>`
+            : `<p class="player-profile-archive-empty">暂无可核验的转会记录</p>`
+        }
       </details>
       <details class="player-profile-archive is-honors">
         <summary>
@@ -10437,23 +10466,28 @@ function renderPlayerProfileArchives(profile = {}) {
           </span>
           <span class="player-profile-archive-count"><b>${honors.length}</b><small>类 · ${honorWins} 次</small></span>
         </summary>
-        <div class="player-profile-honor-groups">
-          ${PLAYER_HONOR_CATEGORIES.map((category) => {
-            const rows = honors.filter((row) => playerHonorCategory(row.name) === category.id);
-            const wins = rows.reduce((total, row) => total + (Number(row.times) || 0), 0);
-            return `
-              <section class="player-profile-honor-group is-${escapeHtml(category.id)}">
-                <header>
-                  <span><strong>${escapeHtml(category.label)}</strong><small>${escapeHtml(category.note)}</small></span>
-                  <b>${rows.length} 类 · ${wins} 次</b>
-                </header>
-                <div class="player-profile-honor-grid">
-                  ${rows.map(renderPlayerHonorCard).join("")}
-                </div>
-              </section>
-            `;
-          }).join("")}
-        </div>
+        ${
+          honors.length
+            ? `<div class="player-profile-honor-groups">
+                ${PLAYER_HONOR_CATEGORIES.map((category) => {
+                  const rows = honors.filter((row) => playerHonorCategory(row) === category.id);
+                  if (!rows.length) return "";
+                  const wins = rows.reduce((total, row) => total + (Number(row.times) || 0), 0);
+                  return `
+                    <section class="player-profile-honor-group is-${escapeHtml(category.id)}">
+                      <header>
+                        <span><strong>${escapeHtml(category.label)}</strong><small>${escapeHtml(category.note)}</small></span>
+                        <b>${rows.length} 类 · ${wins} 次</b>
+                      </header>
+                      <div class="player-profile-honor-grid">
+                        ${rows.map(renderPlayerHonorCard).join("")}
+                      </div>
+                    </section>
+                  `;
+                }).join("")}
+              </div>`
+            : `<p class="player-profile-archive-empty">暂无已公开的冠军或个人奖项记录</p>`
+        }
       </details>
       <details class="player-profile-archive is-injuries">
         <summary>
@@ -10463,45 +10497,49 @@ function renderPlayerProfileArchives(profile = {}) {
           </span>
           <span class="player-profile-archive-count"><b>${injuries.length}</b><small>次 · ${injurySummary.days} 天</small></span>
         </summary>
-        <div class="player-profile-injury-body">
-          <dl class="player-injury-overview">
-            <div><dt>累计伤停</dt><dd>${injurySummary.days}<small>天</small></dd></div>
-            <div><dt>缺席比赛</dt><dd>${injurySummary.gamesMissed}<small>场</small></dd></div>
-            <div><dt>最长记录</dt><dd>${injurySummary.longestDays}<small>天</small></dd></div>
-          </dl>
-          <ol class="player-profile-injury-timeline">
-            ${injuries
-              .map((row, index) => {
-                const date = playerInjuryDateParts(row.from, row.until);
-                const duration = playerInjuryDurationBand(row.days);
-                const hasMissedGames = row.gamesMissed !== null && row.gamesMissed !== undefined;
-                return `
-                  <li class="player-profile-injury-item is-${escapeHtml(duration.id)}">
-                    <time datetime="${escapeHtml(date.datetime)}"><strong>${escapeHtml(date.year)}</strong><span>${escapeHtml(date.range)}</span></time>
-                    <span class="player-profile-injury-track" aria-hidden="true"><i>${index + 1}</i></span>
-                    <article>
-                      <header>
-                        <strong>${escapeHtml(row.injury || "伤病记录")}</strong>
-                        <span class="player-injury-duration">${escapeHtml(duration.label)}</span>
-                      </header>
-                      <div class="player-injury-facts">
-                        <span><small>恢复周期</small><b>${escapeHtml(row.days || 0)} 天</b></span>
-                        <span><small>缺席比赛</small><b>${hasMissedGames ? `${escapeHtml(row.gamesMissed)} 场` : "未记录"}</b></span>
-                      </div>
-                      <div class="player-injury-teams">${renderPlayerInjuryTeams(row.teams)}</div>
-                    </article>
-                  </li>
-                `;
-              })
-              .join("")}
-          </ol>
-        </div>
+        ${
+          injuries.length
+            ? `<div class="player-profile-injury-body">
+                <dl class="player-injury-overview">
+                  <div><dt>累计伤停</dt><dd>${injurySummary.days}<small>天</small></dd></div>
+                  <div><dt>缺席比赛</dt><dd>${injurySummary.gamesMissed}<small>场</small></dd></div>
+                  <div><dt>最长记录</dt><dd>${injurySummary.longestDays}<small>天</small></dd></div>
+                </dl>
+                <ol class="player-profile-injury-timeline">
+                  ${injuries
+                    .map((row, index) => {
+                      const date = playerInjuryDateParts(row.from, row.until);
+                      const duration = playerInjuryDurationBand(row.days);
+                      const hasMissedGames = row.gamesMissed !== null && row.gamesMissed !== undefined;
+                      return `
+                        <li class="player-profile-injury-item is-${escapeHtml(duration.id)}">
+                          <time datetime="${escapeHtml(date.datetime)}"><strong>${escapeHtml(date.year)}</strong><span>${escapeHtml(date.range)}</span></time>
+                          <span class="player-profile-injury-track" aria-hidden="true"><i>${index + 1}</i></span>
+                          <article>
+                            <header>
+                              <strong>${escapeHtml(row.injury || "伤病记录")}</strong>
+                              <span class="player-injury-duration">${escapeHtml(duration.label)}</span>
+                            </header>
+                            <div class="player-injury-facts">
+                              <span><small>恢复周期</small><b>${escapeHtml(row.days || 0)} 天</b></span>
+                              <span><small>缺席比赛</small><b>${hasMissedGames ? `${escapeHtml(row.gamesMissed)} 场` : "未记录"}</b></span>
+                            </div>
+                            <div class="player-injury-teams">${renderPlayerInjuryTeams(row.teams)}</div>
+                          </article>
+                        </li>
+                      `;
+                    })
+                    .join("")}
+                </ol>
+              </div>`
+            : `<p class="player-profile-archive-empty">暂无公开伤病记录</p>`
+        }
       </details>
     </div>
   `;
 }
 
-function renderPlayerProfilePanel(data = {}) {
+function renderPlayerProfilePanel(data = {}, hidden = true) {
   const profile = data.profile || {};
   const identity = profile.identity || {};
   const history = profile.marketValueHistory || [];
@@ -10509,40 +10547,72 @@ function renderPlayerProfilePanel(data = {}) {
   const current = history[history.length - 1];
   const peak = history.reduce((best, row) => (!best || Number(row.valueEuro) > Number(best.valueEuro) ? row : best), null);
   const character = profile.characteristics || {};
+  const characteristicGroups = [
+    ["超强", character.veryStrong, "very-strong"],
+    ["强项", character.strong, "strong"],
+    ["弱项", character.weak, "weak"],
+    ["超弱", character.veryWeak, "very-weak"],
+  ].filter(([, items]) => items?.length);
+  const hasCharacteristics = Boolean(character.styles?.length || characteristicGroups.length);
   return `
-    <div id="player-dqd-panel-profile" class="player-dqd-tab-panel player-profile-panel" data-player-dqd-panel="profile" role="tabpanel" aria-labelledby="player-dqd-tab-profile" hidden>
+    <div id="player-dqd-panel-profile" class="player-dqd-tab-panel player-profile-panel" data-player-dqd-panel="profile" role="tabpanel" aria-labelledby="player-dqd-tab-profile"${hidden ? " hidden" : ""}>
       ${renderPlayerProfileFacts(identity)}
       <section class="player-market-history" aria-labelledby="player-market-history-title">
         <header class="player-profile-section-header">
           <h3 id="player-market-history-title">身价变化</h3>
         </header>
-        <dl class="player-market-summary">
-          <div class="is-start"><dt>起始</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(first?.valueEuro))}</dd></div>
-          <div class="is-peak"><dt>峰值</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(peak?.valueEuro))}</dd></div>
-          <div class="is-current"><dt>当前</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(current?.valueEuro))}</dd></div>
-        </dl>
-        ${renderPlayerMarketSelection(current)}
-        <div class="player-market-chart">
-          <div class="player-market-chart-scroll">
-            <canvas class="player-market-history-canvas" role="img" tabindex="0" aria-label="球员历年身价变化折线图，可点击上方队徽或图中节点查看详情" aria-describedby="player-market-history-hint"></canvas>
-          </div>
-          <p id="player-market-history-hint">横向滑动查看完整走势；点击上方队徽或图中节点查看日期、年龄、球队与身价，键盘可使用左右方向键切换。</p>
-        </div>
+        ${
+          history.length
+            ? `
+              <dl class="player-market-summary">
+                <div class="is-start"><dt>起始</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(first?.valueEuro))}</dd></div>
+                <div class="is-peak"><dt>峰值</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(peak?.valueEuro))}</dd></div>
+                <div class="is-current"><dt>当前</dt><dd>${escapeHtml(formatPlayerArchiveMarketValue(current?.valueEuro))}</dd></div>
+              </dl>
+              ${renderPlayerMarketSelection(current)}
+              ${
+                history.length > 1
+                  ? `<div class="player-market-chart">
+                      <div class="player-market-chart-scroll">
+                        <canvas class="player-market-history-canvas" role="img" tabindex="0" aria-label="球员历年身价变化折线图，可点击上方队徽或图中节点查看详情" aria-describedby="player-market-history-hint"></canvas>
+                      </div>
+                      <p id="player-market-history-hint">横向滑动查看完整走势；点击上方队徽或图中节点查看日期、年龄、球队与身价，键盘可使用左右方向键切换。</p>
+                    </div>`
+                  : `<p class="player-profile-section-empty">当前仅有一个公开身价节点，后续节点同步后将自动生成完整走势图。</p>`
+              }
+            `
+            : `<p class="player-profile-section-empty">暂无可核验的历年身价节点；当前身价仍以页面顶部已核验数据为准。</p>`
+        }
       </section>
       <section class="player-characteristics" aria-labelledby="player-characteristics-title">
         <header class="player-profile-section-header">
           <h3 id="player-characteristics-title">技术特点</h3>
         </header>
-        <div class="player-characteristic-styles">
-          <header><strong>比赛倾向</strong><small>${character.styles?.length || 0} 项</small></header>
-          <div>${renderPlayerCharacteristicTags(character.styles)}</div>
-        </div>
-        <div class="player-characteristic-levels">
-          ${renderPlayerCharacteristicGroup("超强", character.veryStrong, "very-strong")}
-          ${renderPlayerCharacteristicGroup("强项", character.strong, "strong")}
-          ${renderPlayerCharacteristicGroup("弱项", character.weak, "weak")}
-          ${renderPlayerCharacteristicGroup("超弱", character.veryWeak, "very-weak")}
-        </div>
+        ${
+          hasCharacteristics
+            ? `
+              ${
+                character.styles?.length
+                  ? `<div class="player-characteristic-styles">
+                      <header><strong>比赛倾向</strong><small>${character.styles.length} 项</small></header>
+                      <div>${renderPlayerCharacteristicTags(character.styles)}</div>
+                    </div>`
+                  : ""
+              }
+              ${
+                characteristicGroups.length
+                  ? `<div class="player-characteristic-levels">
+                      ${characteristicGroups
+                        .map(([label, items, className]) =>
+                          renderPlayerCharacteristicGroup(label, items, className)
+                        )
+                        .join("")}
+                    </div>`
+                  : ""
+              }
+            `
+            : `<p class="player-profile-section-empty">暂无公开技术特点标签。</p>`
+        }
       </section>
       ${renderPlayerProfileArchives(profile)}
     </div>
@@ -10564,8 +10634,9 @@ function renderPlayerScoutingEmptyPanel(name, title, detail, hidden = true) {
 }
 
 function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap = null, worldCupSchedule = {}) {
-  const profileAvailable = playerDongqiudiAvailable(data);
-  const initialTab = profileAvailable ? "ability" : "world-cup";
+  const abilityAvailable = playerAbilityAvailable(data);
+  const profileAvailable = playerProfileAvailable(data);
+  const initialTab = abilityAvailable ? "ability" : profileAvailable ? "profile" : "world-cup";
   const selected = (name) => String(initialTab === name);
   const tabIndex = (name) => (initialTab === name ? "0" : "-1");
   return `
@@ -10593,14 +10664,24 @@ function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap
       </nav>
       <div class="player-dqd-body">
         ${
-          profileAvailable
-            ? renderPlayerAbilityPanel(data)
-            : renderPlayerScoutingEmptyPanel("ability", "暂无球员能力快照", "完成第三方球员身份匹配后，这里将展示综合评分和六维雷达。")
+          abilityAvailable
+            ? renderPlayerAbilityPanel(data, initialTab !== "ability")
+            : renderPlayerScoutingEmptyPanel(
+                "ability",
+                "暂无球员能力快照",
+                "该球员当前没有可核验的能力模型；资料档案与世界杯数据仍可正常查看。",
+                initialTab !== "ability"
+              )
         }
         ${
           profileAvailable
-            ? renderPlayerProfilePanel(data)
-            : renderPlayerScoutingEmptyPanel("profile", "暂无球员资料档案", "完成第三方资料同步后，这里将展示履历、身价趋势与技术特点。")
+            ? renderPlayerProfilePanel(data, initialTab !== "profile")
+            : renderPlayerScoutingEmptyPanel(
+                "profile",
+                "暂无球员资料档案",
+                "完成第三方资料同步后，这里将展示履历、身价趋势与技术特点。",
+                initialTab !== "profile"
+              )
         }
         ${renderPlayerWorldCupStats(worldCupStats, averageHeatmap, initialTab !== "world-cup", worldCupSchedule)}
       </div>

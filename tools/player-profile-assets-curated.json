@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "primarySource": "懂球帝 App 公开数据层",
+    "collisionGuard": "同一上游图像被大量不同奖项共用时，不作为真实奖杯图标展示。",
+    "officialFallback": "已确认上游图像错误或缺失时，采用赛事或颁奖机构官网公开实物图。",
+    "delivery": "素材本地化、按需懒加载，不加入 Service Worker 安装预缓存。"
+  },
+  "blockedSourceUrls": [
+    "https://sd.qunliao.info/fastdfs6/M00/54/DF/rBUESWGKKAaAdUPqAADZwvi7vaU458.png"
+  ],
+  "honors": {
+    "世界杯冠军": {
+      "assetUrl": "/static/assets/trophies/world-cup.png",
+      "source": "懂球帝公开数据"
+    },
+    "国际足联洲际杯冠军": {
+      "assetUrl": "/static/assets/trophies/fifa-intercontinental-cup.png",
+      "source": "懂球帝公开数据"
+    },
+    "欧洲超级杯冠军": {
+      "assetUrl": "/static/assets/trophies/uefa-super-cup.png",
+      "source": "懂球帝公开数据"
+    },
+    "欧洲金靴": {
+      "assetUrl": "/static/assets/trophies/european-golden-shoe.png",
+      "source": "懂球帝公开数据"
+    },
+    "法国足球顶级联赛冠军": {
+      "assetUrl": "/static/assets/trophies/ligue-1-champion.png",
+      "source": "懂球帝公开数据"
+    },
+    "盖德-穆勒奖": {
+      "assetUrl": "/static/assets/trophies/gerd-muller-trophy.png",
+      "source": "德甲官网实物"
+    },
+    "世界杯金靴": {
+      "assetUrl": "/static/assets/trophies/fifa-world-cup-golden-boot.png",
+      "source": "懂球帝公开数据"
+    },
+    "法国联赛杯冠军": {
+      "assetUrl": "/static/assets/trophies/coupe-de-la-ligue.png",
+      "source": "懂球帝公开数据"
+    },
+    "法国杯冠军": {
+      "assetUrl": "/static/assets/trophies/coupe-de-france.png",
+      "source": "懂球帝公开数据"
+    },
+    "法国超级杯冠军": {
+      "assetUrl": "/static/assets/trophies/trophee-des-champions.png",
+      "source": "懂球帝公开数据"
+    },
+    "金童奖": {
+      "assetUrl": "/static/assets/trophies/golden-boy.png",
+      "source": "懂球帝公开数据"
+    },
+    "最佳射手": {
+      "assetUrl": "/static/assets/trophies/top-scorer.png",
+      "source": "懂球帝公开数据"
+    },
+    "年度最佳球员": {
+      "assetUrl": "/static/assets/trophies/france-football-player-of-year.png",
+      "source": "France Football 实物",
+      "playerIds": [
+        "fifa_player_389867"
+      ]
+    },
+    "赛季最佳球员": {
+      "assetUrl": "/static/assets/trophies/unfp-player-of-season.png",
+      "source": "UNFP 官网实物",
+      "playerIds": [
+        "fifa_player_389867"
+      ]
+    },
+    "科帕奖": {
+      "assetUrl": "/static/assets/trophies/kopa-trophy.png",
+      "source": "懂球帝公开数据"
+    },
+    "欧洲国家联赛冠军": {
+      "assetUrl": "/static/assets/trophies/uefa-nations-league.png",
+      "source": "懂球帝公开数据"
+    },
+    "U19欧洲杯冠军": {
+      "assetUrl": "/static/assets/trophies/uefa-u19-euro.png",
+      "source": "懂球帝公开数据"
+    },
+    "法国青年杯冠军": {
+      "assetUrl": "/static/assets/trophies/coupe-gambardella.png",
+      "source": "FFF 官网实物"
+    }
+  }
+}
