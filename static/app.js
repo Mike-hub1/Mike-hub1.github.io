@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "302";
+const STATIC_DATA_VERSION = "303";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -9909,7 +9909,10 @@ function initPlayerHeatmaps(matchRecords = [], averageHeatmap = null) {
   window.addEventListener("resize", activePlayerHeatmapResizeHandler, { passive: true });
 }
 
-const PLAYER_ABILITY_RADAR_ORDER = ["速度", "射门", "传球", "盘带", "防守", "力量"];
+const PLAYER_ABILITY_RADAR_ORDERS = [
+  ["速度", "射门", "传球", "盘带", "防守", "力量"],
+  ["扑救", "手型", "开球", "反应", "速度", "位置"],
+];
 
 function playerAbilityAvailable(data) {
   return Boolean(data && data.status === "available" && data.ability);
@@ -10009,8 +10012,7 @@ function renderPlayerAbilityPanel(data = {}, hidden = false) {
         </div>
       </div>
       <div class="player-ability-radar-values">
-        ${PLAYER_ABILITY_RADAR_ORDER.map((name) => (ability.radar || []).find((item) => item.name === name))
-          .filter(Boolean)
+        ${playerRadarOrderedValues(ability)
           .map(
             (metric) => `
               <div class="is-${playerAbilityLevel(metric.value)}">
@@ -10689,10 +10691,35 @@ function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap
   `;
 }
 
+function playerRadarMetricOrder(ability = {}) {
+  const radar = Array.isArray(ability.radar) ? ability.radar : [];
+  const sourceNames = radar.map((item) => String(item?.name || "").trim()).filter(Boolean);
+  if (!sourceNames.length) return [];
+  const sourceNameSet = new Set(sourceNames);
+  const preferredOrder = PLAYER_ABILITY_RADAR_ORDERS.reduce(
+    (best, order) => {
+      const matches = order.reduce((count, name) => count + (sourceNameSet.has(name) ? 1 : 0), 0);
+      return matches > best.matches ? { order, matches } : best;
+    },
+    { order: [], matches: -1 }
+  ).order;
+  return [...preferredOrder, ...sourceNames].filter(
+    (name, index, orderedNames) => sourceNameSet.has(name) && orderedNames.indexOf(name) === index
+  );
+}
+
 function playerRadarOrderedValues(ability = {}) {
-  return PLAYER_ABILITY_RADAR_ORDER.map((name) => (ability.radar || []).find((item) => item.name === name))
+  const radar = Array.isArray(ability.radar) ? ability.radar : [];
+  return playerRadarMetricOrder(ability)
+    .map((name) => radar.find((item) => String(item?.name || "").trim() === name))
     .filter(Boolean)
-    .map((item) => ({ name: item.name, value: Math.max(0, Math.min(100, Number(item.value) || 0)) }));
+    .map((item) => {
+      const score = Number(item.value);
+      return {
+        name: String(item.name || "").trim(),
+        value: Math.max(0, Math.min(100, Number.isFinite(score) ? score : 0)),
+      };
+    });
 }
 
 function drawPlayerAbilityRadar(canvas, ability = {}) {

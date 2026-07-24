@@ -1,10 +1,10 @@
-const CACHE_VERSION = "wc26-v302";
+const CACHE_VERSION = "wc26-v303";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 
 const PRECACHE_URLS = [
-  "/static/styles.min.css?v=302",
-  "/static/app.min.js?v=302",
+  "/static/styles.min.css?v=303",
+  "/static/app.min.js?v=303",
   "/static/assets/clubs/as-monaco.png",
   "/static/assets/clubs/paris-saint-germain.png",
   "/static/assets/clubs/real-madrid.png",

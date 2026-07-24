@@ -45,6 +45,7 @@ for (const assetUrl of generatedAssetUrls) {
   assert.ok(isPng || isJpeg || isWebp, `${assetUrl} must use a browser-compatible raster format`);
 }
 
+const availableAbilitySnapshots = [];
 for (const entry of manifest.players) {
   const archiveUrl = archiveIndex.details.players[entry.playerId];
   assert.ok(archiveUrl, `${entry.playerId} must resolve to an archived player snapshot`);
@@ -59,6 +60,11 @@ for (const entry of manifest.players) {
   assert.ok(data.profile.identity.fullNameZh, `${entry.playerId} must retain a Chinese display name`);
   if (data.coverage.ability === "available") {
     assert.ok(data.ability?.radar?.length >= 3, `${entry.playerId} must retain its ability radar`);
+    availableAbilitySnapshots.push({
+      playerId: entry.playerId,
+      position: player.position,
+      ability: data.ability,
+    });
   } else {
     assert.equal(data.ability, null, `${entry.playerId} must use the shared ability empty state`);
   }
@@ -190,6 +196,87 @@ for (const honor of snapshot.profile.honors) {
 const app = fs.readFileSync(path.join(root, "static", "app.js"), "utf8");
 const css = fs.readFileSync(path.join(root, "static", "styles.css"), "utf8");
 const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
+const radarOrderSource = app.slice(
+  app.indexOf("const PLAYER_ABILITY_RADAR_ORDERS"),
+  app.indexOf("function playerAbilityAvailable")
+);
+const radarDrawSource = app.slice(
+  app.indexOf("function playerRadarMetricOrder"),
+  app.indexOf("const playerMarketLogoImages")
+);
+const radarContext = { window: { devicePixelRatio: 2 } };
+vm.runInNewContext(
+  `${radarOrderSource}
+  ${radarDrawSource}
+  this.metricOrder = playerRadarMetricOrder;
+  this.orderedValues = playerRadarOrderedValues;
+  this.drawRadar = drawPlayerAbilityRadar;`,
+  radarContext
+);
+const makeRadarCanvas = () => {
+  const drawingContext = {
+    setTransform() {},
+    clearRect() {},
+    beginPath() {},
+    moveTo() {},
+    lineTo() {},
+    closePath() {},
+    stroke() {},
+    fill() {},
+    arc() {},
+    fillText() {},
+    createLinearGradient() {
+      return { addColorStop() {} };
+    },
+  };
+  return {
+    style: {},
+    dataset: {},
+    width: 0,
+    height: 0,
+    getBoundingClientRect() {
+      return { width: 480, height: 346 };
+    },
+    getContext() {
+      return drawingContext;
+    },
+  };
+};
+let goalkeeperRadarCount = 0;
+for (const { playerId, position, ability } of availableAbilitySnapshots) {
+  const values = Array.from(radarContext.orderedValues(ability));
+  assert.equal(
+    values.length,
+    ability.radar.length,
+    `${playerId} must map every available radar metric into the shared renderer`
+  );
+  assert.ok(values.length >= 3, `${playerId} must provide enough points to draw a radar polygon`);
+  assert.equal(new Set(values.map((item) => item.name)).size, values.length, `${playerId} radar labels must be unique`);
+  assert.ok(
+    values.every((item) => Number.isFinite(item.value) && item.value >= 0 && item.value <= 100),
+    `${playerId} radar values must remain drawable`
+  );
+  const canvas = makeRadarCanvas();
+  radarContext.drawRadar(canvas, ability);
+  assert.equal(canvas.dataset.renderWidth, "480", `${playerId} radar must complete the canvas draw path`);
+  assert.equal(canvas.width, 960, `${playerId} radar must apply the display pixel ratio`);
+  assert.ok(canvas.height > 0, `${playerId} radar must assign a backing-store height`);
+  if (position === "GK") goalkeeperRadarCount += 1;
+}
+assert.ok(goalkeeperRadarCount > 100, "the full-path radar regression must include the goalkeeper cohort");
+const bounou = readJson(
+  path.join(root, archiveIndex.details.players.fifa_player_356956.replace(/^\/+/, ""))
+);
+assert.deepEqual(
+  Array.from(radarContext.metricOrder(bounou.dongqiudiProfile.ability)),
+  ["扑救", "手型", "开球", "反应", "速度", "位置"],
+  "goalkeeper radar metrics must use a complete six-axis order"
+);
+assert.deepEqual(
+  Array.from(radarContext.metricOrder(snapshot.ability)),
+  ["速度", "射门", "传球", "盘带", "防守", "力量"],
+  "outfield radar metrics must retain the established Mbappe order"
+);
 const profileLabelHelpers = app.slice(
   app.indexOf("function formatPlayerArchiveMarketValue"),
   app.indexOf("function renderPlayerProfileFacts")
