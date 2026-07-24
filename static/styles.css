@@ -17419,8 +17419,8 @@ body[data-route="leaderboards"] .main {
 }
 
 .player-profile-archive.is-injuries {
-  --archive-accent: #5f7085;
-  --archive-accent-rgb: 95, 112, 133;
+  --archive-accent: #bd514a;
+  --archive-accent-rgb: 189, 81, 74;
 }
 
 .player-profile-archive > summary {
@@ -17534,8 +17534,38 @@ body[data-route="leaderboards"] .main {
 }
 
 .player-profile-archive-icon.is-injuries {
-  color: #617187;
-  font-size: 17px;
+  background: linear-gradient(145deg, #fff8f6, #ffebe7);
+}
+
+.player-profile-archive-icon.is-injuries > i {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: linear-gradient(145deg, #d4635a, #b94740);
+  box-shadow: 0 4px 9px rgba(185, 71, 64, 0.2);
+}
+
+.player-profile-archive-icon.is-injuries > i::before,
+.player-profile-archive-icon.is-injuries > i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 999px;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+}
+
+.player-profile-archive-icon.is-injuries > i::before {
+  width: 10px;
+  height: 3px;
+}
+
+.player-profile-archive-icon.is-injuries > i::after {
+  width: 3px;
+  height: 10px;
 }
 
 .player-profile-archive-count {
@@ -17833,10 +17863,10 @@ body[data-route="leaderboards"] .main {
 
 .player-profile-honor-card {
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
+  grid-template-columns: 64px minmax(0, 1fr);
   gap: 10px;
   min-width: 0;
-  min-height: 126px;
+  min-height: 134px;
   padding: 10px;
   border: 1px solid rgba(127, 149, 174, 0.16);
   border-radius: 12px;
@@ -17847,21 +17877,61 @@ body[data-route="leaderboards"] .main {
 
 .player-profile-honor-card figure {
   display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
   align-self: start;
   place-items: center;
-  width: 58px;
-  height: 72px;
+  width: 64px;
+  height: 86px;
   margin: 0;
+  padding: 5px 4px 4px;
+  overflow: hidden;
   border: 1px solid rgba(var(--honor-accent-rgb), 0.13);
   border-radius: 12px;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(var(--honor-accent-rgb), 0.055));
 }
 
 .player-profile-honor-card figure img {
-  max-width: 44px;
-  max-height: 58px;
+  max-width: 50px;
+  max-height: 60px;
   object-fit: contain;
   filter: drop-shadow(0 5px 4px rgba(33, 47, 64, 0.18));
+}
+
+.player-profile-honor-card figure.is-photo img,
+.player-profile-honor-card figure.is-mark img {
+  width: 52px;
+  height: 60px;
+  border-radius: 7px;
+  object-fit: cover;
+  filter: none;
+}
+
+.player-profile-honor-card figure.is-mark img {
+  object-fit: contain;
+}
+
+.player-profile-honor-card figure > span {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 55px;
+  border-radius: 10px;
+  color: var(--honor-accent);
+  font-size: 18px;
+  font-weight: 900;
+  background: rgba(var(--honor-accent-rgb), 0.08);
+}
+
+.player-profile-honor-card figcaption {
+  max-width: 100%;
+  overflow: hidden;
+  color: #8190a2;
+  font-size: 6px;
+  font-weight: 750;
+  line-height: 1.2;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .player-profile-honor-card-copy {
@@ -17932,48 +18002,261 @@ body[data-route="leaderboards"] .main {
   background: rgba(var(--honor-accent-rgb), 0.045);
 }
 
-.player-profile-injury-list {
+.player-profile-injury-body {
   display: grid;
+  gap: 14px;
+  padding: 14px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(205, 96, 86, 0.11), transparent 28%),
+    linear-gradient(180deg, #fffdfc, #f9fbfd);
+}
+
+.player-injury-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  padding: 12px;
-  background: #fbfcfd;
+  margin: 0;
 }
 
-.player-profile-injury-list > div {
+.player-injury-overview > div {
   display: grid;
-  gap: 4px 12px;
-  min-height: 54px;
-  align-items: center;
-  padding: 10px 11px;
-  border: 1px solid rgba(124, 146, 172, 0.15);
-  border-radius: 10px;
-  background: #ffffff;
+  gap: 5px;
+  min-height: 66px;
+  align-content: center;
+  padding: 10px 12px;
+  border: 1px solid rgba(177, 91, 84, 0.14);
+  border-radius: 12px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(255, 239, 235, 0.72)),
+    #ffffff;
+  box-shadow: 0 5px 13px rgba(74, 55, 61, 0.045);
 }
 
-.player-profile-injury-list > div {
-  grid-template-columns: 150px minmax(120px, 0.6fr) minmax(0, 1fr);
+.player-injury-overview dt {
+  color: #8591a0;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
-.player-profile-injury-list time {
-  color: #77869a;
-  font-size: 10px;
-  font-weight: 750;
+.player-injury-overview dd {
+  margin: 0;
+  color: #b94842;
+  font-size: 20px;
+  font-weight: 900;
   font-variant-numeric: tabular-nums;
 }
 
-.player-profile-injury-list strong {
-  min-width: 0;
-  color: #263850;
-  font-size: 11px;
-  line-height: 1.4;
+.player-injury-overview dd small {
+  margin-left: 3px;
+  color: #79889a;
+  font-size: 9px;
+  font-weight: 800;
 }
 
-.player-profile-injury-list span {
+.player-profile-injury-timeline {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.player-profile-injury-item {
+  --injury-accent: #ca6258;
+  --injury-accent-rgb: 202, 98, 88;
+  display: grid;
+  grid-template-columns: 72px 30px minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.player-profile-injury-item.is-short {
+  --injury-accent: #2e9279;
+  --injury-accent-rgb: 46, 146, 121;
+}
+
+.player-profile-injury-item.is-medium {
+  --injury-accent: #c17a28;
+  --injury-accent-rgb: 193, 122, 40;
+}
+
+.player-profile-injury-item > time {
+  display: grid;
+  align-content: start;
+  justify-items: end;
+  gap: 2px;
+  padding: 11px 7px 0 0;
+  color: #8290a1;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-profile-injury-item > time strong {
+  color: #2d4058;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.player-profile-injury-item > time span {
+  font-size: 7px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.player-profile-injury-track {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 11px;
+}
+
+.player-profile-injury-track::after {
+  content: "";
+  position: absolute;
+  top: 33px;
+  bottom: -11px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(rgba(var(--injury-accent-rgb), 0.55), rgba(138, 158, 180, 0.16));
+}
+
+.player-profile-injury-item:last-child .player-profile-injury-track::after {
+  display: none;
+}
+
+.player-profile-injury-track i {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(var(--injury-accent-rgb), 0.12);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 900;
+  background: var(--injury-accent);
+  box-shadow: 0 0 0 1px rgba(var(--injury-accent-rgb), 0.17);
+}
+
+.player-profile-injury-item > article {
   min-width: 0;
-  color: #748399;
-  font-size: 10px;
-  line-height: 1.45;
+  margin-bottom: 10px;
+  padding: 11px 12px;
+  border: 1px solid rgba(var(--injury-accent-rgb), 0.16);
+  border-radius: 13px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(var(--injury-accent-rgb), 0.09), transparent 34%),
+    #ffffff;
+  box-shadow: 0 6px 15px rgba(41, 58, 79, 0.045);
+}
+
+.player-profile-injury-item:last-child > article {
+  margin-bottom: 0;
+}
+
+.player-profile-injury-item > article > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.player-profile-injury-item > article > header > strong {
+  min-width: 0;
+  color: #263a52;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.35;
   overflow-wrap: anywhere;
+}
+
+.player-injury-duration {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: var(--injury-accent);
+  font-size: 8px;
+  font-weight: 850;
+  background: rgba(var(--injury-accent-rgb), 0.09);
+}
+
+.player-injury-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 9px;
+}
+
+.player-injury-facts > span {
+  display: grid;
+  gap: 2px;
+  padding: 7px 8px;
+  border: 1px solid rgba(123, 145, 169, 0.12);
+  border-radius: 8px;
+  background: rgba(247, 250, 252, 0.85);
+}
+
+.player-injury-facts small {
+  color: #8793a2;
+  font-size: 7px;
+  font-weight: 750;
+}
+
+.player-injury-facts b {
+  color: #485d74;
+  font-size: 9px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-injury-teams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.player-injury-team {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 24px;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px 3px 4px;
+  border: 1px solid rgba(116, 140, 166, 0.13);
+  border-radius: 999px;
+  color: #5f7185;
+  font-size: 8px;
+  font-weight: 800;
+  background: #f7fafc;
+}
+
+.player-injury-team > i {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  overflow: hidden;
+  border-radius: 50%;
+  color: #668096;
+  font-size: 7px;
+  font-style: normal;
+  background: #ffffff;
+}
+
+.player-injury-team > i img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.player-injury-team.is-flag > i img {
+  width: 17px;
+  height: 12px;
+  border-radius: 2px;
+  object-fit: cover;
 }
 
 @media (max-width: 1000px) {
@@ -18153,11 +18436,9 @@ body[data-route="leaderboards"] .main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .player-profile-injury-list > div {
-    grid-template-columns: 1fr;
-    gap: 3px;
+  .player-profile-injury-body {
+    padding: 12px;
   }
-
 }
 
 @media (max-width: 480px) {
@@ -18297,18 +18578,65 @@ body[data-route="leaderboards"] .main {
   }
 
   .player-profile-honor-card {
-    grid-template-columns: 62px minmax(0, 1fr);
-    min-height: 120px;
+    grid-template-columns: 66px minmax(0, 1fr);
+    min-height: 128px;
   }
 
   .player-profile-honor-card figure {
-    width: 62px;
-    height: 78px;
+    width: 66px;
+    height: 88px;
   }
 
   .player-profile-honor-card figure img {
-    max-width: 48px;
-    max-height: 64px;
+    max-width: 50px;
+    max-height: 62px;
+  }
+
+  .player-profile-injury-body {
+    gap: 11px;
+    padding: 10px 8px 12px;
+  }
+
+  .player-injury-overview {
+    gap: 5px;
+  }
+
+  .player-injury-overview > div {
+    min-height: 58px;
+    padding: 8px;
+  }
+
+  .player-injury-overview dd {
+    font-size: 17px;
+  }
+
+  .player-profile-injury-item {
+    grid-template-columns: 58px 25px minmax(0, 1fr);
+  }
+
+  .player-profile-injury-item > time {
+    padding-right: 3px;
+  }
+
+  .player-profile-injury-item > time strong {
+    font-size: 10px;
+  }
+
+  .player-profile-injury-item > time span {
+    font-size: 6px;
+  }
+
+  .player-profile-injury-item > article {
+    padding: 10px;
+  }
+
+  .player-profile-injury-item > article > header {
+    align-items: flex-start;
+  }
+
+  .player-injury-duration {
+    padding-inline: 5px;
+    font-size: 7px;
   }
 
   .player-profile-fact.is-name,

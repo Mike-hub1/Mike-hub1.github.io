@@ -92,6 +92,9 @@ assert.ok(snapshot.profile.characteristics.veryWeak.includes("防守贡献"));
 assert.equal(snapshot.profile.transfers.length, 8);
 assert.equal(snapshot.profile.honors.length, 18);
 assert.equal(snapshot.profile.injuries.length, 26);
+for (const honor of snapshot.profile.honors) {
+  assert.match(honor.logoSourceUrl, /^https:\/\//, `${honor.name} must retain its upstream icon evidence`);
+}
 
 const app = fs.readFileSync(path.join(root, "static", "app.js"), "utf8");
 const css = fs.readFileSync(path.join(root, "static", "styles.css"), "utf8");
@@ -181,6 +184,10 @@ assert.match(css, /\.player-characteristic-card\s*\{/);
 assert.match(css, /\.player-profile-transfer-item\s*\{/);
 assert.match(css, /\.player-profile-honor-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,/);
 assert.match(css, /\.player-profile-honor-card figure img\s*\{/);
+assert.match(css, /\.player-injury-overview\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3,/);
+assert.match(css, /\.player-profile-injury-item\s*\{/);
+assert.match(css, /\.player-profile-injury-track::after\s*\{/);
+assert.doesNotMatch(css, /\.player-profile-injury-list\s*\{/);
 assert.match(css, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.player-profile-honor-grid\s*\{[\s\S]*?grid-template-columns:\s*1fr/);
 assert.match(css, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.player-profile-facts\s*\{\s*grid-template-columns:\s*repeat\(2,/);
 assert.doesNotMatch(css, /\.player-dqd-header-meta\s*\{/);
@@ -208,8 +215,16 @@ assert.equal(mergedHonors[0].records.length, 2);
 assert.equal(archiveHelperContext.honorCategory("世界杯冠军"), "national");
 assert.equal(archiveHelperContext.honorCategory("法国杯冠军"), "club");
 assert.equal(archiveHelperContext.honorCategory("欧洲金靴"), "individual");
-assert.equal(archiveHelperContext.honorAsset("世界杯冠军"), "/static/assets/trophies/world-cup.png");
-assert.equal(archiveHelperContext.honorAsset("欧洲金靴"), "/static/assets/trophies/golden-boot.png");
+assert.equal(archiveHelperContext.honorAsset("世界杯冠军").url, "/static/assets/trophies/world-cup.png");
+assert.equal(archiveHelperContext.honorAsset("欧洲金靴").url, "/static/assets/trophies/european-golden-shoe.png");
+assert.equal(archiveHelperContext.honorAsset("盖德-穆勒奖").url, "/static/assets/trophies/gerd-muller-trophy.jpg");
+assert.equal(archiveHelperContext.honorAsset("科帕奖").url, "/static/assets/trophies/kopa-trophy.png");
+assert.notEqual(
+  archiveHelperContext.honorAsset("盖德-穆勒奖").url,
+  archiveHelperContext.honorAsset("科帕奖").url,
+  "Gerd Müller and Kopa must not reuse the same upstream icon"
+);
+assert.equal(archiveHelperContext.honorAsset("未核验奖项").kind, "fallback");
 
 const archiveRenderSource = app.slice(
   app.indexOf("const PLAYER_PROFILE_CLUB_ASSETS"),
@@ -239,24 +254,43 @@ const archiveMarkup = archiveRenderContext.renderArchives(snapshot.profile);
 assert.equal((archiveMarkup.match(/class="player-profile-transfer-item"/g) || []).length, 8);
 assert.equal((archiveMarkup.match(/class="player-profile-honor-card"/g) || []).length, 18);
 assert.equal((archiveMarkup.match(/class="player-profile-honor-group is-/g) || []).length, 3);
+assert.equal((archiveMarkup.match(/class="player-profile-injury-item is-/g) || []).length, 26);
+assert.match(archiveMarkup, /class="player-injury-overview"/);
+assert.match(archiveMarkup, /累计伤停/);
+assert.match(archiveMarkup, /301<small>天<\/small>/);
+assert.match(archiveMarkup, /62<small>场<\/small>/);
 assert.match(archiveMarkup, /<small>类 · 50 次<\/small>/);
 assert.match(archiveMarkup, />1\.8亿欧<\/b>/);
 
 for (const trophyName of [
   "world-cup.png",
-  "nations-league.png",
-  "intercontinental-cup.png",
-  "french-cup.png",
-  "golden-boot.png",
-  "individual-award.png",
+  "fifa-intercontinental-cup.png",
+  "uefa-super-cup.png",
+  "european-golden-shoe.png",
+  "ligue-1-champion.png",
+  "fifa-world-cup-golden-boot.png",
+  "coupe-de-la-ligue.png",
+  "coupe-de-france.png",
+  "trophee-des-champions.png",
+  "golden-boy.png",
+  "top-scorer.png",
+  "kopa-trophy.png",
+  "uefa-nations-league.png",
+  "uefa-u19-euro.png",
 ]) {
   const trophy = fs.readFileSync(path.join(root, "static", "assets", "trophies", trophyName));
   assert.ok(trophy.length > 1_000, `${trophyName} must retain a real trophy illustration`);
   assert.deepEqual([...trophy.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${trophyName} must be a PNG`);
 }
-for (const trophyName of ["uefa-super-cup.svg", "ligue-1.svg"]) {
-  const trophy = fs.readFileSync(path.join(root, "static", "assets", "trophies", trophyName), "utf8");
-  assert.match(trophy, /<svg\b/, `${trophyName} must be a valid SVG asset`);
+for (const trophyName of [
+  "gerd-muller-trophy.jpg",
+  "france-football-award.jpg",
+  "unfp-player-of-season.jpg",
+  "coupe-gambardella.jpg",
+]) {
+  const trophy = fs.readFileSync(path.join(root, "static", "assets", "trophies", trophyName));
+  assert.ok(trophy.length > 1_000, `${trophyName} must retain its official-source image`);
+  assert.deepEqual([...trophy.subarray(0, 2)], [255, 216], `${trophyName} must be a JPEG`);
 }
 assert.ok(
   fs.existsSync(path.join(root, "static", "assets", "trophies", "ATTRIBUTION.md")),

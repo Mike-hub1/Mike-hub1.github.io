@@ -83,6 +83,33 @@ function flattenMarketValues(history = {}) {
     .sort((left, right) => left.date.localeCompare(right.date));
 }
 
+function normalizeHonors(honors = []) {
+  return asArray(honors)
+    .map((row) => ({
+      name: compactText(row.name),
+      logoSourceUrl: compactText(row.logo),
+      times: asNumber(row.times),
+      importance: asNumber(row.importance),
+      records: asArray(row.honor_list)
+        .map((record) => ({
+          competition: compactText(record.competition_name),
+          team: compactText(record.team_name),
+          season: compactText(record.season_name),
+        }))
+        .sort(
+          (left, right) =>
+            right.season.localeCompare(left.season) ||
+            left.team.localeCompare(right.team, "zh-CN") ||
+            left.competition.localeCompare(right.competition, "zh-CN")
+        ),
+    }))
+    .sort(
+      (left, right) =>
+        (right.importance || 0) - (left.importance || 0) ||
+        left.name.localeCompare(right.name, "zh-CN")
+    );
+}
+
 function normalizeAbility(payload = {}) {
   const data = payload.data || {};
   return {
@@ -161,16 +188,7 @@ function normalizeMaterial(material = {}) {
       from: compactText(row.from_club_name),
       to: compactText(row.to_club_name),
     })),
-    honors: asArray(material.honor_info).map((row) => ({
-      name: compactText(row.name),
-      times: asNumber(row.times),
-      importance: asNumber(row.importance),
-      records: asArray(row.honor_list).map((record) => ({
-        competition: compactText(record.competition_name),
-        team: compactText(record.team_name),
-        season: compactText(record.season_name),
-      })),
-    })),
+    honors: normalizeHonors(material.honor_info),
     injuries: asArray(material.injury_records?.history).map((row) => ({
       injury: compactText(row.injury),
       from: compactText(row.date_from),

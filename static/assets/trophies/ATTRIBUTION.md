@@ -1,20 +1,39 @@
-# Trophy asset attribution
+# Honor icon provenance
 
-The player honors UI uses the following trophy illustrations from Wikimedia Commons. Files are served locally and have not been materially altered; PNG thumbnail resizing is noted where applicable.
+The v299 player-honors view no longer assigns generic “similar-looking” cups to awards. Every rendered asset is mapped by the exact honor name.
 
-| Local file | Source | Author | License |
-| --- | --- | --- | --- |
-| `world-cup.png` | [Golden trophy 2.png](https://commons.wikimedia.org/wiki/File:Golden_trophy_2.png) | Vitoomafoo | Public-domain simple geometry / CC BY-SA 3.0 |
-| `nations-league.png` | [Trophy LN.png](https://commons.wikimedia.org/wiki/File:Trophy_LN.png) | LashCom | CC BY-SA 3.0 / GFDL |
-| `intercontinental-cup.png` | [IC Trophy 2024.png](https://commons.wikimedia.org/wiki/File:IC_Trophy_2024.png) | RS1974 | CC0 1.0 |
-| `uefa-super-cup.svg` | [UEFA Super Cup.svg](https://commons.wikimedia.org/wiki/File:UEFA_Super_Cup.svg) | 0 Noctis 0 | Public-domain simple geometry / CC BY-SA 3.0 |
-| `ligue-1.svg` | [Ligue1 trophy.svg](https://commons.wikimedia.org/wiki/File:Ligue1_trophy.svg) | Kanchelskis | CC BY-SA 3.0 (also offered under earlier compatible CC BY-SA versions and GFDL) |
-| `french-cup.png` | [Coupe de France.svg](https://commons.wikimedia.org/wiki/File:Coupe_de_France.svg) | MacMoreno | Public domain; rendered as a 250 px PNG thumbnail |
-| `golden-boot.png` | [Bota de oro.png](https://commons.wikimedia.org/wiki/File:Bota_de_oro.png) | Dintrex | Public-domain simple geometry; rendered as a 330 px PNG thumbnail |
-| `individual-award.png` | [Premio Jugador Mundial de la FIFA.png](https://commons.wikimedia.org/wiki/File:Premio_Jugador_Mundial_de_la_FIFA.png) | Dintrex | Public-domain simple geometry |
+## Dongqiudi public data layer
 
-CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/
+The following local PNG files are archived copies of the `logo` fields returned for Kylian Mbappé by Dongqiudi’s mobile-app public data endpoint:
 
-GFDL 1.2 or later: https://www.gnu.org/licenses/old-licenses/fdl-1.2.html
+`https://api.dongqiudi.com/data/v1/detail/person/50226848?app=dqd&lang=zh-cn`
 
-CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/
+| Local file | Honor |
+| --- | --- |
+| `world-cup.png` | 世界杯冠军 |
+| `fifa-intercontinental-cup.png` | 国际足联洲际杯冠军 |
+| `uefa-super-cup.png` | 欧洲超级杯冠军 |
+| `european-golden-shoe.png` | 欧洲金靴 |
+| `ligue-1-champion.png` | 法国足球顶级联赛冠军 |
+| `fifa-world-cup-golden-boot.png` | 世界杯金靴 |
+| `coupe-de-la-ligue.png` | 法国联赛杯冠军 |
+| `coupe-de-france.png` | 法国杯冠军 |
+| `trophee-des-champions.png` | 法国超级杯冠军 |
+| `golden-boy.png` | 金童奖 |
+| `top-scorer.png` | 最佳射手 |
+| `kopa-trophy.png` | 科帕奖 |
+| `uefa-nations-league.png` | 欧洲国家联赛冠军 |
+| `uefa-u19-euro.png` | U19 欧洲杯冠军 |
+
+The upstream `logo` field incorrectly duplicates the Kopa Trophy for the Gerd Müller Trophy and uses a generic cup for several other honors. Those files are not used for those awards.
+
+## Official-source corrections
+
+| Local file | Use | Official source and treatment |
+| --- | --- | --- |
+| `gerd-muller-trophy.jpg` | 盖德-穆勒奖 | Cropped from the award photograph on the [Bundesliga official site](https://www.bundesliga.com/de/bundesliga/news/fc-bayern-munchen-harry-kane-toptorschutze-gerd-muller-trophae-ballon-dor-2024-29511); photograph credited there to Franck Fife. |
+| `unfp-player-of-season.jpg` | 法甲赛季最佳球员 | Trophy-only crop from [UNFP’s official 2024 winner artwork](https://www.unfp.org/2024/05/5-comme-les-anneaux-olympiques/). |
+| `coupe-gambardella.jpg` | 法国青年杯冠军 | Trophy crop from the [FFF official Coupe Gambardella gallery](https://www.fff.fr/diaporama/10185-la-gambardella-en-images.html). |
+| `france-football-award.jpg` | 法国年度最佳球员 | Official France Football section mark from [L’Équipe / France Football](https://www.lequipe.fr/France-Football/), used instead of inventing a trophy that the award does not expose as a stable public icon. |
+
+All competition marks, trophies, photographs, and trademarks remain the property of their respective owners. The archived copies are presented only as identification artwork alongside the corresponding factual honor records.

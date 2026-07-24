@@ -1,21 +1,31 @@
-const CACHE_VERSION = "wc26-v298";
+const CACHE_VERSION = "wc26-v299";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 
 const PRECACHE_URLS = [
-  "/static/styles.min.css?v=298",
-  "/static/app.min.js?v=298",
+  "/static/styles.min.css?v=299",
+  "/static/app.min.js?v=299",
   "/static/assets/clubs/as-monaco.png",
   "/static/assets/clubs/paris-saint-germain.png",
   "/static/assets/clubs/real-madrid.png",
   "/static/assets/trophies/world-cup.png",
-  "/static/assets/trophies/nations-league.png",
-  "/static/assets/trophies/intercontinental-cup.png",
-  "/static/assets/trophies/uefa-super-cup.svg",
-  "/static/assets/trophies/ligue-1.svg",
-  "/static/assets/trophies/french-cup.png",
-  "/static/assets/trophies/golden-boot.png",
-  "/static/assets/trophies/individual-award.png",
+  "/static/assets/trophies/fifa-intercontinental-cup.png",
+  "/static/assets/trophies/uefa-super-cup.png",
+  "/static/assets/trophies/european-golden-shoe.png",
+  "/static/assets/trophies/ligue-1-champion.png",
+  "/static/assets/trophies/gerd-muller-trophy.jpg",
+  "/static/assets/trophies/fifa-world-cup-golden-boot.png",
+  "/static/assets/trophies/coupe-de-la-ligue.png",
+  "/static/assets/trophies/coupe-de-france.png",
+  "/static/assets/trophies/trophee-des-champions.png",
+  "/static/assets/trophies/golden-boy.png",
+  "/static/assets/trophies/top-scorer.png",
+  "/static/assets/trophies/france-football-award.jpg",
+  "/static/assets/trophies/unfp-player-of-season.jpg",
+  "/static/assets/trophies/kopa-trophy.png",
+  "/static/assets/trophies/uefa-nations-league.png",
+  "/static/assets/trophies/uefa-u19-euro.png",
+  "/static/assets/trophies/coupe-gambardella.jpg",
 ];
 
 self.addEventListener("install", (event) => {

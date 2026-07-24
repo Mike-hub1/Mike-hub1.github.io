@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "298";
+const STATIC_DATA_VERSION = "299";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10151,6 +10151,9 @@ const PLAYER_PROFILE_CLUB_ASSETS = [
   { match: "皇家马德里", logoUrl: "/static/assets/clubs/real-madrid.png" },
   { match: "摩纳哥", logoUrl: "/static/assets/clubs/as-monaco.png" },
 ];
+const PLAYER_PROFILE_NATIONAL_ASSETS = [
+  { match: "法国", logoUrl: "/static/assets/flags/fra.png", kind: "flag" },
+];
 
 const PLAYER_HONOR_NATIONAL_NAMES = new Set(["世界杯冠军", "欧洲国家联赛冠军", "U19欧洲杯冠军"]);
 const PLAYER_HONOR_CLUB_NAMES = new Set([
@@ -10167,9 +10170,37 @@ const PLAYER_HONOR_CATEGORIES = [
   { id: "club", label: "俱乐部荣誉", note: "联赛、杯赛与洲际赛事" },
   { id: "individual", label: "个人奖项", note: "赛季表现与射手荣誉" },
 ];
+const PLAYER_HONOR_ASSETS = new Map([
+  ["世界杯冠军", { url: "/static/assets/trophies/world-cup.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["国际足联洲际杯冠军", { url: "/static/assets/trophies/fifa-intercontinental-cup.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["欧洲超级杯冠军", { url: "/static/assets/trophies/uefa-super-cup.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["欧洲金靴", { url: "/static/assets/trophies/european-golden-shoe.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["法国足球顶级联赛冠军", { url: "/static/assets/trophies/ligue-1-champion.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["盖德-穆勒奖", { url: "/static/assets/trophies/gerd-muller-trophy.jpg", source: "德甲官网核验", kind: "photo" }],
+  ["世界杯金靴", { url: "/static/assets/trophies/fifa-world-cup-golden-boot.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["法国联赛杯冠军", { url: "/static/assets/trophies/coupe-de-la-ligue.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["法国杯冠军", { url: "/static/assets/trophies/coupe-de-france.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["法国超级杯冠军", { url: "/static/assets/trophies/trophee-des-champions.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["金童奖", { url: "/static/assets/trophies/golden-boy.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["最佳射手", { url: "/static/assets/trophies/top-scorer.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["年度最佳球员", { url: "/static/assets/trophies/france-football-award.jpg", source: "France Football", kind: "mark" }],
+  ["赛季最佳球员", { url: "/static/assets/trophies/unfp-player-of-season.jpg", source: "UNFP 官网核验", kind: "photo" }],
+  ["科帕奖", { url: "/static/assets/trophies/kopa-trophy.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["欧洲国家联赛冠军", { url: "/static/assets/trophies/uefa-nations-league.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["U19欧洲杯冠军", { url: "/static/assets/trophies/uefa-u19-euro.png", source: "懂球帝公开数据", kind: "trophy" }],
+  ["法国青年杯冠军", { url: "/static/assets/trophies/coupe-gambardella.jpg", source: "FFF 官网核验", kind: "photo" }],
+]);
 
 function playerProfileClubAsset(name = "") {
   return PLAYER_PROFILE_CLUB_ASSETS.find((asset) => String(name).includes(asset.match)) || null;
+}
+
+function playerProfileTeamAsset(name = "") {
+  return (
+    playerProfileClubAsset(name) ||
+    PLAYER_PROFILE_NATIONAL_ASSETS.find((asset) => String(name).includes(asset.match)) ||
+    null
+  );
 }
 
 function playerProfileClubInitial(name = "") {
@@ -10246,15 +10277,13 @@ function playerHonorCategory(name = "") {
 }
 
 function playerHonorAsset(name = "") {
-  const label = String(name);
-  if (label.includes("世界杯冠军")) return "/static/assets/trophies/world-cup.png";
-  if (label.includes("国家联赛") || label.includes("U19欧洲杯")) return "/static/assets/trophies/nations-league.png";
-  if (label.includes("洲际杯")) return "/static/assets/trophies/intercontinental-cup.png";
-  if (label.includes("欧洲超级杯")) return "/static/assets/trophies/uefa-super-cup.svg";
-  if (label.includes("足球顶级联赛")) return "/static/assets/trophies/ligue-1.svg";
-  if (label.includes("法国") && label.includes("杯冠军")) return "/static/assets/trophies/french-cup.png";
-  if (label.includes("金靴") || label.includes("最佳射手")) return "/static/assets/trophies/golden-boot.png";
-  return "/static/assets/trophies/individual-award.png";
+  return (
+    PLAYER_HONOR_ASSETS.get(String(name)) || {
+      url: "",
+      source: "图标待核验",
+      kind: "fallback",
+    }
+  );
 }
 
 function playerHonorRecordGroups(records = []) {
@@ -10270,10 +10299,16 @@ function playerHonorRecordGroups(records = []) {
 
 function renderPlayerHonorCard(row = {}) {
   const recordGroups = playerHonorRecordGroups(row.records || []);
+  const asset = playerHonorAsset(row.name);
   return `
     <article class="player-profile-honor-card">
-      <figure>
-        <img src="${escapeHtml(playerHonorAsset(row.name))}" alt="" loading="lazy" decoding="async" />
+      <figure class="is-${escapeHtml(asset.kind)}">
+        ${
+          asset.url
+            ? `<img src="${escapeHtml(asset.url)}" alt="${escapeHtml(`${row.name}图标`)}" loading="lazy" decoding="async" />`
+            : `<span aria-hidden="true">奖</span>`
+        }
+        <figcaption>${escapeHtml(asset.source)}</figcaption>
       </figure>
       <div class="player-profile-honor-card-copy">
         <header>
@@ -10301,10 +10336,61 @@ function renderPlayerHonorCard(row = {}) {
   `;
 }
 
+function playerInjurySummary(injuries = []) {
+  const rows = Array.isArray(injuries) ? injuries : [];
+  const days = rows.reduce((total, row) => total + (Number(row?.days) || 0), 0);
+  const gamesMissed = rows.reduce((total, row) => total + (Number(row?.gamesMissed) || 0), 0);
+  const longest = rows.reduce((best, row) => (!best || Number(row?.days) > Number(best?.days) ? row : best), null);
+  return {
+    days,
+    gamesMissed,
+    longestDays: Number(longest?.days) || 0,
+  };
+}
+
+function playerInjuryDateParts(from = "", until = "") {
+  const start = String(from).split(/[.-]/);
+  const end = String(until).split(/[.-]/);
+  const year = start[0] || end[0] || "—";
+  const startShort = start.slice(1).join(".");
+  const endShort = end[0] === year ? end.slice(1).join(".") : end.join(".");
+  return {
+    year,
+    range: [startShort, endShort].filter(Boolean).join(" — ") || "日期待补",
+    datetime: String(from).replaceAll(".", "-"),
+  };
+}
+
+function playerInjuryDurationBand(days = 0) {
+  const duration = Number(days) || 0;
+  if (duration > 21) return { id: "long", label: "长期记录" };
+  if (duration > 7) return { id: "medium", label: "中期记录" };
+  return { id: "short", label: "短期记录" };
+}
+
+function renderPlayerInjuryTeams(teams = []) {
+  const labels = Array.isArray(teams) && teams.length ? teams : ["球队未记录"];
+  return labels
+    .map((name) => {
+      const asset = playerProfileTeamAsset(name);
+      return `
+        <span class="player-injury-team${asset ? " has-image" : ""}${asset?.kind === "flag" ? " is-flag" : ""}">
+          <i aria-hidden="true">
+            ${asset ? `<img src="${escapeHtml(asset.logoUrl)}" alt="" loading="lazy" decoding="async" />` : escapeHtml(playerProfileClubInitial(name))}
+          </i>
+          ${escapeHtml(name)}
+        </span>
+      `;
+    })
+    .join("");
+}
+
 function renderPlayerProfileArchives(profile = {}) {
   const transfers = profile.transfers || [];
   const honors = groupPlayerHonors(profile.honors || []);
   const honorWins = honors.reduce((total, row) => total + (Number(row.times) || 0), 0);
+  const injuries = profile.injuries || [];
+  const injurySummary = playerInjurySummary(injuries);
   return `
     <div class="player-profile-archives">
       <details class="player-profile-archive is-transfer">
@@ -10373,27 +10459,43 @@ function renderPlayerProfileArchives(profile = {}) {
       <details class="player-profile-archive is-injuries">
         <summary>
           <span class="player-profile-archive-heading">
-            <span class="player-profile-archive-icon is-injuries" aria-hidden="true">＋</span>
+            <span class="player-profile-archive-icon is-injuries" aria-hidden="true"><i></i></span>
             <span><small>健康履历</small><strong>伤病记录</strong></span>
           </span>
-          <span class="player-profile-archive-count"><b>${profile.injuries?.length || 0}</b><small>条记录</small></span>
+          <span class="player-profile-archive-count"><b>${injuries.length}</b><small>次 · ${injurySummary.days} 天</small></span>
         </summary>
-        <div class="player-profile-injury-list">
-          ${(profile.injuries || [])
-            .map(
-              (row) => `
-                <div>
-                  <time>${escapeHtml([row.from, row.until].filter(Boolean).join(" - "))}</time>
-                  <strong>${escapeHtml(row.injury)}</strong>
-                  <span>${escapeHtml([
-                    row.days ? `${row.days} 天` : "",
-                    row.gamesMissed !== null && row.gamesMissed !== undefined ? `缺席 ${row.gamesMissed} 场` : "",
-                    (row.teams || []).join(" / "),
-                  ].filter(Boolean).join(" · "))}</span>
-                </div>
-              `
-            )
-            .join("")}
+        <div class="player-profile-injury-body">
+          <dl class="player-injury-overview">
+            <div><dt>累计伤停</dt><dd>${injurySummary.days}<small>天</small></dd></div>
+            <div><dt>缺席比赛</dt><dd>${injurySummary.gamesMissed}<small>场</small></dd></div>
+            <div><dt>最长记录</dt><dd>${injurySummary.longestDays}<small>天</small></dd></div>
+          </dl>
+          <ol class="player-profile-injury-timeline">
+            ${injuries
+              .map((row, index) => {
+                const date = playerInjuryDateParts(row.from, row.until);
+                const duration = playerInjuryDurationBand(row.days);
+                const hasMissedGames = row.gamesMissed !== null && row.gamesMissed !== undefined;
+                return `
+                  <li class="player-profile-injury-item is-${escapeHtml(duration.id)}">
+                    <time datetime="${escapeHtml(date.datetime)}"><strong>${escapeHtml(date.year)}</strong><span>${escapeHtml(date.range)}</span></time>
+                    <span class="player-profile-injury-track" aria-hidden="true"><i>${index + 1}</i></span>
+                    <article>
+                      <header>
+                        <strong>${escapeHtml(row.injury || "伤病记录")}</strong>
+                        <span class="player-injury-duration">${escapeHtml(duration.label)}</span>
+                      </header>
+                      <div class="player-injury-facts">
+                        <span><small>恢复周期</small><b>${escapeHtml(row.days || 0)} 天</b></span>
+                        <span><small>缺席比赛</small><b>${hasMissedGames ? `${escapeHtml(row.gamesMissed)} 场` : "未记录"}</b></span>
+                      </div>
+                      <div class="player-injury-teams">${renderPlayerInjuryTeams(row.teams)}</div>
+                    </article>
+                  </li>
+                `;
+              })
+              .join("")}
+          </ol>
         </div>
       </details>
     </div>
