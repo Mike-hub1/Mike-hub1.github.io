@@ -17243,7 +17243,7 @@ body[data-route="leaderboards"] .main {
 .player-market-history-canvas {
   display: block;
   width: 100%;
-  min-height: 260px;
+  min-height: 300px;
   border-radius: 8px;
   touch-action: auto;
 }
@@ -17678,7 +17678,6 @@ body[data-route="leaderboards"] .main {
   .player-market-history-canvas {
     width: 720px;
     min-width: 720px;
-    min-height: 260px;
   }
 
   .player-characteristic-levels {

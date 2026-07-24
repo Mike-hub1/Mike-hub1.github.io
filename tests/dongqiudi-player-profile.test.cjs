@@ -138,7 +138,8 @@ assert.match(app, /function playerProfileMarketValueLabel/);
 assert.match(app, /label: "身价", value: playerProfileMarketValueLabel\(identity\)/);
 assert.match(app, /function drawPlayerAbilityRadar/);
 assert.match(app, /function drawPlayerMarketHistory/);
-assert.match(app, /function playerMarketAdaptiveLogoSizes/);
+assert.match(app, /function playerMarketTimelineLogoLayout/);
+assert.doesNotMatch(app, /function playerMarketAdaptiveLogoSizes/);
 assert.match(app, /const PLAYER_MARKET_TEAM_ASSETS = new Map/);
 assert.match(app, /function initPlayerMarketHistory/);
 assert.match(app, /function selectPlayerMarketHistoryPoint/);
@@ -148,6 +149,7 @@ assert.match(app, /canvas\.addEventListener\("keydown"/);
 assert.match(app, /data-player-market-selection/);
 assert.match(app, /class="player-market-chart-scroll"/);
 assert.match(app, /横向滑动查看完整走势/);
+assert.match(app, /点击上方队徽或图中节点/);
 assert.match(app, /class="player-profile-fact is-/);
 assert.match(app, /class="player-characteristic-card is-/);
 assert.doesNotMatch(app, /Market value history/i);
@@ -176,57 +178,75 @@ const marketChartSource = app.slice(
   app.indexOf("function drawPlayerMarketHistory"),
   app.indexOf("function updatePlayerMarketSelection")
 );
-assert.match(marketChartSource, /const logoSizes = playerMarketAdaptiveLogoSizes\(positions, selectedIndex\)/);
-assert.match(marketChartSource, /const logoSize = logoSizes\[index\]/);
-assert.doesNotMatch(marketChartSource, /context\.arc\(point\.x, point\.y/);
+assert.match(marketChartSource, /const timelineLogos = playerMarketTimelineLogoLayout\(positions, selectedIndex\)/);
+assert.match(marketChartSource, /context\.fillText\(year, yearX, 4\)/);
+assert.doesNotMatch(marketChartSource, /frame\.top \+ height \+ 14/);
+assert.match(marketChartSource, /context\.setLineDash\(selected \? \[4, 4\] : \[2, 5\]\)/);
+assert.match(marketChartSource, /context\.arc\(point\.x, point\.y, selected \? 4\.2 : 2\.2/);
+assert.match(marketChartSource, /logoX: timelineLogos\[index\]\.x/);
+assert.match(app, /const logoDistance = \(area\.logoX - x\) \*\* 2 \+ \(area\.logoY - y\) \*\* 2/);
+const timelineLogoDrawingSource = marketChartSource.slice(
+  marketChartSource.indexOf("const drawTimelineLogo"),
+  marketChartSource.indexOf("nodeOrder.forEach(drawTimelineLogo)")
+);
+assert.doesNotMatch(timelineLogoDrawingSource, /context\.arc/);
 
-const adaptiveLogoSizeSource = app.slice(
-  app.indexOf("function playerMarketAdaptiveLogoSizes"),
+const timelineLogoLayoutSource = app.slice(
+  app.indexOf("function playerMarketTimelineLogoLayout"),
   app.indexOf("function drawPlayerMarketHistory")
 );
-const adaptiveLogoSizeContext = {};
+const timelineLogoLayoutContext = {};
 vm.runInNewContext(
-  `${adaptiveLogoSizeSource}
-  this.getAdaptiveLogoSizes = playerMarketAdaptiveLogoSizes;`,
-  adaptiveLogoSizeContext
+  `${timelineLogoLayoutSource}
+  this.getTimelineLogoLayout = playerMarketTimelineLogoLayout;`,
+  timelineLogoLayoutContext
 );
 assert.deepEqual(
   Array.from(
-    adaptiveLogoSizeContext.getAdaptiveLogoSizes(
+    timelineLogoLayoutContext
+      .getTimelineLogoLayout(
       [
         { x: 0, y: 0 },
-        { x: 9, y: 0 },
-        { x: 45, y: 0 },
+        { x: 10, y: 0 },
+        { x: 22, y: 0 },
+        { x: 40, y: 0 },
       ],
-      -1
+      2
     )
+      .map(({ y, size, lane }) => ({ y, size, lane }))
   ),
-  [8, 8, 26]
+  [
+    { y: 37, size: 15, lane: 0 },
+    { y: 58, size: 15, lane: 1 },
+    { y: 37, size: 20, lane: 0 },
+    { y: 58, size: 15, lane: 1 },
+  ]
 );
-const selectedAdaptiveSizes = Array.from(
-  adaptiveLogoSizeContext.getAdaptiveLogoSizes(
-    [
-      { x: 0, y: 0 },
-      { x: 9, y: 0 },
-      { x: 45, y: 0 },
-    ],
-    2
+const marketHistoryTimes = marketHistory.map((row) => new Date(`${row.date}T00:00:00Z`).getTime());
+const marketHistoryMinimumTime = Math.min(...marketHistoryTimes);
+const marketHistoryMaximumTime = Math.max(...marketHistoryTimes);
+const marketHistoryTimelinePositions = marketHistoryTimes.map((timestamp) => ({
+  x: 58 + ((timestamp - marketHistoryMinimumTime) / (marketHistoryMaximumTime - marketHistoryMinimumTime)) * 644,
+  y: 0,
+}));
+const marketHistoryTimelineLogos = Array.from(
+  timelineLogoLayoutContext.getTimelineLogoLayout(
+    marketHistoryTimelinePositions,
+    marketHistoryTimelinePositions.length - 1
   )
 );
-assert.deepEqual(selectedAdaptiveSizes, [8, 8, 30]);
-assert.ok(selectedAdaptiveSizes[0] / 2 + selectedAdaptiveSizes[1] / 2 <= 9);
-assert.deepEqual(
-  Array.from(
-    adaptiveLogoSizeContext.getAdaptiveLogoSizes(
-      [
-        { x: 0, y: 0 },
-        { x: 21, y: 21 },
-      ],
-      -1
-    )
-  ),
-  [18, 18]
-);
+for (let index = 0; index < marketHistoryTimelineLogos.length; index += 1) {
+  for (let otherIndex = index + 1; otherIndex < marketHistoryTimelineLogos.length; otherIndex += 1) {
+    const logo = marketHistoryTimelineLogos[index];
+    const otherLogo = marketHistoryTimelineLogos[otherIndex];
+    if (logo.lane !== otherLogo.lane) continue;
+    const requiredDistance = logo.size / 2 + otherLogo.size / 2 + 3;
+    assert.ok(
+      Math.abs(logo.x - otherLogo.x) >= requiredDistance,
+      `market timeline logos ${index} and ${otherIndex} must not overlap`
+    );
+  }
+}
 
 console.log("Dongqiudi player ability and profile archive: ok");
 

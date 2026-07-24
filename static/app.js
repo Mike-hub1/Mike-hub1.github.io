@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "296";
+const STATIC_DATA_VERSION = "297";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10228,9 +10228,9 @@ function renderPlayerProfilePanel(data = {}) {
         ${renderPlayerMarketSelection(current)}
         <div class="player-market-chart">
           <div class="player-market-chart-scroll">
-            <canvas class="player-market-history-canvas" role="img" tabindex="0" aria-label="球员历年身价变化折线图，可点击队徽节点查看详情" aria-describedby="player-market-history-hint"></canvas>
+            <canvas class="player-market-history-canvas" role="img" tabindex="0" aria-label="球员历年身价变化折线图，可点击上方队徽或图中节点查看详情" aria-describedby="player-market-history-hint"></canvas>
           </div>
-          <p id="player-market-history-hint">横向滑动查看完整走势；点击或触摸队徽节点查看日期、年龄、球队与身价，键盘可使用左右方向键切换。</p>
+          <p id="player-market-history-hint">横向滑动查看完整走势；点击上方队徽或图中节点查看日期、年龄、球队与身价，键盘可使用左右方向键切换。</p>
         </div>
       </section>
       <section class="player-characteristics" aria-labelledby="player-characteristics-title">
@@ -10416,25 +10416,29 @@ function playerMarketLogoImage(src, redraw) {
   return image.complete && image.naturalWidth ? image : null;
 }
 
-function playerMarketAdaptiveLogoSizes(positions = [], selectedIndex = -1) {
-  const minimumSize = 8;
-  const maximumSize = 26;
-  const selectedMaximumSize = 30;
+function playerMarketTimelineLogoLayout(positions = [], selectedIndex = -1) {
+  const laneCenters = [37, 58];
+  const laneRightEdges = laneCenters.map(() => Number.NEGATIVE_INFINITY);
   const collisionGap = 3;
-  const selectedCollisionGap = 1;
-  const nearestDistances = positions.map((point, index) =>
-    positions.reduce((nearest, other, otherIndex) => {
-      if (index === otherIndex) return nearest;
-      const visualDistance = Math.max(Math.abs(point.x - other.x), Math.abs(point.y - other.y));
-      return Math.min(nearest, visualDistance);
-    }, Number.POSITIVE_INFINITY)
-  );
-  return nearestDistances.map((distance, index) => {
-    const baseSize = Math.round(Math.max(minimumSize, Math.min(maximumSize, distance - collisionGap)));
-    if (index !== selectedIndex) return baseSize;
-    return Math.round(
-      Math.max(minimumSize, Math.min(selectedMaximumSize, distance - selectedCollisionGap, baseSize + 4))
-    );
+  return positions.map((point, index) => {
+    const size = index === selectedIndex ? 20 : 15;
+    const halfSize = size / 2;
+    const preferredLane = index % laneCenters.length;
+    const laneOrder = [preferredLane, ...laneCenters.map((_, lane) => lane).filter((lane) => lane !== preferredLane)];
+    const availableLane = laneOrder.find((lane) => point.x - halfSize >= laneRightEdges[lane] + collisionGap);
+    const lane =
+      availableLane ??
+      laneRightEdges.reduce(
+        (bestLane, edge, candidateLane) => (edge < laneRightEdges[bestLane] ? candidateLane : bestLane),
+        0
+      );
+    laneRightEdges[lane] = point.x + halfSize;
+    return {
+      x: point.x,
+      y: laneCenters[lane],
+      size,
+      lane,
+    };
   });
 }
 
@@ -10445,7 +10449,7 @@ function drawPlayerMarketHistory(canvas, history = []) {
   if (cssWidth < 220) return;
   const scrollViewport = canvas.closest(".player-market-chart-scroll");
   const isHorizontallyScrollable = Boolean(scrollViewport && cssWidth > scrollViewport.clientWidth + 1);
-  const cssHeight = isHorizontallyScrollable ? 280 : Math.max(260, Math.min(340, Math.round(cssWidth * 0.52)));
+  const cssHeight = isHorizontallyScrollable ? 300 : Math.max(300, Math.min(350, Math.round(cssWidth * 0.5)));
   const scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
   const selectedValue = Number.parseInt(canvas.dataset.selectedIndex || "", 10);
   const selectedIndex = Number.isInteger(selectedValue) && selectedValue >= 0 && selectedValue < points.length ? selectedValue : points.length - 1;
@@ -10457,7 +10461,7 @@ function drawPlayerMarketHistory(canvas, history = []) {
   if (!context) return;
   context.setTransform(scale, 0, 0, scale, 0, 0);
   context.clearRect(0, 0, cssWidth, cssHeight);
-  const frame = { left: 58, right: 18, top: 31, bottom: 42 };
+  const frame = { left: 58, right: 18, top: 78, bottom: 18 };
   const width = cssWidth - frame.left - frame.right;
   const height = cssHeight - frame.top - frame.bottom;
   const maximum = Math.max(...points.map((row) => Number(row.valueEuro)), 1);
@@ -10468,7 +10472,9 @@ function drawPlayerMarketHistory(canvas, history = []) {
     x: frame.left + ((dateValues[index] - minimumDate) / Math.max(1, maximumDate - minimumDate)) * width,
     y: frame.top + height - (Number(row.valueEuro) / maximum) * height,
   }));
-  const logoSizes = playerMarketAdaptiveLogoSizes(positions, selectedIndex);
+  const timelineLogos = playerMarketTimelineLogoLayout(positions, selectedIndex);
+  const nodeOrder = points.map((_, index) => index).filter((index) => index !== selectedIndex);
+  nodeOrder.push(selectedIndex);
   context.font = "700 10px system-ui, sans-serif";
   context.textAlign = "right";
   context.textBaseline = "middle";
@@ -10486,14 +10492,32 @@ function drawPlayerMarketHistory(canvas, history = []) {
   }
   const years = [...new Set(points.map((row) => row.date.slice(0, 4)))];
   const yearStep = cssWidth < 520 ? 2 : 1;
+  const timelineBand = context.createLinearGradient(0, 2, 0, frame.top);
+  timelineBand.addColorStop(0, "rgba(235, 244, 251, 0.96)");
+  timelineBand.addColorStop(1, "rgba(249, 252, 254, 0.42)");
+  context.fillStyle = timelineBand;
+  context.fillRect(frame.left, 2, width, frame.top - 7);
+  context.beginPath();
+  context.moveTo(frame.left, 20);
+  context.lineTo(frame.left + width, 20);
+  context.strokeStyle = "rgba(91, 112, 136, 0.26)";
+  context.lineWidth = 1;
+  context.stroke();
   context.textAlign = "center";
   context.textBaseline = "top";
   years.forEach((year, index) => {
     if (index % yearStep && index !== years.length - 1) return;
     const timestamp = new Date(`${year}-07-01T00:00:00Z`).getTime();
     const x = frame.left + ((timestamp - minimumDate) / Math.max(1, maximumDate - minimumDate)) * width;
+    const yearX = Math.max(frame.left, Math.min(frame.left + width, x));
     context.fillStyle = "#7a8798";
-    context.fillText(year, Math.max(frame.left, Math.min(frame.left + width, x)), frame.top + height + 14);
+    context.fillText(year, yearX, 4);
+    context.beginPath();
+    context.moveTo(yearX, 17);
+    context.lineTo(yearX, 24);
+    context.strokeStyle = "rgba(91, 112, 136, 0.34)";
+    context.lineWidth = 1;
+    context.stroke();
   });
   const area = context.createLinearGradient(0, frame.top, 0, frame.top + height);
   area.addColorStop(0, "rgba(239, 114, 42, 0.2)");
@@ -10510,6 +10534,21 @@ function drawPlayerMarketHistory(canvas, history = []) {
   context.closePath();
   context.fillStyle = area;
   context.fill();
+  nodeOrder.forEach((index) => {
+    const point = positions[index];
+    const logoPoint = timelineLogos[index];
+    const selected = index === selectedIndex;
+    const asset = playerMarketTeamAsset(points[index]?.team);
+    context.save();
+    context.setLineDash(selected ? [4, 4] : [2, 5]);
+    context.beginPath();
+    context.moveTo(logoPoint.x, logoPoint.y + logoPoint.size / 2 + 1);
+    context.lineTo(point.x, point.y);
+    context.strokeStyle = selected ? `${asset.accent}88` : `${asset.accent}2e`;
+    context.lineWidth = selected ? 1.4 : 1;
+    context.stroke();
+    context.restore();
+  });
   context.beginPath();
   positions.forEach((point, index) => {
     if (index === 0) context.moveTo(point.x, point.y);
@@ -10520,52 +10559,60 @@ function drawPlayerMarketHistory(canvas, history = []) {
   context.lineJoin = "round";
   context.lineCap = "round";
   context.stroke();
-  const selectedPoint = positions[selectedIndex];
-  const selectedAsset = playerMarketTeamAsset(points[selectedIndex]?.team);
-  context.save();
-  context.setLineDash([4, 5]);
-  context.beginPath();
-  context.moveTo(selectedPoint.x, selectedPoint.y + 13);
-  context.lineTo(selectedPoint.x, frame.top + height);
-  context.strokeStyle = `${selectedAsset.accent}66`;
-  context.lineWidth = 1;
-  context.stroke();
-  context.restore();
-  const drawNode = (index) => {
-    const row = points[index];
+  const drawPointMarker = (index) => {
     const point = positions[index];
     const selected = index === selectedIndex;
-    const logoSize = logoSizes[index];
+    const asset = playerMarketTeamAsset(points[index]?.team);
+    context.beginPath();
+    context.arc(point.x, point.y, selected ? 4.2 : 2.2, 0, Math.PI * 2);
+    context.fillStyle = "#ffffff";
+    context.fill();
+    context.strokeStyle = selected ? asset.accent : "#ef722a";
+    context.lineWidth = selected ? 2 : 1.35;
+    context.stroke();
+  };
+  nodeOrder.forEach(drawPointMarker);
+  const drawTimelineLogo = (index) => {
+    const row = points[index];
+    const logoPoint = timelineLogos[index];
+    const selected = index === selectedIndex;
+    const logoSize = logoPoint.size;
     const asset = playerMarketTeamAsset(row.team);
     const redraw = () => {
       if (canvas.isConnected) drawPlayerMarketHistory(canvas, history);
     };
     const logo = playerMarketLogoImage(asset.logoUrl, redraw);
     context.save();
-    context.globalAlpha = selected ? 1 : 0.9;
+    context.globalAlpha = selected ? 1 : 0.94;
     context.shadowColor = selected ? `${asset.accent}77` : "rgba(15, 23, 42, 0.2)";
-    context.shadowBlur = selected ? 9 : Math.max(2, logoSize * 0.16);
+    context.shadowBlur = selected ? 9 : 4;
     context.shadowOffsetY = selected ? 2 : 1;
     if (logo) {
-      context.drawImage(logo, point.x - logoSize / 2, point.y - logoSize / 2, logoSize, logoSize);
+      context.drawImage(
+        logo,
+        logoPoint.x - logoSize / 2,
+        logoPoint.y - logoSize / 2,
+        logoSize,
+        logoSize
+      );
     } else {
       context.shadowColor = "transparent";
       context.fillStyle = asset.accent;
       context.font = `900 ${selected ? 11 : 8}px system-ui, sans-serif`;
       context.textAlign = "center";
       context.textBaseline = "middle";
-      context.fillText(String(row.team?.name || "队").slice(0, 1), point.x, point.y);
+      context.fillText(String(row.team?.name || "队").slice(0, 1), logoPoint.x, logoPoint.y);
     }
     context.restore();
   };
-  const nodeOrder = points.map((_, index) => index).filter((index) => index !== selectedIndex);
-  nodeOrder.push(selectedIndex);
-  nodeOrder.forEach(drawNode);
+  nodeOrder.forEach(drawTimelineLogo);
   canvas._playerMarketHitAreas = positions.map((point, index) => ({
     ...point,
     index,
-    logoSize: logoSizes[index],
-    radius: Math.max(index === selectedIndex ? 16 : 10, logoSizes[index] / 2),
+    logoX: timelineLogos[index].x,
+    logoY: timelineLogos[index].y,
+    logoSize: timelineLogos[index].size,
+    radius: index === selectedIndex ? 16 : 12,
   }));
   canvas.dataset.renderWidth = String(cssWidth);
   canvas.dataset.renderHeight = String(cssHeight);
@@ -10611,7 +10658,9 @@ function playerMarketHitIndex(canvas, event) {
   let nearest = -1;
   let nearestDistance = Number.POSITIVE_INFINITY;
   areas.forEach((area) => {
-    const distance = (area.x - x) ** 2 + (area.y - y) ** 2;
+    const pointDistance = (area.x - x) ** 2 + (area.y - y) ** 2;
+    const logoDistance = (area.logoX - x) ** 2 + (area.logoY - y) ** 2;
+    const distance = Math.min(pointDistance, logoDistance);
     const threshold = Math.max(23, area.radius + 9);
     if (distance <= threshold ** 2 && distance < nearestDistance) {
       nearest = area.index;
