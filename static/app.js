@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "299";
+const STATIC_DATA_VERSION = "300";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10176,19 +10176,19 @@ const PLAYER_HONOR_ASSETS = new Map([
   ["欧洲超级杯冠军", { url: "/static/assets/trophies/uefa-super-cup.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["欧洲金靴", { url: "/static/assets/trophies/european-golden-shoe.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["法国足球顶级联赛冠军", { url: "/static/assets/trophies/ligue-1-champion.png", source: "懂球帝公开数据", kind: "trophy" }],
-  ["盖德-穆勒奖", { url: "/static/assets/trophies/gerd-muller-trophy.jpg", source: "德甲官网核验", kind: "photo" }],
+  ["盖德-穆勒奖", { url: "/static/assets/trophies/gerd-muller-trophy.png", source: "德甲官网实物", kind: "trophy" }],
   ["世界杯金靴", { url: "/static/assets/trophies/fifa-world-cup-golden-boot.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["法国联赛杯冠军", { url: "/static/assets/trophies/coupe-de-la-ligue.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["法国杯冠军", { url: "/static/assets/trophies/coupe-de-france.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["法国超级杯冠军", { url: "/static/assets/trophies/trophee-des-champions.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["金童奖", { url: "/static/assets/trophies/golden-boy.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["最佳射手", { url: "/static/assets/trophies/top-scorer.png", source: "懂球帝公开数据", kind: "trophy" }],
-  ["年度最佳球员", { url: "/static/assets/trophies/france-football-award.jpg", source: "France Football", kind: "mark" }],
-  ["赛季最佳球员", { url: "/static/assets/trophies/unfp-player-of-season.jpg", source: "UNFP 官网核验", kind: "photo" }],
+  ["年度最佳球员", { url: "/static/assets/trophies/france-football-player-of-year.png", source: "France Football 实物", kind: "trophy" }],
+  ["赛季最佳球员", { url: "/static/assets/trophies/unfp-player-of-season.png", source: "UNFP 官网实物", kind: "trophy" }],
   ["科帕奖", { url: "/static/assets/trophies/kopa-trophy.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["欧洲国家联赛冠军", { url: "/static/assets/trophies/uefa-nations-league.png", source: "懂球帝公开数据", kind: "trophy" }],
   ["U19欧洲杯冠军", { url: "/static/assets/trophies/uefa-u19-euro.png", source: "懂球帝公开数据", kind: "trophy" }],
-  ["法国青年杯冠军", { url: "/static/assets/trophies/coupe-gambardella.jpg", source: "FFF 官网核验", kind: "photo" }],
+  ["法国青年杯冠军", { url: "/static/assets/trophies/coupe-gambardella.png", source: "FFF 官网实物", kind: "trophy" }],
 ]);
 
 function playerProfileClubAsset(name = "") {

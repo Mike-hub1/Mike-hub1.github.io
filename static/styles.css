@@ -17891,23 +17891,10 @@ body[data-route="leaderboards"] .main {
 }
 
 .player-profile-honor-card figure img {
-  max-width: 50px;
-  max-height: 60px;
+  width: 54px;
+  height: 64px;
   object-fit: contain;
   filter: drop-shadow(0 5px 4px rgba(33, 47, 64, 0.18));
-}
-
-.player-profile-honor-card figure.is-photo img,
-.player-profile-honor-card figure.is-mark img {
-  width: 52px;
-  height: 60px;
-  border-radius: 7px;
-  object-fit: cover;
-  filter: none;
-}
-
-.player-profile-honor-card figure.is-mark img {
-  object-fit: contain;
 }
 
 .player-profile-honor-card figure > span {
@@ -18588,8 +18575,8 @@ body[data-route="leaderboards"] .main {
   }
 
   .player-profile-honor-card figure img {
-    max-width: 50px;
-    max-height: 62px;
+    width: 54px;
+    height: 64px;
   }
 
   .player-profile-injury-body {

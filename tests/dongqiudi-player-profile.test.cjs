@@ -217,7 +217,12 @@ assert.equal(archiveHelperContext.honorCategory("法国杯冠军"), "club");
 assert.equal(archiveHelperContext.honorCategory("欧洲金靴"), "individual");
 assert.equal(archiveHelperContext.honorAsset("世界杯冠军").url, "/static/assets/trophies/world-cup.png");
 assert.equal(archiveHelperContext.honorAsset("欧洲金靴").url, "/static/assets/trophies/european-golden-shoe.png");
-assert.equal(archiveHelperContext.honorAsset("盖德-穆勒奖").url, "/static/assets/trophies/gerd-muller-trophy.jpg");
+assert.equal(archiveHelperContext.honorAsset("盖德-穆勒奖").url, "/static/assets/trophies/gerd-muller-trophy.png");
+assert.equal(
+  archiveHelperContext.honorAsset("年度最佳球员").url,
+  "/static/assets/trophies/france-football-player-of-year.png"
+);
+assert.equal(archiveHelperContext.honorAsset("年度最佳球员").kind, "trophy");
 assert.equal(archiveHelperContext.honorAsset("科帕奖").url, "/static/assets/trophies/kopa-trophy.png");
 assert.notEqual(
   archiveHelperContext.honorAsset("盖德-穆勒奖").url,
@@ -283,14 +288,15 @@ for (const trophyName of [
   assert.deepEqual([...trophy.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${trophyName} must be a PNG`);
 }
 for (const trophyName of [
-  "gerd-muller-trophy.jpg",
-  "france-football-award.jpg",
-  "unfp-player-of-season.jpg",
-  "coupe-gambardella.jpg",
+  "gerd-muller-trophy.png",
+  "france-football-player-of-year.png",
+  "unfp-player-of-season.png",
+  "coupe-gambardella.png",
 ]) {
   const trophy = fs.readFileSync(path.join(root, "static", "assets", "trophies", trophyName));
-  assert.ok(trophy.length > 1_000, `${trophyName} must retain its official-source image`);
-  assert.deepEqual([...trophy.subarray(0, 2)], [255, 216], `${trophyName} must be a JPEG`);
+  assert.ok(trophy.length > 1_000, `${trophyName} must retain its official-source trophy cutout`);
+  assert.deepEqual([...trophy.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${trophyName} must be a PNG`);
+  assert.equal(trophy[25], 6, `${trophyName} must retain an RGBA transparency channel`);
 }
 assert.ok(
   fs.existsSync(path.join(root, "static", "assets", "trophies", "ATTRIBUTION.md")),

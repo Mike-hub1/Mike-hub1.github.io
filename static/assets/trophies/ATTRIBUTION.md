@@ -1,6 +1,6 @@
 # Honor icon provenance
 
-The v299 player-honors view no longer assigns generic “similar-looking” cups to awards. Every rendered asset is mapped by the exact honor name.
+The v300 player-honors view no longer assigns generic “similar-looking” cups to awards. Every rendered asset is mapped by the exact honor name.
 
 ## Dongqiudi public data layer
 
@@ -31,9 +31,11 @@ The upstream `logo` field incorrectly duplicates the Kopa Trophy for the Gerd M�
 
 | Local file | Use | Official source and treatment |
 | --- | --- | --- |
-| `gerd-muller-trophy.jpg` | 盖德-穆勒奖 | Cropped from the award photograph on the [Bundesliga official site](https://www.bundesliga.com/de/bundesliga/news/fc-bayern-munchen-harry-kane-toptorschutze-gerd-muller-trophae-ballon-dor-2024-29511); photograph credited there to Franck Fife. |
-| `unfp-player-of-season.jpg` | 法甲赛季最佳球员 | Trophy-only crop from [UNFP’s official 2024 winner artwork](https://www.unfp.org/2024/05/5-comme-les-anneaux-olympiques/). |
-| `coupe-gambardella.jpg` | 法国青年杯冠军 | Trophy crop from the [FFF official Coupe Gambardella gallery](https://www.fff.fr/diaporama/10185-la-gambardella-en-images.html). |
-| `france-football-award.jpg` | 法国年度最佳球员 | Official France Football section mark from [L’Équipe / France Football](https://www.lequipe.fr/France-Football/), used instead of inventing a trophy that the award does not expose as a stable public icon. |
+| `gerd-muller-trophy.png` | 盖德-穆勒奖 | Transparent-background trophy cutout reconstructed from the award photograph on the [Bundesliga official site](https://www.bundesliga.com/de/bundesliga/news/fc-bayern-munchen-harry-kane-toptorschutze-gerd-muller-trophae-ballon-dor-2024-29511); photograph credited there to Franck Fife. |
+| `unfp-player-of-season.png` | 法甲赛季最佳球员 | Transparent-background trophy cutout reconstructed from [UNFP’s official 2024 winner artwork](https://www.unfp.org/2024/05/5-comme-les-anneaux-olympiques/). |
+| `coupe-gambardella.png` | 法国青年杯冠军 | Transparent-background trophy cutout reconstructed from the [FFF official Coupe Gambardella gallery](https://www.fff.fr/diaporama/10185-la-gambardella-en-images.html). |
+| `france-football-player-of-year.png` | 法国年度最佳球员 | Transparent-background cutout of the physical France Football award shown in the [official 2022–2023 winner photograph](https://www.lequipe.fr/France-Football/Actualites/Le-palmares-complet-des-joueurs-francais-france-football/1407254). This replaces the former France Football section mark. |
+
+The four transparent cutouts above are UI derivatives of the cited source photographs. Backgrounds, people, and hands were removed; small occluded edges were reconstructed so the trophy can be displayed as a standalone identification icon. They are not represented as separately published official logo downloads.
 
 All competition marks, trophies, photographs, and trademarks remain the property of their respective owners. The archived copies are presented only as identification artwork alongside the corresponding factual honor records.
