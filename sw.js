@@ -1,10 +1,10 @@
-const CACHE_VERSION = "wc26-v300";
+const CACHE_VERSION = "wc26-v301";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 
 const PRECACHE_URLS = [
-  "/static/styles.min.css?v=300",
-  "/static/app.min.js?v=300",
+  "/static/styles.min.css?v=301",
+  "/static/app.min.js?v=301",
   "/static/assets/clubs/as-monaco.png",
   "/static/assets/clubs/paris-saint-germain.png",
   "/static/assets/clubs/real-madrid.png",
@@ -13,19 +13,15 @@ const PRECACHE_URLS = [
   "/static/assets/trophies/uefa-super-cup.png",
   "/static/assets/trophies/european-golden-shoe.png",
   "/static/assets/trophies/ligue-1-champion.png",
-  "/static/assets/trophies/gerd-muller-trophy.png",
   "/static/assets/trophies/fifa-world-cup-golden-boot.png",
   "/static/assets/trophies/coupe-de-la-ligue.png",
   "/static/assets/trophies/coupe-de-france.png",
   "/static/assets/trophies/trophee-des-champions.png",
   "/static/assets/trophies/golden-boy.png",
   "/static/assets/trophies/top-scorer.png",
-  "/static/assets/trophies/france-football-player-of-year.png",
-  "/static/assets/trophies/unfp-player-of-season.png",
   "/static/assets/trophies/kopa-trophy.png",
   "/static/assets/trophies/uefa-nations-league.png",
   "/static/assets/trophies/uefa-u19-euro.png",
-  "/static/assets/trophies/coupe-gambardella.png",
 ];
 
 self.addEventListener("install", (event) => {

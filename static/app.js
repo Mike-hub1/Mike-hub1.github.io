@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "300";
+const STATIC_DATA_VERSION = "301";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10308,7 +10308,6 @@ function renderPlayerHonorCard(row = {}) {
             ? `<img src="${escapeHtml(asset.url)}" alt="${escapeHtml(`${row.name}图标`)}" loading="lazy" decoding="async" />`
             : `<span aria-hidden="true">奖</span>`
         }
-        <figcaption>${escapeHtml(asset.source)}</figcaption>
       </figure>
       <div class="player-profile-honor-card-copy">
         <header>

@@ -98,6 +98,7 @@ for (const honor of snapshot.profile.honors) {
 
 const app = fs.readFileSync(path.join(root, "static", "app.js"), "utf8");
 const css = fs.readFileSync(path.join(root, "static", "styles.css"), "utf8");
+const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 const profileLabelHelpers = app.slice(
   app.indexOf("function formatPlayerArchiveMarketValue"),
   app.indexOf("function renderPlayerProfileFacts")
@@ -258,6 +259,8 @@ vm.runInNewContext(
 const archiveMarkup = archiveRenderContext.renderArchives(snapshot.profile);
 assert.equal((archiveMarkup.match(/class="player-profile-transfer-item"/g) || []).length, 8);
 assert.equal((archiveMarkup.match(/class="player-profile-honor-card"/g) || []).length, 18);
+assert.doesNotMatch(archiveMarkup, /<figcaption>/, "honor cards must not render provenance captions");
+assert.doesNotMatch(archiveMarkup, /懂球帝公开数据|官网实物|France Football 实物/);
 assert.equal((archiveMarkup.match(/class="player-profile-honor-group is-/g) || []).length, 3);
 assert.equal((archiveMarkup.match(/class="player-profile-injury-item is-/g) || []).length, 26);
 assert.match(archiveMarkup, /class="player-injury-overview"/);
@@ -295,8 +298,12 @@ for (const trophyName of [
 ]) {
   const trophy = fs.readFileSync(path.join(root, "static", "assets", "trophies", trophyName));
   assert.ok(trophy.length > 1_000, `${trophyName} must retain its official-source trophy cutout`);
+  assert.ok(trophy.length < 96 * 1024, `${trophyName} must remain web-sized`);
   assert.deepEqual([...trophy.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${trophyName} must be a PNG`);
+  assert.equal(trophy.readUInt32BE(16), 256, `${trophyName} must be 256px wide`);
+  assert.equal(trophy.readUInt32BE(20), 256, `${trophyName} must be 256px high`);
   assert.equal(trophy[25], 6, `${trophyName} must retain an RGBA transparency channel`);
+  assert.doesNotMatch(serviceWorker, new RegExp(`/static/assets/trophies/${trophyName.replaceAll(".", "\\.")}`));
 }
 assert.ok(
   fs.existsSync(path.join(root, "static", "assets", "trophies", "ATTRIBUTION.md")),

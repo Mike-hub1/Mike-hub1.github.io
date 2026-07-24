@@ -1,6 +1,6 @@
 # Honor icon provenance
 
-The v300 player-honors view no longer assigns generic “similar-looking” cups to awards. Every rendered asset is mapped by the exact honor name.
+The v301 player-honors view no longer assigns generic “similar-looking” cups to awards. Every rendered asset is mapped by the exact honor name.
 
 ## Dongqiudi public data layer
 
@@ -37,5 +37,7 @@ The upstream `logo` field incorrectly duplicates the Kopa Trophy for the Gerd M�
 | `france-football-player-of-year.png` | 法国年度最佳球员 | Transparent-background cutout of the physical France Football award shown in the [official 2022–2023 winner photograph](https://www.lequipe.fr/France-Football/Actualites/Le-palmares-complet-des-joueurs-francais-france-football/1407254). This replaces the former France Football section mark. |
 
 The four transparent cutouts above are UI derivatives of the cited source photographs. Backgrounds, people, and hands were removed; small occluded edges were reconstructed so the trophy can be displayed as a standalone identification icon. They are not represented as separately published official logo downloads.
+
+For web delivery, these four RGBA PNGs are capped at 256 × 256 pixels, stripped of unnecessary source-photo metadata, and loaded through the existing lazy-image path. They are intentionally omitted from the service worker’s install-time precache and are cached only after the browser requests them.
 
 All competition marks, trophies, photographs, and trademarks remain the property of their respective owners. The archived copies are presented only as identification artwork alongside the corresponding factual honor records.

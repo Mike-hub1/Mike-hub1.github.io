@@ -17877,7 +17877,6 @@ body[data-route="leaderboards"] .main {
 
 .player-profile-honor-card figure {
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
   align-self: start;
   place-items: center;
   width: 64px;
@@ -17907,18 +17906,6 @@ body[data-route="leaderboards"] .main {
   font-size: 18px;
   font-weight: 900;
   background: rgba(var(--honor-accent-rgb), 0.08);
-}
-
-.player-profile-honor-card figcaption {
-  max-width: 100%;
-  overflow: hidden;
-  color: #8190a2;
-  font-size: 6px;
-  font-weight: 750;
-  line-height: 1.2;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .player-profile-honor-card-copy {
