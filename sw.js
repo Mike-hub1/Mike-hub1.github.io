@@ -1,13 +1,21 @@
-const CACHE_VERSION = "wc26-v297";
+const CACHE_VERSION = "wc26-v298";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 
 const PRECACHE_URLS = [
-  "/static/styles.min.css?v=297",
-  "/static/app.min.js?v=297",
+  "/static/styles.min.css?v=298",
+  "/static/app.min.js?v=298",
   "/static/assets/clubs/as-monaco.png",
   "/static/assets/clubs/paris-saint-germain.png",
   "/static/assets/clubs/real-madrid.png",
+  "/static/assets/trophies/world-cup.png",
+  "/static/assets/trophies/nations-league.png",
+  "/static/assets/trophies/intercontinental-cup.png",
+  "/static/assets/trophies/uefa-super-cup.svg",
+  "/static/assets/trophies/ligue-1.svg",
+  "/static/assets/trophies/french-cup.png",
+  "/static/assets/trophies/golden-boot.png",
+  "/static/assets/trophies/individual-award.png",
 ];
 
 self.addEventListener("install", (event) => {

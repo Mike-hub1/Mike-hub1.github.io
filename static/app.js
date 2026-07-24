@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "297";
+const STATIC_DATA_VERSION = "298";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10146,43 +10146,238 @@ function renderPlayerMarketSelection(row = {}) {
   `;
 }
 
+const PLAYER_PROFILE_CLUB_ASSETS = [
+  { match: "巴黎圣日耳曼", logoUrl: "/static/assets/clubs/paris-saint-germain.png" },
+  { match: "皇家马德里", logoUrl: "/static/assets/clubs/real-madrid.png" },
+  { match: "摩纳哥", logoUrl: "/static/assets/clubs/as-monaco.png" },
+];
+
+const PLAYER_HONOR_NATIONAL_NAMES = new Set(["世界杯冠军", "欧洲国家联赛冠军", "U19欧洲杯冠军"]);
+const PLAYER_HONOR_CLUB_NAMES = new Set([
+  "国际足联洲际杯冠军",
+  "欧洲超级杯冠军",
+  "法国足球顶级联赛冠军",
+  "法国杯冠军",
+  "法国联赛杯冠军",
+  "法国超级杯冠军",
+  "法国青年杯冠军",
+]);
+const PLAYER_HONOR_CATEGORIES = [
+  { id: "national", label: "国家队荣誉", note: "蓝衣军团与青年国家队" },
+  { id: "club", label: "俱乐部荣誉", note: "联赛、杯赛与洲际赛事" },
+  { id: "individual", label: "个人奖项", note: "赛季表现与射手荣誉" },
+];
+
+function playerProfileClubAsset(name = "") {
+  return PLAYER_PROFILE_CLUB_ASSETS.find((asset) => String(name).includes(asset.match)) || null;
+}
+
+function playerProfileClubInitial(name = "") {
+  const normalized = String(name).replace(/青年队|U19/gi, "").trim();
+  return Array.from(normalized || "队").slice(0, 1).join("");
+}
+
+function renderPlayerTransferClub(name = "") {
+  const label = name || "待定";
+  const asset = playerProfileClubAsset(label);
+  return `
+    <span class="player-transfer-club">
+      <span class="player-transfer-club-logo${asset ? " has-image" : ""}" aria-hidden="true">
+        ${asset ? `<img src="${escapeHtml(asset.logoUrl)}" alt="" loading="lazy" decoding="async" />` : escapeHtml(playerProfileClubInitial(label))}
+      </span>
+      <strong>${escapeHtml(label)}</strong>
+    </span>
+  `;
+}
+
+function playerTransferFeeLabel(fee = "") {
+  const label = String(fee || "").trim();
+  const tenThousandEuro = label.match(/^(\d+(?:\.\d+)?)万欧(?:元)?$/);
+  if (!tenThousandEuro) return label || "未披露";
+  return formatPlayerArchiveMarketValue(Number(tenThousandEuro[1]) * 10_000);
+}
+
+function playerTransferTypeClass(type = "") {
+  const label = String(type);
+  if (label.includes("租借")) return "loan";
+  if (label.includes("梯队")) return "academy";
+  if (label.includes("免签")) return "free";
+  return "transfer";
+}
+
+function playerTransferDateParts(value = "") {
+  const [year = "—", month = "", day = ""] = String(value).split("-");
+  return { year, shortDate: [month, day].filter(Boolean).join(".") || "日期待补" };
+}
+
+function groupPlayerHonors(honors = []) {
+  const byName = new Map();
+  honors.forEach((row) => {
+    const name = String(row?.name || "未命名荣誉").trim();
+    const current = byName.get(name) || {
+      ...row,
+      name,
+      times: 0,
+      importance: Number(row?.importance) || 0,
+      records: [],
+    };
+    const records = Array.isArray(row?.records) ? row.records : [];
+    current.times += Math.max(Number(row?.times) || 0, records.length);
+    current.importance = Math.max(current.importance, Number(row?.importance) || 0);
+    const recordKeys = new Set(
+      current.records.map((record) => [record.season, record.team, record.competition].join("|"))
+    );
+    records.forEach((record) => {
+      const key = [record.season, record.team, record.competition].join("|");
+      if (!recordKeys.has(key)) {
+        current.records.push(record);
+        recordKeys.add(key);
+      }
+    });
+    byName.set(name, current);
+  });
+  return Array.from(byName.values()).sort((left, right) => right.importance - left.importance);
+}
+
+function playerHonorCategory(name = "") {
+  if (PLAYER_HONOR_NATIONAL_NAMES.has(name)) return "national";
+  if (PLAYER_HONOR_CLUB_NAMES.has(name)) return "club";
+  return "individual";
+}
+
+function playerHonorAsset(name = "") {
+  const label = String(name);
+  if (label.includes("世界杯冠军")) return "/static/assets/trophies/world-cup.png";
+  if (label.includes("国家联赛") || label.includes("U19欧洲杯")) return "/static/assets/trophies/nations-league.png";
+  if (label.includes("洲际杯")) return "/static/assets/trophies/intercontinental-cup.png";
+  if (label.includes("欧洲超级杯")) return "/static/assets/trophies/uefa-super-cup.svg";
+  if (label.includes("足球顶级联赛")) return "/static/assets/trophies/ligue-1.svg";
+  if (label.includes("法国") && label.includes("杯冠军")) return "/static/assets/trophies/french-cup.png";
+  if (label.includes("金靴") || label.includes("最佳射手")) return "/static/assets/trophies/golden-boot.png";
+  return "/static/assets/trophies/individual-award.png";
+}
+
+function playerHonorRecordGroups(records = []) {
+  const groups = new Map();
+  records.forEach((record) => {
+    const label = [record.team, record.competition].filter(Boolean).join(" · ") || "个人荣誉";
+    const seasons = groups.get(label) || [];
+    if (record.season && !seasons.includes(record.season)) seasons.push(record.season);
+    groups.set(label, seasons);
+  });
+  return Array.from(groups, ([label, seasons]) => ({ label, seasons }));
+}
+
+function renderPlayerHonorCard(row = {}) {
+  const recordGroups = playerHonorRecordGroups(row.records || []);
+  return `
+    <article class="player-profile-honor-card">
+      <figure>
+        <img src="${escapeHtml(playerHonorAsset(row.name))}" alt="" loading="lazy" decoding="async" />
+      </figure>
+      <div class="player-profile-honor-card-copy">
+        <header>
+          <strong>${escapeHtml(row.name)}</strong>
+          <b aria-label="${escapeHtml(`${row.times || 0} 次`)}">×${escapeHtml(row.times || 0)}</b>
+        </header>
+        <div class="player-profile-honor-records">
+          ${
+            recordGroups.length
+              ? recordGroups
+                  .map(
+                    (group) => `
+                      <div>
+                        <span>${escapeHtml(group.label)}</span>
+                        <p>${group.seasons.map((season) => `<time>${escapeHtml(season)}</time>`).join("")}</p>
+                      </div>
+                    `
+                  )
+                  .join("")
+              : `<div><span>赛季记录待补</span></div>`
+          }
+        </div>
+      </div>
+    </article>
+  `;
+}
+
 function renderPlayerProfileArchives(profile = {}) {
+  const transfers = profile.transfers || [];
+  const honors = groupPlayerHonors(profile.honors || []);
+  const honorWins = honors.reduce((total, row) => total + (Number(row.times) || 0), 0);
   return `
     <div class="player-profile-archives">
-      <details class="player-profile-archive">
-        <summary><span>转会记录</span><b>${profile.transfers?.length || 0} 条</b></summary>
-        <div class="player-profile-transfer-list">
-          ${(profile.transfers || [])
+      <details class="player-profile-archive is-transfer">
+        <summary>
+          <span class="player-profile-archive-heading">
+            <span class="player-profile-archive-icon is-transfer" aria-hidden="true">↗</span>
+            <span><small>职业轨迹</small><strong>转会记录</strong></span>
+          </span>
+          <span class="player-profile-archive-count"><b>${transfers.length}</b><small>条记录</small></span>
+        </summary>
+        <ol class="player-profile-transfer-list">
+          ${transfers
             .map(
-              (row) => `
-                <div>
-                  <time>${escapeHtml(row.date)}</time>
-                  <strong>${escapeHtml(row.from || "青训")} <span aria-hidden="true">→</span> ${escapeHtml(row.to || "待定")}</strong>
-                  <span>${escapeHtml(row.type)} · ${escapeHtml(row.fee)}</span>
-                </div>
-              `
+              (row, index) => {
+                const date = playerTransferDateParts(row.date);
+                return `
+                  <li class="player-profile-transfer-item">
+                    <time datetime="${escapeHtml(row.date)}"><strong>${escapeHtml(date.year)}</strong><span>${escapeHtml(date.shortDate)}</span></time>
+                    <span class="player-profile-transfer-track" aria-hidden="true"><i>${index + 1}</i></span>
+                    <article>
+                      <header>
+                        <span class="player-transfer-type is-${escapeHtml(playerTransferTypeClass(row.type))}">${escapeHtml(row.type)}</span>
+                        <b>${escapeHtml(playerTransferFeeLabel(row.fee))}</b>
+                      </header>
+                      <div class="player-transfer-route">
+                        ${renderPlayerTransferClub(row.from || "青训")}
+                        <span class="player-transfer-arrow" aria-hidden="true">→</span>
+                        ${renderPlayerTransferClub(row.to || "待定")}
+                      </div>
+                    </article>
+                  </li>
+                `;
+              }
             )
             .join("")}
-        </div>
+        </ol>
       </details>
-      <details class="player-profile-archive">
-        <summary><span>荣誉档案</span><b>${profile.honors?.length || 0} 项</b></summary>
-        <div class="player-profile-honor-list">
-          ${(profile.honors || [])
-            .map(
-              (row) => `
-                <div>
-                  <strong>${escapeHtml(row.name)}</strong>
-                  <span>${escapeHtml(row.times ?? row.records?.length ?? 0)} 次</span>
-                  <small>${escapeHtml((row.records || []).map((record) => [record.season, record.team || record.competition].filter(Boolean).join(" · ")).filter(Boolean).join(" / ") || "赛季记录待补")}</small>
+      <details class="player-profile-archive is-honors">
+        <summary>
+          <span class="player-profile-archive-heading">
+            <span class="player-profile-archive-icon is-honors" aria-hidden="true">
+              <img src="/static/assets/trophies/world-cup.png" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span><small>冠军陈列</small><strong>荣誉档案</strong></span>
+          </span>
+          <span class="player-profile-archive-count"><b>${honors.length}</b><small>类 · ${honorWins} 次</small></span>
+        </summary>
+        <div class="player-profile-honor-groups">
+          ${PLAYER_HONOR_CATEGORIES.map((category) => {
+            const rows = honors.filter((row) => playerHonorCategory(row.name) === category.id);
+            const wins = rows.reduce((total, row) => total + (Number(row.times) || 0), 0);
+            return `
+              <section class="player-profile-honor-group is-${escapeHtml(category.id)}">
+                <header>
+                  <span><strong>${escapeHtml(category.label)}</strong><small>${escapeHtml(category.note)}</small></span>
+                  <b>${rows.length} 类 · ${wins} 次</b>
+                </header>
+                <div class="player-profile-honor-grid">
+                  ${rows.map(renderPlayerHonorCard).join("")}
                 </div>
-              `
-            )
-            .join("")}
+              </section>
+            `;
+          }).join("")}
         </div>
       </details>
-      <details class="player-profile-archive">
-        <summary><span>伤病记录</span><b>${profile.injuries?.length || 0} 条</b></summary>
+      <details class="player-profile-archive is-injuries">
+        <summary>
+          <span class="player-profile-archive-heading">
+            <span class="player-profile-archive-icon is-injuries" aria-hidden="true">＋</span>
+            <span><small>健康履历</small><strong>伤病记录</strong></span>
+          </span>
+          <span class="player-profile-archive-count"><b>${profile.injuries?.length || 0}</b><small>条记录</small></span>
+        </summary>
         <div class="player-profile-injury-list">
           ${(profile.injuries || [])
             .map(

@@ -17393,27 +17393,61 @@ body[data-route="leaderboards"] .main {
 
 .player-profile-archives {
   display: grid;
+  gap: 12px;
+  margin-top: 18px;
 }
 
 .player-profile-archive {
-  border-bottom: 1px solid var(--line);
+  --archive-accent: #56708f;
+  --archive-accent-rgb: 86, 112, 143;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(130, 151, 176, 0.22);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 22px rgba(28, 52, 78, 0.055);
 }
 
-.player-profile-archive:last-child {
-  border-bottom: 0;
+.player-profile-archive.is-transfer {
+  --archive-accent: #087f72;
+  --archive-accent-rgb: 8, 127, 114;
+}
+
+.player-profile-archive.is-honors {
+  --archive-accent: #8b5b19;
+  --archive-accent-rgb: 139, 91, 25;
+}
+
+.player-profile-archive.is-injuries {
+  --archive-accent: #5f7085;
+  --archive-accent-rgb: 95, 112, 133;
 }
 
 .player-profile-archive > summary {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto 29px;
+  gap: 13px;
   align-items: center;
-  min-height: 54px;
+  min-height: 76px;
+  padding: 10px 13px 10px 12px;
   color: #273950;
-  font-size: 13px;
-  font-weight: 850;
   cursor: pointer;
   list-style: none;
+  background:
+    radial-gradient(circle at 91% 10%, rgba(var(--archive-accent-rgb), 0.12), transparent 26%),
+    linear-gradient(110deg, rgba(var(--archive-accent-rgb), 0.075), rgba(255, 255, 255, 0.94) 48%);
+  transition: background 160ms ease, box-shadow 160ms ease;
+}
+
+.player-profile-archive > summary:hover {
+  background:
+    radial-gradient(circle at 91% 10%, rgba(var(--archive-accent-rgb), 0.17), transparent 28%),
+    linear-gradient(110deg, rgba(var(--archive-accent-rgb), 0.11), #ffffff 52%);
+}
+
+.player-profile-archive > summary:focus-visible {
+  outline: 3px solid rgba(var(--archive-accent-rgb), 0.25);
+  outline-offset: -3px;
 }
 
 .player-profile-archive > summary::-webkit-details-marker {
@@ -17422,64 +17456,504 @@ body[data-route="leaderboards"] .main {
 
 .player-profile-archive > summary::after {
   content: "+";
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1;
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
-  margin-left: 46px;
-  border: 1px solid var(--line);
+  width: 27px;
+  height: 27px;
+  border: 1px solid rgba(var(--archive-accent-rgb), 0.25);
   border-radius: 50%;
-  color: #607085;
-  background: #f7fafc;
+  color: var(--archive-accent);
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 3px 8px rgba(37, 56, 77, 0.08);
 }
 
 .player-profile-archive[open] > summary::after {
   content: "−";
 }
 
-.player-profile-archive > summary b {
+.player-profile-archive[open] > summary {
+  border-bottom: 1px solid rgba(var(--archive-accent-rgb), 0.15);
+}
+
+.player-profile-archive-heading {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 11px;
+}
+
+.player-profile-archive-heading > span:last-child {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.player-profile-archive-heading small {
+  color: var(--archive-accent);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.player-profile-archive-heading strong {
+  color: #1c3049;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.player-profile-archive-icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--archive-accent-rgb), 0.18);
+  border-radius: 13px;
+  color: var(--archive-accent);
+  font-size: 21px;
+  font-weight: 850;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65), 0 5px 12px rgba(var(--archive-accent-rgb), 0.1);
+}
+
+.player-profile-archive-icon.is-honors {
+  background: linear-gradient(145deg, #fff9eb, #fff3cf);
+}
+
+.player-profile-archive-icon.is-honors img {
+  width: 24px;
+  height: 34px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px rgba(91, 61, 15, 0.2));
+}
+
+.player-profile-archive-icon.is-injuries {
+  color: #617187;
+  font-size: 17px;
+}
+
+.player-profile-archive-count {
   grid-column: 2;
   grid-row: 1;
-  color: #78879a;
-  font-size: 10px;
+  display: grid;
+  justify-items: end;
+  gap: 1px;
+  white-space: nowrap;
+}
+
+.player-profile-archive-count b {
+  color: var(--archive-accent);
+  font-size: 18px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-profile-archive-count small {
+  color: #7c8999;
+  font-size: 9px;
   font-weight: 750;
 }
 
-.player-profile-transfer-list,
-.player-profile-honor-list,
-.player-profile-injury-list {
+.player-profile-transfer-list {
   display: grid;
-  gap: 1px;
-  padding-bottom: 14px;
-  background: var(--line);
+  margin: 0;
+  padding: 16px 16px 18px 13px;
+  list-style: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(249, 253, 252, 0.96)),
+    radial-gradient(circle at 0 0, rgba(8, 127, 114, 0.12), transparent 32%);
 }
 
-.player-profile-transfer-list > div,
-.player-profile-honor-list > div,
+.player-profile-transfer-item {
+  display: grid;
+  grid-template-columns: 58px 30px minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.player-profile-transfer-item > time {
+  display: grid;
+  align-content: start;
+  justify-items: end;
+  gap: 1px;
+  padding: 12px 7px 0 0;
+  color: #748397;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-profile-transfer-item > time strong {
+  color: #21364f;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.player-profile-transfer-item > time span {
+  font-size: 9px;
+  font-weight: 750;
+}
+
+.player-profile-transfer-track {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}
+
+.player-profile-transfer-track::after {
+  content: "";
+  position: absolute;
+  top: 34px;
+  bottom: -12px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(#78c7ba, rgba(120, 199, 186, 0.18));
+}
+
+.player-profile-transfer-item:last-child .player-profile-transfer-track::after {
+  display: none;
+}
+
+.player-profile-transfer-track i {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 3px solid #e6f5f1;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 900;
+  background: #0a8a79;
+  box-shadow: 0 0 0 1px rgba(10, 138, 121, 0.2);
+}
+
+.player-profile-transfer-item > article {
+  min-width: 0;
+  margin-bottom: 11px;
+  padding: 11px 12px 12px;
+  border: 1px solid rgba(93, 135, 144, 0.16);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 6px 15px rgba(34, 69, 77, 0.045);
+}
+
+.player-profile-transfer-item:last-child > article {
+  margin-bottom: 0;
+}
+
+.player-profile-transfer-item > article > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.player-profile-transfer-item > article > header b {
+  color: #4d6178;
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.player-transfer-type {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: #245d56;
+  font-size: 9px;
+  font-weight: 850;
+  background: #e8f6f2;
+}
+
+.player-transfer-type.is-loan {
+  color: #6653a7;
+  background: #f0ecfb;
+}
+
+.player-transfer-type.is-academy {
+  color: #46709b;
+  background: #edf5fb;
+}
+
+.player-transfer-type.is-transfer {
+  color: #b94e25;
+  background: #fff0e8;
+}
+
+.player-transfer-route {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+}
+
+.player-transfer-club {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-transfer-club:last-child {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.player-transfer-club-logo {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  overflow: hidden;
+  border: 1px solid rgba(114, 136, 160, 0.17);
+  border-radius: 10px;
+  color: #567189;
+  font-size: 11px;
+  font-weight: 900;
+  background: linear-gradient(145deg, #f7fafc, #edf3f7);
+}
+
+.player-transfer-club-logo.has-image {
+  padding: 4px;
+  background: #ffffff;
+}
+
+.player-transfer-club-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.player-transfer-club strong {
+  min-width: 0;
+  color: #273a51;
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.player-transfer-arrow {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #0b8676;
+  font-size: 13px;
+  background: #edf8f5;
+}
+
+.player-profile-honor-groups {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(201, 148, 49, 0.11), transparent 25%),
+    #fbfcfd;
+}
+
+.player-profile-honor-group {
+  --honor-accent: #276e9e;
+  --honor-accent-rgb: 39, 110, 158;
+  overflow: hidden;
+  border: 1px solid rgba(var(--honor-accent-rgb), 0.17);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 7px 18px rgba(33, 54, 78, 0.045);
+}
+
+.player-profile-honor-group.is-club {
+  --honor-accent: #b56722;
+  --honor-accent-rgb: 181, 103, 34;
+}
+
+.player-profile-honor-group.is-individual {
+  --honor-accent: #7652a9;
+  --honor-accent-rgb: 118, 82, 169;
+}
+
+.player-profile-honor-group > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 57px;
+  padding: 9px 12px 9px 14px;
+  border-bottom: 1px solid rgba(var(--honor-accent-rgb), 0.12);
+  background: linear-gradient(105deg, rgba(var(--honor-accent-rgb), 0.095), rgba(255, 255, 255, 0.96) 58%);
+  box-shadow: inset 3px 0 0 rgba(var(--honor-accent-rgb), 0.72);
+}
+
+.player-profile-honor-group > header > span {
+  display: grid;
+  gap: 2px;
+}
+
+.player-profile-honor-group > header strong {
+  color: #21364f;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.player-profile-honor-group > header small {
+  color: #7b899b;
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.player-profile-honor-group > header b {
+  padding: 5px 8px;
+  border: 1px solid rgba(var(--honor-accent-rgb), 0.14);
+  border-radius: 999px;
+  color: var(--honor-accent);
+  font-size: 9px;
+  font-weight: 850;
+  white-space: nowrap;
+  background: rgba(var(--honor-accent-rgb), 0.065);
+}
+
+.player-profile-honor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  padding: 10px;
+}
+
+.player-profile-honor-card {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 10px;
+  min-width: 0;
+  min-height: 126px;
+  padding: 10px;
+  border: 1px solid rgba(127, 149, 174, 0.16);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 0 0, rgba(var(--honor-accent-rgb), 0.085), transparent 39%),
+    linear-gradient(145deg, #ffffff, #fbfcfe);
+}
+
+.player-profile-honor-card figure {
+  display: grid;
+  align-self: start;
+  place-items: center;
+  width: 58px;
+  height: 72px;
+  margin: 0;
+  border: 1px solid rgba(var(--honor-accent-rgb), 0.13);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(var(--honor-accent-rgb), 0.055));
+}
+
+.player-profile-honor-card figure img {
+  max-width: 44px;
+  max-height: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 4px rgba(33, 47, 64, 0.18));
+}
+
+.player-profile-honor-card-copy {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 9px;
+}
+
+.player-profile-honor-card-copy > header {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.player-profile-honor-card-copy > header strong {
+  min-width: 0;
+  color: #24374e;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.player-profile-honor-card-copy > header b {
+  flex: 0 0 auto;
+  padding: 2px 6px;
+  border-radius: 999px;
+  color: var(--honor-accent);
+  font-size: 10px;
+  font-weight: 900;
+  background: rgba(var(--honor-accent-rgb), 0.09);
+}
+
+.player-profile-honor-records {
+  display: grid;
+  gap: 7px;
+}
+
+.player-profile-honor-records > div {
+  display: grid;
+  gap: 4px;
+}
+
+.player-profile-honor-records span {
+  color: #748397;
+  font-size: 8px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.player-profile-honor-records p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin: 0;
+}
+
+.player-profile-honor-records time {
+  padding: 2px 5px;
+  border: 1px solid rgba(var(--honor-accent-rgb), 0.12);
+  border-radius: 5px;
+  color: #52677e;
+  font-size: 8px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  background: rgba(var(--honor-accent-rgb), 0.045);
+}
+
+.player-profile-injury-list {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  background: #fbfcfd;
+}
+
 .player-profile-injury-list > div {
   display: grid;
   gap: 4px 12px;
   min-height: 54px;
   align-items: center;
-  padding: 9px 11px;
-  background: #f9fbfc;
-}
-
-.player-profile-transfer-list > div {
-  grid-template-columns: 88px minmax(0, 1fr) auto;
-}
-
-.player-profile-honor-list > div {
-  grid-template-columns: minmax(0, 0.72fr) 46px minmax(0, 1.3fr);
+  padding: 10px 11px;
+  border: 1px solid rgba(124, 146, 172, 0.15);
+  border-radius: 10px;
+  background: #ffffff;
 }
 
 .player-profile-injury-list > div {
   grid-template-columns: 150px minmax(120px, 0.6fr) minmax(0, 1fr);
 }
 
-.player-profile-transfer-list time,
 .player-profile-injury-list time {
   color: #77869a;
   font-size: 10px;
@@ -17487,8 +17961,6 @@ body[data-route="leaderboards"] .main {
   font-variant-numeric: tabular-nums;
 }
 
-.player-profile-transfer-list strong,
-.player-profile-honor-list strong,
 .player-profile-injury-list strong {
   min-width: 0;
   color: #263850;
@@ -17496,9 +17968,6 @@ body[data-route="leaderboards"] .main {
   line-height: 1.4;
 }
 
-.player-profile-transfer-list span,
-.player-profile-honor-list span,
-.player-profile-honor-list small,
 .player-profile-injury-list span {
   min-width: 0;
   color: #748399;
@@ -17684,8 +18153,6 @@ body[data-route="leaderboards"] .main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .player-profile-transfer-list > div,
-  .player-profile-honor-list > div,
   .player-profile-injury-list > div {
     grid-template-columns: 1fr;
     gap: 3px;
@@ -17758,6 +18225,90 @@ body[data-route="leaderboards"] .main {
 
   .player-profile-facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .player-profile-archive > summary {
+    grid-template-columns: minmax(0, 1fr) auto 26px;
+    gap: 8px;
+    min-height: 70px;
+    padding-inline: 9px;
+  }
+
+  .player-profile-archive-icon {
+    width: 37px;
+    height: 37px;
+    border-radius: 11px;
+  }
+
+  .player-profile-archive-heading {
+    gap: 8px;
+  }
+
+  .player-profile-archive-heading strong {
+    font-size: 13px;
+  }
+
+  .player-profile-archive-count b {
+    font-size: 16px;
+  }
+
+  .player-profile-transfer-list {
+    padding: 13px 9px 15px 6px;
+  }
+
+  .player-profile-transfer-item {
+    grid-template-columns: 48px 27px minmax(0, 1fr);
+  }
+
+  .player-profile-transfer-item > time {
+    padding-right: 4px;
+  }
+
+  .player-profile-transfer-item > article {
+    padding: 10px;
+  }
+
+  .player-transfer-club {
+    display: grid;
+    justify-items: start;
+    gap: 5px;
+  }
+
+  .player-transfer-club:last-child {
+    justify-items: end;
+  }
+
+  .player-transfer-club-logo {
+    width: 29px;
+    height: 29px;
+  }
+
+  .player-transfer-club strong {
+    font-size: 9px;
+  }
+
+  .player-profile-honor-groups {
+    padding: 10px;
+  }
+
+  .player-profile-honor-grid {
+    grid-template-columns: 1fr;
+    padding: 8px;
+  }
+
+  .player-profile-honor-card {
+    grid-template-columns: 62px minmax(0, 1fr);
+    min-height: 120px;
+  }
+
+  .player-profile-honor-card figure {
+    width: 62px;
+    height: 78px;
+  }
+
+  .player-profile-honor-card figure img {
+    max-width: 48px;
+    max-height: 64px;
   }
 
   .player-profile-fact.is-name,

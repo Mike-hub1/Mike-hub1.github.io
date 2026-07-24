@@ -152,6 +152,14 @@ assert.match(app, /横向滑动查看完整走势/);
 assert.match(app, /点击上方队徽或图中节点/);
 assert.match(app, /class="player-profile-fact is-/);
 assert.match(app, /class="player-characteristic-card is-/);
+assert.match(app, /function groupPlayerHonors/);
+assert.match(app, /class="player-profile-transfer-item"/);
+assert.match(app, /class="player-profile-honor-groups"/);
+assert.match(app, /class="player-profile-honor-card"/);
+assert.match(app, /label: "国家队荣誉"/);
+assert.match(app, /label: "俱乐部荣誉"/);
+assert.match(app, /label: "个人奖项"/);
+assert.doesNotMatch(app, /class="player-profile-honor-list"/);
 assert.doesNotMatch(app, /Market value history/i);
 assert.doesNotMatch(app, /Playing profile/i);
 assert.doesNotMatch(app, /个公开节点/);
@@ -170,9 +178,90 @@ assert.match(css, /\.player-market-chart-scroll\s*\{[\s\S]*?overflow-x:\s*auto/)
 assert.match(css, /@media \(max-width: 760px\)\s*\{[\s\S]*?\.player-market-history-canvas\s*\{[\s\S]*?min-width:\s*720px/);
 assert.match(css, /\.player-market-selection\s*\{/);
 assert.match(css, /\.player-characteristic-card\s*\{/);
+assert.match(css, /\.player-profile-transfer-item\s*\{/);
+assert.match(css, /\.player-profile-honor-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,/);
+assert.match(css, /\.player-profile-honor-card figure img\s*\{/);
+assert.match(css, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.player-profile-honor-grid\s*\{[\s\S]*?grid-template-columns:\s*1fr/);
 assert.match(css, /@media \(max-width: 480px\)\s*\{[\s\S]*?\.player-profile-facts\s*\{\s*grid-template-columns:\s*repeat\(2,/);
 assert.doesNotMatch(css, /\.player-dqd-header-meta\s*\{/);
 assert.doesNotMatch(css, /\.player-dqd-footer\s*\{/);
+
+const archiveHelperSource = app.slice(
+  app.indexOf("const PLAYER_PROFILE_CLUB_ASSETS"),
+  app.indexOf("function renderPlayerProfileArchives")
+);
+const archiveHelperContext = {};
+vm.runInNewContext(
+  `${archiveHelperSource}
+  this.groupHonors = groupPlayerHonors;
+  this.honorCategory = playerHonorCategory;
+  this.honorAsset = playerHonorAsset;`,
+  archiveHelperContext
+);
+const mergedHonors = archiveHelperContext.groupHonors([
+  { name: "测试奖杯", times: 1, importance: 2, records: [{ season: "2024", team: "甲队" }] },
+  { name: "测试奖杯", times: 1, importance: 3, records: [{ season: "2025", team: "乙队" }] },
+]);
+assert.equal(mergedHonors.length, 1, "same-named trophies must render as one honor card");
+assert.equal(mergedHonors[0].times, 2);
+assert.equal(mergedHonors[0].records.length, 2);
+assert.equal(archiveHelperContext.honorCategory("世界杯冠军"), "national");
+assert.equal(archiveHelperContext.honorCategory("法国杯冠军"), "club");
+assert.equal(archiveHelperContext.honorCategory("欧洲金靴"), "individual");
+assert.equal(archiveHelperContext.honorAsset("世界杯冠军"), "/static/assets/trophies/world-cup.png");
+assert.equal(archiveHelperContext.honorAsset("欧洲金靴"), "/static/assets/trophies/golden-boot.png");
+
+const archiveRenderSource = app.slice(
+  app.indexOf("const PLAYER_PROFILE_CLUB_ASSETS"),
+  app.indexOf("function renderPlayerProfilePanel")
+);
+const archiveRenderContext = {};
+vm.runInNewContext(
+  `function escapeHtml(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+  function formatPlayerArchiveMarketValue(value) {
+    const amount = Number(value);
+    if (amount >= 100_000_000) return \`\${Number((amount / 100_000_000).toFixed(2))}亿欧\`;
+    if (amount >= 10_000) return \`\${Number((amount / 10_000).toFixed(1))}万欧\`;
+    return \`\${amount}欧\`;
+  }
+  ${archiveRenderSource}
+  this.renderArchives = renderPlayerProfileArchives;`,
+  archiveRenderContext
+);
+const archiveMarkup = archiveRenderContext.renderArchives(snapshot.profile);
+assert.equal((archiveMarkup.match(/class="player-profile-transfer-item"/g) || []).length, 8);
+assert.equal((archiveMarkup.match(/class="player-profile-honor-card"/g) || []).length, 18);
+assert.equal((archiveMarkup.match(/class="player-profile-honor-group is-/g) || []).length, 3);
+assert.match(archiveMarkup, /<small>类 · 50 次<\/small>/);
+assert.match(archiveMarkup, />1\.8亿欧<\/b>/);
+
+for (const trophyName of [
+  "world-cup.png",
+  "nations-league.png",
+  "intercontinental-cup.png",
+  "french-cup.png",
+  "golden-boot.png",
+  "individual-award.png",
+]) {
+  const trophy = fs.readFileSync(path.join(root, "static", "assets", "trophies", trophyName));
+  assert.ok(trophy.length > 1_000, `${trophyName} must retain a real trophy illustration`);
+  assert.deepEqual([...trophy.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${trophyName} must be a PNG`);
+}
+for (const trophyName of ["uefa-super-cup.svg", "ligue-1.svg"]) {
+  const trophy = fs.readFileSync(path.join(root, "static", "assets", "trophies", trophyName), "utf8");
+  assert.match(trophy, /<svg\b/, `${trophyName} must be a valid SVG asset`);
+}
+assert.ok(
+  fs.existsSync(path.join(root, "static", "assets", "trophies", "ATTRIBUTION.md")),
+  "trophy asset licenses must be retained"
+);
 
 const marketChartSource = app.slice(
   app.indexOf("function drawPlayerMarketHistory"),
