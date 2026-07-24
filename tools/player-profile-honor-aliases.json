@@ -1,0 +1,1575 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-24T16:17:02.605Z",
+  "source": {
+    "provider": "懂球帝 App 公开数据层",
+    "locale": "en",
+    "representativePlayers": 115,
+    "pagesFetched": 115
+  },
+  "summary": {
+    "unresolvedHonors": 194,
+    "honorIds": 196,
+    "honorsWithEnglishAliases": 194,
+    "missingHonorIds": [],
+    "errors": []
+  },
+  "honors": {
+    "阿尔及利亚杯冠军": {
+      "honorIds": [
+        "287"
+      ],
+      "aliases": [
+        "Algerian Cup Winner"
+      ]
+    },
+    "阿尔及利亚联赛杯冠军": {
+      "honorIds": [
+        "289"
+      ],
+      "aliases": [
+        "Algerian League Cup Winner"
+      ]
+    },
+    "阿尔加夫U17国际邀请赛": {
+      "honorIds": [
+        "408"
+      ],
+      "aliases": [
+        "Torneio Internacional Algarve U17"
+      ]
+    },
+    "阿根廷超级杯冠军": {
+      "honorIds": [
+        "4474"
+      ],
+      "aliases": [
+        "Supercopa Argentina"
+      ]
+    },
+    "阿根廷冠军挑战杯": {
+      "honorIds": [
+        "4757"
+      ],
+      "aliases": [
+        "Trofeo de Campeones de la Superliga"
+      ]
+    },
+    "埃及杯冠军": {
+      "honorIds": [
+        "336"
+      ],
+      "aliases": [
+        "Egyptian Cup Winner"
+      ]
+    },
+    "埃及超级杯冠军": {
+      "honorIds": [
+        "337"
+      ],
+      "aliases": [
+        "Egyptian Super Cup Winner"
+      ]
+    },
+    "爱尔兰足球超级联赛冠军": {
+      "honorIds": [
+        "148"
+      ],
+      "aliases": [
+        "Irish Champion"
+      ]
+    },
+    "爱沙尼亚杯冠军": {
+      "honorIds": [
+        "116"
+      ],
+      "aliases": [
+        "Estonian Cup Winner"
+      ]
+    },
+    "奥地利足球丁级联赛冠军": {
+      "honorIds": [
+        "73"
+      ],
+      "aliases": [
+        "Champion Landesliga Steiermark"
+      ]
+    },
+    "奥地利足球乙级联赛冠军": {
+      "honorIds": [
+        "71"
+      ],
+      "aliases": [
+        "2. Liga Champion (aut)"
+      ]
+    },
+    "奥地利足球U18联赛冠军": {
+      "honorIds": [
+        "443"
+      ],
+      "aliases": [
+        "Austrian Youth League U18 Champion"
+      ]
+    },
+    "奥迪杯冠军": {
+      "honorIds": [
+        "4604"
+      ],
+      "aliases": [
+        "Audi Cup"
+      ]
+    },
+    "澳大利亚青年联赛冠军": {
+      "honorIds": [
+        "4468"
+      ],
+      "aliases": [
+        "Y-League"
+      ]
+    },
+    "巴登杯": {
+      "honorIds": [
+        "4510"
+      ],
+      "aliases": [
+        "Reg. Cup Baden"
+      ]
+    },
+    "巴伐利亚足球地区联赛冠军": {
+      "honorIds": [
+        "130"
+      ],
+      "aliases": [
+        "German Regionalliga Bavaria Champion"
+      ]
+    },
+    "巴拉圭足球甲级联赛闭幕赛季冠军": {
+      "honorIds": [
+        "206"
+      ],
+      "aliases": [
+        "Paraguayan Champion Clausura"
+      ]
+    },
+    "巴拉圭足球甲级联赛冠军": {
+      "honorIds": [
+        "204"
+      ],
+      "aliases": [
+        "Paraguayan Champion"
+      ]
+    },
+    "巴拉圭足球甲级联赛开幕赛季冠军": {
+      "honorIds": [
+        "205"
+      ],
+      "aliases": [
+        "Paraguayan Champion Apertura"
+      ]
+    },
+    "巴林超级杯冠军": {
+      "honorIds": [
+        "506"
+      ],
+      "aliases": [
+        "Bahraini Supercup Winner"
+      ]
+    },
+    "巴林国王杯冠军": {
+      "honorIds": [
+        "504"
+      ],
+      "aliases": [
+        "Bahraini King's Cup Winner"
+      ]
+    },
+    "巴林足球超级联赛冠军": {
+      "honorIds": [
+        "503"
+      ],
+      "aliases": [
+        "Bahraini Champion"
+      ]
+    },
+    "巴拿马杯冠军": {
+      "honorIds": [
+        "171"
+      ],
+      "aliases": [
+        "Panamanian Cup Winner"
+      ]
+    },
+    "巴拿马足球闭幕赛季冠军": {
+      "honorIds": [
+        "348"
+      ],
+      "aliases": [
+        "Panamanian Champion Clausura"
+      ]
+    },
+    "巴拿马足球开幕赛季冠军": {
+      "honorIds": [
+        "347"
+      ],
+      "aliases": [
+        "Panamanian Champion Apertura"
+      ]
+    },
+    "巴西巴拉纳甲级联赛冠军": {
+      "honorIds": [
+        "4233"
+      ],
+      "aliases": [
+        "Paranaense 1"
+      ]
+    },
+    "巴西丙组联赛冠军": {
+      "honorIds": [
+        "4225"
+      ],
+      "aliases": [
+        "Serie C"
+      ]
+    },
+    "巴西高乔甲级联赛冠军": {
+      "honorIds": [
+        "4235"
+      ],
+      "aliases": [
+        "Gaúcho 1"
+      ]
+    },
+    "巴西米内罗甲级联赛冠军": {
+      "honorIds": [
+        "4234"
+      ],
+      "aliases": [
+        "Mineiro 1"
+      ]
+    },
+    "保加利亚杯冠军": {
+      "honorIds": [
+        "95"
+      ],
+      "aliases": [
+        "Bulgarian Cup Winner"
+      ]
+    },
+    "保加利亚超级杯冠军": {
+      "honorIds": [
+        "96"
+      ],
+      "aliases": [
+        "Bulgaria Super Cup Winner"
+      ]
+    },
+    "北美足球锦标赛冠军": {
+      "honorIds": [
+        "193"
+      ],
+      "aliases": [
+        "Campeones Cup Winner"
+      ]
+    },
+    "北美足球联赛冠军": {
+      "honorIds": [
+        "4427"
+      ],
+      "aliases": [
+        "NASL"
+      ]
+    },
+    "波黑杯冠军": {
+      "honorIds": [
+        "262"
+      ],
+      "aliases": [
+        "Bosnian-herzegovinian Cup Winner"
+      ]
+    },
+    "波黑足球超级联赛": {
+      "honorIds": [
+        "263"
+      ],
+      "aliases": [
+        "Bosnian-herzegovinian Champion"
+      ]
+    },
+    "波黑足球U19联赛冠军": {
+      "honorIds": [
+        "441"
+      ],
+      "aliases": [
+        "Bosnian-herzegovinian Champion U19"
+      ]
+    },
+    "波黑U19杯赛冠军": {
+      "honorIds": [
+        "442"
+      ],
+      "aliases": [
+        "Bosnian-herzegovinian Cup Winner U19"
+      ]
+    },
+    "超级联赛国际杯冠军": {
+      "honorIds": [
+        "4596"
+      ],
+      "aliases": [
+        "Premier League International Cup"
+      ]
+    },
+    "大洋洲国家杯冠军": {
+      "honorIds": [
+        "458"
+      ],
+      "aliases": [
+        "Ofc Nations Cup Winner"
+      ]
+    },
+    "大洋洲太平洋运动会冠军": {
+      "honorIds": [
+        "4438"
+      ],
+      "aliases": [
+        "Pacific Games"
+      ]
+    },
+    "大洋洲U17锦标赛冠军": {
+      "honorIds": [
+        "4423"
+      ],
+      "aliases": [
+        "OFC U17 Championship"
+      ]
+    },
+    "大洋洲U20锦标赛冠军": {
+      "honorIds": [
+        "4430"
+      ],
+      "aliases": [
+        "OFC U20 Championship"
+      ]
+    },
+    "丹麦足球甲级联赛冠军": {
+      "honorIds": [
+        "114"
+      ],
+      "aliases": [
+        "Danish Second Tier Champion"
+      ]
+    },
+    "丹麦足球乙级联赛冠军": {
+      "honorIds": [
+        "361"
+      ],
+      "aliases": [
+        "Danish Third Tier Champion"
+      ]
+    },
+    "丹麦足球U19联赛冠军": {
+      "honorIds": [
+        "429"
+      ],
+      "aliases": [
+        "Danish Youth Champion"
+      ]
+    },
+    "德国地区联赛冠军": {
+      "honorIds": [
+        "132"
+      ],
+      "aliases": [
+        "German Regionalliga Southwest Champion"
+      ]
+    },
+    "德国足球北部地区联赛冠军": {
+      "honorIds": [
+        "349"
+      ],
+      "aliases": [
+        "German Regionalliga North Champion"
+      ]
+    },
+    "德国足球U17联赛冠军": {
+      "honorIds": [
+        "438"
+      ],
+      "aliases": [
+        "German U17 Champion"
+      ]
+    },
+    "德国足球U19联赛冠军": {
+      "honorIds": [
+        "414"
+      ],
+      "aliases": [
+        "German U19 Champion"
+      ]
+    },
+    "德国U19足协杯冠军": {
+      "honorIds": [
+        "415"
+      ],
+      "aliases": [
+        "Germans U19s Cup Winner"
+      ]
+    },
+    "德下莱茵杯冠军": {
+      "honorIds": [
+        "4518"
+      ],
+      "aliases": [
+        "Reg. Cup Niederrhein"
+      ]
+    },
+    "俄罗斯足球甲级联赛冠军": {
+      "honorIds": [
+        "216"
+      ],
+      "aliases": [
+        "Russian Second Tier Champion"
+      ]
+    },
+    "厄瓜多尔足球甲级联赛冠军": {
+      "honorIds": [
+        "461"
+      ],
+      "aliases": [
+        "Ecuadorian Champion"
+      ]
+    },
+    "厄瓜多尔足球乙级联赛冠军": {
+      "honorIds": [
+        "4261"
+      ],
+      "aliases": [
+        "Liga Pro Serie B"
+      ]
+    },
+    "法国全国联赛冠军": {
+      "honorIds": [
+        "4174"
+      ],
+      "aliases": [
+        "National 1"
+      ]
+    },
+    "泛美运动会足球冠军": {
+      "honorIds": [
+        "62"
+      ],
+      "aliases": [
+        "Winner Of Panamerican Games"
+      ]
+    },
+    "刚果超级联赛冠军": {
+      "honorIds": [
+        "4851"
+      ],
+      "aliases": [
+        "Congo DR Ligue 1"
+      ]
+    },
+    "哥伦比亚杯冠军": {
+      "honorIds": [
+        "4321"
+      ],
+      "aliases": [
+        "Copa Colombia"
+      ]
+    },
+    "哥伦比亚超级杯冠军": {
+      "honorIds": [
+        "4458"
+      ],
+      "aliases": [
+        "Superliga"
+      ]
+    },
+    "国际冠军杯冠军": {
+      "honorIds": [
+        "4490"
+      ],
+      "aliases": [
+        "International Champions Cup"
+      ]
+    },
+    "哈萨克斯坦杯冠军": {
+      "honorIds": [
+        "175"
+      ],
+      "aliases": [
+        "Kazakh Cup Winner"
+      ]
+    },
+    "哈萨克斯坦足球超级联赛冠军": {
+      "honorIds": [
+        "174"
+      ],
+      "aliases": [
+        "Kazakh Champion"
+      ]
+    },
+    "海地共和国联赛冠军": {
+      "honorIds": [
+        "4283"
+      ],
+      "aliases": [
+        "Ligue Haïtienne"
+      ]
+    },
+    "海地冠军杯冠军": {
+      "honorIds": [
+        "4866"
+      ],
+      "aliases": [
+        "Haiti Trophée des Champions"
+      ]
+    },
+    "海湾奥林匹克队杯冠军": {
+      "honorIds": [
+        "4471"
+      ],
+      "aliases": [
+        "Gulf Olympic Teams Cup"
+      ]
+    },
+    "海湾运动会男子足球赛冠军": {
+      "honorIds": [
+        "4278"
+      ],
+      "aliases": [
+        "Gulf Cup of Nations"
+      ]
+    },
+    "荷兰丙级联赛冠军": {
+      "honorIds": [
+        "4620"
+      ],
+      "aliases": [
+        "Tweede Divisie"
+      ]
+    },
+    "荷兰青年杯U19冠军": {
+      "honorIds": [
+        "4472"
+      ],
+      "aliases": [
+        "Youth Cup U19"
+      ]
+    },
+    "荷兰足球U17联赛冠军": {
+      "honorIds": [
+        "445"
+      ],
+      "aliases": [
+        "Dutch U17 Champion"
+      ]
+    },
+    "荷兰足球U21冠军": {
+      "honorIds": [
+        "338"
+      ],
+      "aliases": [
+        "U21 Eredivisie Champion"
+      ]
+    },
+    "荷兰U19杯冠军": {
+      "honorIds": [
+        "422"
+      ],
+      "aliases": [
+        "Dutch U19 Youth Cup Winner"
+      ]
+    },
+    "荷兰U19联赛冠军": {
+      "honorIds": [
+        "421"
+      ],
+      "aliases": [
+        "Dutch U19 Champion"
+      ]
+    },
+    "黑森杯": {
+      "honorIds": [
+        "4926"
+      ],
+      "aliases": [
+        "Hessen Cup"
+      ]
+    },
+    "加勒比俱乐部冠军联赛": {
+      "honorIds": [
+        "322"
+      ],
+      "aliases": [
+        "Caribbean Club Championship Winner"
+      ]
+    },
+    "加拿大足球联赛冠军": {
+      "honorIds": [
+        "518"
+      ],
+      "aliases": [
+        "Canadian Champion"
+      ]
+    },
+    "加纳足球超级联赛冠军": {
+      "honorIds": [
+        "329"
+      ],
+      "aliases": [
+        "Ghanasian Champion"
+      ]
+    },
+    "加泰罗尼亚超级杯冠军": {
+      "honorIds": [
+        "4619"
+      ],
+      "aliases": [
+        "Supercopa de Catalunya"
+      ]
+    },
+    "捷克超级杯冠军": {
+      "honorIds": [
+        "4857"
+      ],
+      "aliases": [
+        "Czech Republic Super Cup"
+      ]
+    },
+    "捷克足球全国联赛冠军": {
+      "honorIds": [
+        "4179"
+      ],
+      "aliases": [
+        "FNL"
+      ]
+    },
+    "骏河银行锦标赛冠军": {
+      "honorIds": [
+        "4398"
+      ],
+      "aliases": [
+        "J.League Cup / Copa Sudamericana Championship"
+      ]
+    },
+    "卡塔尔乙级联赛冠军": {
+      "honorIds": [
+        "4846"
+      ],
+      "aliases": [
+        "Qatar Second Division"
+      ]
+    },
+    "科特迪瓦超级联赛冠军": {
+      "honorIds": [
+        "4832"
+      ],
+      "aliases": [
+        "Côte d'Ivoire Ligue 1"
+      ]
+    },
+    "克罗地亚超级杯冠军": {
+      "honorIds": [
+        "4794"
+      ],
+      "aliases": [
+        "Croatia Super Cup"
+      ]
+    },
+    "美国足球联合联赛常规赛冠军": {
+      "honorIds": [
+        "271"
+      ],
+      "aliases": [
+        "Usl Regular Season Champion"
+      ]
+    },
+    "美国足球联合联赛冠军": {
+      "honorIds": [
+        "270"
+      ],
+      "aliases": [
+        "Usl Cup Champion"
+      ]
+    },
+    "秘鲁足球乙级联赛冠军": {
+      "honorIds": [
+        "468"
+      ],
+      "aliases": [
+        "Peruvian Second Tier Champion"
+      ]
+    },
+    "摩尔多瓦杯冠军": {
+      "honorIds": [
+        "389"
+      ],
+      "aliases": [
+        "Moldavian Cup Winner"
+      ]
+    },
+    "摩尔多瓦足球联赛冠军": {
+      "honorIds": [
+        "388"
+      ],
+      "aliases": [
+        "Moldavian Champion"
+      ]
+    },
+    "墨西哥杯闭幕赛季冠军": {
+      "honorIds": [
+        "534"
+      ],
+      "aliases": [
+        "Mexican Cup Winner Clausura"
+      ]
+    },
+    "墨西哥杯开幕赛季冠军": {
+      "honorIds": [
+        "525"
+      ],
+      "aliases": [
+        "Mexican Cup Winner Apertura"
+      ]
+    },
+    "墨西哥超级杯冠军": {
+      "honorIds": [
+        "529"
+      ],
+      "aliases": [
+        "Mexican Super Cup Winner"
+      ]
+    },
+    "墨西哥冠军杯冠军": {
+      "honorIds": [
+        "530"
+      ],
+      "aliases": [
+        "Mexican Campeón De Campeones"
+      ]
+    },
+    "墨西哥足球甲级联赛冠军": {
+      "honorIds": [
+        "4193"
+      ],
+      "aliases": [
+        "Liga de Expansión MX"
+      ]
+    },
+    "南非八强杯冠军": {
+      "honorIds": [
+        "300"
+      ],
+      "aliases": [
+        "Mtn8 Cup Winner"
+      ]
+    },
+    "南非杯冠军": {
+      "honorIds": [
+        "299"
+      ],
+      "aliases": [
+        "South African Cup Winner"
+      ]
+    },
+    "南非甲级联赛冠军": {
+      "honorIds": [
+        "4831"
+      ],
+      "aliases": [
+        "South Africa 1st Division"
+      ]
+    },
+    "南非联赛杯冠军": {
+      "honorIds": [
+        "302",
+        "4852"
+      ],
+      "aliases": [
+        "Nedbank Cup Winner",
+        "South Africa League Cup"
+      ]
+    },
+    "南非足球超级联赛冠军": {
+      "honorIds": [
+        "301"
+      ],
+      "aliases": [
+        "South African Champion"
+      ]
+    },
+    "南韩K联杯冠军": {
+      "honorIds": [
+        "4203"
+      ],
+      "aliases": [
+        "K League Cup"
+      ]
+    },
+    "南美U20解放者杯": {
+      "honorIds": [
+        "452"
+      ],
+      "aliases": [
+        "U20-copa-libertadores-sieger"
+      ]
+    },
+    "年度最佳球员": {
+      "honorIds": [
+        "537"
+      ],
+      "aliases": [
+        "Footballer Of The Year"
+      ]
+    },
+    "挪威足球甲级联赛冠军": {
+      "honorIds": [
+        "4803"
+      ],
+      "aliases": [
+        "Norway 1. Division"
+      ]
+    },
+    "青年英超联赛冠军": {
+      "honorIds": [
+        "515"
+      ],
+      "aliases": [
+        "U21 Premier League Sieger"
+      ]
+    },
+    "酋长杯冠军": {
+      "honorIds": [
+        "4595"
+      ],
+      "aliases": [
+        "Emirates Cup"
+      ]
+    },
+    "全非运动会冠军": {
+      "honorIds": [
+        "4426"
+      ],
+      "aliases": [
+        "All Africa Games"
+      ]
+    },
+    "瑞典足球甲级联赛冠军": {
+      "honorIds": [
+        "543",
+        "640"
+      ],
+      "aliases": [
+        "Swedish 2nd Division Champion",
+        "Swedish Superettan Champion"
+      ]
+    },
+    "瑞士足球挑战联赛冠军": {
+      "honorIds": [
+        "4184"
+      ],
+      "aliases": [
+        "Challenge League"
+      ]
+    },
+    "瑞士足球U18联赛冠军": {
+      "honorIds": [
+        "430"
+      ],
+      "aliases": [
+        "Swiss U18-champion"
+      ]
+    },
+    "塞尔维亚足球U17联赛冠军": {
+      "honorIds": [
+        "496"
+      ],
+      "aliases": [
+        "Serbia U17 Champion"
+      ]
+    },
+    "塞浦路斯超级杯冠军": {
+      "honorIds": [
+        "459"
+      ],
+      "aliases": [
+        "Cypriot Super Cup Winner"
+      ]
+    },
+    "塞浦路斯足球甲级联赛冠军": {
+      "honorIds": [
+        "109"
+      ],
+      "aliases": [
+        "Cypriot Champion"
+      ]
+    },
+    "塞浦路斯足球乙级联赛冠军": {
+      "honorIds": [
+        "4828"
+      ],
+      "aliases": [
+        "Cyprus 2. Division"
+      ]
+    },
+    "赛季最佳球员": {
+      "honorIds": [
+        "540"
+      ],
+      "aliases": [
+        "Player Of The Year"
+      ]
+    },
+    "苏格兰挑战杯冠军": {
+      "honorIds": [
+        "222"
+      ],
+      "aliases": [
+        "Scottish Challenge Cup Winner"
+      ]
+    },
+    "苏格兰足球第二级别联赛冠军": {
+      "honorIds": [
+        "225"
+      ],
+      "aliases": [
+        "Scottish Second League Champion"
+      ]
+    },
+    "苏格兰足球第三级别联赛冠军": {
+      "honorIds": [
+        "224"
+      ],
+      "aliases": [
+        "Scottish Third League Champion"
+      ]
+    },
+    "苏格兰足球第四级别联赛冠军": {
+      "honorIds": [
+        "223"
+      ],
+      "aliases": [
+        "Scottish Fourth League Champion"
+      ]
+    },
+    "泰国联赛杯冠军": {
+      "honorIds": [
+        "483"
+      ],
+      "aliases": [
+        "Thai League Cup Winner"
+      ]
+    },
+    "突尼斯杯冠军": {
+      "honorIds": [
+        "291"
+      ],
+      "aliases": [
+        "Tunisian Cup Winner"
+      ]
+    },
+    "突尼斯超级杯冠军": {
+      "honorIds": [
+        "292"
+      ],
+      "aliases": [
+        "Tunesischer Superpokalsieger"
+      ]
+    },
+    "突尼斯足球甲级联赛冠军": {
+      "honorIds": [
+        "290"
+      ],
+      "aliases": [
+        "Tunisian Champion"
+      ]
+    },
+    "土耳其足球甲级联赛冠军": {
+      "honorIds": [
+        "4182"
+      ],
+      "aliases": [
+        "1. Lig"
+      ]
+    },
+    "威斯特法伦足球联赛冠军": {
+      "honorIds": [
+        "355"
+      ],
+      "aliases": [
+        "Champion Westfalenliga 1"
+      ]
+    },
+    "维多利亚冠军": {
+      "honorIds": [
+        "4223"
+      ],
+      "aliases": [
+        "Victoria NPL"
+      ]
+    },
+    "乌拉圭超级杯冠军": {
+      "honorIds": [
+        "256"
+      ],
+      "aliases": [
+        "Supercopa Uruguaya Winner"
+      ]
+    },
+    "乌兹别克斯坦杯冠军": {
+      "honorIds": [
+        "317"
+      ],
+      "aliases": [
+        "Uzbek Cup Winner"
+      ]
+    },
+    "乌兹别克斯坦超级杯冠军": {
+      "honorIds": [
+        "315"
+      ],
+      "aliases": [
+        "Uzbek Supercup Winner"
+      ]
+    },
+    "乌兹别克斯坦超级联赛冠军": {
+      "honorIds": [
+        "4322"
+      ],
+      "aliases": [
+        "Pro League A"
+      ]
+    },
+    "乌兹别克斯坦职业足球联赛冠军": {
+      "honorIds": [
+        "316"
+      ],
+      "aliases": [
+        "Uzbek Champion"
+      ]
+    },
+    "西亚足球锦标赛冠军": {
+      "honorIds": [
+        "4400"
+      ],
+      "aliases": [
+        "WAFF Championship"
+      ]
+    },
+    "新西兰足球锦标赛冠军": {
+      "honorIds": [
+        "200"
+      ],
+      "aliases": [
+        "New Zealand Champion"
+      ]
+    },
+    "匈牙利超级杯冠军": {
+      "honorIds": [
+        "4797"
+      ],
+      "aliases": [
+        "Hungary Super Cup"
+      ]
+    },
+    "亚洲青年足球锦标赛U19冠军": {
+      "honorIds": [
+        "4397"
+      ],
+      "aliases": [
+        "AFC U19 Championship"
+      ]
+    },
+    "伊拉克杯冠军": {
+      "honorIds": [
+        "313"
+      ],
+      "aliases": [
+        "Iraqi Cup Winner"
+      ]
+    },
+    "伊拉克超级杯冠军": {
+      "honorIds": [
+        "314"
+      ],
+      "aliases": [
+        "Iraqi Supercup Winner"
+      ]
+    },
+    "伊拉克足球顶级联赛冠军": {
+      "honorIds": [
+        "312"
+      ],
+      "aliases": [
+        "Iraqi Champion"
+      ]
+    },
+    "伊朗甲组联赛冠军": {
+      "honorIds": [
+        "4315"
+      ],
+      "aliases": [
+        "Azadegan League"
+      ]
+    },
+    "意大利青年杯冠军": {
+      "honorIds": [
+        "418"
+      ],
+      "aliases": [
+        "Winner Of Coppa Italia Primavera"
+      ]
+    },
+    "意大利维亚莱乔杯冠军": {
+      "honorIds": [
+        "419"
+      ],
+      "aliases": [
+        "Viareggio"
+      ]
+    },
+    "意大利足球U19联赛冠军": {
+      "honorIds": [
+        "417"
+      ],
+      "aliases": [
+        "Italian Youth Champion (primavera)"
+      ]
+    },
+    "意大利U19超级杯冠军": {
+      "honorIds": [
+        "423"
+      ],
+      "aliases": [
+        "Winner Italian Supercoppa (primavera)"
+      ]
+    },
+    "英超亚洲杯冠军": {
+      "honorIds": [
+        "4605"
+      ],
+      "aliases": [
+        "Premier League Asia Trophy"
+      ]
+    },
+    "英格兰足球U18联赛冠军": {
+      "honorIds": [
+        "488"
+      ],
+      "aliases": [
+        "English Youth League Winner"
+      ]
+    },
+    "英格兰U23超级联赛A组冠军": {
+      "honorIds": [
+        "4652"
+      ],
+      "aliases": [
+        "Premier League 2 Division One"
+      ]
+    },
+    "英格兰U23超级联赛B组冠军": {
+      "honorIds": [
+        "4653"
+      ],
+      "aliases": [
+        "Premier League 2 Division Two"
+      ]
+    },
+    "英格兰U23联赛杯冠军": {
+      "honorIds": [
+        "4498"
+      ],
+      "aliases": [
+        "Premier League Cup"
+      ]
+    },
+    "英足总锦标赛冠军": {
+      "honorIds": [
+        "4342"
+      ],
+      "aliases": [
+        "FA Trophy"
+      ]
+    },
+    "约旦杯冠军": {
+      "honorIds": [
+        "308"
+      ],
+      "aliases": [
+        "Jordanian Cup Winner"
+      ]
+    },
+    "约旦超级杯冠军": {
+      "honorIds": [
+        "310"
+      ],
+      "aliases": [
+        "Jordanian Supercup Winner"
+      ]
+    },
+    "约旦足球超级联赛冠军": {
+      "honorIds": [
+        "307"
+      ],
+      "aliases": [
+        "Jordanian Champion"
+      ]
+    },
+    "约旦足总盾杯冠军": {
+      "honorIds": [
+        "309"
+      ],
+      "aliases": [
+        "Jordanischer Fa Shield-sieger"
+      ]
+    },
+    "中北美洲男足U17冠军杯冠军": {
+      "honorIds": [
+        "4361"
+      ],
+      "aliases": [
+        "Concacaf U17"
+      ]
+    },
+    "中北美洲青年冠军杯冠军": {
+      "honorIds": [
+        "4277"
+      ],
+      "aliases": [
+        "Concacaf U20"
+      ]
+    },
+    "中亚杯冠军": {
+      "honorIds": [
+        "4922"
+      ],
+      "aliases": [
+        "CAFA NATIONS CUP WINNER"
+      ]
+    },
+    "Algarve Football Cup": {
+      "honorIds": [
+        "4687"
+      ],
+      "aliases": [
+        "Algarve Football Cup"
+      ]
+    },
+    "Arena Cup": {
+      "honorIds": [
+        "4677"
+      ],
+      "aliases": [
+        "Arena Cup"
+      ]
+    },
+    "Argentina Copa Bicentenario": {
+      "honorIds": [
+        "4896"
+      ],
+      "aliases": [
+        "Argentina Copa Bicentenario"
+      ]
+    },
+    "Bosnian-herzegovinian Champion U17": {
+      "honorIds": [
+        "685"
+      ],
+      "aliases": [
+        "Bosnian-herzegovinian Champion U17"
+      ]
+    },
+    "Campeón de Campeones": {
+      "honorIds": [
+        "4606"
+      ],
+      "aliases": [
+        "Campeón de Campeones"
+      ]
+    },
+    "Caribbean Cup Winner": {
+      "honorIds": [
+        "643"
+      ],
+      "aliases": [
+        "Caribbean Cup Winner"
+      ]
+    },
+    "Cheshire Senior Cup": {
+      "honorIds": [
+        "4563"
+      ],
+      "aliases": [
+        "Cheshire Senior Cup"
+      ]
+    },
+    "Copa Ecuador": {
+      "honorIds": [
+        "4755"
+      ],
+      "aliases": [
+        "Copa Ecuador"
+      ]
+    },
+    "Copa Ibérica": {
+      "honorIds": [
+        "4751"
+      ],
+      "aliases": [
+        "Copa Ibérica"
+      ]
+    },
+    "Copa Libertadores Play-off": {
+      "honorIds": [
+        "4598"
+      ],
+      "aliases": [
+        "Copa Libertadores Play-off"
+      ]
+    },
+    "Cpl Fall Season Champion": {
+      "honorIds": [
+        "698"
+      ],
+      "aliases": [
+        "Cpl Fall Season Champion"
+      ]
+    },
+    "Cuadrangular Bogota": {
+      "honorIds": [
+        "4708"
+      ],
+      "aliases": [
+        "Cuadrangular Bogota"
+      ]
+    },
+    "Cuadrangular Pereira": {
+      "honorIds": [
+        "4721"
+      ],
+      "aliases": [
+        "Cuadrangular Pereira"
+      ]
+    },
+    "FA Youth Cup": {
+      "honorIds": [
+        "4508"
+      ],
+      "aliases": [
+        "FA Youth Cup"
+      ]
+    },
+    "Florida Cup": {
+      "honorIds": [
+        "4630"
+      ],
+      "aliases": [
+        "Florida Cup"
+      ]
+    },
+    "Irish Cup Winner": {
+      "honorIds": [
+        "636"
+      ],
+      "aliases": [
+        "Irish Cup Winner"
+      ]
+    },
+    "Istria Winter Cup": {
+      "honorIds": [
+        "4678"
+      ],
+      "aliases": [
+        "Istria Winter Cup"
+      ]
+    },
+    "King's Cup": {
+      "honorIds": [
+        "4692"
+      ],
+      "aliases": [
+        "King's Cup"
+      ]
+    },
+    "Leinster Senior Cup": {
+      "honorIds": [
+        "4586"
+      ],
+      "aliases": [
+        "Leinster Senior Cup"
+      ]
+    },
+    "M-150 Cup U23": {
+      "honorIds": [
+        "4703"
+      ],
+      "aliases": [
+        "M-150 Cup U23"
+      ]
+    },
+    "Macufe Cup": {
+      "honorIds": [
+        "4165"
+      ],
+      "aliases": [
+        "Macufe Cup"
+      ]
+    },
+    "Minor Premiership Winner (nzl)": {
+      "honorIds": [
+        "635"
+      ],
+      "aliases": [
+        "Minor Premiership Winner (nzl)"
+      ]
+    },
+    "Mobile Mini Sun Cup": {
+      "honorIds": [
+        "4695"
+      ],
+      "aliases": [
+        "Mobile Mini Sun Cup"
+      ]
+    },
+    "Ofc Under-20 Championship Winner": {
+      "honorIds": [
+        "670"
+      ],
+      "aliases": [
+        "Ofc Under-20 Championship Winner"
+      ]
+    },
+    "Ofc-u17-championship-winner": {
+      "honorIds": [
+        "688"
+      ],
+      "aliases": [
+        "Ofc-u17-championship-winner"
+      ]
+    },
+    "Olympics Intercontinental Play-o冠军": {
+      "honorIds": [
+        "4608"
+      ],
+      "aliases": [
+        "Olympics Intercontinental Play-offs"
+      ]
+    },
+    "Oxfordshire Senior Cup": {
+      "honorIds": [
+        "4553"
+      ],
+      "aliases": [
+        "Oxfordshire Senior Cup"
+      ]
+    },
+    "PFL Cup": {
+      "honorIds": [
+        "4577"
+      ],
+      "aliases": [
+        "PFL Cup"
+      ]
+    },
+    "Reg. Cup Schleswig-Holstein": {
+      "honorIds": [
+        "4523"
+      ],
+      "aliases": [
+        "Reg. Cup Schleswig-Holstein"
+      ]
+    },
+    "Supercopa de Ecuador": {
+      "honorIds": [
+        "4758"
+      ],
+      "aliases": [
+        "Supercopa de Ecuador"
+      ]
+    },
+    "Timbers Preseason Tournament": {
+      "honorIds": [
+        "4764"
+      ],
+      "aliases": [
+        "Timbers Preseason Tournament"
+      ]
+    },
+    "Tipsport Liga": {
+      "honorIds": [
+        "4631"
+      ],
+      "aliases": [
+        "Tipsport Liga"
+      ]
+    },
+    "Tipsport Malta Cup": {
+      "honorIds": [
+        "4763"
+      ],
+      "aliases": [
+        "Tipsport Malta Cup"
+      ]
+    },
+    "Tournoi U20 4 Nations": {
+      "honorIds": [
+        "4635"
+      ],
+      "aliases": [
+        "Tournoi U20 4 Nations"
+      ]
+    },
+    "U17美洲杯冠军": {
+      "honorIds": [
+        "396"
+      ],
+      "aliases": [
+        "South American Champion U17"
+      ]
+    },
+    "U20 Elite League Winner": {
+      "honorIds": [
+        "618"
+      ],
+      "aliases": [
+        "U20 Elite League Winner"
+      ]
+    },
+    "U23非洲杯冠军": {
+      "honorIds": [
+        "703"
+      ],
+      "aliases": [
+        "Under-23 Africa Cup Winner"
+      ]
+    },
+    "Under-20 Brazilian Champion": {
+      "honorIds": [
+        "661"
+      ],
+      "aliases": [
+        "Under-20 Brazilian Champion"
+      ]
+    },
+    "USL League One": {
+      "honorIds": [
+        "4726"
+      ],
+      "aliases": [
+        "USL League One"
+      ]
+    },
+    "Uzbekistan League Cup": {
+      "honorIds": [
+        "4910"
+      ],
+      "aliases": [
+        "Uzbekistan League Cup"
+      ]
+    }
+  }
+}

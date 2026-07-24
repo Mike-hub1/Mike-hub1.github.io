@@ -87,6 +87,14 @@
     "法国青年杯冠军": {
       "assetUrl": "/static/assets/trophies/coupe-gambardella.png",
       "source": "FFF 官网实物"
+    },
+    "加泰罗尼亚超级杯冠军": {
+      "assetUrl": "/static/assets/trophies/supercopa-catalunya.png",
+      "source": "加泰罗尼亚足协官网实物",
+      "sourcePage": "https://www.fcf.cat/noticia/presentacio-institucional-de-la-supercopa-al-palau-de-la-generalitat/01/03/2019",
+      "sourceImageUrl": "https://files.fcf.cat/img/noticies/contingut/res_2019-03-01_13:36:39_1DX_7618.jpg",
+      "assetKind": "official-trophy-photo-cutout",
+      "verifiedAt": "2026-07-24"
     }
   }
 }

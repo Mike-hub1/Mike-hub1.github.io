@@ -17908,6 +17908,15 @@ body[data-route="leaderboards"] .main {
     linear-gradient(145deg, #ffffff, #fbfcfe);
 }
 
+.player-profile-honor-card[data-has-artwork="false"] {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 112px;
+  background:
+    linear-gradient(90deg, rgba(var(--honor-accent-rgb), 0.08), rgba(var(--honor-accent-rgb), 0.08)) 0 0 / 3px 100% no-repeat,
+    radial-gradient(circle at 100% 0, rgba(var(--honor-accent-rgb), 0.07), transparent 40%),
+    linear-gradient(145deg, #ffffff, #fbfcfe);
+}
+
 .player-profile-honor-card figure {
   display: grid;
   align-self: start;
@@ -18587,6 +18596,11 @@ body[data-route="leaderboards"] .main {
   .player-profile-honor-card {
     grid-template-columns: 66px minmax(0, 1fr);
     min-height: 128px;
+  }
+
+  .player-profile-honor-card[data-has-artwork="false"] {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 106px;
   }
 
   .player-profile-honor-card figure {

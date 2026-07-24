@@ -5,6 +5,7 @@ const path = require("node:path");
 const ROOT = path.resolve(__dirname, "..");
 const API_INDEX_PATH = path.join(ROOT, "static/api/v1/index.json");
 const CURATED_PATH = path.join(__dirname, "player-profile-assets-curated.json");
+const VERIFIED_PATH = path.join(__dirname, "player-profile-honor-assets-verified.json");
 const REGISTRY_PATH = path.join(__dirname, "player-profile-asset-registry.json");
 const TROPHY_DIR = path.join(ROOT, "static/assets/trophies/catalog");
 const CLUB_DIR = path.join(ROOT, "static/assets/clubs/catalog");
@@ -334,6 +335,12 @@ function honorRegistryRows(sources, acquired, curated) {
         assetUrl: curatedAsset.assetUrl,
         status: "curated",
         source: curatedAsset.source,
+        sourcePage: curatedAsset.sourcePage,
+        sourceImageUrl: curatedAsset.sourceImageUrl,
+        assetKind: curatedAsset.assetKind,
+        credit: curatedAsset.credit,
+        license: curatedAsset.license,
+        verifiedAt: curatedAsset.verifiedAt,
       };
       continue;
     }
@@ -478,6 +485,11 @@ function pruneGeneratedAssets(registry) {
 async function main() {
   const index = readJson(API_INDEX_PATH);
   const curated = readJson(CURATED_PATH);
+  const verified = fs.existsSync(VERIFIED_PATH) ? readJson(VERIFIED_PATH) : { honors: {} };
+  curated.honors = {
+    ...(verified.honors || {}),
+    ...(curated.honors || {}),
+  };
   const sources = collectSources(index);
   if (!CHECK_ONLY) {
     fs.mkdirSync(TROPHY_DIR, { recursive: true });

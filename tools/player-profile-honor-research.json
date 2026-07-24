@@ -1,0 +1,4679 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-24T16:48:07.411Z",
+  "policy": {
+    "sourcePriority": [
+      "competition organizer",
+      "official federation or award owner",
+      "Wikimedia structured public asset"
+    ],
+    "automaticAcceptance": "Only an exact high-scoring football competition entity with a dedicated public logo or image becomes a candidate; every candidate remains reviewable.",
+    "noSyntheticMarks": true
+  },
+  "summary": {
+    "unresolvedHonors": 194,
+    "candidates": 6,
+    "manualReview": 188
+  },
+  "honors": {
+    "年度最佳球员": {
+      "name": "年度最佳球员",
+      "honorIds": [
+        "537"
+      ],
+      "category": "individual",
+      "uses": 45,
+      "aliases": [
+        "Footballer Of The Year"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q1750244",
+          "label": "FWA Footballer of the Year",
+          "description": "annual award",
+          "score": 140,
+          "query": "Footballer Of The Year",
+          "assetKind": "public-image",
+          "assetFile": "FWA Player of the Year from 2015.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/FWA%20Player%20of%20the%20Year%20from%202015.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E8%8B%B1%E6%A0%BC%E8%98%ADFWA%E8%B6%B3%E7%90%83%E5%85%88%E7%94%9F",
+          "officialWebsite": "https://footballwriters.co.uk/previous-foty/"
+        },
+        {
+          "id": "Q66035836",
+          "label": "Footballer of the Year",
+          "description": "1986 video game",
+          "score": 132,
+          "query": "Footballer Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q66035836",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q325603",
+          "label": "Footballer of the Year",
+          "description": "prize",
+          "score": 132,
+          "query": "Footballer Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://fr.wikipedia.org/wiki/Footballeur_est-allemand_de_l'ann%C3%A9e",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q645468",
+          "label": "Footballer of the Year of Argentina",
+          "description": "Argentinan award",
+          "score": 107,
+          "query": "Footballer Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%A0%B9%E5%BB%B7%E5%B9%B4%E5%BA%A6%E6%9C%80%E4%BD%B3%E7%90%83%E5%91%98",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q283079",
+          "label": "Footballer of the Year in Russia",
+          "description": "award",
+          "score": 107,
+          "query": "Footballer Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Footballer_of_the_Year_in_Russia_(Sport-Express)",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "赛季最佳球员": {
+      "name": "赛季最佳球员",
+      "honorIds": [
+        "540"
+      ],
+      "category": "individual",
+      "uses": 43,
+      "aliases": [
+        "Player Of The Year"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q271159",
+          "label": "Player of the Year",
+          "description": "Swedish ice hockey award",
+          "score": 162,
+          "query": "Player Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://de.wikipedia.org/wiki/%C3%85rets_spelare",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q15140008",
+          "label": "Player of the Year",
+          "description": "annual baseball award given by MLBPA to the best player in Major League Baseball",
+          "score": 162,
+          "query": "Player Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q15140008",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q421933",
+          "label": "European Basketball Player of the Year Awards",
+          "description": "award",
+          "score": 140,
+          "query": "Player Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q421933",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q7203278",
+          "label": "player of the year award",
+          "description": "Annual award given in various sports leagues",
+          "score": 107,
+          "query": "Player Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Player_of_the_Year",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q7203277",
+          "label": "Player of the Year Trophy",
+          "description": "British ice hockey award",
+          "score": 107,
+          "query": "Player Of The Year",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Player_of_the_Year_Trophy_(IHJUK)",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "酋长杯冠军": {
+      "name": "酋长杯冠军",
+      "honorIds": [
+        "4595"
+      ],
+      "category": "club",
+      "uses": 32,
+      "aliases": [
+        "Emirates Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q577696",
+          "label": "Emirates Cup",
+          "description": "association football tournament",
+          "score": 162,
+          "query": "Emirates Cup",
+          "assetKind": "public-image",
+          "assetFile": "Winning the Emirates Cup.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Winning%20the%20Emirates%20Cup.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E9%85%8B%E9%95%B7%E7%9B%83",
+          "officialWebsite": "http://www.arsenal.com/emiratescup"
+        },
+        {
+          "id": "Q3052421",
+          "label": "Emirates Cup",
+          "description": "cycling tournament",
+          "score": 162,
+          "query": "Emirates Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://es.wikipedia.org/wiki/Emirates_Cup_(ciclismo)",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q83254953",
+          "label": "Emirates Cup 2010",
+          "description": "cycling tournament",
+          "score": 107,
+          "query": "Emirates Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q83254953",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q83254949",
+          "label": "Emirates Cup 2009",
+          "description": "cycling tournament",
+          "score": 107,
+          "query": "Emirates Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q83254949",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q16834764",
+          "label": "2014 Emirates Cup",
+          "description": "international football competition",
+          "score": 107,
+          "query": "Emirates Cup",
+          "assetKind": "public-image",
+          "assetFile": "Emirates Cup - Arsenal v Monaco (14859079861).jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Emirates%20Cup%20-%20Arsenal%20v%20Monaco%20(14859079861).jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/2014%E5%B9%B4%E9%85%8B%E9%95%BF%E6%9D%AF",
+          "officialWebsite": "http://www.arsenal.com/emiratescup"
+        }
+      ]
+    },
+    "埃及杯冠军": {
+      "name": "埃及杯冠军",
+      "honorIds": [
+        "336"
+      ],
+      "category": "club",
+      "uses": 19,
+      "aliases": [
+        "Egyptian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q2084827",
+          "label": "埃及杯",
+          "description": "football tournament",
+          "score": 162,
+          "query": "埃及杯",
+          "assetKind": "public-image",
+          "assetFile": "شعار كاس مصر.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/%D8%B4%D8%B9%D8%A7%D8%B1%20%D9%83%D8%A7%D8%B3%20%D9%85%D8%B5%D8%B1.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%9F%83%E5%8F%8A%E7%9B%83",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q115910290",
+          "label": "Egyptian cup 2021-222",
+          "description": "Egyptian football cup season 2021-222",
+          "score": 107,
+          "query": "Egyptian Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Egypt_Cup",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "巴拿马足球闭幕赛季冠军": {
+      "name": "巴拿马足球闭幕赛季冠军",
+      "honorIds": [
+        "348"
+      ],
+      "category": "club",
+      "uses": 14,
+      "aliases": [
+        "Panamanian Champion Clausura"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "阿尔加夫U17国际邀请赛": {
+      "name": "阿尔加夫U17国际邀请赛",
+      "honorIds": [
+        "408"
+      ],
+      "category": "club",
+      "uses": 13,
+      "aliases": [
+        "Torneio Internacional Algarve U17"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "青年英超联赛冠军": {
+      "name": "青年英超联赛冠军",
+      "honorIds": [
+        "515"
+      ],
+      "category": "club",
+      "uses": 13,
+      "aliases": [
+        "U21 Premier League Sieger"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "亚洲青年足球锦标赛U19冠军": {
+      "name": "亚洲青年足球锦标赛U19冠军",
+      "honorIds": [
+        "4397"
+      ],
+      "category": "club",
+      "uses": 13,
+      "aliases": [
+        "AFC U19 Championship"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "中亚杯冠军": {
+      "name": "中亚杯冠军",
+      "honorIds": [
+        "4922"
+      ],
+      "category": "club",
+      "uses": 13,
+      "aliases": [
+        "CAFA NATIONS CUP WINNER"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q55504193",
+          "label": "CAFA Nations Cup",
+          "description": "football tournament",
+          "score": 162,
+          "query": "CAFA NATIONS CUP",
+          "assetKind": "public-image",
+          "assetFile": "CAFA member associations map.png",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/CAFA%20member%20associations%20map.png?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E4%BA%9E%E5%9C%8B%E5%AE%B6%E7%9B%83",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q117390055",
+          "label": "2023 CAFA Nations Cup",
+          "description": "first edition of the CAFA Nations Cup",
+          "score": 107,
+          "query": "CAFA NATIONS CUP",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/2023%E5%B9%B4%E4%B8%AD%E4%BA%9E%E5%9C%8B%E5%AE%B6%E7%9B%83",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q135216593",
+          "label": "2025 CAFA Nations Cup",
+          "description": "second edition of the CAFA Nations Cup",
+          "score": 107,
+          "query": "CAFA NATIONS CUP",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/2025%E5%B9%B4%E4%B8%AD%E4%BA%9A%E5%9B%BD%E5%AE%B6%E6%9D%AF",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "埃及超级杯冠军": {
+      "name": "埃及超级杯冠军",
+      "honorIds": [
+        "337"
+      ],
+      "category": "club",
+      "uses": 12,
+      "aliases": [
+        "Egyptian Super Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q254055",
+          "label": "Egyptian Super Cup",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Egyptian Super Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%9F%83%E5%8F%8A%E8%B6%85%E7%BA%A7%E6%9D%AF",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "大洋洲国家杯冠军": {
+      "name": "大洋洲国家杯冠军",
+      "honorIds": [
+        "458"
+      ],
+      "category": "club",
+      "uses": 12,
+      "aliases": [
+        "Ofc Nations Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "荷兰青年杯U19冠军": {
+      "name": "荷兰青年杯U19冠军",
+      "honorIds": [
+        "4472"
+      ],
+      "category": "club",
+      "uses": 12,
+      "aliases": [
+        "Youth Cup U19"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "乌兹别克斯坦职业足球联赛冠军": {
+      "name": "乌兹别克斯坦职业足球联赛冠军",
+      "honorIds": [
+        "316"
+      ],
+      "category": "club",
+      "uses": 12,
+      "aliases": [
+        "Uzbek Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "大洋洲太平洋运动会冠军": {
+      "name": "大洋洲太平洋运动会冠军",
+      "honorIds": [
+        "4438"
+      ],
+      "category": "club",
+      "uses": 11,
+      "aliases": [
+        "Pacific Games"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "乌兹别克斯坦超级杯冠军": {
+      "name": "乌兹别克斯坦超级杯冠军",
+      "honorIds": [
+        "315"
+      ],
+      "category": "club",
+      "uses": 11,
+      "aliases": [
+        "Uzbek Supercup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴拿马足球开幕赛季冠军": {
+      "name": "巴拿马足球开幕赛季冠军",
+      "honorIds": [
+        "347"
+      ],
+      "category": "club",
+      "uses": 10,
+      "aliases": [
+        "Panamanian Champion Apertura"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "荷兰足球U17联赛冠军": {
+      "name": "荷兰足球U17联赛冠军",
+      "honorIds": [
+        "445"
+      ],
+      "category": "club",
+      "uses": 10,
+      "aliases": [
+        "Dutch U17 Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "南非八强杯冠军": {
+      "name": "南非八强杯冠军",
+      "honorIds": [
+        "300"
+      ],
+      "category": "club",
+      "uses": 10,
+      "aliases": [
+        "Mtn8 Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "乌兹别克斯坦杯冠军": {
+      "name": "乌兹别克斯坦杯冠军",
+      "honorIds": [
+        "317"
+      ],
+      "category": "club",
+      "uses": 10,
+      "aliases": [
+        "Uzbek Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "奥地利足球U18联赛冠军": {
+      "name": "奥地利足球U18联赛冠军",
+      "honorIds": [
+        "443"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "Austrian Youth League U18 Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "奥迪杯冠军": {
+      "name": "奥迪杯冠军",
+      "honorIds": [
+        "4604"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "Audi Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴拉圭足球甲级联赛冠军": {
+      "name": "巴拉圭足球甲级联赛冠军",
+      "honorIds": [
+        "204"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "Paraguayan Champion"
+      ],
+      "status": "candidate",
+      "selected": {
+        "id": "Q517883",
+        "label": "Paraguayan Football Association",
+        "description": "governing body of association football in Paraguay",
+        "score": 107,
+        "query": "Paraguayan",
+        "assetKind": "competition-logo",
+        "assetFile": "Paraguay football association.svg",
+        "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Paraguay%20football%20association.svg?width=512",
+        "sourcePage": "https://zh.wikipedia.org/wiki/%E5%B7%B4%E6%8B%89%E5%9C%AD%E8%B6%B3%E7%90%83%E5%8D%8F%E4%BC%9A",
+        "officialWebsite": "http://www.apf.org.py"
+      },
+      "candidates": [
+        {
+          "id": "Q954911",
+          "label": "巴拉圭足球甲级联赛",
+          "description": "顶级联赛",
+          "score": 162,
+          "query": "巴拉圭足球甲级联赛",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%B7%B4%E6%8B%89%E5%9C%AD%E8%B6%B3%E7%90%83%E7%94%B2%E7%B4%9A%E8%81%AF%E8%B3%BD",
+          "officialWebsite": "http://www.apf.org.py/p/division-de-honor"
+        },
+        {
+          "id": "Q517883",
+          "label": "Paraguayan Football Association",
+          "description": "governing body of association football in Paraguay",
+          "score": 107,
+          "query": "Paraguayan",
+          "assetKind": "competition-logo",
+          "assetFile": "Paraguay football association.svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Paraguay%20football%20association.svg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%B7%B4%E6%8B%89%E5%9C%AD%E8%B6%B3%E7%90%83%E5%8D%8F%E4%BC%9A",
+          "officialWebsite": "http://www.apf.org.py"
+        },
+        {
+          "id": "Q58947",
+          "label": "Paraguayan War",
+          "description": "large-scale conflict in South America (1864–1870)",
+          "score": 77,
+          "query": "Paraguayan",
+          "assetKind": "public-image",
+          "assetFile": "Tuyuti1.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Tuyuti1.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%B7%B4%E6%8B%89%E5%9C%AD%E6%88%98%E4%BA%89",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q207514",
+          "label": "Paraguayan guaraní",
+          "description": "currency",
+          "score": 77,
+          "query": "Paraguayan",
+          "assetKind": "public-image",
+          "assetFile": "La Trinité-sur-Mer 56 Front de mer 2013.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/La%20Trinit%C3%A9-sur-Mer%2056%20Front%20de%20mer%202013.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%B7%B4%E6%8B%89%E5%9C%AD%E7%93%9C%E6%8B%89%E5%B0%BC",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q986526",
+          "label": "Cáceres",
+          "description": "municipality of Mato Grosso state, Brazil",
+          "score": 0,
+          "query": "Paraguayan",
+          "assetKind": "public-image",
+          "assetFile": "Catedral de São Luís2.JPG",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Catedral%20de%20S%C3%A3o%20Lu%C3%ADs2.JPG?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%8D%A1%E5%A1%9E%E9%9B%B7%E6%96%AF_(%E9%A9%AC%E6%89%98%E6%A0%BC%E7%BD%97%E7%B4%A2%E5%B7%9E)",
+          "officialWebsite": "http://www.caceres.mt.gov.br"
+        }
+      ]
+    },
+    "大洋洲U17锦标赛冠军": {
+      "name": "大洋洲U17锦标赛冠军",
+      "honorIds": [
+        "4423"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "OFC U17 Championship"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "德国足球U17联赛冠军": {
+      "name": "德国足球U17联赛冠军",
+      "honorIds": [
+        "438"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "German U17 Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q119519126",
+          "label": "German U17 Open Badminton Championships",
+          "description": "badminton championships",
+          "score": 107,
+          "query": "German U17",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://de.wikipedia.org/wiki/German_U17_Open",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q126209324",
+          "label": "2022 German U17 Open Badminton Championships",
+          "description": "badminton championships",
+          "score": 95,
+          "query": "German U17",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q126209324",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q126209331",
+          "label": "2025 German U17 Open Badminton Championships",
+          "description": "badminton championships",
+          "score": 95,
+          "query": "German U17",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q126209331",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q126209330",
+          "label": "2024 German U17 Open Badminton Championships",
+          "description": "badminton championships",
+          "score": 95,
+          "query": "German U17",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q126209330",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q126209326",
+          "label": "2023 German U17 Open Badminton Championships",
+          "description": "badminton championships",
+          "score": 95,
+          "query": "German U17",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q126209326",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "德国足球U19联赛冠军": {
+      "name": "德国足球U19联赛冠军",
+      "honorIds": [
+        "414"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "German U19 Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "荷兰U19联赛冠军": {
+      "name": "荷兰U19联赛冠军",
+      "honorIds": [
+        "421"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "Dutch U19 Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "加泰罗尼亚超级杯冠军": {
+      "name": "加泰罗尼亚超级杯冠军",
+      "honorIds": [
+        "4619"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "Supercopa de Catalunya"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "南非联赛杯冠军": {
+      "name": "南非联赛杯冠军",
+      "honorIds": [
+        "302",
+        "4852"
+      ],
+      "category": "club",
+      "uses": 9,
+      "aliases": [
+        "Nedbank Cup Winner",
+        "South Africa League Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "厄瓜多尔足球甲级联赛冠军": {
+      "name": "厄瓜多尔足球甲级联赛冠军",
+      "honorIds": [
+        "461"
+      ],
+      "category": "club",
+      "uses": 8,
+      "aliases": [
+        "Ecuadorian Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "国际冠军杯冠军": {
+      "name": "国际冠军杯冠军",
+      "honorIds": [
+        "4490"
+      ],
+      "category": "club",
+      "uses": 8,
+      "aliases": [
+        "International Champions Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "英超亚洲杯冠军": {
+      "name": "英超亚洲杯冠军",
+      "honorIds": [
+        "4605"
+      ],
+      "category": "national",
+      "uses": 8,
+      "aliases": [
+        "Premier League Asia Trophy"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Algarve Football Cup": {
+      "name": "Algarve Football Cup",
+      "honorIds": [
+        "4687"
+      ],
+      "category": "club",
+      "uses": 8,
+      "aliases": [
+        "Algarve Football Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "阿根廷超级杯冠军": {
+      "name": "阿根廷超级杯冠军",
+      "honorIds": [
+        "4474"
+      ],
+      "category": "club",
+      "uses": 7,
+      "aliases": [
+        "Supercopa Argentina"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "克罗地亚超级杯冠军": {
+      "name": "克罗地亚超级杯冠军",
+      "honorIds": [
+        "4794"
+      ],
+      "category": "club",
+      "uses": 7,
+      "aliases": [
+        "Croatia Super Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "乌拉圭超级杯冠军": {
+      "name": "乌拉圭超级杯冠军",
+      "honorIds": [
+        "256"
+      ],
+      "category": "club",
+      "uses": 7,
+      "aliases": [
+        "Supercopa Uruguaya Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "中北美洲青年冠军杯冠军": {
+      "name": "中北美洲青年冠军杯冠军",
+      "honorIds": [
+        "4277"
+      ],
+      "category": "club",
+      "uses": 7,
+      "aliases": [
+        "Concacaf U20"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "U23非洲杯冠军": {
+      "name": "U23非洲杯冠军",
+      "honorIds": [
+        "703"
+      ],
+      "category": "national",
+      "uses": 7,
+      "aliases": [
+        "Under-23 Africa Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴拉圭足球甲级联赛闭幕赛季冠军": {
+      "name": "巴拉圭足球甲级联赛闭幕赛季冠军",
+      "honorIds": [
+        "206"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "Paraguayan Champion Clausura"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "巴西米内罗甲级联赛冠军": {
+      "name": "巴西米内罗甲级联赛冠军",
+      "honorIds": [
+        "4234"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "Mineiro 1"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "海湾运动会男子足球赛冠军": {
+      "name": "海湾运动会男子足球赛冠军",
+      "honorIds": [
+        "4278"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "Gulf Cup of Nations"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q874564",
+          "label": "Arabians Gulf Cup",
+          "description": "association football tournament",
+          "score": 140,
+          "query": "Gulf Cup of Nations",
+          "assetKind": "public-image",
+          "assetFile": "MuscatGulfCup1.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/MuscatGulfCup1.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%8B%89%E4%BC%AF%E6%B5%B7%E7%81%A3%E7%9B%83",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q2759944",
+          "label": "Gulf Cup of Nations Under 23",
+          "description": "football tournament",
+          "score": 107,
+          "query": "Gulf Cup of Nations",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/AGCFF_U-23_Gulf_Cup",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q3289833",
+          "label": "2008 Gulf Cup of Nations Under 23",
+          "description": "international football competition",
+          "score": 95,
+          "query": "Gulf Cup of Nations",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2008_GCC_U-23_Championship",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q4119380",
+          "label": "2010 Gulf Cup of Nations Under 23",
+          "description": "international football competition",
+          "score": 95,
+          "query": "Gulf Cup of Nations",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2010_GCC_U-23_Championship",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q12234078",
+          "label": "22nd Arabian Gulf Cup",
+          "description": "2014 football competition held in Saudi Arabia",
+          "score": 42,
+          "query": "Gulf Cup of Nations",
+          "assetKind": "competition-logo",
+          "assetFile": "Arabian Gulf Cup text logo.png",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Arabian%20Gulf%20Cup%20text%20logo.png?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/22nd_Arabian_Gulf_Cup",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "墨西哥杯闭幕赛季冠军": {
+      "name": "墨西哥杯闭幕赛季冠军",
+      "honorIds": [
+        "534"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "Mexican Cup Winner Clausura"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "南非足球超级联赛冠军": {
+      "name": "南非足球超级联赛冠军",
+      "honorIds": [
+        "301"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "South African Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q603439",
+          "label": "南非足球超级联赛",
+          "description": "association football league in South Africa",
+          "score": 162,
+          "query": "南非足球超级联赛",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Premier_Soccer_League",
+          "officialWebsite": "http://www.psl.co.za"
+        },
+        {
+          "id": "Q15763539",
+          "label": "South African Archaeological Bulletin",
+          "description": "academic journal",
+          "score": 77,
+          "query": "South African",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q15763539",
+          "officialWebsite": "http://www.jstor.org/action/showPublication?journalCode=soutafriarchbull"
+        },
+        {
+          "id": "Q7565732",
+          "label": "South African Medical Journal",
+          "description": "journal",
+          "score": 77,
+          "query": "South African",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/South_African_Medical_Journal",
+          "officialWebsite": "http://www.samj.org.za/"
+        },
+        {
+          "id": "Q15761363",
+          "label": "South African Historical Journal",
+          "description": "academic journal",
+          "score": 77,
+          "query": "South African",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/South_African_Historical_Journal",
+          "officialWebsite": "http://www.tandfonline.com/loi/rshj20#.Vsc0nrerS71"
+        },
+        {
+          "id": "Q15766963",
+          "label": "South African Dental Journal",
+          "description": "journal",
+          "score": 77,
+          "query": "South African",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q15766963",
+          "officialWebsite": "http://www.sada.co.za/publications/sada-journals.html"
+        }
+      ]
+    },
+    "瑞典足球甲级联赛冠军": {
+      "name": "瑞典足球甲级联赛冠军",
+      "honorIds": [
+        "543",
+        "640"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "Swedish 2nd Division Champion",
+        "Swedish Superettan Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "西亚足球锦标赛冠军": {
+      "name": "西亚足球锦标赛冠军",
+      "honorIds": [
+        "4400"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "WAFF Championship"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "新西兰足球锦标赛冠军": {
+      "name": "新西兰足球锦标赛冠军",
+      "honorIds": [
+        "200"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "New Zealand Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Olympics Intercontinental Play-o冠军": {
+      "name": "Olympics Intercontinental Play-o冠军",
+      "honorIds": [
+        "4608"
+      ],
+      "category": "club",
+      "uses": 6,
+      "aliases": [
+        "Olympics Intercontinental Play-offs"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "波黑足球超级联赛": {
+      "name": "波黑足球超级联赛",
+      "honorIds": [
+        "263"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Bosnian-herzegovinian Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "哥伦比亚杯冠军": {
+      "name": "哥伦比亚杯冠军",
+      "honorIds": [
+        "4321"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Copa Colombia"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "哥伦比亚超级杯冠军": {
+      "name": "哥伦比亚超级杯冠军",
+      "honorIds": [
+        "4458"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Superliga"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "荷兰U19杯冠军": {
+      "name": "荷兰U19杯冠军",
+      "honorIds": [
+        "422"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Dutch U19 Youth Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "捷克足球全国联赛冠军": {
+      "name": "捷克足球全国联赛冠军",
+      "honorIds": [
+        "4179"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "FNL"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "突尼斯杯冠军": {
+      "name": "突尼斯杯冠军",
+      "honorIds": [
+        "291"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Tunisian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "伊拉克超级杯冠军": {
+      "name": "伊拉克超级杯冠军",
+      "honorIds": [
+        "314"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Iraqi Supercup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "英格兰U23超级联赛B组冠军": {
+      "name": "英格兰U23超级联赛B组冠军",
+      "honorIds": [
+        "4653"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Premier League 2 Division Two"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "King's Cup": {
+      "name": "King's Cup",
+      "honorIds": [
+        "4692"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "King's Cup"
+      ],
+      "status": "candidate",
+      "selected": {
+        "id": "Q483794",
+        "label": "Copa del Rey",
+        "description": "Spanish association football tournament",
+        "score": 140,
+        "query": "King's Cup",
+        "assetKind": "competition-logo",
+        "assetFile": "Copa del Rey logo (2021).svg",
+        "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Copa%20del%20Rey%20logo%20(2021).svg?width=512",
+        "sourcePage": "https://zh.wikipedia.org/wiki/%E8%A5%BF%E7%8F%AD%E7%89%99%E5%9C%8B%E7%8E%8B%E7%9B%83",
+        "officialWebsite": "http://www.rfef.es/noticias/competiciones/copa-del-rey"
+      },
+      "candidates": [
+        {
+          "id": "Q278545",
+          "label": "King's Cup",
+          "description": "international football tournament in Thailand",
+          "score": 162,
+          "query": "King's Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E6%B3%B0%E7%8E%8B%E7%9B%83%E8%B6%B3%E7%90%83%E8%B3%BD",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q4923567",
+          "label": "King's Cup",
+          "description": "golf tournament on the Asian Tour",
+          "score": 162,
+          "query": "King's Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/King's_Cup_(golf)",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q483794",
+          "label": "Copa del Rey",
+          "description": "Spanish association football tournament",
+          "score": 140,
+          "query": "King's Cup",
+          "assetKind": "competition-logo",
+          "assetFile": "Copa del Rey logo (2021).svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Copa%20del%20Rey%20logo%20(2021).svg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E8%A5%BF%E7%8F%AD%E7%89%99%E5%9C%8B%E7%8E%8B%E7%9B%83",
+          "officialWebsite": "http://www.rfef.es/noticias/competiciones/copa-del-rey"
+        },
+        {
+          "id": "Q3196978",
+          "label": "King's Cup",
+          "description": "",
+          "score": 132,
+          "query": "King's Cup",
+          "assetKind": "public-image",
+          "assetFile": "Tennisstadion, Stockholm 1942.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Tennisstadion%2C%20Stockholm%201942.jpg?width=512",
+          "sourcePage": "https://fr.wikipedia.org/wiki/King's_Cup_(tennis)",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q4042228",
+          "label": "King's Cup",
+          "description": "",
+          "score": 132,
+          "query": "King's Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/King's_Cup_(snooker)",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "Ofc Under-20 Championship Winner": {
+      "name": "Ofc Under-20 Championship Winner",
+      "honorIds": [
+        "670"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Ofc Under-20 Championship Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q2252565",
+          "label": "2013 OFC U-20 Championship",
+          "description": "international football competition",
+          "score": 42,
+          "query": "Ofc Under-20 Championship",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/2013%E5%B9%B4%E5%A4%A7%E6%B4%8B%E6%B4%B2%E8%B6%B3%E5%8D%94U-20%E9%8C%A6%E6%A8%99%E8%B3%BD",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q16725939",
+          "label": "2014 OFC Under 19 Championship",
+          "description": "The first edition of an Under 19 Football association competition for members of the Oceania Football Confederation, since it was reorganised from its Under 20 guise in a meeting held in late 2013.",
+          "score": 42,
+          "query": "Ofc Under-20 Championship",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/2014%E5%B9%B4%E5%A4%A7%E6%B4%8B%E6%B4%B2%E8%B6%B3%E5%8D%94U-20%E9%8C%A6%E6%A8%99%E8%B3%BD",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "Uzbekistan League Cup": {
+      "name": "Uzbekistan League Cup",
+      "honorIds": [
+        "4910"
+      ],
+      "category": "club",
+      "uses": 5,
+      "aliases": [
+        "Uzbekistan League Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q21660752",
+          "label": "Uzbekistan League Cup",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Uzbekistan League Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Uzbekistan_League_Cup",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q65129366",
+          "label": "Uzbekistan League Cup",
+          "description": "",
+          "score": 132,
+          "query": "Uzbekistan League Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q65129366",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "巴西巴拉纳甲级联赛冠军": {
+      "name": "巴西巴拉纳甲级联赛冠军",
+      "honorIds": [
+        "4233"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Paranaense 1"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "北美足球锦标赛冠军": {
+      "name": "北美足球锦标赛冠军",
+      "honorIds": [
+        "193"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Campeones Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q55074683",
+          "label": "Campeones Cup",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Campeones Cup",
+          "assetKind": "public-image",
+          "assetFile": "Campeones Cup logo.svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Campeones%20Cup%20logo.svg?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/Campeones_Cup",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q55716920",
+          "label": "Campeones Cup 2018",
+          "description": "football competition in North America",
+          "score": 107,
+          "query": "Campeones Cup",
+          "assetKind": "public-image",
+          "assetFile": "BMO Field in 2016.png",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/BMO%20Field%20in%202016.png?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/2018_Campeones_Cup",
+          "officialWebsite": "http://www.campeonescup.com/"
+        },
+        {
+          "id": "Q140570056",
+          "label": "campeones cup 2026",
+          "description": "Soccer match in Miami",
+          "score": 107,
+          "query": "Campeones Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://es.wikipedia.org/wiki/Campeones_Cup_2026",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q65091112",
+          "label": "2019 Campeones Cup",
+          "description": "Football match",
+          "score": 107,
+          "query": "Campeones Cup",
+          "assetKind": "public-image",
+          "assetFile": "Peach Bowl Pre-game (39431667481).jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Peach%20Bowl%20Pre-game%20(39431667481).jpg?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/2019_Campeones_Cup",
+          "officialWebsite": "http://www.campeonescup.com/"
+        },
+        {
+          "id": "Q86750771",
+          "label": "2020 Campeones Cup",
+          "description": "football match",
+          "score": 107,
+          "query": "Campeones Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2020_Campeones_Cup",
+          "officialWebsite": "http://www.campeonescup.com"
+        }
+      ]
+    },
+    "超级联赛国际杯冠军": {
+      "name": "超级联赛国际杯冠军",
+      "honorIds": [
+        "4596"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Premier League International Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q18344374",
+          "label": "Premier League International Cup",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Premier League International Cup",
+          "assetKind": "public-image",
+          "assetFile": "Premier League International Cup Trophy.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Premier%20League%20International%20Cup%20Trophy.jpg?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/Premier_League_International_Cup",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "大洋洲U20锦标赛冠军": {
+      "name": "大洋洲U20锦标赛冠军",
+      "honorIds": [
+        "4430"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "OFC U20 Championship"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "德国U19足协杯冠军": {
+      "name": "德国U19足协杯冠军",
+      "honorIds": [
+        "415"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Germans U19s Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "荷兰足球U21冠军": {
+      "name": "荷兰足球U21冠军",
+      "honorIds": [
+        "338"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "U21 Eredivisie Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "墨西哥杯开幕赛季冠军": {
+      "name": "墨西哥杯开幕赛季冠军",
+      "honorIds": [
+        "525"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Mexican Cup Winner Apertura"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "墨西哥冠军杯冠军": {
+      "name": "墨西哥冠军杯冠军",
+      "honorIds": [
+        "530"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Mexican Campeón De Campeones"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "挪威足球甲级联赛冠军": {
+      "name": "挪威足球甲级联赛冠军",
+      "honorIds": [
+        "4803"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Norway 1. Division"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "突尼斯足球甲级联赛冠军": {
+      "name": "突尼斯足球甲级联赛冠军",
+      "honorIds": [
+        "290"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Tunisian Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "伊拉克足球顶级联赛冠军": {
+      "name": "伊拉克足球顶级联赛冠军",
+      "honorIds": [
+        "312"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Iraqi Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "英格兰足球U18联赛冠军": {
+      "name": "英格兰足球U18联赛冠军",
+      "honorIds": [
+        "488"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "English Youth League Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "英格兰U23超级联赛A组冠军": {
+      "name": "英格兰U23超级联赛A组冠军",
+      "honorIds": [
+        "4652"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Premier League 2 Division One"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "英格兰U23联赛杯冠军": {
+      "name": "英格兰U23联赛杯冠军",
+      "honorIds": [
+        "4498"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Premier League Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "约旦杯冠军": {
+      "name": "约旦杯冠军",
+      "honorIds": [
+        "308"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Jordanian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "约旦超级杯冠军": {
+      "name": "约旦超级杯冠军",
+      "honorIds": [
+        "310"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Jordanian Supercup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "约旦足球超级联赛冠军": {
+      "name": "约旦足球超级联赛冠军",
+      "honorIds": [
+        "307"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Jordanian Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q12212853",
+          "label": "Jordanian Writers Society",
+          "description": "Professional association based in Jordan",
+          "score": 107,
+          "query": "Jordanian",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q12212853",
+          "officialWebsite": "http://www.jo-writers.org/"
+        },
+        {
+          "id": "Q18523364",
+          "label": "Jordaniana",
+          "description": "genus of insects",
+          "score": 77,
+          "query": "Jordanian",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q18523364",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q2893000",
+          "label": "Jordanian annexation of the West Bank",
+          "description": "1950 annexation event",
+          "score": 77,
+          "query": "Jordanian",
+          "assetKind": "public-image",
+          "assetFile": "UN armistice lines 1949 (cropped).jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/UN%20armistice%20lines%201949%20(cropped).jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E7%B4%84%E6%97%A6%E5%90%9E%E4%BD%B5%E7%B4%84%E6%97%A6%E6%B2%B3%E8%A5%BF%E5%B2%B8",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q1075753",
+          "label": "Jordanian Armed Forces",
+          "description": "combined military forces of Eastern Palestine",
+          "score": 77,
+          "query": "Jordanian",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E7%BA%A6%E6%97%A6%E5%86%9B%E4%BA%8B",
+          "officialWebsite": "http://www.jaf.mil.jo"
+        },
+        {
+          "id": "Q783164",
+          "label": "Royal Jordanian Air Force",
+          "description": "air warfare branch of Jordan's military",
+          "score": 65,
+          "query": "Jordanian",
+          "assetKind": "competition-logo",
+          "assetFile": "Roundel of Jordan.svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Roundel%20of%20Jordan.svg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E7%BA%A6%E6%97%A6%E7%9A%87%E5%AE%B6%E7%A9%BA%E5%86%9B",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "约旦足总盾杯冠军": {
+      "name": "约旦足总盾杯冠军",
+      "honorIds": [
+        "309"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Jordanischer Fa Shield-sieger"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "Campeón de Campeones": {
+      "name": "Campeón de Campeones",
+      "honorIds": [
+        "4606"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Campeón de Campeones"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q1031000",
+          "label": "Campeón de Campeones",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Campeón de Campeones",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%A2%A8%E8%A5%BF%E5%93%A5%E5%86%A0%E5%86%9B%E6%9D%AF",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q106588936",
+          "label": "Campeón de Campeones 1944-45",
+          "description": "Mexican tournament",
+          "score": 107,
+          "query": "Campeón de Campeones",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/1945_Campe%C3%B3n_de_Campeones",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q106588915",
+          "label": "Campeón de Campeones 1945-46",
+          "description": "Mexican tournament",
+          "score": 107,
+          "query": "Campeón de Campeones",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://es.wikipedia.org/wiki/Campe%C3%B3n_de_Campeones_1945-46",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q106588725",
+          "label": "Campeón de Campeones 1947-48",
+          "description": "Mexican tournament",
+          "score": 107,
+          "query": "Campeón de Campeones",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://es.wikipedia.org/wiki/Campe%C3%B3n_de_Campeones_1947-48",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q107424056",
+          "label": "Campeón de Campeones 1965-66",
+          "description": "Mexican tournament",
+          "score": 107,
+          "query": "Campeón de Campeones",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://es.wikipedia.org/wiki/Campe%C3%B3n_de_Campeones_1965-66",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "Florida Cup": {
+      "name": "Florida Cup",
+      "honorIds": [
+        "4630"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Florida Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q21797443",
+          "label": "Florida Cup",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Florida Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Florida_Cup_(soccer)",
+          "officialWebsite": "http://www.floridacup.com/"
+        },
+        {
+          "id": "Q5461303",
+          "label": "Florida Cup",
+          "description": "annual American football rivalry",
+          "score": 162,
+          "query": "Florida Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Florida_Cup",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q21797464",
+          "label": "2016 Florida Cup",
+          "description": "international football competition",
+          "score": 107,
+          "query": "Florida Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2016_Florida_Cup",
+          "officialWebsite": "http://floridacup.com/"
+        },
+        {
+          "id": "Q22022500",
+          "label": "2015 Florida Cup",
+          "description": "international football competition",
+          "score": 107,
+          "query": "Florida Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2015_Florida_Cup",
+          "officialWebsite": "http://floridacup.com/"
+        },
+        {
+          "id": "Q26727503",
+          "label": "2017 Florida Cup",
+          "description": "friendly soccer tournament",
+          "score": 107,
+          "query": "Florida Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2017_Florida_Cup",
+          "officialWebsite": "http://floridacup.com/"
+        }
+      ]
+    },
+    "Mobile Mini Sun Cup": {
+      "name": "Mobile Mini Sun Cup",
+      "honorIds": [
+        "4695"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "Mobile Mini Sun Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "U20 Elite League Winner": {
+      "name": "U20 Elite League Winner",
+      "honorIds": [
+        "618"
+      ],
+      "category": "club",
+      "uses": 4,
+      "aliases": [
+        "U20 Elite League Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "奥地利足球乙级联赛冠军": {
+      "name": "奥地利足球乙级联赛冠军",
+      "honorIds": [
+        "71"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "2. Liga Champion (aut)"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴伐利亚足球地区联赛冠军": {
+      "name": "巴伐利亚足球地区联赛冠军",
+      "honorIds": [
+        "130"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "German Regionalliga Bavaria Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴拉圭足球甲级联赛开幕赛季冠军": {
+      "name": "巴拉圭足球甲级联赛开幕赛季冠军",
+      "honorIds": [
+        "205"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Paraguayan Champion Apertura"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "保加利亚杯冠军": {
+      "name": "保加利亚杯冠军",
+      "honorIds": [
+        "95"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Bulgarian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "波黑足球U19联赛冠军": {
+      "name": "波黑足球U19联赛冠军",
+      "honorIds": [
+        "441"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Bosnian-herzegovinian Champion U19"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "骏河银行锦标赛冠军": {
+      "name": "骏河银行锦标赛冠军",
+      "honorIds": [
+        "4398"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "J.League Cup / Copa Sudamericana Championship"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "瑞士足球挑战联赛冠军": {
+      "name": "瑞士足球挑战联赛冠军",
+      "honorIds": [
+        "4184"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Challenge League"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "苏格兰足球第二级别联赛冠军": {
+      "name": "苏格兰足球第二级别联赛冠军",
+      "honorIds": [
+        "225"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Scottish Second League Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "土耳其足球甲级联赛冠军": {
+      "name": "土耳其足球甲级联赛冠军",
+      "honorIds": [
+        "4182"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "1. Lig"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "乌兹别克斯坦超级联赛冠军": {
+      "name": "乌兹别克斯坦超级联赛冠军",
+      "honorIds": [
+        "4322"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Pro League A"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "伊拉克杯冠军": {
+      "name": "伊拉克杯冠军",
+      "honorIds": [
+        "313"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Iraqi Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "意大利青年杯冠军": {
+      "name": "意大利青年杯冠军",
+      "honorIds": [
+        "418"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Winner Of Coppa Italia Primavera"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q1423881",
+          "label": "意大利青年杯",
+          "description": "football competition in Italy",
+          "score": 162,
+          "query": "意大利青年杯",
+          "assetKind": "public-image",
+          "assetFile": "Coppa Italia Primavera trophy icon.svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Coppa%20Italia%20Primavera%20trophy%20icon.svg?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/Coppa_Italia_Primavera",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "Copa Ibérica": {
+      "name": "Copa Ibérica",
+      "honorIds": [
+        "4751"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Copa Ibérica"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q116859515",
+          "label": "Copa Ibérica",
+          "description": "",
+          "score": 132,
+          "query": "Copa Ibérica",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://pt.wikipedia.org/wiki/Liga_Portugal_Copa_Ib%C3%A9rica",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q3325068",
+          "label": "Copa Ibérica de Rugby",
+          "description": "tournament for rugby clubs from Spain and Portugal",
+          "score": 107,
+          "query": "Copa Ibérica",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Copa_Ib%C3%A9rica_de_Rugby",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q5787015",
+          "label": "Copa Ibérica de fútbol de 1991",
+          "description": "",
+          "score": 77,
+          "query": "Copa Ibérica",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://es.wikipedia.org/wiki/Copa_Ib%C3%A9rica_de_f%C3%BAtbol_de_1991",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q5787017",
+          "label": "Copa Ibérica de fútbol de 2000",
+          "description": "",
+          "score": 77,
+          "query": "Copa Ibérica",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://es.wikipedia.org/wiki/Copa_Ib%C3%A9rica_de_f%C3%BAtbol_de_2000",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q5787020",
+          "label": "Copa Ibérica de fútbol de 2005",
+          "description": "",
+          "score": 77,
+          "query": "Copa Ibérica",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://es.wikipedia.org/wiki/Copa_Ib%C3%A9rica_de_f%C3%BAtbol_de_2005",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "FA Youth Cup": {
+      "name": "FA Youth Cup",
+      "honorIds": [
+        "4508"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "FA Youth Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q1466284",
+          "label": "FA Youth Cup",
+          "description": "English football competition for under-18 sides",
+          "score": 162,
+          "query": "FA Youth Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E8%8B%B1%E6%A0%BC%E8%98%AD%E8%B6%B3%E7%B8%BD%E9%9D%92%E5%B9%B4%E7%9B%83",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q5424537",
+          "label": "FA Youth Cup Finals",
+          "description": "list of English football matches",
+          "score": 107,
+          "query": "FA Youth Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/FA_Youth_Cup_Finals",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q104868765",
+          "label": "FA Youth Cup Finals of the 2010s",
+          "description": "List of English football matches",
+          "score": 107,
+          "query": "FA Youth Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/FA_Youth_Cup_Finals_of_the_2010s",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q5424538",
+          "label": "FA Youth Cup Finals of the 1950s",
+          "description": "List of English football matches",
+          "score": 107,
+          "query": "FA Youth Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/FA_Youth_Cup_Finals_of_the_1950s",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q5424545",
+          "label": "FA Youth Cup Finals of the 1990s",
+          "description": "FA Youth Cup final championships in the 1990s",
+          "score": 107,
+          "query": "FA Youth Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/FA_Youth_Cup_Finals_of_the_1990s",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "M-150 Cup U23": {
+      "name": "M-150 Cup U23",
+      "honorIds": [
+        "4703"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "M-150 Cup U23"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "Minor Premiership Winner (nzl)": {
+      "name": "Minor Premiership Winner (nzl)",
+      "honorIds": [
+        "635"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Minor Premiership Winner (nzl)"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "PFL Cup": {
+      "name": "PFL Cup",
+      "honorIds": [
+        "4577"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "PFL Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q48817143",
+          "label": "Copa Paulino Alcantara",
+          "description": "Filipino knockout football competition held annually since 2018",
+          "score": 140,
+          "query": "PFL Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Copa_Paulino_Alcantara",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q3656007",
+          "label": "PFL Cup",
+          "description": "",
+          "score": 132,
+          "query": "PFL Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q3656007",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q48954734",
+          "label": "PFL Cup Pereprava",
+          "description": "",
+          "score": 77,
+          "query": "PFL Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q48954734",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q48816999",
+          "label": "2018 PFL Cup",
+          "description": "1st season of the Copa Paulino Alcantara",
+          "score": 77,
+          "query": "PFL Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2018_Copa_Paulino_Alcantara",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q105162309",
+          "label": "2021 Copa Paulino Alcantara",
+          "description": "football tournament season",
+          "score": 42,
+          "query": "PFL Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2021_Copa_Paulino_Alcantara",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "Timbers Preseason Tournament": {
+      "name": "Timbers Preseason Tournament",
+      "honorIds": [
+        "4764"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Timbers Preseason Tournament"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "Tournoi U20 4 Nations": {
+      "name": "Tournoi U20 4 Nations",
+      "honorIds": [
+        "4635"
+      ],
+      "category": "club",
+      "uses": 3,
+      "aliases": [
+        "Tournoi U20 4 Nations"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴拿马杯冠军": {
+      "name": "巴拿马杯冠军",
+      "honorIds": [
+        "171"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Panamanian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "保加利亚超级杯冠军": {
+      "name": "保加利亚超级杯冠军",
+      "honorIds": [
+        "96"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Bulgaria Super Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "波黑杯冠军": {
+      "name": "波黑杯冠军",
+      "honorIds": [
+        "262"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Bosnian-herzegovinian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "波黑U19杯赛冠军": {
+      "name": "波黑U19杯赛冠军",
+      "honorIds": [
+        "442"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Bosnian-herzegovinian Cup Winner U19"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "丹麦足球甲级联赛冠军": {
+      "name": "丹麦足球甲级联赛冠军",
+      "honorIds": [
+        "114"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Danish Second Tier Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "德国地区联赛冠军": {
+      "name": "德国地区联赛冠军",
+      "honorIds": [
+        "132"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "German Regionalliga Southwest Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "德国足球北部地区联赛冠军": {
+      "name": "德国足球北部地区联赛冠军",
+      "honorIds": [
+        "349"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "German Regionalliga North Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "泛美运动会足球冠军": {
+      "name": "泛美运动会足球冠军",
+      "honorIds": [
+        "62"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Winner Of Panamerican Games"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "海湾奥林匹克队杯冠军": {
+      "name": "海湾奥林匹克队杯冠军",
+      "honorIds": [
+        "4471"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Gulf Olympic Teams Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "荷兰丙级联赛冠军": {
+      "name": "荷兰丙级联赛冠军",
+      "honorIds": [
+        "4620"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Tweede Divisie"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "捷克超级杯冠军": {
+      "name": "捷克超级杯冠军",
+      "honorIds": [
+        "4857"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Czech Republic Super Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "卡塔尔乙级联赛冠军": {
+      "name": "卡塔尔乙级联赛冠军",
+      "honorIds": [
+        "4846"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Qatar Second Division"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q2914098",
+          "label": "Qatar Stars League 2",
+          "description": "football league",
+          "score": 152,
+          "query": "Qatar Second Division",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%8D%A1%E5%A1%94%E5%B0%94%E8%B6%B3%E7%90%83%E4%B9%99%E7%BA%A7%E8%81%94%E8%B5%9B",
+          "officialWebsite": "http://www.qsl.com.qa/"
+        }
+      ]
+    },
+    "美国足球联合联赛常规赛冠军": {
+      "name": "美国足球联合联赛常规赛冠军",
+      "honorIds": [
+        "271"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Usl Regular Season Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "美国足球联合联赛冠军": {
+      "name": "美国足球联合联赛冠军",
+      "honorIds": [
+        "270"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Usl Cup Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q125388576",
+          "label": "USL Cup",
+          "description": "soccer knockout tournament in the U.S.",
+          "score": 162,
+          "query": "Usl Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/USL_Cup",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "摩尔多瓦杯冠军": {
+      "name": "摩尔多瓦杯冠军",
+      "honorIds": [
+        "389"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Moldavian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q1165191",
+          "label": "摩尔多瓦杯",
+          "description": "球赛",
+          "score": 132,
+          "query": "摩尔多瓦杯",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E6%91%A9%E7%88%BE%E5%A4%9A%E7%93%A6%E7%9B%83",
+          "officialWebsite": "http://www.fmf.md/moldcup_ro.htm"
+        }
+      ]
+    },
+    "墨西哥超级杯冠军": {
+      "name": "墨西哥超级杯冠军",
+      "honorIds": [
+        "529"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Mexican Super Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "南非杯冠军": {
+      "name": "南非杯冠军",
+      "honorIds": [
+        "299"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "South African Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "南非甲级联赛冠军": {
+      "name": "南非甲级联赛冠军",
+      "honorIds": [
+        "4831"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "South Africa 1st Division"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "南美U20解放者杯": {
+      "name": "南美U20解放者杯",
+      "honorIds": [
+        "452"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "U20-copa-libertadores-sieger"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "瑞士足球U18联赛冠军": {
+      "name": "瑞士足球U18联赛冠军",
+      "honorIds": [
+        "430"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Swiss U18-champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "突尼斯超级杯冠军": {
+      "name": "突尼斯超级杯冠军",
+      "honorIds": [
+        "292"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Tunesischer Superpokalsieger"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "伊朗甲组联赛冠军": {
+      "name": "伊朗甲组联赛冠军",
+      "honorIds": [
+        "4315"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Azadegan League"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "中北美洲男足U17冠军杯冠军": {
+      "name": "中北美洲男足U17冠军杯冠军",
+      "honorIds": [
+        "4361"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Concacaf U17"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Arena Cup": {
+      "name": "Arena Cup",
+      "honorIds": [
+        "4677"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Arena Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Bosnian-herzegovinian Champion U17": {
+      "name": "Bosnian-herzegovinian Champion U17",
+      "honorIds": [
+        "685"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Bosnian-herzegovinian Champion U17"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Copa Ecuador": {
+      "name": "Copa Ecuador",
+      "honorIds": [
+        "4755"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Copa Ecuador"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Copa Libertadores Play-off": {
+      "name": "Copa Libertadores Play-off",
+      "honorIds": [
+        "4598"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Copa Libertadores Play-off"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Ofc-u17-championship-winner": {
+      "name": "Ofc-u17-championship-winner",
+      "honorIds": [
+        "688"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Ofc-u17-championship-winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "Supercopa de Ecuador": {
+      "name": "Supercopa de Ecuador",
+      "honorIds": [
+        "4758"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Supercopa de Ecuador"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q65490416",
+          "label": "Supercopa de Ecuador",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Supercopa de Ecuador",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Supercopa_Ecuador",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q116213605",
+          "label": "Supercopa de Ecuador 2023",
+          "description": "Third edition of Ecuador Supercup",
+          "score": 107,
+          "query": "Supercopa de Ecuador",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2023_Supercopa_Ecuador",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q104762329",
+          "label": "Supercopa de Ecuador 2021",
+          "description": "Second edition of Ecuador Supercup",
+          "score": 107,
+          "query": "Supercopa de Ecuador",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2021_Supercopa_Ecuador",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q78255689",
+          "label": "2020 Supercopa Ecuador",
+          "description": "football match",
+          "score": 107,
+          "query": "Supercopa de Ecuador",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2020_Supercopa_Ecuador",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q139668725",
+          "label": "2026 Supercopa Ecuador",
+          "description": "football match",
+          "score": 107,
+          "query": "Supercopa de Ecuador",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2026_Supercopa_Ecuador",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "Tipsport Liga": {
+      "name": "Tipsport Liga",
+      "honorIds": [
+        "4631"
+      ],
+      "category": "club",
+      "uses": 2,
+      "aliases": [
+        "Tipsport Liga"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q12059002",
+          "label": "Tipsport liga",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Tipsport Liga",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Tipsport_liga_(football)",
+          "officialWebsite": "http://www.tipsport-liga.cz"
+        },
+        {
+          "id": "Q27974454",
+          "label": "2017 Tipsport liga",
+          "description": "football tournament season",
+          "score": 107,
+          "query": "Tipsport Liga",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2017_Tipsport_liga",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q22121541",
+          "label": "2016 Tipsport liga",
+          "description": "football tournament season",
+          "score": 107,
+          "query": "Tipsport Liga",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2016_Tipsport_liga",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q110550840",
+          "label": "2022 Tipsport liga",
+          "description": "football tournament season",
+          "score": 107,
+          "query": "Tipsport Liga",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2022_Tipsport_liga",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q81994254",
+          "label": "2020 Tipsport liga",
+          "description": "football tournament season",
+          "score": 107,
+          "query": "Tipsport Liga",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2020_Tipsport_liga",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "U17美洲杯冠军": {
+      "name": "U17美洲杯冠军",
+      "honorIds": [
+        "396"
+      ],
+      "category": "national",
+      "uses": 2,
+      "aliases": [
+        "South American Champion U17"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "阿尔及利亚杯冠军": {
+      "name": "阿尔及利亚杯冠军",
+      "honorIds": [
+        "287"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Algerian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q2021582",
+          "label": "Algerian Cup",
+          "description": "football tournament",
+          "score": 162,
+          "query": "Algerian Cup",
+          "assetKind": "public-image",
+          "assetFile": "Trophées des Coupes d'Algérie 1963 et 1964.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Troph%C3%A9es%20des%20Coupes%20d'Alg%C3%A9rie%201963%20et%201964.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E9%98%BF%E7%88%BE%E5%8F%8A%E5%88%A9%E4%BA%9E%E7%9B%83",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "阿尔及利亚联赛杯冠军": {
+      "name": "阿尔及利亚联赛杯冠军",
+      "honorIds": [
+        "289"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Algerian League Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q3000216",
+          "label": "Algerian League Cup",
+          "description": "Algerian football competition organized by the Algerian Football Federation",
+          "score": 162,
+          "query": "Algerian League Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Algerian_League_Cup",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "阿根廷冠军挑战杯": {
+      "name": "阿根廷冠军挑战杯",
+      "honorIds": [
+        "4757"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Trofeo de Campeones de la Superliga"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "爱尔兰足球超级联赛冠军": {
+      "name": "爱尔兰足球超级联赛冠军",
+      "honorIds": [
+        "148"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Irish Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "爱沙尼亚杯冠军": {
+      "name": "爱沙尼亚杯冠军",
+      "honorIds": [
+        "116"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Estonian Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "奥地利足球丁级联赛冠军": {
+      "name": "奥地利足球丁级联赛冠军",
+      "honorIds": [
+        "73"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Champion Landesliga Steiermark"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "澳大利亚青年联赛冠军": {
+      "name": "澳大利亚青年联赛冠军",
+      "honorIds": [
+        "4468"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Y-League"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴登杯": {
+      "name": "巴登杯",
+      "honorIds": [
+        "4510"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Reg. Cup Baden"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴林超级杯冠军": {
+      "name": "巴林超级杯冠军",
+      "honorIds": [
+        "506"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Bahraini Supercup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴林国王杯冠军": {
+      "name": "巴林国王杯冠军",
+      "honorIds": [
+        "504"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Bahraini King's Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴林足球超级联赛冠军": {
+      "name": "巴林足球超级联赛冠军",
+      "honorIds": [
+        "503"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Bahraini Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴西丙组联赛冠军": {
+      "name": "巴西丙组联赛冠军",
+      "honorIds": [
+        "4225"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Serie C"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "巴西高乔甲级联赛冠军": {
+      "name": "巴西高乔甲级联赛冠军",
+      "honorIds": [
+        "4235"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Gaúcho 1"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "北美足球联赛冠军": {
+      "name": "北美足球联赛冠军",
+      "honorIds": [
+        "4427"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "NASL"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "丹麦足球乙级联赛冠军": {
+      "name": "丹麦足球乙级联赛冠军",
+      "honorIds": [
+        "361"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Danish Third Tier Champion"
+      ],
+      "status": "candidate",
+      "selected": {
+        "id": "Q383932",
+        "label": "丹麦足球乙级联赛",
+        "description": "association football league",
+        "score": 162,
+        "query": "丹麦足球乙级联赛",
+        "assetKind": "competition-logo",
+        "assetFile": "Danish 2nd Division 2011.svg",
+        "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Danish%202nd%20Division%202011.svg?width=512",
+        "sourcePage": "https://zh.wikipedia.org/wiki/%E4%B8%B9%E9%BA%A6%E8%B6%B3%E7%90%83%E4%B9%99%E7%BA%A7%E8%81%94%E8%B5%9B",
+        "officialWebsite": "http://www.2division.dk"
+      },
+      "candidates": [
+        {
+          "id": "Q383932",
+          "label": "丹麦足球乙级联赛",
+          "description": "association football league",
+          "score": 162,
+          "query": "丹麦足球乙级联赛",
+          "assetKind": "competition-logo",
+          "assetFile": "Danish 2nd Division 2011.svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Danish%202nd%20Division%202011.svg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E4%B8%B9%E9%BA%A6%E8%B6%B3%E7%90%83%E4%B9%99%E7%BA%A7%E8%81%94%E8%B5%9B",
+          "officialWebsite": "http://www.2division.dk"
+        }
+      ]
+    },
+    "丹麦足球U19联赛冠军": {
+      "name": "丹麦足球U19联赛冠军",
+      "honorIds": [
+        "429"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Danish Youth Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q20490020",
+          "label": "Danish Youth",
+          "description": "painting by William H. Johnson",
+          "score": 132,
+          "query": "Danish Youth",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q20490020",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q12307580",
+          "label": "Danish Youth Council",
+          "description": "national council of youth organizations",
+          "score": 77,
+          "query": "Danish Youth",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q12307580",
+          "officialWebsite": "http://www.duf.dk"
+        },
+        {
+          "id": "Q29526155",
+          "label": "Danish Youth Ensemble",
+          "description": "national youth string orchestra of Denmark",
+          "score": 77,
+          "query": "Danish Youth",
+          "assetKind": "competition-logo",
+          "assetFile": "Danish Youth Ensemble Logo.png",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Danish%20Youth%20Ensemble%20Logo.png?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/Danish_Youth_Ensemble",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "德下莱茵杯冠军": {
+      "name": "德下莱茵杯冠军",
+      "honorIds": [
+        "4518"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Reg. Cup Niederrhein"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "俄罗斯足球甲级联赛冠军": {
+      "name": "俄罗斯足球甲级联赛冠军",
+      "honorIds": [
+        "216"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Russian Second Tier Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q162533",
+          "label": "俄罗斯足球甲级联赛",
+          "description": "俄罗斯足球赛事",
+          "score": 162,
+          "query": "俄罗斯足球甲级联赛",
+          "assetKind": "public-image",
+          "assetFile": "1st League Logo 2022.png",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/1st%20League%20Logo%202022.png?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E4%BF%84%E7%BE%85%E6%96%AF%E7%94%B2%E7%B5%84%E8%B6%B3%E7%90%83%E8%81%AF%E8%B3%BD",
+          "officialWebsite": "http://www.1fnl.ru/"
+        }
+      ]
+    },
+    "厄瓜多尔足球乙级联赛冠军": {
+      "name": "厄瓜多尔足球乙级联赛冠军",
+      "honorIds": [
+        "4261"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Liga Pro Serie B"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "法国全国联赛冠军": {
+      "name": "法国全国联赛冠军",
+      "honorIds": [
+        "4174"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "National 1"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "刚果超级联赛冠军": {
+      "name": "刚果超级联赛冠军",
+      "honorIds": [
+        "4851"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Congo DR Ligue 1"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "哈萨克斯坦杯冠军": {
+      "name": "哈萨克斯坦杯冠军",
+      "honorIds": [
+        "175"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Kazakh Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "哈萨克斯坦足球超级联赛冠军": {
+      "name": "哈萨克斯坦足球超级联赛冠军",
+      "honorIds": [
+        "174"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Kazakh Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "海地共和国联赛冠军": {
+      "name": "海地共和国联赛冠军",
+      "honorIds": [
+        "4283"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Ligue Haïtienne"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "海地冠军杯冠军": {
+      "name": "海地冠军杯冠军",
+      "honorIds": [
+        "4866"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Haiti Trophée des Champions"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "黑森杯": {
+      "name": "黑森杯",
+      "honorIds": [
+        "4926"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Hessen Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "加勒比俱乐部冠军联赛": {
+      "name": "加勒比俱乐部冠军联赛",
+      "honorIds": [
+        "322"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Caribbean Club Championship Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "加拿大足球联赛冠军": {
+      "name": "加拿大足球联赛冠军",
+      "honorIds": [
+        "518"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Canadian Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "加纳足球超级联赛冠军": {
+      "name": "加纳足球超级联赛冠军",
+      "honorIds": [
+        "329"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Ghanasian Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "科特迪瓦超级联赛冠军": {
+      "name": "科特迪瓦超级联赛冠军",
+      "honorIds": [
+        "4832"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Côte d'Ivoire Ligue 1"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "秘鲁足球乙级联赛冠军": {
+      "name": "秘鲁足球乙级联赛冠军",
+      "honorIds": [
+        "468"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Peruvian Second Tier Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q507576",
+          "label": "秘鲁足球乙级联赛",
+          "description": "association football league",
+          "score": 162,
+          "query": "秘鲁足球乙级联赛",
+          "assetKind": "public-image",
+          "assetFile": "Liga2 1XBET.png",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Liga2%201XBET.png?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E7%A7%98%E9%AD%AF%E8%B6%B3%E7%90%83%E4%B9%99%E7%B4%9A%E8%81%AF%E8%B3%BD",
+          "officialWebsite": "http://www.adfp-sd.com/"
+        }
+      ]
+    },
+    "摩尔多瓦足球联赛冠军": {
+      "name": "摩尔多瓦足球联赛冠军",
+      "honorIds": [
+        "388"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Moldavian Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q2351845",
+          "label": "football in Moldova",
+          "description": "overview of association football practiced in Moldova",
+          "score": 140,
+          "query": "Moldavian",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/Football_in_Moldova",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q36392",
+          "label": "Moldovan",
+          "description": "former name for the Romanian language in Moldova",
+          "score": 110,
+          "query": "Moldavian",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E6%91%A9%E7%88%BE%E5%A4%9A%E7%93%A6%E8%AA%9E",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q170895",
+          "label": "Moldavian Soviet Socialist Republic",
+          "description": "republic of the Soviet Union (1940-1991)",
+          "score": 77,
+          "query": "Moldavian",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E6%91%A9%E5%B0%94%E8%BE%BE%E7%BB%B4%E4%BA%9A%E8%8B%8F%E7%BB%B4%E5%9F%83%E7%A4%BE%E4%BC%9A%E4%B8%BB%E4%B9%89%E5%85%B1%E5%92%8C%E5%9B%BD",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q964024",
+          "label": "Moldavian Democratic Republic",
+          "description": "former country",
+          "score": 77,
+          "query": "Moldavian",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E6%91%A9%E7%88%BE%E9%81%94%E7%B6%AD%E4%BA%9E%E6%B0%91%E4%B8%BB%E5%85%B1%E5%92%8C%E5%9C%8B",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q1752216",
+          "label": "Moldavian Airlines",
+          "description": "former airline of Moldova",
+          "score": 77,
+          "query": "Moldavian",
+          "assetKind": "public-image",
+          "assetFile": "Moldavian Airlines Saab 2000.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Moldavian%20Airlines%20Saab%202000.jpg?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/Moldavian_Airlines",
+          "officialWebsite": "http://www.mdv.md"
+        }
+      ]
+    },
+    "墨西哥足球甲级联赛冠军": {
+      "name": "墨西哥足球甲级联赛冠军",
+      "honorIds": [
+        "4193"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Liga de Expansión MX"
+      ],
+      "status": "candidate",
+      "selected": {
+        "id": "Q764690",
+        "label": "墨西哥足球甲级联赛",
+        "description": "墨西哥最高级别足球联赛",
+        "score": 162,
+        "query": "墨西哥足球甲级联赛",
+        "assetKind": "competition-logo",
+        "assetFile": "MX logo.png",
+        "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/MX%20logo.png?width=512",
+        "sourcePage": "https://zh.wikipedia.org/wiki/%E5%A2%A8%E8%A5%BF%E5%93%A5%E8%B6%B3%E7%90%83%E8%B6%85%E7%B4%9A%E8%81%AF%E8%B3%BD",
+        "officialWebsite": "https://ligamx.net/"
+      },
+      "candidates": [
+        {
+          "id": "Q764690",
+          "label": "墨西哥足球甲级联赛",
+          "description": "墨西哥最高级别足球联赛",
+          "score": 162,
+          "query": "墨西哥足球甲级联赛",
+          "assetKind": "competition-logo",
+          "assetFile": "MX logo.png",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/MX%20logo.png?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%A2%A8%E8%A5%BF%E5%93%A5%E8%B6%B3%E7%90%83%E8%B6%85%E7%B4%9A%E8%81%AF%E8%B3%BD",
+          "officialWebsite": "https://ligamx.net/"
+        },
+        {
+          "id": "Q92292023",
+          "label": "MX Expansion League",
+          "description": "Mexican football league",
+          "score": 152,
+          "query": "Liga de Expansión MX",
+          "assetKind": "public-image",
+          "assetFile": "Liga de expansión MX.logopng.png",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Liga%20de%20expansi%C3%B3n%20MX.logopng.png?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/Liga_de_Expansi%C3%B3n_MX",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q97354396",
+          "label": "2020–21 Liga de Expansión MX season",
+          "description": "1st professional season of the second football league in Mexico",
+          "score": 107,
+          "query": "Liga de Expansión MX",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Liga_de_Expansi%C3%B3n_MX_season",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q7243457",
+          "label": "2007年至2008年墨西哥足球甲级联赛",
+          "description": "football league season",
+          "score": 95,
+          "query": "墨西哥足球甲级联赛",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/2007%E5%B9%B4%E8%87%B32008%E5%B9%B4%E5%A2%A8%E8%A5%BF%E5%93%A5%E8%B6%85%E7%B4%9A%E8%B6%B3%E7%90%83%E8%81%AF%E8%B3%BD",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q112728858",
+          "label": "Liga de Expansión MX/Mannschaften",
+          "description": "Wikimedia list article",
+          "score": 77,
+          "query": "Liga de Expansión MX",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://de.wikipedia.org/wiki/Liga_de_Expansi%C3%B3n_MX%2FMannschaften",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "南韩K联杯冠军": {
+      "name": "南韩K联杯冠军",
+      "honorIds": [
+        "4203"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "K League Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q496365",
+          "label": "League Cup",
+          "description": "Football competition in Korea",
+          "score": 140,
+          "query": "K League Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E9%9F%A9%E5%9B%BD%E8%81%94%E8%B5%9B%E6%9D%AF",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "全非运动会冠军": {
+      "name": "全非运动会冠军",
+      "honorIds": [
+        "4426"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "All Africa Games"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q391394",
+          "label": "African Games",
+          "description": "African multi-sport event",
+          "score": 110,
+          "query": "All Africa Games",
+          "assetKind": "public-image",
+          "assetFile": "ASC Leiden - Rietveld Collection - Nigeria 1970 - 1973 - 01 - 087 Pan African Games Lagos January 7-18, 1973. A high jumper hits the bar in the stadium - Lagos.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/ASC%20Leiden%20-%20Rietveld%20Collection%20-%20Nigeria%201970%20-%201973%20-%2001%20-%20087%20Pan%20African%20Games%20Lagos%20January%207-18%2C%201973.%20A%20high%20jumper%20hits%20the%20bar%20in%20the%20stadium%20-%20Lagos.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E9%9D%9E%E6%B4%B2%E8%BF%90%E5%8A%A8%E4%BC%9A",
+          "officialWebsite": "http://www.aag.org.za"
+        },
+        {
+          "id": "Q1351087",
+          "label": "2007 All-Africa Games",
+          "description": "ninth edition of the All-Africa Games",
+          "score": 77,
+          "query": "All Africa Games",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/2007%E5%B9%B4%E5%85%A8%E9%9D%9E%E9%81%8B%E5%8B%95%E6%9C%83",
+          "officialWebsite": "http://algiers2007.anoca.info"
+        },
+        {
+          "id": "Q1255145",
+          "label": "全非運動會羽毛球比賽",
+          "description": "羽毛球賽事",
+          "score": 12,
+          "query": "全非运动会",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E9%9D%9E%E6%B4%B2%E9%81%8B%E5%8B%95%E6%9C%83%E7%BE%BD%E7%90%83%E6%AF%94%E8%B3%BD",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "塞尔维亚足球U17联赛冠军": {
+      "name": "塞尔维亚足球U17联赛冠军",
+      "honorIds": [
+        "496"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Serbia U17 Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "塞浦路斯超级杯冠军": {
+      "name": "塞浦路斯超级杯冠军",
+      "honorIds": [
+        "459"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Cypriot Super Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "塞浦路斯足球甲级联赛冠军": {
+      "name": "塞浦路斯足球甲级联赛冠军",
+      "honorIds": [
+        "109"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Cypriot Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "塞浦路斯足球乙级联赛冠军": {
+      "name": "塞浦路斯足球乙级联赛冠军",
+      "honorIds": [
+        "4828"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Cyprus 2. Division"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "苏格兰挑战杯冠军": {
+      "name": "苏格兰挑战杯冠军",
+      "honorIds": [
+        "222"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Scottish Challenge Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "苏格兰足球第三级别联赛冠军": {
+      "name": "苏格兰足球第三级别联赛冠军",
+      "honorIds": [
+        "224"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Scottish Third League Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "苏格兰足球第四级别联赛冠军": {
+      "name": "苏格兰足球第四级别联赛冠军",
+      "honorIds": [
+        "223"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Scottish Fourth League Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "泰国联赛杯冠军": {
+      "name": "泰国联赛杯冠军",
+      "honorIds": [
+        "483"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Thai League Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "威斯特法伦足球联赛冠军": {
+      "name": "威斯特法伦足球联赛冠军",
+      "honorIds": [
+        "355"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Champion Westfalenliga 1"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "维多利亚冠军": {
+      "name": "维多利亚冠军",
+      "honorIds": [
+        "4223"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Victoria NPL"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "匈牙利超级杯冠军": {
+      "name": "匈牙利超级杯冠军",
+      "honorIds": [
+        "4797"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Hungary Super Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "意大利维亚莱乔杯冠军": {
+      "name": "意大利维亚莱乔杯冠军",
+      "honorIds": [
+        "419"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Viareggio"
+      ],
+      "status": "candidate",
+      "selected": {
+        "id": "Q1526935",
+        "label": "Viareggio Prize",
+        "description": "Italian literary award",
+        "score": 107,
+        "query": "Viareggio",
+        "assetKind": "competition-logo",
+        "assetFile": "Premio Viareggio Repaci.svg",
+        "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Premio%20Viareggio%20Repaci.svg?width=512",
+        "sourcePage": "https://en.wikipedia.org/wiki/Viareggio_Prize",
+        "officialWebsite": "http://www.premioletterarioviareggiorepaci.it/"
+      },
+      "candidates": [
+        {
+          "id": "Q221377",
+          "label": "Viareggio",
+          "description": "comune in northern Tuscany, Italy",
+          "score": 132,
+          "query": "Viareggio",
+          "assetKind": "public-image",
+          "assetFile": "Italy - Viareggio.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Italy%20-%20Viareggio.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E7%B6%AD%E4%BA%9E%E9%9B%B7%E7%84%A6",
+          "officialWebsite": "https://www.comune.viareggio.lu.it"
+        },
+        {
+          "id": "Q30031688",
+          "label": "Viareggio",
+          "description": "chief town of the homonym municipality",
+          "score": 132,
+          "query": "Viareggio",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q30031688",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q1380971",
+          "label": "Viareggio Calcio",
+          "description": "Italian football club located in Viareggio, Tuscany",
+          "score": 107,
+          "query": "Viareggio",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/ASD_Viareggio_Calcio",
+          "officialWebsite": "http://www.asdviareggiocalcio.it/"
+        },
+        {
+          "id": "Q1526935",
+          "label": "Viareggio Prize",
+          "description": "Italian literary award",
+          "score": 107,
+          "query": "Viareggio",
+          "assetKind": "competition-logo",
+          "assetFile": "Premio Viareggio Repaci.svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Premio%20Viareggio%20Repaci.svg?width=512",
+          "sourcePage": "https://en.wikipedia.org/wiki/Viareggio_Prize",
+          "officialWebsite": "http://www.premioletterarioviareggiorepaci.it/"
+        },
+        {
+          "id": "Q60642820",
+          "label": "Viareggio-Versilia International Prize",
+          "description": "Italian literary award",
+          "score": 107,
+          "query": "Viareggio",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://www.wikidata.org/wiki/Q60642820",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "意大利足球U19联赛冠军": {
+      "name": "意大利足球U19联赛冠军",
+      "honorIds": [
+        "417"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Italian Youth Champion (primavera)"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "意大利U19超级杯冠军": {
+      "name": "意大利U19超级杯冠军",
+      "honorIds": [
+        "423"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Winner Italian Supercoppa (primavera)"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "英足总锦标赛冠军": {
+      "name": "英足总锦标赛冠军",
+      "honorIds": [
+        "4342"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "FA Trophy"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q1046509",
+          "label": "FA Trophy",
+          "description": "Annual association football competiton",
+          "score": 162,
+          "query": "FA Trophy",
+          "assetKind": "public-image",
+          "assetFile": "Sacha Opinel.jpg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sacha%20Opinel.jpg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E8%8B%B1%E6%A0%BC%E8%98%AD%E8%B6%B3%E7%B8%BD%E9%8C%A6%E6%A8%99",
+          "officialWebsite": "http://www.thefa.com/Competitions/FACompetitions/TheFATrophy"
+        },
+        {
+          "id": "Q16782233",
+          "label": "FA Trophy",
+          "description": "Wikimedia disambiguation page",
+          "score": 132,
+          "query": "FA Trophy",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/FA_Trophy_(disambiguation)",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q2743195",
+          "label": "2010–11 FA Trophy",
+          "description": "football tournament season",
+          "score": 107,
+          "query": "FA Trophy",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2010%E2%80%9311_FA_Trophy",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q4612619",
+          "label": "2008–09 FA Trophy",
+          "description": "football tournament season",
+          "score": 107,
+          "query": "FA Trophy",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2008%E2%80%9309_FA_Trophy",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q74114429",
+          "label": "2019–20 FA Trophy",
+          "description": "football tournament season",
+          "score": 107,
+          "query": "FA Trophy",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2019%E2%80%9320_FA_Trophy",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "Argentina Copa Bicentenario": {
+      "name": "Argentina Copa Bicentenario",
+      "honorIds": [
+        "4896"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Argentina Copa Bicentenario"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": []
+    },
+    "Caribbean Cup Winner": {
+      "name": "Caribbean Cup Winner",
+      "honorIds": [
+        "643"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Caribbean Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [
+        {
+          "id": "Q528449",
+          "label": "Caribbean Cup",
+          "description": "association football tournament",
+          "score": 162,
+          "query": "Caribbean Cup",
+          "assetKind": "public-image",
+          "assetFile": "Members of CFU.svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Members%20of%20CFU.svg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E5%8A%A0%E5%8B%92%E6%AF%94%E6%B5%B7%E7%9B%83",
+          "officialWebsite": "http://www.concacaf.com/category/caribbean-cup-men"
+        },
+        {
+          "id": "Q2999414",
+          "label": "1990 Caribbean Cup",
+          "description": "international football competition",
+          "score": 107,
+          "query": "Caribbean Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://zh.wikipedia.org/wiki/1990%E5%B9%B4%E5%8A%A0%E5%8B%92%E6%AF%94%E6%B5%B7%E7%9B%83",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q21600051",
+          "label": "2017 Caribbean Cup",
+          "description": "international football competition",
+          "score": 107,
+          "query": "Caribbean Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2017_Caribbean_Cup",
+          "officialWebsite": "https://www.caribbeancup2017martinique.com/en"
+        },
+        {
+          "id": "Q1476464",
+          "label": "2010 Caribbean Cup",
+          "description": "international football competition",
+          "score": 107,
+          "query": "Caribbean Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2010_Caribbean_Cup",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q1476468",
+          "label": "2012 Caribbean Cup",
+          "description": "international football competition",
+          "score": 107,
+          "query": "Caribbean Cup",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2012_Caribbean_Cup",
+          "officialWebsite": ""
+        }
+      ]
+    },
+    "Cheshire Senior Cup": {
+      "name": "Cheshire Senior Cup",
+      "honorIds": [
+        "4563"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Cheshire Senior Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Cpl Fall Season Champion": {
+      "name": "Cpl Fall Season Champion",
+      "honorIds": [
+        "698"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Cpl Fall Season Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Cuadrangular Bogota": {
+      "name": "Cuadrangular Bogota",
+      "honorIds": [
+        "4708"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Cuadrangular Bogota"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Cuadrangular Pereira": {
+      "name": "Cuadrangular Pereira",
+      "honorIds": [
+        "4721"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Cuadrangular Pereira"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Irish Cup Winner": {
+      "name": "Irish Cup Winner",
+      "honorIds": [
+        "636"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Irish Cup Winner"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Istria Winter Cup": {
+      "name": "Istria Winter Cup",
+      "honorIds": [
+        "4678"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Istria Winter Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Leinster Senior Cup": {
+      "name": "Leinster Senior Cup",
+      "honorIds": [
+        "4586"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Leinster Senior Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Macufe Cup": {
+      "name": "Macufe Cup",
+      "honorIds": [
+        "4165"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Macufe Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Oxfordshire Senior Cup": {
+      "name": "Oxfordshire Senior Cup",
+      "honorIds": [
+        "4553"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Oxfordshire Senior Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Reg. Cup Schleswig-Holstein": {
+      "name": "Reg. Cup Schleswig-Holstein",
+      "honorIds": [
+        "4523"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Reg. Cup Schleswig-Holstein"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Tipsport Malta Cup": {
+      "name": "Tipsport Malta Cup",
+      "honorIds": [
+        "4763"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Tipsport Malta Cup"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "Under-20 Brazilian Champion": {
+      "name": "Under-20 Brazilian Champion",
+      "honorIds": [
+        "661"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "Under-20 Brazilian Champion"
+      ],
+      "status": "needs-manual-review",
+      "selected": null,
+      "candidates": [],
+      "error": "429 Too Many Requests"
+    },
+    "USL League One": {
+      "name": "USL League One",
+      "honorIds": [
+        "4726"
+      ],
+      "category": "club",
+      "uses": 1,
+      "aliases": [
+        "USL League One"
+      ],
+      "status": "candidate",
+      "selected": {
+        "id": "Q30636616",
+        "label": "USL League One",
+        "description": "American professional soccer league",
+        "score": 162,
+        "query": "USL League One",
+        "assetKind": "competition-logo",
+        "assetFile": "USL League One horz dark logo.svg",
+        "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/USL%20League%20One%20horz%20dark%20logo.svg?width=512",
+        "sourcePage": "https://zh.wikipedia.org/wiki/%E7%BE%8E%E5%9C%8B%E8%B6%B3%E7%90%83%E7%94%B2%E7%B4%9A%E8%81%AF%E8%B3%BD",
+        "officialWebsite": "https://www.uslleagueone.com"
+      },
+      "candidates": [
+        {
+          "id": "Q30636616",
+          "label": "USL League One",
+          "description": "American professional soccer league",
+          "score": 162,
+          "query": "USL League One",
+          "assetKind": "competition-logo",
+          "assetFile": "USL League One horz dark logo.svg",
+          "assetSourceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/USL%20League%20One%20horz%20dark%20logo.svg?width=512",
+          "sourcePage": "https://zh.wikipedia.org/wiki/%E7%BE%8E%E5%9C%8B%E8%B6%B3%E7%90%83%E7%94%B2%E7%B4%9A%E8%81%AF%E8%B3%BD",
+          "officialWebsite": "https://www.uslleagueone.com"
+        },
+        {
+          "id": "Q39056068",
+          "label": "2019 USL League One season",
+          "description": "inaugural season of USL League One",
+          "score": 107,
+          "query": "USL League One",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2019_USL_League_One_season",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q105085658",
+          "label": "2021 USL League One season",
+          "description": "football league season",
+          "score": 107,
+          "query": "USL League One",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2021_USL_League_One_season",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q110937701",
+          "label": "2022 USL League One season",
+          "description": "football league season",
+          "score": 107,
+          "query": "USL League One",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2022_USL_League_One_season",
+          "officialWebsite": ""
+        },
+        {
+          "id": "Q85737230",
+          "label": "2020 USL League One season",
+          "description": "football league season",
+          "score": 107,
+          "query": "USL League One",
+          "assetKind": "",
+          "assetFile": "",
+          "assetSourceUrl": "",
+          "sourcePage": "https://en.wikipedia.org/wiki/2020_USL_League_One_season",
+          "officialWebsite": ""
+        }
+      ]
+    }
+  }
+}

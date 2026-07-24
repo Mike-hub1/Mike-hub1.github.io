@@ -1,6 +1,18 @@
 # Honor icon provenance
 
-The v301 player-honors view no longer assigns generic “similar-looking” cups to awards. Every rendered asset is mapped by the exact honor name.
+The v304 player-honors view no longer assigns generic “similar-looking” cups to awards. Every rendered asset is mapped by the exact honor name.
+
+## Site-wide verified registry
+
+The same source-first workflow now applies to all 1,247 player profiles. Exact competition marks from public data catalogs are accepted only after the competition identity has been cross-checked against an organizer, federation, or governing-body page. When an official page publishes only a photograph or title banner, the repository stores a small transparent cutout of the existing trophy or event mark rather than inventing a replacement.
+
+Per-honor provenance, source URLs, credits, licenses, and verification dates are recorded in:
+
+- `tools/player-profile-assets-curated.json`
+- `tools/player-profile-honor-assets-supplemental.json`
+- `tools/player-profile-honor-assets-verified.json`
+
+The sync pipeline rejects heavily shared placeholder artwork and content collisions. Unresolved or ambiguous honor names render as text-only cards until a uniquely attributable source is available.
 
 ## Dongqiudi public data layer
 

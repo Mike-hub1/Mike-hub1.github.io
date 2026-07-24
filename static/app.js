@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "303";
+const STATIC_DATA_VERSION = "304";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10328,14 +10328,14 @@ function renderPlayerHonorCard(row = {}) {
   const recordGroups = playerHonorRecordGroups(row.records || []);
   const asset = playerHonorAsset(row);
   return `
-    <article class="player-profile-honor-card">
-      <figure class="is-${escapeHtml(asset.kind)}">
-        ${
-          asset.url
-            ? `<img src="${escapeHtml(asset.url)}" alt="${escapeHtml(`${row.name}图标`)}" loading="lazy" decoding="async" />`
-            : `<span aria-hidden="true">奖</span>`
-        }
-      </figure>
+    <article class="player-profile-honor-card" data-has-artwork="${asset.url ? "true" : "false"}">
+      ${
+        asset.url
+          ? `<figure class="is-${escapeHtml(asset.kind)}">
+              <img src="${escapeHtml(asset.url)}" alt="${escapeHtml(`${row.name}图标`)}" loading="lazy" decoding="async" />
+            </figure>`
+          : ""
+      }
       <div class="player-profile-honor-card-copy">
         <header>
           <strong>${escapeHtml(row.name)}</strong>

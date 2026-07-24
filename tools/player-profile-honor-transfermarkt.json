@@ -1,0 +1,2210 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-24T17:21:32.118Z",
+  "source": "Transfermarkt public all-winners index",
+  "policy": {
+    "automaticAcceptance": "Exact English honor phrase plus a unique pokalwettbewerb code only; image must pass a separate download and visual/format check.",
+    "ambiguousIndividualAwardsExcluded": true
+  },
+  "summary": {
+    "unresolvedHonors": 194,
+    "exactCodeCandidates": 84,
+    "manualReview": 110
+  },
+  "honors": {
+    "年度最佳球员": {
+      "name": "年度最佳球员",
+      "uses": 45,
+      "category": "individual",
+      "honorIds": [
+        "537"
+      ],
+      "alias": "Footballer Of The Year",
+      "status": "needs-manual-review"
+    },
+    "赛季最佳球员": {
+      "name": "赛季最佳球员",
+      "uses": 43,
+      "category": "individual",
+      "honorIds": [
+        "540"
+      ],
+      "alias": "Player Of The Year",
+      "status": "needs-manual-review"
+    },
+    "酋长杯冠军": {
+      "name": "酋长杯冠军",
+      "uses": 32,
+      "category": "club",
+      "honorIds": [
+        "4595"
+      ],
+      "alias": "Emirates Cup",
+      "status": "needs-manual-review"
+    },
+    "埃及杯冠军": {
+      "name": "埃及杯冠军",
+      "uses": 19,
+      "category": "club",
+      "honorIds": [
+        "336"
+      ],
+      "alias": "Egyptian Cup Winner",
+      "code": "EGYP",
+      "sourcePage": "https://www.transfermarkt.com/egypt-cup/erfolge/pokalwettbewerb/EGYP",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "巴拿马足球闭幕赛季冠军": {
+      "name": "巴拿马足球闭幕赛季冠军",
+      "uses": 14,
+      "category": "club",
+      "honorIds": [
+        "348"
+      ],
+      "alias": "Panamanian Champion Clausura",
+      "code": "PN1C",
+      "sourcePage": "https://www.transfermarkt.com/liga-panamena-de-futbol-clausura/erfolge/pokalwettbewerb/PN1C",
+      "score": 198,
+      "status": "exact-code-candidate"
+    },
+    "阿尔加夫U17国际邀请赛": {
+      "name": "阿尔加夫U17国际邀请赛",
+      "uses": 13,
+      "category": "club",
+      "honorIds": [
+        "408"
+      ],
+      "alias": "Torneio Internacional Algarve U17",
+      "status": "needs-manual-review"
+    },
+    "青年英超联赛冠军": {
+      "name": "青年英超联赛冠军",
+      "uses": 13,
+      "category": "club",
+      "honorIds": [
+        "515"
+      ],
+      "alias": "U21 Premier League Sieger",
+      "code": "GB21",
+      "sourcePage": "https://www.transfermarkt.com/premier-league-2/erfolge/pokalwettbewerb/GB21",
+      "score": 193,
+      "status": "exact-code-candidate"
+    },
+    "亚洲青年足球锦标赛U19冠军": {
+      "name": "亚洲青年足球锦标赛U19冠军",
+      "uses": 13,
+      "category": "club",
+      "honorIds": [
+        "4397"
+      ],
+      "alias": "AFC U19 Championship",
+      "code": "A192",
+      "sourcePage": "https://www.transfermarkt.com/afc-u19-championship-2012/erfolge/pokalwettbewerb/A192",
+      "score": 183,
+      "status": "exact-code-candidate"
+    },
+    "中亚杯冠军": {
+      "name": "中亚杯冠军",
+      "uses": 13,
+      "category": "club",
+      "honorIds": [
+        "4922"
+      ],
+      "alias": "CAFA NATIONS CUP WINNER",
+      "code": "CAFA",
+      "sourcePage": "https://www.transfermarkt.com/cafa-nations-cup/erfolge/pokalwettbewerb/CAFA",
+      "score": 191,
+      "status": "exact-code-candidate"
+    },
+    "埃及超级杯冠军": {
+      "name": "埃及超级杯冠军",
+      "uses": 12,
+      "category": "club",
+      "honorIds": [
+        "337"
+      ],
+      "alias": "Egyptian Super Cup Winner",
+      "code": "ESCU",
+      "sourcePage": "https://www.transfermarkt.com/egyptian-super-cup/erfolge/pokalwettbewerb/ESCU",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "大洋洲国家杯冠军": {
+      "name": "大洋洲国家杯冠军",
+      "uses": 12,
+      "category": "club",
+      "honorIds": [
+        "458"
+      ],
+      "alias": "Ofc Nations Cup Winner",
+      "code": "OFCN",
+      "sourcePage": "https://www.transfermarkt.com/ofc-nations-cup/erfolge/pokalwettbewerb/OFCN",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "荷兰青年杯U19冠军": {
+      "name": "荷兰青年杯U19冠军",
+      "uses": 12,
+      "category": "club",
+      "honorIds": [
+        "4472"
+      ],
+      "alias": "Youth Cup U19",
+      "status": "needs-manual-review"
+    },
+    "乌兹别克斯坦职业足球联赛冠军": {
+      "name": "乌兹别克斯坦职业足球联赛冠军",
+      "uses": 12,
+      "category": "club",
+      "honorIds": [
+        "316"
+      ],
+      "alias": "Uzbek Champion",
+      "code": "UZ1",
+      "sourcePage": "https://www.transfermarkt.com/ozbekiston-superligasi/erfolge/pokalwettbewerb/UZ1",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "大洋洲太平洋运动会冠军": {
+      "name": "大洋洲太平洋运动会冠军",
+      "uses": 11,
+      "category": "club",
+      "honorIds": [
+        "4438"
+      ],
+      "alias": "Pacific Games",
+      "status": "needs-manual-review"
+    },
+    "乌兹别克斯坦超级杯冠军": {
+      "name": "乌兹别克斯坦超级杯冠军",
+      "uses": 11,
+      "category": "club",
+      "honorIds": [
+        "315"
+      ],
+      "alias": "Uzbek Supercup Winner",
+      "code": "UZSC",
+      "sourcePage": "https://www.transfermarkt.com/uzbekistan-supercup/erfolge/pokalwettbewerb/UZSC",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "巴拿马足球开幕赛季冠军": {
+      "name": "巴拿马足球开幕赛季冠军",
+      "uses": 10,
+      "category": "club",
+      "honorIds": [
+        "347"
+      ],
+      "alias": "Panamanian Champion Apertura",
+      "code": "PN1F",
+      "sourcePage": "https://www.transfermarkt.com/liga-panamena-de-futbol-apertura-playoff/erfolge/pokalwettbewerb/PN1F",
+      "score": 198,
+      "status": "exact-code-candidate"
+    },
+    "荷兰足球U17联赛冠军": {
+      "name": "荷兰足球U17联赛冠军",
+      "uses": 10,
+      "category": "club",
+      "honorIds": [
+        "445"
+      ],
+      "alias": "Dutch U17 Champion",
+      "status": "needs-manual-review"
+    },
+    "南非八强杯冠军": {
+      "name": "南非八强杯冠军",
+      "uses": 10,
+      "category": "club",
+      "honorIds": [
+        "300"
+      ],
+      "alias": "Mtn8 Cup Winner",
+      "code": "SFAL",
+      "sourcePage": "https://www.transfermarkt.com/mtn8/erfolge/pokalwettbewerb/SFAL",
+      "score": 184,
+      "status": "exact-code-candidate"
+    },
+    "乌兹别克斯坦杯冠军": {
+      "name": "乌兹别克斯坦杯冠军",
+      "uses": 10,
+      "category": "club",
+      "honorIds": [
+        "317"
+      ],
+      "alias": "Uzbek Cup Winner",
+      "code": "KOBU",
+      "sourcePage": "https://www.transfermarkt.com/uzbekistan-cup/erfolge/pokalwettbewerb/KOBU",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "奥地利足球U18联赛冠军": {
+      "name": "奥地利足球U18联赛冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "443"
+      ],
+      "alias": "Austrian Youth League U18 Champion",
+      "status": "needs-manual-review"
+    },
+    "奥迪杯冠军": {
+      "name": "奥迪杯冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "4604"
+      ],
+      "alias": "Audi Cup",
+      "status": "needs-manual-review"
+    },
+    "巴拉圭足球甲级联赛冠军": {
+      "name": "巴拉圭足球甲级联赛冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "204"
+      ],
+      "alias": "Paraguayan Champion",
+      "code": "PR1C",
+      "sourcePage": "https://www.transfermarkt.com/primera-divizion-klausura/erfolge/pokalwettbewerb/PR1C",
+      "score": 190,
+      "status": "exact-code-candidate"
+    },
+    "大洋洲U17锦标赛冠军": {
+      "name": "大洋洲U17锦标赛冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "4423"
+      ],
+      "alias": "OFC U17 Championship",
+      "status": "needs-manual-review"
+    },
+    "德国足球U17联赛冠军": {
+      "name": "德国足球U17联赛冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "438"
+      ],
+      "alias": "German U17 Champion",
+      "code": "BJ",
+      "sourcePage": "https://www.transfermarkt.com/campionato-u17-germania-fase-finale/erfolge/pokalwettbewerb/BJ",
+      "score": 186,
+      "status": "exact-code-candidate"
+    },
+    "德国足球U19联赛冠军": {
+      "name": "德国足球U19联赛冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "414"
+      ],
+      "alias": "German U19 Champion",
+      "code": "AJ",
+      "sourcePage": "https://www.transfermarkt.com/german-under-19-championship/erfolge/pokalwettbewerb/AJ",
+      "score": 186,
+      "status": "exact-code-candidate"
+    },
+    "荷兰U19联赛冠军": {
+      "name": "荷兰U19联赛冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "421"
+      ],
+      "alias": "Dutch U19 Champion",
+      "code": "NLAJ",
+      "sourcePage": "https://www.transfermarkt.com/u19-division-1-spring/erfolge/pokalwettbewerb/NLAJ",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "加泰罗尼亚超级杯冠军": {
+      "name": "加泰罗尼亚超级杯冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "4619"
+      ],
+      "alias": "Supercopa de Catalunya",
+      "status": "needs-manual-review"
+    },
+    "南非联赛杯冠军": {
+      "name": "南非联赛杯冠军",
+      "uses": 9,
+      "category": "club",
+      "honorIds": [
+        "302",
+        "4852"
+      ],
+      "alias": "Nedbank Cup Winner",
+      "code": "NEDC",
+      "sourcePage": "https://www.transfermarkt.com/nedbank-cup/erfolge/pokalwettbewerb/NEDC",
+      "score": 187,
+      "status": "exact-code-candidate"
+    },
+    "厄瓜多尔足球甲级联赛冠军": {
+      "name": "厄瓜多尔足球甲级联赛冠军",
+      "uses": 8,
+      "category": "club",
+      "honorIds": [
+        "461"
+      ],
+      "alias": "Ecuadorian Champion",
+      "code": "EC1N",
+      "sourcePage": "https://www.transfermarkt.com/ligapro-serie-a/erfolge/pokalwettbewerb/EC1N",
+      "score": 190,
+      "status": "exact-code-candidate"
+    },
+    "国际冠军杯冠军": {
+      "name": "国际冠军杯冠军",
+      "uses": 8,
+      "category": "club",
+      "honorIds": [
+        "4490"
+      ],
+      "alias": "International Champions Cup",
+      "status": "needs-manual-review"
+    },
+    "英超亚洲杯冠军": {
+      "name": "英超亚洲杯冠军",
+      "uses": 8,
+      "category": "national",
+      "honorIds": [
+        "4605"
+      ],
+      "alias": "Premier League Asia Trophy",
+      "status": "needs-manual-review"
+    },
+    "Algarve Football Cup": {
+      "name": "Algarve Football Cup",
+      "uses": 8,
+      "category": "club",
+      "honorIds": [
+        "4687"
+      ],
+      "alias": "Algarve Football Cup",
+      "status": "needs-manual-review"
+    },
+    "阿根廷超级杯冠军": {
+      "name": "阿根廷超级杯冠军",
+      "uses": 7,
+      "category": "club",
+      "honorIds": [
+        "4474"
+      ],
+      "alias": "Supercopa Argentina",
+      "code": "SCAG",
+      "sourcePage": "https://www.transfermarkt.com/supercopa-argentina/erfolge/pokalwettbewerb/SCAG",
+      "score": 193,
+      "status": "exact-code-candidate"
+    },
+    "克罗地亚超级杯冠军": {
+      "name": "克罗地亚超级杯冠军",
+      "uses": 7,
+      "category": "club",
+      "honorIds": [
+        "4794"
+      ],
+      "alias": "Croatia Super Cup",
+      "status": "needs-manual-review"
+    },
+    "乌拉圭超级杯冠军": {
+      "name": "乌拉圭超级杯冠军",
+      "uses": 7,
+      "category": "club",
+      "honorIds": [
+        "256"
+      ],
+      "alias": "Supercopa Uruguaya Winner",
+      "status": "needs-manual-review"
+    },
+    "中北美洲青年冠军杯冠军": {
+      "name": "中北美洲青年冠军杯冠军",
+      "uses": 7,
+      "category": "club",
+      "honorIds": [
+        "4277"
+      ],
+      "alias": "Concacaf U20",
+      "status": "needs-manual-review"
+    },
+    "U23非洲杯冠军": {
+      "name": "U23非洲杯冠军",
+      "uses": 7,
+      "category": "national",
+      "honorIds": [
+        "703"
+      ],
+      "alias": "Under-23 Africa Cup Winner",
+      "code": "23AC",
+      "sourcePage": "https://www.transfermarkt.com/africa-u-23-cup-of-nations/erfolge/pokalwettbewerb/23AC",
+      "score": 186,
+      "status": "exact-code-candidate"
+    },
+    "巴拉圭足球甲级联赛闭幕赛季冠军": {
+      "name": "巴拉圭足球甲级联赛闭幕赛季冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "206"
+      ],
+      "alias": "Paraguayan Champion Clausura",
+      "status": "needs-manual-review"
+    },
+    "巴西米内罗甲级联赛冠军": {
+      "name": "巴西米内罗甲级联赛冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "4234"
+      ],
+      "alias": "Mineiro 1",
+      "status": "needs-manual-review"
+    },
+    "海湾运动会男子足球赛冠军": {
+      "name": "海湾运动会男子足球赛冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "4278"
+      ],
+      "alias": "Gulf Cup of Nations",
+      "status": "needs-manual-review"
+    },
+    "墨西哥杯闭幕赛季冠军": {
+      "name": "墨西哥杯闭幕赛季冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "534"
+      ],
+      "alias": "Mexican Cup Winner Clausura",
+      "code": "MXCC",
+      "sourcePage": "https://www.transfermarkt.com/copa-mx-clausura-18-19-/erfolge/pokalwettbewerb/MXCC",
+      "score": 195,
+      "status": "exact-code-candidate"
+    },
+    "南非足球超级联赛冠军": {
+      "name": "南非足球超级联赛冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "301"
+      ],
+      "alias": "South African Champion",
+      "code": "SFA1",
+      "sourcePage": "https://www.transfermarkt.com/dstv-premiership/erfolge/pokalwettbewerb/SFA1",
+      "score": 192,
+      "status": "exact-code-candidate"
+    },
+    "瑞典足球甲级联赛冠军": {
+      "name": "瑞典足球甲级联赛冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "543",
+        "640"
+      ],
+      "alias": "Swedish 2nd Division Champion",
+      "code": "SE2",
+      "sourcePage": "https://www.transfermarkt.com/superettan/erfolge/pokalwettbewerb/SE2",
+      "score": 198,
+      "status": "exact-code-candidate"
+    },
+    "西亚足球锦标赛冠军": {
+      "name": "西亚足球锦标赛冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "4400"
+      ],
+      "alias": "WAFF Championship",
+      "code": "WAF1",
+      "sourcePage": "https://www.transfermarkt.com/waff-championship/erfolge/pokalwettbewerb/WAF1",
+      "score": 184,
+      "status": "exact-code-candidate"
+    },
+    "新西兰足球锦标赛冠军": {
+      "name": "新西兰足球锦标赛冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "200"
+      ],
+      "alias": "New Zealand Champion",
+      "code": "NZNL",
+      "sourcePage": "https://www.transfermarkt.com/national-league-championship/erfolge/pokalwettbewerb/NZNL",
+      "score": 190,
+      "status": "exact-code-candidate"
+    },
+    "Olympics Intercontinental Play-o冠军": {
+      "name": "Olympics Intercontinental Play-o冠军",
+      "uses": 6,
+      "category": "club",
+      "honorIds": [
+        "4608"
+      ],
+      "alias": "Olympics Intercontinental Play-offs",
+      "status": "needs-manual-review"
+    },
+    "波黑足球超级联赛": {
+      "name": "波黑足球超级联赛",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "263"
+      ],
+      "alias": "Bosnian-herzegovinian Champion",
+      "code": "BOS1",
+      "sourcePage": "https://www.transfermarkt.com/premijer-liga-bosne-i-hercegovine/erfolge/pokalwettbewerb/BOS1",
+      "score": 200,
+      "status": "exact-code-candidate"
+    },
+    "哥伦比亚杯冠军": {
+      "name": "哥伦比亚杯冠军",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "4321"
+      ],
+      "alias": "Copa Colombia",
+      "code": "COPO",
+      "sourcePage": "https://www.transfermarkt.com/copa-colombia/erfolge/pokalwettbewerb/COPO",
+      "score": 192,
+      "status": "exact-code-candidate"
+    },
+    "哥伦比亚超级杯冠军": {
+      "name": "哥伦比亚超级杯冠军",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "4458"
+      ],
+      "alias": "Superliga",
+      "code": "RO1",
+      "sourcePage": "https://www.transfermarkt.com/liga-1-romania/erfolge/pokalwettbewerb/RO1",
+      "score": 184,
+      "status": "exact-code-candidate"
+    },
+    "荷兰U19杯冠军": {
+      "name": "荷兰U19杯冠军",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "422"
+      ],
+      "alias": "Dutch U19 Youth Cup Winner",
+      "code": "NLJB",
+      "sourcePage": "https://www.transfermarkt.com/u19-cup-netherlands/erfolge/pokalwettbewerb/NLJB",
+      "score": 190,
+      "status": "exact-code-candidate"
+    },
+    "捷克足球全国联赛冠军": {
+      "name": "捷克足球全国联赛冠军",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "4179"
+      ],
+      "alias": "FNL",
+      "status": "needs-manual-review"
+    },
+    "突尼斯杯冠军": {
+      "name": "突尼斯杯冠军",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "291"
+      ],
+      "alias": "Tunisian Cup Winner",
+      "code": "TUNP",
+      "sourcePage": "https://www.transfermarkt.com/tunisian-cup/erfolge/pokalwettbewerb/TUNP",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "伊拉克超级杯冠军": {
+      "name": "伊拉克超级杯冠军",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "314"
+      ],
+      "alias": "Iraqi Supercup Winner",
+      "code": "IKSC",
+      "sourcePage": "https://www.transfermarkt.com/iraqi-super-cup/erfolge/pokalwettbewerb/IKSC",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "英格兰U23超级联赛B组冠军": {
+      "name": "英格兰U23超级联赛B组冠军",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "4653"
+      ],
+      "alias": "Premier League 2 Division Two",
+      "status": "needs-manual-review"
+    },
+    "King's Cup": {
+      "name": "King's Cup",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "4692"
+      ],
+      "alias": "King's Cup",
+      "code": "SAKC",
+      "sourcePage": "https://www.transfermarkt.com/kings-cup/erfolge/pokalwettbewerb/SAKC",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "Ofc Under-20 Championship Winner": {
+      "name": "Ofc Under-20 Championship Winner",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "670"
+      ],
+      "alias": "Ofc Under-20 Championship Winner",
+      "status": "needs-manual-review"
+    },
+    "Uzbekistan League Cup": {
+      "name": "Uzbekistan League Cup",
+      "uses": 5,
+      "category": "club",
+      "honorIds": [
+        "4910"
+      ],
+      "alias": "Uzbekistan League Cup",
+      "status": "needs-manual-review"
+    },
+    "巴西巴拉纳甲级联赛冠军": {
+      "name": "巴西巴拉纳甲级联赛冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4233"
+      ],
+      "alias": "Paranaense 1",
+      "code": "BRC",
+      "sourcePage": "https://www.transfermarkt.com/kopa-do-burajiru/erfolge/pokalwettbewerb/BRC",
+      "score": 91,
+      "status": "exact-code-candidate"
+    },
+    "北美足球锦标赛冠军": {
+      "name": "北美足球锦标赛冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "193"
+      ],
+      "alias": "Campeones Cup Winner",
+      "code": "CAMC",
+      "sourcePage": "https://www.transfermarkt.com/campeones-cup/erfolge/pokalwettbewerb/CAMC",
+      "score": 189,
+      "status": "exact-code-candidate"
+    },
+    "超级联赛国际杯冠军": {
+      "name": "超级联赛国际杯冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4596"
+      ],
+      "alias": "Premier League International Cup",
+      "code": "PLIC",
+      "sourcePage": "https://www.transfermarkt.com/premier-league-international-cup-u21/erfolge/pokalwettbewerb/PLIC",
+      "score": 200,
+      "status": "exact-code-candidate"
+    },
+    "大洋洲U20锦标赛冠军": {
+      "name": "大洋洲U20锦标赛冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4430"
+      ],
+      "alias": "OFC U20 Championship",
+      "status": "needs-manual-review"
+    },
+    "德国U19足协杯冠军": {
+      "name": "德国U19足协杯冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "415"
+      ],
+      "alias": "Germans U19s Cup Winner",
+      "code": "DFBJ",
+      "sourcePage": "https://www.transfermarkt.com/dfb-pokal-der-junioren/erfolge/pokalwettbewerb/DFBJ",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "荷兰足球U21冠军": {
+      "name": "荷兰足球U21冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "338"
+      ],
+      "alias": "U21 Eredivisie Champion",
+      "code": "NLBE",
+      "sourcePage": "https://www.transfermarkt.com/beloften-eredivisie/erfolge/pokalwettbewerb/NLBE",
+      "score": 190,
+      "status": "exact-code-candidate"
+    },
+    "墨西哥杯开幕赛季冠军": {
+      "name": "墨西哥杯开幕赛季冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "525"
+      ],
+      "alias": "Mexican Cup Winner Apertura",
+      "status": "needs-manual-review"
+    },
+    "墨西哥冠军杯冠军": {
+      "name": "墨西哥冠军杯冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "530"
+      ],
+      "alias": "Mexican Campeón De Campeones",
+      "status": "needs-manual-review"
+    },
+    "挪威足球甲级联赛冠军": {
+      "name": "挪威足球甲级联赛冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4803"
+      ],
+      "alias": "Norway 1. Division",
+      "status": "needs-manual-review"
+    },
+    "突尼斯足球甲级联赛冠军": {
+      "name": "突尼斯足球甲级联赛冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "290"
+      ],
+      "alias": "Tunisian Champion",
+      "code": "TUN1",
+      "sourcePage": "https://www.transfermarkt.com/ligue-1/erfolge/pokalwettbewerb/TUN1",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "伊拉克足球顶级联赛冠军": {
+      "name": "伊拉克足球顶级联赛冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "312"
+      ],
+      "alias": "Iraqi Champion",
+      "code": "IRQ1",
+      "sourcePage": "https://www.transfermarkt.com/iraq-stars-league/erfolge/pokalwettbewerb/IRQ1",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "英格兰足球U18联赛冠军": {
+      "name": "英格兰足球U18联赛冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "488"
+      ],
+      "alias": "English Youth League Winner",
+      "code": "GB18",
+      "sourcePage": "https://www.transfermarkt.com/u18-premier-league/erfolge/pokalwettbewerb/GB18",
+      "score": 192,
+      "status": "exact-code-candidate"
+    },
+    "英格兰U23超级联赛A组冠军": {
+      "name": "英格兰U23超级联赛A组冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4652"
+      ],
+      "alias": "Premier League 2 Division One",
+      "status": "needs-manual-review"
+    },
+    "英格兰U23联赛杯冠军": {
+      "name": "英格兰U23联赛杯冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4498"
+      ],
+      "alias": "Premier League Cup",
+      "status": "needs-manual-review"
+    },
+    "约旦杯冠军": {
+      "name": "约旦杯冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "308"
+      ],
+      "alias": "Jordanian Cup Winner",
+      "status": "needs-manual-review"
+    },
+    "约旦超级杯冠军": {
+      "name": "约旦超级杯冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "310"
+      ],
+      "alias": "Jordanian Supercup Winner",
+      "code": "JOSC",
+      "sourcePage": "https://www.transfermarkt.com/jordan-super-cup/erfolge/pokalwettbewerb/JOSC",
+      "score": 189,
+      "status": "exact-code-candidate"
+    },
+    "约旦足球超级联赛冠军": {
+      "name": "约旦足球超级联赛冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "307"
+      ],
+      "alias": "Jordanian Champion",
+      "code": "JO1L",
+      "sourcePage": "https://www.transfermarkt.com/jordanian-pro-league/erfolge/pokalwettbewerb/JO1L",
+      "score": 189,
+      "status": "exact-code-candidate"
+    },
+    "约旦足总盾杯冠军": {
+      "name": "约旦足总盾杯冠军",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "309"
+      ],
+      "alias": "Jordanischer Fa Shield-sieger",
+      "status": "needs-manual-review"
+    },
+    "Campeón de Campeones": {
+      "name": "Campeón de Campeones",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4606"
+      ],
+      "alias": "Campeón de Campeones",
+      "status": "needs-manual-review"
+    },
+    "Florida Cup": {
+      "name": "Florida Cup",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4630"
+      ],
+      "alias": "Florida Cup",
+      "status": "needs-manual-review"
+    },
+    "Mobile Mini Sun Cup": {
+      "name": "Mobile Mini Sun Cup",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "4695"
+      ],
+      "alias": "Mobile Mini Sun Cup",
+      "status": "needs-manual-review"
+    },
+    "U20 Elite League Winner": {
+      "name": "U20 Elite League Winner",
+      "uses": 4,
+      "category": "club",
+      "honorIds": [
+        "618"
+      ],
+      "alias": "U20 Elite League Winner",
+      "code": "SU20",
+      "sourcePage": "https://www.transfermarkt.com/u20-elite-league/erfolge/pokalwettbewerb/SU20",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "奥地利足球乙级联赛冠军": {
+      "name": "奥地利足球乙级联赛冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "71"
+      ],
+      "alias": "2. Liga Champion (aut)",
+      "status": "needs-manual-review"
+    },
+    "巴伐利亚足球地区联赛冠军": {
+      "name": "巴伐利亚足球地区联赛冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "130"
+      ],
+      "alias": "German Regionalliga Bavaria Champion",
+      "code": "RLB3",
+      "sourcePage": "https://www.transfermarkt.com/regionalliga-bayern/erfolge/pokalwettbewerb/RLB3",
+      "score": 205,
+      "status": "exact-code-candidate"
+    },
+    "巴拉圭足球甲级联赛开幕赛季冠军": {
+      "name": "巴拉圭足球甲级联赛开幕赛季冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "205"
+      ],
+      "alias": "Paraguayan Champion Apertura",
+      "code": "PR1A",
+      "sourcePage": "https://www.transfermarkt.com/primera-division-apertura/erfolge/pokalwettbewerb/PR1A",
+      "score": 198,
+      "status": "exact-code-candidate"
+    },
+    "保加利亚杯冠军": {
+      "name": "保加利亚杯冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "95"
+      ],
+      "alias": "Bulgarian Cup Winner",
+      "code": "BULP",
+      "sourcePage": "https://www.transfermarkt.com/bulgarischer-pokal/erfolge/pokalwettbewerb/BULP",
+      "score": 189,
+      "status": "exact-code-candidate"
+    },
+    "波黑足球U19联赛冠军": {
+      "name": "波黑足球U19联赛冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "441"
+      ],
+      "alias": "Bosnian-herzegovinian Champion U19",
+      "status": "needs-manual-review"
+    },
+    "骏河银行锦标赛冠军": {
+      "name": "骏河银行锦标赛冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4398"
+      ],
+      "alias": "J.League Cup / Copa Sudamericana Championship",
+      "status": "needs-manual-review"
+    },
+    "瑞士足球挑战联赛冠军": {
+      "name": "瑞士足球挑战联赛冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4184"
+      ],
+      "alias": "Challenge League",
+      "code": "AFCP",
+      "sourcePage": "https://www.transfermarkt.com/afc-presidents-cup/erfolge/pokalwettbewerb/AFCP",
+      "score": 189,
+      "status": "exact-code-candidate"
+    },
+    "苏格兰足球第二级别联赛冠军": {
+      "name": "苏格兰足球第二级别联赛冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "225"
+      ],
+      "alias": "Scottish Second League Champion",
+      "code": "SC2",
+      "sourcePage": "https://www.transfermarkt.com/scottish-championship/erfolge/pokalwettbewerb/SC2",
+      "score": 194,
+      "status": "exact-code-candidate"
+    },
+    "土耳其足球甲级联赛冠军": {
+      "name": "土耳其足球甲级联赛冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4182"
+      ],
+      "alias": "1. Lig",
+      "status": "needs-manual-review"
+    },
+    "乌兹别克斯坦超级联赛冠军": {
+      "name": "乌兹别克斯坦超级联赛冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4322"
+      ],
+      "alias": "Pro League A",
+      "status": "needs-manual-review"
+    },
+    "伊拉克杯冠军": {
+      "name": "伊拉克杯冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "313"
+      ],
+      "alias": "Iraqi Cup Winner",
+      "code": "IRQC",
+      "sourcePage": "https://www.transfermarkt.com/iraq-fa-cup/erfolge/pokalwettbewerb/IRQC",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "意大利青年杯冠军": {
+      "name": "意大利青年杯冠军",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "418"
+      ],
+      "alias": "Winner Of Coppa Italia Primavera",
+      "code": "CITP",
+      "sourcePage": "https://www.transfermarkt.com/coppa-italia-primavera/erfolge/pokalwettbewerb/CITP",
+      "score": 100,
+      "status": "exact-code-candidate"
+    },
+    "Copa Ibérica": {
+      "name": "Copa Ibérica",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4751"
+      ],
+      "alias": "Copa Ibérica",
+      "status": "needs-manual-review"
+    },
+    "FA Youth Cup": {
+      "name": "FA Youth Cup",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4508"
+      ],
+      "alias": "FA Youth Cup",
+      "code": "FAYC",
+      "sourcePage": "https://www.transfermarkt.com/fayusukappu/erfolge/pokalwettbewerb/FAYC",
+      "score": 187,
+      "status": "exact-code-candidate"
+    },
+    "M-150 Cup U23": {
+      "name": "M-150 Cup U23",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4703"
+      ],
+      "alias": "M-150 Cup U23",
+      "status": "needs-manual-review"
+    },
+    "Minor Premiership Winner (nzl)": {
+      "name": "Minor Premiership Winner (nzl)",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "635"
+      ],
+      "alias": "Minor Premiership Winner (nzl)",
+      "status": "needs-manual-review"
+    },
+    "PFL Cup": {
+      "name": "PFL Cup",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4577"
+      ],
+      "alias": "PFL Cup",
+      "status": "needs-manual-review"
+    },
+    "Timbers Preseason Tournament": {
+      "name": "Timbers Preseason Tournament",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4764"
+      ],
+      "alias": "Timbers Preseason Tournament",
+      "status": "needs-manual-review"
+    },
+    "Tournoi U20 4 Nations": {
+      "name": "Tournoi U20 4 Nations",
+      "uses": 3,
+      "category": "club",
+      "honorIds": [
+        "4635"
+      ],
+      "alias": "Tournoi U20 4 Nations",
+      "status": "needs-manual-review"
+    },
+    "巴拿马杯冠军": {
+      "name": "巴拿马杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "171"
+      ],
+      "alias": "Panamanian Cup Winner",
+      "status": "needs-manual-review"
+    },
+    "保加利亚超级杯冠军": {
+      "name": "保加利亚超级杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "96"
+      ],
+      "alias": "Bulgaria Super Cup Winner",
+      "code": "BULS",
+      "sourcePage": "https://www.transfermarkt.com/bulgarian-super-cup/erfolge/pokalwettbewerb/BULS",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "波黑杯冠军": {
+      "name": "波黑杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "262"
+      ],
+      "alias": "Bosnian-herzegovinian Cup Winner",
+      "code": "BIHP",
+      "sourcePage": "https://www.transfermarkt.com/kup-bih/erfolge/pokalwettbewerb/BIHP",
+      "score": 200,
+      "status": "exact-code-candidate"
+    },
+    "波黑U19杯赛冠军": {
+      "name": "波黑U19杯赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "442"
+      ],
+      "alias": "Bosnian-herzegovinian Cup Winner U19",
+      "status": "needs-manual-review"
+    },
+    "丹麦足球甲级联赛冠军": {
+      "name": "丹麦足球甲级联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "114"
+      ],
+      "alias": "Danish Second Tier Champion",
+      "status": "needs-manual-review"
+    },
+    "德国地区联赛冠军": {
+      "name": "德国地区联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "132"
+      ],
+      "alias": "German Regionalliga Southwest Champion",
+      "code": "RLSW",
+      "sourcePage": "https://www.transfermarkt.com/regionalliga-sudwest/erfolge/pokalwettbewerb/RLSW",
+      "score": 207,
+      "status": "exact-code-candidate"
+    },
+    "德国足球北部地区联赛冠军": {
+      "name": "德国足球北部地区联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "349"
+      ],
+      "alias": "German Regionalliga North Champion",
+      "code": "RLN3",
+      "sourcePage": "https://www.transfermarkt.com/regionalliga-nord/erfolge/pokalwettbewerb/RLN3",
+      "score": 203,
+      "status": "exact-code-candidate"
+    },
+    "泛美运动会足球冠军": {
+      "name": "泛美运动会足球冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "62"
+      ],
+      "alias": "Winner Of Panamerican Games",
+      "status": "needs-manual-review"
+    },
+    "海湾奥林匹克队杯冠军": {
+      "name": "海湾奥林匹克队杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4471"
+      ],
+      "alias": "Gulf Olympic Teams Cup",
+      "status": "needs-manual-review"
+    },
+    "荷兰丙级联赛冠军": {
+      "name": "荷兰丙级联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4620"
+      ],
+      "alias": "Tweede Divisie",
+      "status": "needs-manual-review"
+    },
+    "捷克超级杯冠军": {
+      "name": "捷克超级杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4857"
+      ],
+      "alias": "Czech Republic Super Cup",
+      "status": "needs-manual-review"
+    },
+    "卡塔尔乙级联赛冠军": {
+      "name": "卡塔尔乙级联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4846"
+      ],
+      "alias": "Qatar Second Division",
+      "status": "needs-manual-review"
+    },
+    "美国足球联合联赛常规赛冠军": {
+      "name": "美国足球联合联赛常规赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "271"
+      ],
+      "alias": "Usl Regular Season Champion",
+      "code": "USL",
+      "sourcePage": "https://www.transfermarkt.com/usl-championship/erfolge/pokalwettbewerb/USL",
+      "score": 196,
+      "status": "exact-code-candidate"
+    },
+    "美国足球联合联赛冠军": {
+      "name": "美国足球联合联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "270"
+      ],
+      "alias": "Usl Cup Champion",
+      "status": "needs-manual-review"
+    },
+    "摩尔多瓦杯冠军": {
+      "name": "摩尔多瓦杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "389"
+      ],
+      "alias": "Moldavian Cup Winner",
+      "status": "needs-manual-review"
+    },
+    "墨西哥超级杯冠军": {
+      "name": "墨西哥超级杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "529"
+      ],
+      "alias": "Mexican Super Cup Winner",
+      "code": "SC14",
+      "sourcePage": "https://www.transfermarkt.com/supercopa-mx/erfolge/pokalwettbewerb/SC14",
+      "score": 187,
+      "status": "exact-code-candidate"
+    },
+    "南非杯冠军": {
+      "name": "南非杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "299"
+      ],
+      "alias": "South African Cup Winner",
+      "code": "TELK",
+      "sourcePage": "https://www.transfermarkt.com/carling-knockout/erfolge/pokalwettbewerb/TELK",
+      "score": 192,
+      "status": "exact-code-candidate"
+    },
+    "南非甲级联赛冠军": {
+      "name": "南非甲级联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4831"
+      ],
+      "alias": "South Africa 1st Division",
+      "status": "needs-manual-review"
+    },
+    "南美U20解放者杯": {
+      "name": "南美U20解放者杯",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "452"
+      ],
+      "alias": "U20-copa-libertadores-sieger",
+      "status": "needs-manual-review"
+    },
+    "瑞士足球U18联赛冠军": {
+      "name": "瑞士足球U18联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "430"
+      ],
+      "alias": "Swiss U18-champion",
+      "status": "needs-manual-review"
+    },
+    "突尼斯超级杯冠军": {
+      "name": "突尼斯超级杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "292"
+      ],
+      "alias": "Tunesischer Superpokalsieger",
+      "status": "needs-manual-review"
+    },
+    "伊朗甲组联赛冠军": {
+      "name": "伊朗甲组联赛冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4315"
+      ],
+      "alias": "Azadegan League",
+      "status": "needs-manual-review"
+    },
+    "中北美洲男足U17冠军杯冠军": {
+      "name": "中北美洲男足U17冠军杯冠军",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4361"
+      ],
+      "alias": "Concacaf U17",
+      "code": "CO17",
+      "sourcePage": "https://www.transfermarkt.com/concacaf-u-17-championship/erfolge/pokalwettbewerb/CO17",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "Arena Cup": {
+      "name": "Arena Cup",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4677"
+      ],
+      "alias": "Arena Cup",
+      "status": "needs-manual-review"
+    },
+    "Bosnian-herzegovinian Champion U17": {
+      "name": "Bosnian-herzegovinian Champion U17",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "685"
+      ],
+      "alias": "Bosnian-herzegovinian Champion U17",
+      "status": "needs-manual-review"
+    },
+    "Copa Ecuador": {
+      "name": "Copa Ecuador",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4755"
+      ],
+      "alias": "Copa Ecuador",
+      "code": "ECUP",
+      "sourcePage": "https://www.transfermarkt.com/copa-ecuador/erfolge/pokalwettbewerb/ECUP",
+      "score": 191,
+      "status": "exact-code-candidate"
+    },
+    "Copa Libertadores Play-off": {
+      "name": "Copa Libertadores Play-off",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4598"
+      ],
+      "alias": "Copa Libertadores Play-off",
+      "status": "needs-manual-review"
+    },
+    "Ofc-u17-championship-winner": {
+      "name": "Ofc-u17-championship-winner",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "688"
+      ],
+      "alias": "Ofc-u17-championship-winner",
+      "status": "needs-manual-review"
+    },
+    "Supercopa de Ecuador": {
+      "name": "Supercopa de Ecuador",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4758"
+      ],
+      "alias": "Supercopa de Ecuador",
+      "status": "needs-manual-review"
+    },
+    "Tipsport Liga": {
+      "name": "Tipsport Liga",
+      "uses": 2,
+      "category": "club",
+      "honorIds": [
+        "4631"
+      ],
+      "alias": "Tipsport Liga",
+      "status": "needs-manual-review"
+    },
+    "U17美洲杯冠军": {
+      "name": "U17美洲杯冠军",
+      "uses": 2,
+      "category": "national",
+      "honorIds": [
+        "396"
+      ],
+      "alias": "South American Champion U17",
+      "code": "SAM7",
+      "sourcePage": "https://www.transfermarkt.com/u17-sudamerikameisterschaft/erfolge/pokalwettbewerb/SAM7",
+      "score": 193,
+      "status": "exact-code-candidate"
+    },
+    "阿尔及利亚杯冠军": {
+      "name": "阿尔及利亚杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "287"
+      ],
+      "alias": "Algerian Cup Winner",
+      "code": "ALGP",
+      "sourcePage": "https://www.transfermarkt.com/coupe-dalgerie/erfolge/pokalwettbewerb/ALGP",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "阿尔及利亚联赛杯冠军": {
+      "name": "阿尔及利亚联赛杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "289"
+      ],
+      "alias": "Algerian League Cup Winner",
+      "code": "ALLP",
+      "sourcePage": "https://www.transfermarkt.com/coupe-de-la-ligue-dalgerie/erfolge/pokalwettbewerb/ALLP",
+      "score": 188,
+      "status": "exact-code-candidate"
+    },
+    "阿根廷冠军挑战杯": {
+      "name": "阿根廷冠军挑战杯",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4757"
+      ],
+      "alias": "Trofeo de Campeones de la Superliga",
+      "status": "needs-manual-review"
+    },
+    "爱尔兰足球超级联赛冠军": {
+      "name": "爱尔兰足球超级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "148"
+      ],
+      "alias": "Irish Champion",
+      "code": "IR1",
+      "sourcePage": "https://www.transfermarkt.com/league-of-ireland-premier-division/erfolge/pokalwettbewerb/IR1",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "爱沙尼亚杯冠军": {
+      "name": "爱沙尼亚杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "116"
+      ],
+      "alias": "Estonian Cup Winner",
+      "status": "needs-manual-review"
+    },
+    "奥地利足球丁级联赛冠军": {
+      "name": "奥地利足球丁级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "73"
+      ],
+      "alias": "Champion Landesliga Steiermark",
+      "status": "needs-manual-review"
+    },
+    "澳大利亚青年联赛冠军": {
+      "name": "澳大利亚青年联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4468"
+      ],
+      "alias": "Y-League",
+      "status": "needs-manual-review"
+    },
+    "巴登杯": {
+      "name": "巴登杯",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4510"
+      ],
+      "alias": "Reg. Cup Baden",
+      "status": "needs-manual-review"
+    },
+    "巴林超级杯冠军": {
+      "name": "巴林超级杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "506"
+      ],
+      "alias": "Bahraini Supercup Winner",
+      "status": "needs-manual-review"
+    },
+    "巴林国王杯冠军": {
+      "name": "巴林国王杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "504"
+      ],
+      "alias": "Bahraini King's Cup Winner",
+      "status": "needs-manual-review"
+    },
+    "巴林足球超级联赛冠军": {
+      "name": "巴林足球超级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "503"
+      ],
+      "alias": "Bahraini Champion",
+      "status": "needs-manual-review"
+    },
+    "巴西丙组联赛冠军": {
+      "name": "巴西丙组联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4225"
+      ],
+      "alias": "Serie C",
+      "code": "SCIC",
+      "sourcePage": "https://www.transfermarkt.com/supercoppa-di-serie-c/erfolge/pokalwettbewerb/SCIC",
+      "score": 186,
+      "status": "exact-code-candidate"
+    },
+    "巴西高乔甲级联赛冠军": {
+      "name": "巴西高乔甲级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4235"
+      ],
+      "alias": "Gaúcho 1",
+      "status": "needs-manual-review"
+    },
+    "北美足球联赛冠军": {
+      "name": "北美足球联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4427"
+      ],
+      "alias": "NASL",
+      "code": "NAFC",
+      "sourcePage": "https://www.transfermarkt.com/nasl-fall-championship/erfolge/pokalwettbewerb/NAFC",
+      "score": 184,
+      "status": "exact-code-candidate"
+    },
+    "丹麦足球乙级联赛冠军": {
+      "name": "丹麦足球乙级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "361"
+      ],
+      "alias": "Danish Third Tier Champion",
+      "status": "needs-manual-review"
+    },
+    "丹麦足球U19联赛冠军": {
+      "name": "丹麦足球U19联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "429"
+      ],
+      "alias": "Danish Youth Champion",
+      "status": "needs-manual-review"
+    },
+    "德下莱茵杯冠军": {
+      "name": "德下莱茵杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4518"
+      ],
+      "alias": "Reg. Cup Niederrhein",
+      "status": "needs-manual-review"
+    },
+    "俄罗斯足球甲级联赛冠军": {
+      "name": "俄罗斯足球甲级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "216"
+      ],
+      "alias": "Russian Second Tier Champion",
+      "status": "needs-manual-review"
+    },
+    "厄瓜多尔足球乙级联赛冠军": {
+      "name": "厄瓜多尔足球乙级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4261"
+      ],
+      "alias": "Liga Pro Serie B",
+      "code": "EC2L",
+      "sourcePage": "https://www.transfermarkt.com/liga-pro-serie-b/erfolge/pokalwettbewerb/EC2L",
+      "score": 193,
+      "status": "exact-code-candidate"
+    },
+    "法国全国联赛冠军": {
+      "name": "法国全国联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4174"
+      ],
+      "alias": "National 1",
+      "status": "needs-manual-review"
+    },
+    "刚果超级联赛冠军": {
+      "name": "刚果超级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4851"
+      ],
+      "alias": "Congo DR Ligue 1",
+      "status": "needs-manual-review"
+    },
+    "哈萨克斯坦杯冠军": {
+      "name": "哈萨克斯坦杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "175"
+      ],
+      "alias": "Kazakh Cup Winner",
+      "code": "KAZP",
+      "sourcePage": "https://www.transfermarkt.com/kazakhstan-cup/erfolge/pokalwettbewerb/KAZP",
+      "score": 186,
+      "status": "exact-code-candidate"
+    },
+    "哈萨克斯坦足球超级联赛冠军": {
+      "name": "哈萨克斯坦足球超级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "174"
+      ],
+      "alias": "Kazakh Champion",
+      "code": "KASR",
+      "sourcePage": "https://www.transfermarkt.com/repescagem-premier-liga/erfolge/pokalwettbewerb/KASR",
+      "score": 186,
+      "status": "exact-code-candidate"
+    },
+    "海地共和国联赛冠军": {
+      "name": "海地共和国联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4283"
+      ],
+      "alias": "Ligue Haïtienne",
+      "status": "needs-manual-review"
+    },
+    "海地冠军杯冠军": {
+      "name": "海地冠军杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4866"
+      ],
+      "alias": "Haiti Trophée des Champions",
+      "status": "needs-manual-review"
+    },
+    "黑森杯": {
+      "name": "黑森杯",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4926"
+      ],
+      "alias": "Hessen Cup",
+      "status": "needs-manual-review"
+    },
+    "加勒比俱乐部冠军联赛": {
+      "name": "加勒比俱乐部冠军联赛",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "322"
+      ],
+      "alias": "Caribbean Club Championship Winner",
+      "code": "CCC1",
+      "sourcePage": "https://www.transfermarkt.com/concacaf-caribbean-cup/erfolge/pokalwettbewerb/CCC1",
+      "score": 193,
+      "status": "exact-code-candidate"
+    },
+    "加拿大足球联赛冠军": {
+      "name": "加拿大足球联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "518"
+      ],
+      "alias": "Canadian Champion",
+      "status": "needs-manual-review"
+    },
+    "加纳足球超级联赛冠军": {
+      "name": "加纳足球超级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "329"
+      ],
+      "alias": "Ghanasian Champion",
+      "status": "needs-manual-review"
+    },
+    "科特迪瓦超级联赛冠军": {
+      "name": "科特迪瓦超级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4832"
+      ],
+      "alias": "Côte d'Ivoire Ligue 1",
+      "status": "needs-manual-review"
+    },
+    "秘鲁足球乙级联赛冠军": {
+      "name": "秘鲁足球乙级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "468"
+      ],
+      "alias": "Peruvian Second Tier Champion",
+      "code": "P2PL",
+      "sourcePage": "https://www.transfermarkt.com/liga-2-playoffs/erfolge/pokalwettbewerb/P2PL",
+      "score": 198,
+      "status": "exact-code-candidate"
+    },
+    "摩尔多瓦足球联赛冠军": {
+      "name": "摩尔多瓦足球联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "388"
+      ],
+      "alias": "Moldavian Champion",
+      "code": "MO1N",
+      "sourcePage": "https://www.transfermarkt.com/super-liga/erfolge/pokalwettbewerb/MO1N",
+      "score": 189,
+      "status": "exact-code-candidate"
+    },
+    "墨西哥足球甲级联赛冠军": {
+      "name": "墨西哥足球甲级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4193"
+      ],
+      "alias": "Liga de Expansión MX",
+      "status": "needs-manual-review"
+    },
+    "南韩K联杯冠军": {
+      "name": "南韩K联杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4203"
+      ],
+      "alias": "K League Cup",
+      "status": "needs-manual-review"
+    },
+    "全非运动会冠军": {
+      "name": "全非运动会冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4426"
+      ],
+      "alias": "All Africa Games",
+      "status": "needs-manual-review"
+    },
+    "塞尔维亚足球U17联赛冠军": {
+      "name": "塞尔维亚足球U17联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "496"
+      ],
+      "alias": "Serbia U17 Champion",
+      "status": "needs-manual-review"
+    },
+    "塞浦路斯超级杯冠军": {
+      "name": "塞浦路斯超级杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "459"
+      ],
+      "alias": "Cypriot Super Cup Winner",
+      "code": "CYSC",
+      "sourcePage": "https://www.transfermarkt.com/cypriot-super-cup/erfolge/pokalwettbewerb/CYSC",
+      "score": 187,
+      "status": "exact-code-candidate"
+    },
+    "塞浦路斯足球甲级联赛冠军": {
+      "name": "塞浦路斯足球甲级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "109"
+      ],
+      "alias": "Cypriot Champion",
+      "code": "ZYP1",
+      "sourcePage": "https://www.transfermarkt.com/cyprus-league/erfolge/pokalwettbewerb/ZYP1",
+      "score": 187,
+      "status": "exact-code-candidate"
+    },
+    "塞浦路斯足球乙级联赛冠军": {
+      "name": "塞浦路斯足球乙级联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4828"
+      ],
+      "alias": "Cyprus 2. Division",
+      "status": "needs-manual-review"
+    },
+    "苏格兰挑战杯冠军": {
+      "name": "苏格兰挑战杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "222"
+      ],
+      "alias": "Scottish Challenge Cup Winner",
+      "status": "needs-manual-review"
+    },
+    "苏格兰足球第三级别联赛冠军": {
+      "name": "苏格兰足球第三级别联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "224"
+      ],
+      "alias": "Scottish Third League Champion",
+      "code": "SC3",
+      "sourcePage": "https://www.transfermarkt.com/scottish-league-one/erfolge/pokalwettbewerb/SC3",
+      "score": 193,
+      "status": "exact-code-candidate"
+    },
+    "苏格兰足球第四级别联赛冠军": {
+      "name": "苏格兰足球第四级别联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "223"
+      ],
+      "alias": "Scottish Fourth League Champion",
+      "code": "SC4",
+      "sourcePage": "https://www.transfermarkt.com/scottish-league-two/erfolge/pokalwettbewerb/SC4",
+      "score": 194,
+      "status": "exact-code-candidate"
+    },
+    "泰国联赛杯冠军": {
+      "name": "泰国联赛杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "483"
+      ],
+      "alias": "Thai League Cup Winner",
+      "code": "THLC",
+      "sourcePage": "https://www.transfermarkt.com/thai-league-cup/erfolge/pokalwettbewerb/THLC",
+      "score": 184,
+      "status": "exact-code-candidate"
+    },
+    "威斯特法伦足球联赛冠军": {
+      "name": "威斯特法伦足球联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "355"
+      ],
+      "alias": "Champion Westfalenliga 1",
+      "status": "needs-manual-review"
+    },
+    "维多利亚冠军": {
+      "name": "维多利亚冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4223"
+      ],
+      "alias": "Victoria NPL",
+      "status": "needs-manual-review"
+    },
+    "匈牙利超级杯冠军": {
+      "name": "匈牙利超级杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4797"
+      ],
+      "alias": "Hungary Super Cup",
+      "status": "needs-manual-review"
+    },
+    "意大利维亚莱乔杯冠军": {
+      "name": "意大利维亚莱乔杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "419"
+      ],
+      "alias": "Viareggio",
+      "code": "TDV",
+      "sourcePage": "https://www.transfermarkt.com/viareggio-cup/erfolge/pokalwettbewerb/TDV",
+      "score": 189,
+      "status": "exact-code-candidate"
+    },
+    "意大利足球U19联赛冠军": {
+      "name": "意大利足球U19联赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "417"
+      ],
+      "alias": "Italian Youth Champion (primavera)",
+      "code": "IJ1",
+      "sourcePage": "https://www.transfermarkt.com/primavera-1/erfolge/pokalwettbewerb/IJ1",
+      "score": 201,
+      "status": "exact-code-candidate"
+    },
+    "意大利U19超级杯冠军": {
+      "name": "意大利U19超级杯冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "423"
+      ],
+      "alias": "Winner Italian Supercoppa (primavera)",
+      "code": "SCIJ",
+      "sourcePage": "https://www.transfermarkt.com/supercoppa-primavera/erfolge/pokalwettbewerb/SCIJ",
+      "score": 201,
+      "status": "exact-code-candidate"
+    },
+    "英足总锦标赛冠军": {
+      "name": "英足总锦标赛冠军",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4342"
+      ],
+      "alias": "FA Trophy",
+      "code": "MALC",
+      "sourcePage": "https://www.transfermarkt.com/maltese-fa-trophy/erfolge/pokalwettbewerb/MALC",
+      "score": 182,
+      "status": "exact-code-candidate"
+    },
+    "Argentina Copa Bicentenario": {
+      "name": "Argentina Copa Bicentenario",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4896"
+      ],
+      "alias": "Argentina Copa Bicentenario",
+      "status": "needs-manual-review"
+    },
+    "Caribbean Cup Winner": {
+      "name": "Caribbean Cup Winner",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "643"
+      ],
+      "alias": "Caribbean Cup Winner",
+      "status": "needs-manual-review"
+    },
+    "Cheshire Senior Cup": {
+      "name": "Cheshire Senior Cup",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4563"
+      ],
+      "alias": "Cheshire Senior Cup",
+      "status": "needs-manual-review"
+    },
+    "Cpl Fall Season Champion": {
+      "name": "Cpl Fall Season Champion",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "698"
+      ],
+      "alias": "Cpl Fall Season Champion",
+      "status": "needs-manual-review"
+    },
+    "Cuadrangular Bogota": {
+      "name": "Cuadrangular Bogota",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4708"
+      ],
+      "alias": "Cuadrangular Bogota",
+      "status": "needs-manual-review"
+    },
+    "Cuadrangular Pereira": {
+      "name": "Cuadrangular Pereira",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4721"
+      ],
+      "alias": "Cuadrangular Pereira",
+      "status": "needs-manual-review"
+    },
+    "Irish Cup Winner": {
+      "name": "Irish Cup Winner",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "636"
+      ],
+      "alias": "Irish Cup Winner",
+      "code": "NILC",
+      "sourcePage": "https://www.transfermarkt.com/irish-league-cup/erfolge/pokalwettbewerb/NILC",
+      "score": 185,
+      "status": "exact-code-candidate"
+    },
+    "Istria Winter Cup": {
+      "name": "Istria Winter Cup",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4678"
+      ],
+      "alias": "Istria Winter Cup",
+      "status": "needs-manual-review"
+    },
+    "Leinster Senior Cup": {
+      "name": "Leinster Senior Cup",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4586"
+      ],
+      "alias": "Leinster Senior Cup",
+      "code": "IRLC",
+      "sourcePage": "https://www.transfermarkt.com/leinster-senior-cup/erfolge/pokalwettbewerb/IRLC",
+      "score": 194,
+      "status": "exact-code-candidate"
+    },
+    "Macufe Cup": {
+      "name": "Macufe Cup",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4165"
+      ],
+      "alias": "Macufe Cup",
+      "status": "needs-manual-review"
+    },
+    "Oxfordshire Senior Cup": {
+      "name": "Oxfordshire Senior Cup",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4553"
+      ],
+      "alias": "Oxfordshire Senior Cup",
+      "status": "needs-manual-review"
+    },
+    "Reg. Cup Schleswig-Holstein": {
+      "name": "Reg. Cup Schleswig-Holstein",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4523"
+      ],
+      "alias": "Reg. Cup Schleswig-Holstein",
+      "status": "needs-manual-review"
+    },
+    "Tipsport Malta Cup": {
+      "name": "Tipsport Malta Cup",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4763"
+      ],
+      "alias": "Tipsport Malta Cup",
+      "status": "needs-manual-review"
+    },
+    "Under-20 Brazilian Champion": {
+      "name": "Under-20 Brazilian Champion",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "661"
+      ],
+      "alias": "Under-20 Brazilian Champion",
+      "status": "needs-manual-review"
+    },
+    "USL League One": {
+      "name": "USL League One",
+      "uses": 1,
+      "category": "club",
+      "honorIds": [
+        "4726"
+      ],
+      "alias": "USL League One",
+      "code": "USC3",
+      "sourcePage": "https://www.transfermarkt.com/uslrigu1/erfolge/pokalwettbewerb/USC3",
+      "score": 186,
+      "status": "exact-code-candidate"
+    }
+  }
+}
