@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "306";
+const STATIC_DATA_VERSION = "307";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -9990,21 +9990,21 @@ function renderPlayerAbilityCategory(group = {}, index = 0) {
 }
 
 const PLAYER_ABILITY_POSITION_LAYOUT = [
-  { code: "lw", x: 12, y: 10 },
-  { code: "lf", x: 37, y: 10 },
-  { code: "ls", x: 63, y: 10 },
-  { code: "rw", x: 88, y: 10 },
-  { code: "lm", x: 12, y: 31 },
-  { code: "lam", x: 37, y: 31 },
-  { code: "lcm", x: 63, y: 31 },
-  { code: "rm", x: 88, y: 31 },
-  { code: "lwb", x: 12, y: 52 },
-  { code: "ldm", x: 50, y: 52 },
-  { code: "rwb", x: 88, y: 52 },
-  { code: "lb", x: 22, y: 73 },
-  { code: "lcb", x: 50, y: 73 },
-  { code: "rb", x: 78, y: 73 },
-  { code: "gk", x: 50, y: 91 },
+  { code: "lw", zone: "left", order: 0 },
+  { code: "lm", zone: "left", order: 1 },
+  { code: "lwb", zone: "left", order: 2 },
+  { code: "lb", zone: "left", order: 3 },
+  { code: "ls", zone: "center", order: 0 },
+  { code: "lf", zone: "center", order: 1 },
+  { code: "lam", zone: "center", order: 2 },
+  { code: "lcm", zone: "center", order: 3 },
+  { code: "ldm", zone: "center", order: 4 },
+  { code: "lcb", zone: "center", order: 5 },
+  { code: "gk", zone: "center", order: 6 },
+  { code: "rw", zone: "right", order: 0 },
+  { code: "rm", zone: "right", order: 1 },
+  { code: "rwb", zone: "right", order: 2 },
+  { code: "rb", zone: "right", order: 3 },
 ];
 
 function playerAbilityPositionRatings(ability = {}) {
@@ -10025,6 +10025,16 @@ function playerAbilityPositionRatings(ability = {}) {
   }).filter(Boolean);
 }
 
+function playerPositionRatingLevel(value) {
+  const score = Number(value);
+  if (score >= 90) return "elite";
+  if (score >= 80) return "strong";
+  if (score >= 70) return "solid";
+  if (score >= 50) return "developing";
+  if (score >= 35) return "low";
+  return "base";
+}
+
 function renderPlayerPositionRatings(ability = {}) {
   const ratings = playerAbilityPositionRatings(ability);
   if (!ratings.length) {
@@ -10032,7 +10042,6 @@ function renderPlayerPositionRatings(ability = {}) {
       <section class="player-position-ratings is-empty" aria-labelledby="player-position-ratings-title">
         <header class="player-position-ratings-header">
           <div>
-            <span>POSITION MAP</span>
             <h3 id="player-position-ratings-title">不同位置能力值</h3>
             <p>懂球帝 App 公开能力模型暂未提供该球员的位置评分。</p>
           </div>
@@ -10043,79 +10052,63 @@ function renderPlayerPositionRatings(ability = {}) {
   const ranked = [...ratings].sort((left, right) => right.value - left.value || left.index - right.index);
   const best = ranked[0];
   const version = ability.version || "能力模型";
+  const renderZone = (zone) => `
+    <div class="player-position-board-column is-${zone}" role="presentation">
+      ${ratings
+        .filter((rating) => rating.zone === zone)
+        .sort((left, right) => left.order - right.order)
+        .map(
+          (rating) => `
+            <div
+              class="player-position-tile is-${playerPositionRatingLevel(rating.value)}${rating === best ? " is-best" : ""}"
+              role="listitem"
+              aria-label="${escapeHtml(rating.name)} ${escapeHtml(rating.value)}${rating === best ? "，最适位置" : ""}"
+            >
+              <span>${escapeHtml(rating.name)}</span>
+              <strong>${escapeHtml(rating.value)}</strong>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
   return `
     <section class="player-position-ratings" aria-labelledby="player-position-ratings-title">
       <header class="player-position-ratings-header">
         <div>
-          <span>POSITION MAP</span>
           <h3 id="player-position-ratings-title">不同位置能力值</h3>
           <p>同一能力模型下的场上位置适配评分</p>
         </div>
         <small>懂球帝 · ${ratings.length} 个位置</small>
       </header>
       <div class="player-position-ratings-body">
-        <div class="player-position-pitch-shell">
-          <div class="player-position-pitch-caption">
-            <span>进攻方向</span>
-            <b aria-hidden="true">↑</b>
-            <small>数值越高，位置适配度越高</small>
-          </div>
-          <div class="player-position-pitch" role="list" aria-label="不同位置能力值球场分布">
-            <span class="player-position-pitch-midline" aria-hidden="true"></span>
-            <span class="player-position-pitch-circle" aria-hidden="true"></span>
-            <span class="player-position-pitch-box is-top" aria-hidden="true"></span>
-            <span class="player-position-pitch-box is-bottom" aria-hidden="true"></span>
-            ${ratings
-              .map(
-                (rating) => `
-                  <div
-                    class="player-position-marker is-${playerAbilityLevel(rating.value)}${rating === best ? " is-best" : ""}"
-                    style="--position-x:${rating.x}%;--position-y:${rating.y}%"
-                    role="listitem"
-                    aria-label="${escapeHtml(rating.name)} ${escapeHtml(rating.value)}"
-                  >
-                    <strong>${escapeHtml(rating.value)}</strong>
-                    <span>${escapeHtml(rating.name)}</span>
-                  </div>
-                `
-              )
-              .join("")}
+        <div class="player-position-board-shell">
+          <div class="player-position-board" role="list" aria-label="不同位置能力值球场分布">
+            <span class="player-position-board-midline" aria-hidden="true"></span>
+            <span class="player-position-board-circle" aria-hidden="true"></span>
+            <span class="player-position-board-box is-top" aria-hidden="true"></span>
+            <span class="player-position-board-box is-bottom" aria-hidden="true"></span>
+            ${renderZone("left")}
+            ${renderZone("center")}
+            ${renderZone("right")}
           </div>
         </div>
-        <aside class="player-position-summary" aria-label="位置评分摘要">
+        <footer class="player-position-ratings-footer">
           <div class="player-position-best">
-            <div>
-              <span>最适位置</span>
-              <strong>${escapeHtml(best.name)}</strong>
-              <small>${escapeHtml(version)} 位置评分</small>
-            </div>
+            <span>最适位置</span>
+            <strong>${escapeHtml(best.name)}</strong>
+            <small>${escapeHtml(version)}</small>
             <b>${escapeHtml(best.value)}</b>
-          </div>
-          <div class="player-position-ranking">
-            <span>推荐位置</span>
-            <ol>
-              ${ranked
-                .slice(0, 3)
-                .map(
-                  (rating, index) => `
-                    <li class="is-${playerAbilityLevel(rating.value)}">
-                      <i>${String(index + 1).padStart(2, "0")}</i>
-                      <span>${escapeHtml(rating.name)}</span>
-                      <b>${escapeHtml(rating.value)}</b>
-                    </li>
-                  `
-                )
-                .join("")}
-            </ol>
           </div>
           <div class="player-position-legend" aria-label="评分颜色说明">
             <span class="is-elite"><i></i>90+</span>
             <span class="is-strong"><i></i>80–89</span>
             <span class="is-solid"><i></i>70–79</span>
             <span class="is-developing"><i></i>50–69</span>
-            <span class="is-low"><i></i>&lt;50</span>
+            <span class="is-low"><i></i>35–49</span>
+            <span class="is-base"><i></i>&lt;35</span>
           </div>
-        </aside>
+        </footer>
       </div>
     </section>
   `;

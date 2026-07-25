@@ -219,9 +219,9 @@ const css = fs.readFileSync(path.join(root, "static", "styles.css"), "utf8");
 const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 assert.match(app, /function renderPlayerPositionRatings/);
 assert.match(app, /不同位置能力值/);
-assert.match(app, /player-position-pitch/);
+assert.match(app, /player-position-board/);
 assert.match(css, /\.player-position-ratings/);
-assert.match(css, /\.player-position-marker/);
+assert.match(css, /\.player-position-tile/);
 const positionLabelSource = app.slice(
   app.indexOf("function playerAbilityPositionLabel"),
   app.indexOf("function renderPlayerAbilityStars")
