@@ -60,6 +60,27 @@ for (const entry of manifest.players) {
   assert.ok(data.profile.identity.fullNameZh, `${entry.playerId} must retain a Chinese display name`);
   if (data.coverage.ability === "available") {
     assert.ok(data.ability?.radar?.length >= 3, `${entry.playerId} must retain its ability radar`);
+    assert.equal(
+      data.ability?.positionRatings?.length,
+      15,
+      `${entry.playerId} must retain all 15 public position ratings`
+    );
+    assert.equal(
+      new Set(data.ability.positionRatings.map((rating) => rating.code)).size,
+      15,
+      `${entry.playerId} position rating codes must be unique`
+    );
+    assert.ok(
+      data.ability.positionRatings.every(
+        (rating) =>
+          rating.name &&
+          rating.code &&
+          Number.isFinite(rating.value) &&
+          rating.value >= 0 &&
+          rating.value <= 100
+      ),
+      `${entry.playerId} position ratings must remain renderable`
+    );
     availableAbilitySnapshots.push({
       playerId: entry.playerId,
       position: player.position,
@@ -196,6 +217,11 @@ for (const honor of snapshot.profile.honors) {
 const app = fs.readFileSync(path.join(root, "static", "app.js"), "utf8");
 const css = fs.readFileSync(path.join(root, "static", "styles.css"), "utf8");
 const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
+assert.match(app, /function renderPlayerPositionRatings/);
+assert.match(app, /不同位置能力值/);
+assert.match(app, /player-position-pitch/);
+assert.match(css, /\.player-position-ratings/);
+assert.match(css, /\.player-position-marker/);
 const radarOrderSource = app.slice(
   app.indexOf("const PLAYER_ABILITY_RADAR_ORDERS"),
   app.indexOf("function playerAbilityAvailable")
@@ -266,6 +292,29 @@ for (const { playerId, position, ability } of availableAbilitySnapshots) {
 assert.ok(goalkeeperRadarCount > 100, "the full-path radar regression must include the goalkeeper cohort");
 const bounou = readJson(
   path.join(root, archiveIndex.details.players.fifa_player_356956.replace(/^\/+/, ""))
+);
+assert.deepEqual(
+  Object.fromEntries(
+    bounou.dongqiudiProfile.ability.positionRatings.map((rating) => [rating.code, rating.value])
+  ),
+  {
+    gk: 82,
+    lam: 36,
+    lb: 30,
+    lcb: 31,
+    lcm: 36,
+    ldm: 35,
+    lf: 30,
+    lm: 34,
+    ls: 32,
+    lw: 28,
+    lwb: 31,
+    rb: 30,
+    rm: 34,
+    rw: 28,
+    rwb: 31,
+  },
+  "Bounou position ratings must match the archived Dongqiudi public payload"
 );
 assert.deepEqual(
   Array.from(radarContext.metricOrder(bounou.dongqiudiProfile.ability)),

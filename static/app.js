@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "304";
+const STATIC_DATA_VERSION = "305";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -9981,6 +9981,138 @@ function renderPlayerAbilityCategory(group = {}, index = 0) {
   `;
 }
 
+const PLAYER_ABILITY_POSITION_LAYOUT = [
+  { code: "lw", x: 12, y: 10 },
+  { code: "lf", x: 37, y: 10 },
+  { code: "ls", x: 63, y: 10 },
+  { code: "rw", x: 88, y: 10 },
+  { code: "lm", x: 12, y: 31 },
+  { code: "lam", x: 37, y: 31 },
+  { code: "lcm", x: 63, y: 31 },
+  { code: "rm", x: 88, y: 31 },
+  { code: "lwb", x: 12, y: 52 },
+  { code: "ldm", x: 50, y: 52 },
+  { code: "rwb", x: 88, y: 52 },
+  { code: "lb", x: 22, y: 73 },
+  { code: "lcb", x: 50, y: 73 },
+  { code: "rb", x: 78, y: 73 },
+  { code: "gk", x: 50, y: 91 },
+];
+
+function playerAbilityPositionRatings(ability = {}) {
+  const ratingByCode = new Map(
+    (ability.positionRatings || [])
+      .map((rating) => [String(rating.code || "").toLowerCase(), rating])
+      .filter(([code, rating]) => code && Number.isFinite(Number(rating.value)))
+  );
+  return PLAYER_ABILITY_POSITION_LAYOUT.map((slot, index) => {
+    const rating = ratingByCode.get(slot.code);
+    if (!rating) return null;
+    return {
+      ...slot,
+      index,
+      name: rating.name || slot.code.toUpperCase(),
+      value: Number(rating.value),
+    };
+  }).filter(Boolean);
+}
+
+function renderPlayerPositionRatings(ability = {}) {
+  const ratings = playerAbilityPositionRatings(ability);
+  if (!ratings.length) {
+    return `
+      <section class="player-position-ratings is-empty" aria-labelledby="player-position-ratings-title">
+        <header class="player-position-ratings-header">
+          <div>
+            <span>POSITION MAP</span>
+            <h3 id="player-position-ratings-title">不同位置能力值</h3>
+            <p>懂球帝 App 公开能力模型暂未提供该球员的位置评分。</p>
+          </div>
+        </header>
+      </section>
+    `;
+  }
+  const ranked = [...ratings].sort((left, right) => right.value - left.value || left.index - right.index);
+  const best = ranked[0];
+  const version = ability.version || "能力模型";
+  return `
+    <section class="player-position-ratings" aria-labelledby="player-position-ratings-title">
+      <header class="player-position-ratings-header">
+        <div>
+          <span>POSITION MAP</span>
+          <h3 id="player-position-ratings-title">不同位置能力值</h3>
+          <p>同一能力模型下的场上位置适配评分</p>
+        </div>
+        <small>懂球帝 · ${ratings.length} 个位置</small>
+      </header>
+      <div class="player-position-ratings-body">
+        <div class="player-position-pitch-shell">
+          <div class="player-position-pitch-caption">
+            <span>进攻方向</span>
+            <b aria-hidden="true">↑</b>
+            <small>数值越高，位置适配度越高</small>
+          </div>
+          <div class="player-position-pitch" role="list" aria-label="不同位置能力值球场分布">
+            <span class="player-position-pitch-midline" aria-hidden="true"></span>
+            <span class="player-position-pitch-circle" aria-hidden="true"></span>
+            <span class="player-position-pitch-box is-top" aria-hidden="true"></span>
+            <span class="player-position-pitch-box is-bottom" aria-hidden="true"></span>
+            ${ratings
+              .map(
+                (rating) => `
+                  <div
+                    class="player-position-marker is-${playerAbilityLevel(rating.value)}${rating === best ? " is-best" : ""}"
+                    style="--position-x:${rating.x}%;--position-y:${rating.y}%"
+                    role="listitem"
+                    aria-label="${escapeHtml(rating.name)} ${escapeHtml(rating.value)}"
+                  >
+                    <strong>${escapeHtml(rating.value)}</strong>
+                    <span>${escapeHtml(rating.name)}</span>
+                  </div>
+                `
+              )
+              .join("")}
+          </div>
+        </div>
+        <aside class="player-position-summary" aria-label="位置评分摘要">
+          <div class="player-position-best">
+            <div>
+              <span>最适位置</span>
+              <strong>${escapeHtml(best.name)}</strong>
+              <small>${escapeHtml(version)} 位置评分</small>
+            </div>
+            <b>${escapeHtml(best.value)}</b>
+          </div>
+          <div class="player-position-ranking">
+            <span>推荐位置</span>
+            <ol>
+              ${ranked
+                .slice(0, 3)
+                .map(
+                  (rating, index) => `
+                    <li class="is-${playerAbilityLevel(rating.value)}">
+                      <i>${String(index + 1).padStart(2, "0")}</i>
+                      <span>${escapeHtml(rating.name)}</span>
+                      <b>${escapeHtml(rating.value)}</b>
+                    </li>
+                  `
+                )
+                .join("")}
+            </ol>
+          </div>
+          <div class="player-position-legend" aria-label="评分颜色说明">
+            <span class="is-elite"><i></i>90+</span>
+            <span class="is-strong"><i></i>80–89</span>
+            <span class="is-solid"><i></i>70–79</span>
+            <span class="is-developing"><i></i>50–69</span>
+            <span class="is-low"><i></i>&lt;50</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  `;
+}
+
 function renderPlayerAbilityPanel(data = {}, hidden = false) {
   const ability = data.ability || {};
   const positionLabels = (ability.registeredPositions || []).map(playerAbilityPositionLabel).filter(Boolean);
@@ -10023,6 +10155,7 @@ function renderPlayerAbilityPanel(data = {}, hidden = false) {
           )
           .join("")}
       </div>
+      ${renderPlayerPositionRatings(ability)}
       <div class="player-ability-category-grid">
         ${(ability.categories || []).map(renderPlayerAbilityCategory).join("")}
       </div>
@@ -10653,7 +10786,7 @@ function renderPlayerDongqiudiProfile(data, worldCupStats = null, averageHeatmap
       <nav class="player-dqd-tabs" role="tablist" aria-label="球员数据中心">
         <button id="player-dqd-tab-ability" type="button" role="tab" aria-selected="${selected("ability")}" aria-controls="player-dqd-panel-ability" tabindex="${tabIndex("ability")}" data-player-dqd-tab="ability">
           <span class="player-dqd-tab-icon" aria-hidden="true">◎</span>
-          <span class="player-dqd-tab-copy"><strong>球员能力</strong><small>评分 · 六维雷达</small></span>
+          <span class="player-dqd-tab-copy"><strong>球员能力</strong><small>评分 · 雷达 · 位置</small></span>
         </button>
         <button id="player-dqd-tab-profile" type="button" role="tab" aria-selected="${selected("profile")}" aria-controls="player-dqd-panel-profile" tabindex="${tabIndex("profile")}" data-player-dqd-tab="profile">
           <span class="player-dqd-tab-icon" aria-hidden="true">▤</span>
