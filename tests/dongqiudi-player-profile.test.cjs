@@ -222,6 +222,20 @@ assert.match(app, /不同位置能力值/);
 assert.match(app, /player-position-pitch/);
 assert.match(css, /\.player-position-ratings/);
 assert.match(css, /\.player-position-marker/);
+const positionLabelSource = app.slice(
+  app.indexOf("function playerAbilityPositionLabel"),
+  app.indexOf("function renderPlayerAbilityStars")
+);
+const positionLabelContext = {};
+vm.runInNewContext(
+  `${positionLabelSource}
+  this.positionLabel = playerAbilityPositionLabel;`,
+  positionLabelContext
+);
+assert.equal(positionLabelContext.positionLabel("GK"), "门将");
+assert.equal(positionLabelContext.positionLabel("CB"), "中后卫");
+assert.equal(positionLabelContext.positionLabel("CDM"), "后腰");
+assert.equal(positionLabelContext.positionLabel("RWB"), "右翼卫");
 const radarOrderSource = app.slice(
   app.indexOf("const PLAYER_ABILITY_RADAR_ORDERS"),
   app.indexOf("function playerAbilityAvailable")

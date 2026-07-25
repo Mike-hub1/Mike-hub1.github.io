@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "305";
+const STATIC_DATA_VERSION = "306";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -9933,13 +9933,21 @@ function playerAbilityLevel(value) {
 
 function playerAbilityPositionLabel(code) {
   const labels = {
+    GK: "门将",
     ST: "中锋",
     LW: "左边锋",
     LM: "左中场",
     RW: "右边锋",
     RM: "右中场",
     CAM: "前腰",
+    CM: "中前卫",
+    CDM: "后腰",
     CF: "影锋",
+    LB: "左后卫",
+    CB: "中后卫",
+    RB: "右后卫",
+    LWB: "左翼卫",
+    RWB: "右翼卫",
   };
   return labels[String(code || "").toUpperCase()] || code;
 }
