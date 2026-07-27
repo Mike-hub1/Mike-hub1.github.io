@@ -23874,7 +23874,52 @@ body[data-route="search"] .main {
 }
 
 .search-result-value {
-  color: #344c68;
+  display: inline-flex;
+  overflow: hidden;
+  align-items: center;
+  min-height: 25px;
+  border: 1px solid rgba(18, 153, 129, 0.2);
+  border-radius: 8px;
+  color: #0b6e60;
+  background: rgba(18, 153, 129, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.search-result-value small,
+.search-result-value strong {
+  display: inline-flex;
+  align-items: center;
+  min-height: 23px;
+  padding: 0 7px;
+  font: inherit;
+}
+
+.search-result-value small {
+  border-right: 1px solid rgba(18, 153, 129, 0.16);
+  color: #6d7d8e;
+  background: rgba(255, 255, 255, 0.56);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.search-result-value strong {
+  color: #087665;
+  font-size: 11px;
+  font-weight: 950;
+}
+
+.search-result-value.is-unavailable {
+  border-color: #dce4eb;
+  color: #778697;
+  background: #f3f6f8;
+}
+
+.search-result-value.is-unavailable small {
+  border-right-color: #dce4eb;
+}
+
+.search-result-value.is-unavailable strong {
+  color: #778697;
 }
 
 .search-result-context-copy {
@@ -24262,5 +24307,372 @@ body[data-route="search"] .main {
 
   .search-empty-actions {
     grid-column: auto;
+  }
+}
+
+/* Market value index — verified snapshot and €100m player treatment */
+.leaderboard-page[data-leaderboard-metric="market_values"] {
+  --market-gold: #f2c766;
+  --market-gold-bright: #ffe4a0;
+  --market-emerald: #34d4b3;
+  --market-ink: #07182d;
+}
+
+.leaderboard-page[data-leaderboard-metric="market_values"] .leaderboard-hero-market {
+  min-height: 224px;
+  margin-bottom: 2px;
+  border: 1px solid rgba(242, 199, 102, 0.18);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 78% 24%, rgba(242, 199, 102, 0.16), transparent 30%),
+    radial-gradient(circle at 22% 74%, rgba(52, 212, 179, 0.13), transparent 32%),
+    linear-gradient(145deg, rgba(13, 39, 68, 0.76), rgba(4, 17, 34, 0.62));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 22px 44px rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-page[data-leaderboard-metric="market_values"] .leaderboard-hero-market h1 {
+  background: linear-gradient(92deg, #fff8df, var(--market-gold-bright) 48%, #e8fff9);
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.leaderboard-page[data-leaderboard-metric="market_values"] .leaderboard-hero-badges span {
+  border-color: rgba(242, 199, 102, 0.2);
+  color: #f5ead0;
+  background: rgba(5, 20, 38, 0.52);
+}
+
+.market-value-overview {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(210px, 0.86fr) minmax(0, 1.44fr);
+  gap: 22px;
+  align-items: stretch;
+  margin: 14px 0 22px;
+  padding: 18px;
+  border: 1px solid rgba(242, 199, 102, 0.25);
+  border-radius: 22px;
+  color: #f8fbff;
+  background:
+    radial-gradient(circle at 0 0, rgba(242, 199, 102, 0.12), transparent 31%),
+    linear-gradient(130deg, rgba(13, 36, 62, 0.94), rgba(4, 20, 39, 0.9));
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.market-value-overview::after {
+  content: "€";
+  position: absolute;
+  right: -3px;
+  top: -31px;
+  color: rgba(242, 199, 102, 0.055);
+  font-size: 178px;
+  font-weight: 950;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.market-value-overview-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  padding: 4px 4px 4px 8px;
+}
+
+.market-value-overview-copy p {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 7px;
+  color: var(--market-gold);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+}
+
+.market-value-overview-copy p span {
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--market-gold), var(--market-emerald));
+  box-shadow: 0 0 10px rgba(242, 199, 102, 0.45);
+}
+
+.market-value-overview-copy h2 {
+  margin: 0;
+  color: #fff7df;
+  font-size: clamp(23px, 3.1vw, 31px);
+  font-weight: 950;
+  letter-spacing: -0.035em;
+}
+
+.market-value-overview-copy small {
+  max-width: 330px;
+  margin-top: 7px;
+  color: rgba(219, 232, 244, 0.7);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.market-value-overview-stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin: 0;
+}
+
+.market-value-overview-stats > div {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  min-height: 104px;
+  padding: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.market-value-overview-stats dt {
+  margin-bottom: 8px;
+  color: rgba(201, 218, 234, 0.72);
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.market-value-overview-stats dd {
+  overflow: hidden;
+  margin: 0;
+  color: var(--market-gold-bright);
+  font-size: clamp(19px, 2.8vw, 27px);
+  font-weight: 950;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.market-value-overview-stats dd small {
+  margin-left: 3px;
+  color: rgba(231, 239, 246, 0.72);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.market-value-overview-stats dd.is-date {
+  color: #e7f4f1;
+  font-size: 13px;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.podium-card-market-elite {
+  border-color: rgba(242, 199, 102, 0.5);
+}
+
+.market-elite-badge {
+  position: absolute;
+  z-index: 2;
+  right: 9px;
+  top: 9px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 21px;
+  padding: 0 7px;
+  border: 1px solid rgba(255, 238, 191, 0.35);
+  border-radius: 999px;
+  color: #4a3204;
+  background: linear-gradient(135deg, #fff0bd, #e8b74e);
+  box-shadow:
+    0 6px 14px rgba(232, 183, 78, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+}
+
+.leaderboard-row-name-line {
+  display: flex;
+  min-width: 0;
+  gap: 7px;
+  align-items: center;
+}
+
+.leaderboard-row-name-line > strong {
+  flex: 0 1 auto;
+}
+
+.market-elite-pill {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  min-height: 19px;
+  padding: 0 6px;
+  border: 1px solid rgba(242, 199, 102, 0.32);
+  border-radius: 999px;
+  color: #ffe7a6;
+  background: rgba(242, 199, 102, 0.1);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 950;
+  letter-spacing: 0.03em;
+}
+
+.leaderboard-list-row-market-elite {
+  background:
+    linear-gradient(90deg, rgba(242, 199, 102, 0.11), transparent 48%),
+    rgba(255, 255, 255, 0.018);
+}
+
+.leaderboard-list-row-market-elite::before {
+  content: "";
+  position: absolute;
+  inset: 8px auto 8px 0;
+  width: 3px;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(180deg, var(--market-gold-bright), #d99f31);
+  box-shadow: 0 0 11px rgba(242, 199, 102, 0.42);
+}
+
+.leaderboard-list-row-market-elite .leaderboard-row-rank,
+.leaderboard-list-row-market-elite .leaderboard-row-value strong {
+  color: var(--market-gold-bright);
+}
+
+.leaderboard-list-row-market-elite .leaderboard-row-avatar {
+  border-color: rgba(242, 199, 102, 0.62);
+  box-shadow:
+    0 0 0 3px rgba(242, 199, 102, 0.07),
+    0 0 15px rgba(242, 199, 102, 0.18);
+}
+
+.leaderboard-page[data-leaderboard-metric="market_values"] .leaderboard-slider-range::-webkit-slider-runnable-track {
+  border-color: rgba(242, 199, 102, 0.3);
+  background: linear-gradient(90deg, var(--market-gold), var(--market-emerald));
+}
+
+.leaderboard-page[data-leaderboard-metric="market_values"] .leaderboard-slider-range::-moz-range-track {
+  border-color: rgba(242, 199, 102, 0.3);
+  background: linear-gradient(90deg, var(--market-gold), var(--market-emerald));
+}
+
+.market-value-source-badge {
+  border-color: rgba(242, 199, 102, 0.24) !important;
+  color: #fff0c7 !important;
+}
+
+.market-value-update-note {
+  color: rgba(230, 239, 248, 0.76);
+}
+
+.market-value-update-note > span:first-child {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(52, 212, 179, 0.32);
+  border-radius: 50%;
+  color: var(--market-emerald);
+  background: rgba(52, 212, 179, 0.08);
+}
+
+@media (max-width: 700px) {
+  .market-value-overview {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .market-value-overview-copy {
+    padding: 2px 2px 0;
+  }
+
+  .market-value-overview-stats > div {
+    min-height: 82px;
+    padding: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard-page[data-leaderboard-metric="market_values"] .leaderboard-hero-market {
+    min-height: 192px;
+    border-radius: 20px;
+  }
+
+  .market-value-overview {
+    margin-block: 10px 17px;
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .market-value-overview-copy h2 {
+    font-size: 24px;
+  }
+
+  .market-value-overview-copy small {
+    font-size: 10px;
+  }
+
+  .market-value-overview-stats {
+    gap: 6px;
+  }
+
+  .market-value-overview-stats > div {
+    min-height: 74px;
+    padding: 9px 8px;
+    border-radius: 12px;
+  }
+
+  .market-value-overview-stats dt {
+    margin-bottom: 6px;
+    font-size: 9px;
+  }
+
+  .market-value-overview-stats dd {
+    font-size: 17px;
+  }
+
+  .market-value-overview-stats dd.is-date {
+    font-size: 10px;
+  }
+
+  .market-elite-badge {
+    right: 5px;
+    top: 6px;
+    min-height: 18px;
+    padding-inline: 5px;
+    font-size: 7px;
+  }
+
+  .leaderboard-row-name-line {
+    gap: 4px;
+  }
+
+  .market-elite-pill {
+    min-height: 17px;
+    padding-inline: 5px;
+    font-size: 7px;
+  }
+
+  .search-result-value small,
+  .search-result-value strong {
+    min-height: 21px;
+    padding-inline: 6px;
+  }
+
+  .search-result-value strong {
+    font-size: 10px;
   }
 }

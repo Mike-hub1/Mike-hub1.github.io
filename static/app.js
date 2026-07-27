@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "309";
+const STATIC_DATA_VERSION = "310";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -734,6 +734,9 @@ async function archiveSearchApi(index, canonicalPath) {
         clubName: row.club?.name,
         clubLogoUrl: row.club?.logoUrl,
         marketValueLabel: row.marketValueLabelZh || row.marketValueLabel,
+        marketValueStatus: row.marketValueStatus,
+        marketValueSource: row.marketValueSource,
+        marketValueCheckedAt: row.marketValueCheckedAt,
         href: `/players/${row.id}`,
       });
     }
@@ -1529,6 +1532,46 @@ function leaderboardValueText(row) {
   return String(value ?? "-");
 }
 
+const MARKET_VALUE_ELITE_THRESHOLD = 100_000_000;
+
+function leaderboardNumericValue(row) {
+  const value = Number(row?.value ?? row?.player?.marketValue ?? 0);
+  return Number.isFinite(value) ? value : 0;
+}
+
+function leaderboardIsMarketElite(row, config) {
+  return config.metric === "market_values" && leaderboardNumericValue(row) >= MARKET_VALUE_ELITE_THRESHOLD;
+}
+
+function renderMarketValueOverview(items, data) {
+  const eliteItems = (items || []).filter((row) => leaderboardNumericValue(row) >= MARKET_VALUE_ELITE_THRESHOLD);
+  const highest = items?.[0] ? leaderboardValueText(items[0]) : "-";
+  const checkedAt = data.generatedAt ? formatFullDate(data.generatedAt) : "本期快照";
+  return `
+    <section class="market-value-overview" aria-labelledby="market-value-overview-title">
+      <div class="market-value-overview-copy">
+        <p><span aria-hidden="true"></span> €100M CLUB</p>
+        <h2 id="market-value-overview-title">亿元球星俱乐部</h2>
+        <small>身价达到或超过 1 亿欧元的球员，使用专属金色标识呈现。</small>
+      </div>
+      <dl class="market-value-overview-stats">
+        <div>
+          <dt>亿元球星</dt>
+          <dd>${eliteItems.length}<small>人</small></dd>
+        </div>
+        <div>
+          <dt>本期最高</dt>
+          <dd>${escapeHtml(highest)}</dd>
+        </div>
+        <div>
+          <dt>数据核验</dt>
+          <dd class="is-date">${escapeHtml(checkedAt)}</dd>
+        </div>
+      </dl>
+    </section>
+  `;
+}
+
 function renderLeaderboardTrend(row) {
   const trend = Number(row.trend || 0);
   if (!trend) return `<span class="leaderboard-trend neutral">-</span>`;
@@ -1539,15 +1582,20 @@ function renderLeaderboardTrend(row) {
 
 function renderLeaderboardHero(config, data) {
   if (config.metric === "players") return renderPlayerStatHero(data);
-  const badges = config.metric === "teams" ? [] : ["实时更新", "官方数据", "全赛事统计"];
-  const title = config.metric === "teams" ? "球队综合实力榜" : "榜单中心";
+  const isMarketValues = config.metric === "market_values";
+  const badges = config.metric === "teams"
+    ? []
+    : isMarketValues
+      ? ["最新身价快照", "亿元球星高亮", "懂球帝公开数据"]
+      : ["实时更新", "官方数据", "全赛事统计"];
+  const title = config.metric === "teams" ? "球队综合实力榜" : isMarketValues ? "球员身价榜" : "榜单中心";
   return `
-    <section class="leaderboard-hero" aria-label="榜单中心">
+    <section class="leaderboard-hero${isMarketValues ? " leaderboard-hero-market" : ""}" aria-label="${escapeHtml(title)}">
       <span class="leaderboard-hero-light light-left" aria-hidden="true"></span>
       <span class="leaderboard-hero-light light-right" aria-hidden="true"></span>
       <span class="leaderboard-trophy-glow" aria-hidden="true"></span>
       <span class="leaderboard-particles" aria-hidden="true"></span>
-      <p class="leaderboard-kicker">2026 World Cup Data Hall</p>
+      <p class="leaderboard-kicker">${isMarketValues ? "2026 Player Market Index" : "2026 World Cup Data Hall"}</p>
       <h1>${escapeHtml(title)}</h1>
       ${badges.length ? `<div class="leaderboard-hero-badges" aria-label="榜单说明">${badges.map((badge) => `<span>${escapeHtml(badge)}</span>`).join("")}</div>` : ""}
     </section>
@@ -2034,11 +2082,14 @@ function renderTopThreePodium(items, config) {
 function renderPodiumCard(row, config, place, theme, index) {
   const identity = leaderboardIdentity(row, config);
   const isTeamMetric = row.subject === "team" || config.subject === "team";
+  const isMarketElite = leaderboardIsMarketElite(row, config);
+  const rank = Number(row.rank) || place;
   const hrefAttr = identity.href ? ` data-href="${identity.href}" role="link" tabindex="0"` : "";
   return `
-    <article class="podium-card podium-card-${theme}${isTeamMetric ? " podium-card-team" : ""}" style="--stagger:${index}"${hrefAttr}>
+    <article class="podium-card podium-card-${theme}${isTeamMetric ? " podium-card-team" : ""}${isMarketElite ? " podium-card-market-elite" : ""}" style="--stagger:${index}"${hrefAttr}>
+      ${isMarketElite ? '<span class="market-elite-badge">€100M+</span>' : ""}
       <span class="podium-crown" aria-hidden="true">♕</span>
-      <span class="podium-rank">#${place}</span>
+      <span class="podium-rank">#${rank}</span>
       ${renderLeaderboardAvatar(row, config, "podium-avatar")}
       <div class="podium-name-row">
         ${isTeamMetric ? "" : teamLogo(identity.team, "leaderboard-flag")}
@@ -2141,13 +2192,18 @@ function initLeaderboardSlider(items, config) {
 function renderLeaderboardListRow(row, config, displayRank, index) {
   const identity = leaderboardIdentity(row, config);
   const isTeamMetric = row.subject === "team" || config.subject === "team";
+  const isMarketElite = leaderboardIsMarketElite(row, config);
+  const rank = Number(row.rank) || displayRank;
   const hrefAttr = identity.href ? ` data-href="${identity.href}" role="link" tabindex="0"` : "";
   return `
-    <article class="leaderboard-list-row${isTeamMetric ? " leaderboard-list-row-team" : ""}" style="--stagger:${index}"${hrefAttr}>
-      <span class="leaderboard-row-rank">${displayRank}</span>
+    <article class="leaderboard-list-row${isTeamMetric ? " leaderboard-list-row-team" : ""}${isMarketElite ? " leaderboard-list-row-market-elite" : ""}" style="--stagger:${index}"${hrefAttr}>
+      <span class="leaderboard-row-rank">${rank}</span>
       ${renderLeaderboardAvatar(row, config, "leaderboard-row-avatar")}
       <span class="leaderboard-row-main">
-        <strong title="${escapeHtml(identity.fullName)}">${escapeHtml(identity.name)}</strong>
+        <span class="leaderboard-row-name-line">
+          <strong title="${escapeHtml(identity.fullName)}">${escapeHtml(identity.name)}</strong>
+          ${isMarketElite ? '<em class="market-elite-pill">亿元级</em>' : ""}
+        </span>
         <small>
           ${isTeamMetric ? "" : teamLogo(identity.team, "leaderboard-flag")}
           <span title="${escapeHtml(identity.teamName)}">${escapeHtml(identity.teamName)}</span>
@@ -2162,6 +2218,14 @@ function renderLeaderboardListRow(row, config, displayRank, index) {
 function renderLeaderboardFooter(data) {
   const generatedAt = data.generatedAt ? formatFullDate(data.generatedAt) : "即时同步";
   if (data.snapshotMode === "dongqiudi-player-stats") return "";
+  if (data.snapshotMode === "dongqiudi-market-values") {
+    return `
+      <footer class="leaderboard-update-note market-value-update-note">
+        <span aria-hidden="true">✓</span>
+        <span>懂球帝 App 公开数据层身价快照 · ${escapeHtml(generatedAt)}</span>
+      </footer>
+    `;
+  }
   if (data.snapshotMode === "w32-csi") {
     return `
       <footer class="leaderboard-update-note">
@@ -9008,10 +9072,13 @@ async function renderLeaderboard(metric, params) {
       ${renderMetricSwitch(activeMetric, filters)}
       ${filters.q ? `<a class="leaderboard-query-pill" href="${hashHref(`/leaderboards/${activeMetric}`, { ...filters, q: "" })}">搜索：${escapeHtml(filters.q)} ×</a>` : ""}
       ${renderLeaderboardHero(config, data)}
+      ${config.metric === "market_values" ? renderMarketValueOverview(visibleItems, data) : ""}
       ${renderTopThreePodium(visibleItems, config)}
       ${renderLeaderboardList(visibleItems, config)}
       <div class="leaderboard-actions">
-        ${renderLeaderboardRealtimeBadge(data.realtime)}
+        ${config.metric === "market_values"
+          ? `<span class="source-badge market-value-source-badge">本期身价已核验 · ${escapeHtml(formatFullDate(data.generatedAt))}</span>`
+          : renderLeaderboardRealtimeBadge(data.realtime)}
         ${exportMetric ? `<button class="btn" data-export-resource="leaderboard" data-export-metric="${escapeHtml(exportMetric)}">导出</button>` : ""}
       </div>
       ${renderLeaderboardFooter(data)}
@@ -11955,7 +12022,11 @@ function searchResultContext(item, type) {
         </span>
       `
       : `<span class="search-result-club">${escapeHtml(item.teamName || "国家队球员")}</span>`;
-    const value = item.marketValueLabel ? `<span class="search-result-value">身价 ${escapeHtml(item.marketValueLabel)}</span>` : "";
+    const value = item.marketValueLabel
+      ? `<span class="search-result-value"><small>最新身价</small><strong>${escapeHtml(item.marketValueLabel)}</strong></span>`
+      : item.marketValueStatus === "unavailable"
+        ? '<span class="search-result-value is-unavailable"><small>最新身价</small><strong>暂无报价</strong></span>'
+        : "";
     return `${club}${value}`;
   }
   if (type === "team") {

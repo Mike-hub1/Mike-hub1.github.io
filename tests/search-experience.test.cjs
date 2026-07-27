@@ -63,6 +63,9 @@ async function testArchiveSearchEnrichment() {
           logoUrl: "https://example.com/real-madrid.png",
         },
         marketValueLabelZh: "2亿欧",
+        marketValueStatus: "verified",
+        marketValueSource: "懂球帝",
+        marketValueCheckedAt: "2026-07-27T13:48:13.372Z",
       }],
     },
   };
@@ -96,6 +99,9 @@ async function testArchiveSearchEnrichment() {
       clubName: "皇家马德里",
       clubLogoUrl: "https://example.com/real-madrid.png",
       marketValueLabel: "2亿欧",
+      marketValueStatus: "verified",
+      marketValueSource: "懂球帝",
+      marketValueCheckedAt: "2026-07-27T13:48:13.372Z",
       href: "/players/fifa_player_389867",
     },
   );
@@ -127,6 +133,7 @@ function testSearchCardRendering() {
     clubName: "皇家马德里",
     clubLogoUrl: "https://example.com/club.png",
     marketValueLabel: "2亿欧",
+    marketValueStatus: "verified",
     href: "/players/fifa_player_389867",
   }, "姆巴佩");
 
@@ -137,8 +144,21 @@ function testSearchCardRendering() {
   assert.match(html, />前锋</);
   assert.match(html, />法国</);
   assert.match(html, /皇家马德里/);
-  assert.match(html, /身价 2亿欧/);
+  assert.match(html, /最新身价/);
+  assert.match(html, />2亿欧</);
   assert.match(html, /href="#\/players\/fifa_player_389867"/);
+
+  const unavailableHtml = context.renderSearchResult({
+    type: "player",
+    label: "测试门将",
+    subLabel: "GK",
+    teamName: "测试队",
+    marketValueStatus: "unavailable",
+    href: "/players/test-player",
+  }, "门将");
+  assert.match(unavailableHtml, /最新身价/);
+  assert.match(unavailableHtml, /暂无报价/);
+  assert.match(unavailableHtml, /is-unavailable/);
 }
 
 function testCommercialSearchShellAndResponsiveStyles() {
@@ -156,6 +176,7 @@ function testCommercialSearchShellAndResponsiveStyles() {
   assert.match(css, /body\[data-route="search"\] \.main/);
   assert.match(css, /\.search-result-card:focus-visible/);
   assert.match(css, /\.search-result-card\[hidden\]/);
+  assert.match(css, /\.search-result-value\.is-unavailable/);
   assert.match(css, /@media \(max-width: 480px\)[\s\S]*?\.search-hero/);
   assert.match(css, /@media \(max-width: 480px\)[\s\S]*?\.search-result-card/);
 }
