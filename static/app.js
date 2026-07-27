@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "307";
+const STATIC_DATA_VERSION = "308";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -10007,6 +10007,42 @@ const PLAYER_ABILITY_POSITION_LAYOUT = [
   { code: "rb", zone: "right", order: 3 },
 ];
 
+const PLAYER_ABILITY_REGISTERED_RATING_CODES = {
+  GK: "gk",
+  ST: "ls",
+  CF: "lf",
+  CAM: "lam",
+  CM: "lcm",
+  CDM: "ldm",
+  CB: "lcb",
+  LW: "lw",
+  LM: "lm",
+  LWB: "lwb",
+  LB: "lb",
+  RW: "rw",
+  RM: "rm",
+  RWB: "rwb",
+  RB: "rb",
+};
+
+const PLAYER_ABILITY_POSITION_RECOMMENDATION_TIEBREAK = [
+  "ls",
+  "lf",
+  "lam",
+  "lcm",
+  "ldm",
+  "lcb",
+  "gk",
+  "lw",
+  "rw",
+  "lm",
+  "rm",
+  "lwb",
+  "rwb",
+  "lb",
+  "rb",
+];
+
 function playerAbilityPositionRatings(ability = {}) {
   const ratingByCode = new Map(
     (ability.positionRatings || [])
@@ -10023,6 +10059,60 @@ function playerAbilityPositionRatings(ability = {}) {
       value: Number(rating.value),
     };
   }).filter(Boolean);
+}
+
+function playerAbilityRegisteredRatingCodes(ability = {}) {
+  return (ability.registeredPositions || [])
+    .map((code) => PLAYER_ABILITY_REGISTERED_RATING_CODES[String(code || "").toUpperCase()])
+    .filter(Boolean);
+}
+
+function playerAbilityPositionRecommendations(ability = {}, ratings = []) {
+  const registeredRank = new Map(
+    playerAbilityRegisteredRatingCodes(ability).map((code, index) => [code, index])
+  );
+  const fallbackRank = new Map(
+    PLAYER_ABILITY_POSITION_RECOMMENDATION_TIEBREAK.map((code, index) => [code, index])
+  );
+  const unregistered = Number.MAX_SAFE_INTEGER;
+  return [...ratings].sort(
+    (left, right) =>
+      right.value - left.value ||
+      (registeredRank.get(left.code) ?? unregistered) -
+        (registeredRank.get(right.code) ?? unregistered) ||
+      (fallbackRank.get(left.code) ?? unregistered) -
+        (fallbackRank.get(right.code) ?? unregistered) ||
+      left.index - right.index
+  );
+}
+
+function playerAbilityPositionRecommendationCards(ability = {}, ratings = [], limit = 3) {
+  const ranked = playerAbilityPositionRecommendations(ability, ratings);
+  if (!ranked.length || limit <= 0) return [];
+  const registeredCodes = playerAbilityRegisteredRatingCodes(ability);
+  const registeredRank = new Map(registeredCodes.map((code, index) => [code, index]));
+  const ratingByCode = new Map(ratings.map((rating) => [rating.code, rating]));
+  const selected = [];
+  const selectedCodes = new Set();
+  const add = (rating) => {
+    if (!rating || selectedCodes.has(rating.code) || selected.length >= limit) return;
+    selected.push(rating);
+    selectedCodes.add(rating.code);
+  };
+  add(ranked[0]);
+  registeredCodes
+    .map((code) => ratingByCode.get(code))
+    .filter(Boolean)
+    .sort(
+      (left, right) =>
+        right.value - left.value ||
+        (registeredRank.get(left.code) ?? Number.MAX_SAFE_INTEGER) -
+          (registeredRank.get(right.code) ?? Number.MAX_SAFE_INTEGER)
+    )
+    .forEach(add);
+  const inferredFloor = Math.max(50, ranked[0].value - 8);
+  ranked.filter((rating) => rating.value >= inferredFloor).forEach(add);
+  return selected;
 }
 
 function playerPositionRatingLevel(value) {
@@ -10049,9 +10139,11 @@ function renderPlayerPositionRatings(ability = {}) {
       </section>
     `;
   }
-  const ranked = [...ratings].sort((left, right) => right.value - left.value || left.index - right.index);
+  const ranked = playerAbilityPositionRecommendations(ability, ratings);
   const best = ranked[0];
   const version = ability.version || "能力模型";
+  const registeredCodes = new Set(playerAbilityRegisteredRatingCodes(ability));
+  const recommendations = playerAbilityPositionRecommendationCards(ability, ratings);
   const renderZone = (zone) => `
     <div class="player-position-board-column is-${zone}" role="presentation">
       ${ratings
@@ -10060,9 +10152,9 @@ function renderPlayerPositionRatings(ability = {}) {
         .map(
           (rating) => `
             <div
-              class="player-position-tile is-${playerPositionRatingLevel(rating.value)}${rating === best ? " is-best" : ""}"
+              class="player-position-tile is-${playerPositionRatingLevel(rating.value)}${rating.code === best.code ? " is-best" : ""}"
               role="listitem"
-              aria-label="${escapeHtml(rating.name)} ${escapeHtml(rating.value)}${rating === best ? "，最适位置" : ""}"
+              aria-label="${escapeHtml(rating.name)} ${escapeHtml(rating.value)}${rating.code === best.code ? "，首选推荐位置" : ""}"
             >
               <span>${escapeHtml(rating.name)}</span>
               <strong>${escapeHtml(rating.value)}</strong>
@@ -10079,7 +10171,6 @@ function renderPlayerPositionRatings(ability = {}) {
           <h3 id="player-position-ratings-title">不同位置能力值</h3>
           <p>同一能力模型下的场上位置适配评分</p>
         </div>
-        <small>懂球帝 · ${ratings.length} 个位置</small>
       </header>
       <div class="player-position-ratings-body">
         <div class="player-position-board-shell">
@@ -10094,13 +10185,35 @@ function renderPlayerPositionRatings(ability = {}) {
           </div>
         </div>
         <footer class="player-position-ratings-footer">
-          <div class="player-position-best">
-            <span>最适位置</span>
-            <strong>${escapeHtml(best.name)}</strong>
-            <small>${escapeHtml(version)}</small>
-            <b>${escapeHtml(best.value)}</b>
-          </div>
+          <section class="player-position-recommendations" aria-labelledby="player-position-recommendations-title">
+            <header>
+              <div>
+                <h4 id="player-position-recommendations-title">推荐位置</h4>
+                <p>按能力值排序，同分时优先注册位置</p>
+              </div>
+              <small>${escapeHtml(version)}</small>
+            </header>
+            <ol class="has-${recommendations.length}">
+              ${recommendations
+                .map(
+                  (rating, index) => `
+                    <li class="is-${playerPositionRatingLevel(rating.value)}${index === 0 ? " is-primary" : ""}">
+                      <span>
+                        <i>${String(index + 1).padStart(2, "0")}</i>
+                        <small>${registeredCodes.has(rating.code) ? "注册位置" : "能力适配"}</small>
+                      </span>
+                      <div>
+                        <strong>${escapeHtml(rating.name)}</strong>
+                        <b>${escapeHtml(rating.value)}</b>
+                      </div>
+                    </li>
+                  `
+                )
+                .join("")}
+            </ol>
+          </section>
           <div class="player-position-legend" aria-label="评分颜色说明">
+            <strong>评分色阶</strong>
             <span class="is-elite"><i></i>90+</span>
             <span class="is-strong"><i></i>80–89</span>
             <span class="is-solid"><i></i>70–79</span>

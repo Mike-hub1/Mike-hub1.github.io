@@ -220,8 +220,76 @@ const serviceWorker = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 assert.match(app, /function renderPlayerPositionRatings/);
 assert.match(app, /不同位置能力值/);
 assert.match(app, /player-position-board/);
+assert.match(app, /推荐位置/);
+assert.doesNotMatch(app, /懂球帝 · \$\{ratings\.length\} 个位置/);
 assert.match(css, /\.player-position-ratings/);
 assert.match(css, /\.player-position-tile/);
+assert.match(css, /\.player-position-recommendations/);
+const positionRecommendationSource = app.slice(
+  app.indexOf("const PLAYER_ABILITY_POSITION_LAYOUT"),
+  app.indexOf("function playerPositionRatingLevel")
+);
+const positionRecommendationContext = {};
+vm.runInNewContext(
+  `${positionRecommendationSource}
+  this.positionRatings = playerAbilityPositionRatings;
+  this.positionRecommendations = playerAbilityPositionRecommendations;
+  this.positionRecommendationCards = playerAbilityPositionRecommendationCards;
+  this.registeredRatingCodes = playerAbilityRegisteredRatingCodes;`,
+  positionRecommendationContext
+);
+const mbappePositionRatings = positionRecommendationContext.positionRatings(snapshot.ability);
+const mbappeRecommendations = positionRecommendationContext.positionRecommendations(
+  snapshot.ability,
+  mbappePositionRatings
+);
+assert.equal(
+  Array.from(mbappeRecommendations.slice(0, 3), (rating) => rating.code).join(","),
+  "ls,lm,lam",
+  "Mbappe recommendations must prefer his primary registered striker role when ratings tie"
+);
+const mbappeRecommendationCards = positionRecommendationContext.positionRecommendationCards(
+  snapshot.ability,
+  mbappePositionRatings
+);
+assert.equal(
+  Array.from(mbappeRecommendationCards, (rating) => rating.code).join(","),
+  "ls,lm,lw",
+  "Mbappe recommendation cards must retain his three real registered roles"
+);
+for (const { playerId, ability } of availableAbilitySnapshots) {
+  const ratings = Array.from(positionRecommendationContext.positionRatings(ability));
+  const recommendations = Array.from(
+    positionRecommendationContext.positionRecommendations(ability, ratings)
+  );
+  assert.equal(recommendations.length, 15, `${playerId} must retain 15 recommendation candidates`);
+  assert.equal(
+    recommendations[0].value,
+    Math.max(...ratings.map((rating) => rating.value)),
+    `${playerId} recommendations must keep ability value as the primary sort key`
+  );
+  const registeredCodes = Array.from(positionRecommendationContext.registeredRatingCodes(ability));
+  const tiedRegistered = registeredCodes.find((code) =>
+    ratings.some((rating) => rating.code === code && rating.value === recommendations[0].value)
+  );
+  if (tiedRegistered) {
+    assert.equal(
+      recommendations[0].code,
+      tiedRegistered,
+      `${playerId} must use registered-position order to resolve a top-rating tie`
+    );
+  }
+  const cards = Array.from(
+    positionRecommendationContext.positionRecommendationCards(ability, ratings)
+  );
+  assert.ok(cards.length >= 1 && cards.length <= 3, `${playerId} must show one to three recommendations`);
+  assert.equal(cards[0].code, recommendations[0].code, `${playerId} must keep the calibrated top position first`);
+  assert.equal(
+    new Set(cards.map((rating) => rating.code)).size,
+    cards.length,
+    `${playerId} recommendation cards must not duplicate positions`
+  );
+}
 const positionLabelSource = app.slice(
   app.indexOf("function playerAbilityPositionLabel"),
   app.indexOf("function renderPlayerAbilityStars")

@@ -16830,8 +16830,7 @@ body[data-route="leaderboards"] .main {
   display: flex;
   min-height: 82px;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: flex-start;
   padding: 16px 21px;
   border-bottom: 1px solid rgba(155, 168, 180, 0.28);
   background:
@@ -16861,18 +16860,6 @@ body[data-route="leaderboards"] .main {
   color: #788696;
   font-size: 11px;
   font-weight: 700;
-}
-
-.player-position-ratings-header > small {
-  flex: 0 0 auto;
-  padding: 7px 10px;
-  border: 1px solid rgba(30, 132, 121, 0.16);
-  border-radius: 999px;
-  color: #197d75;
-  background: rgba(235, 247, 245, 0.92);
-  font-size: 10px;
-  font-weight: 850;
-  white-space: nowrap;
 }
 
 .player-position-ratings-body {
@@ -17095,75 +17082,200 @@ body[data-route="leaderboards"] .main {
 
 .player-position-ratings-footer {
   display: grid;
-  grid-template-columns: minmax(220px, 0.58fr) minmax(0, 1fr);
-  gap: 12px;
+  gap: 9px;
   max-width: 660px;
   margin: 13px auto 0;
 }
 
-.player-position-best {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto auto auto;
-  gap: 2px 14px;
-  align-items: center;
-  min-height: 88px;
-  padding: 13px 15px;
-  border: 1px solid rgba(28, 127, 116, 0.17);
-  border-radius: 13px;
+.player-position-recommendations {
+  padding: 13px;
+  border: 1px solid rgba(29, 119, 111, 0.17);
+  border-radius: 14px;
   background:
-    radial-gradient(circle at 100% 0, rgba(28, 154, 137, 0.13), transparent 45%),
-    linear-gradient(145deg, #ffffff, #f0f8f7);
-  box-shadow: 0 7px 18px rgba(30, 79, 87, 0.05);
+    radial-gradient(circle at 100% 0, rgba(24, 150, 134, 0.1), transparent 34%),
+    linear-gradient(145deg, #ffffff, #f3f9f8);
+  box-shadow: 0 8px 20px rgba(28, 75, 82, 0.05);
 }
 
-.player-position-best span {
-  grid-column: 1;
-  grid-row: 1;
-  color: #667d8b;
-  font-size: 9px;
-  font-weight: 850;
-  letter-spacing: 0.05em;
+.player-position-recommendations > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 0 2px;
 }
 
-.player-position-best strong {
-  grid-column: 1;
-  grid-row: 2;
-  color: #17364b;
-  font-size: 19px;
+.player-position-recommendations > header > div {
+  display: grid;
+  gap: 2px;
+}
+
+.player-position-recommendations h4,
+.player-position-recommendations p {
+  margin: 0;
+}
+
+.player-position-recommendations h4 {
+  color: #19364a;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
   line-height: 1.2;
 }
 
-.player-position-best small {
-  grid-column: 1;
-  grid-row: 3;
-  color: #82939e;
+.player-position-recommendations p {
+  color: #7a8b97;
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 720;
 }
 
-.player-position-best > b {
-  grid-column: 2;
-  grid-row: 1 / 4;
-  color: #157f78;
-  font-size: 43px;
+.player-position-recommendations > header > small {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border: 1px solid rgba(31, 126, 118, 0.15);
+  border-radius: 999px;
+  color: #237e77;
+  background: rgba(238, 248, 247, 0.9);
+  font-size: 9px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.player-position-recommendations ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.player-position-recommendations ol.has-1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.player-position-recommendations ol.has-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.player-position-recommendations li {
+  --recommendation-tone: #758392;
+  display: grid;
+  min-width: 0;
+  min-height: 74px;
+  gap: 8px;
+  padding: 9px 10px;
+  border: 1px solid color-mix(in srgb, var(--recommendation-tone) 22%, #dce4e9);
+  border-radius: 11px;
+  background:
+    linear-gradient(145deg, #ffffff, color-mix(in srgb, var(--recommendation-tone) 7%, #ffffff));
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.player-position-recommendations li.is-primary {
+  border-color: color-mix(in srgb, var(--recommendation-tone) 48%, #ffffff);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--recommendation-tone) 10%, transparent),
+    inset 0 1px 0 #ffffff,
+    0 6px 14px color-mix(in srgb, var(--recommendation-tone) 11%, transparent);
+}
+
+.player-position-recommendations li > span,
+.player-position-recommendations li > div {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.player-position-recommendations li i {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  color: var(--recommendation-tone);
+  background: color-mix(in srgb, var(--recommendation-tone) 12%, #ffffff);
+  font-size: 8px;
+  font-style: normal;
   font-weight: 950;
-  line-height: 1;
+}
+
+.player-position-recommendations li.is-primary i {
+  color: #ffffff;
+  background: var(--recommendation-tone);
+}
+
+.player-position-recommendations li > span small {
+  overflow: hidden;
+  color: #778692;
+  font-size: 8px;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-position-recommendations li strong {
+  overflow: hidden;
+  color: #24394c;
+  font-size: 15px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-position-recommendations li b {
+  color: var(--recommendation-tone);
+  font-size: 25px;
+  font-weight: 950;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 6px 16px rgba(20, 132, 120, 0.12);
+  line-height: 1;
+}
+
+.player-position-recommendations li.is-elite {
+  --recommendation-tone: #d94339;
+}
+
+.player-position-recommendations li.is-strong {
+  --recommendation-tone: #e96f16;
+}
+
+.player-position-recommendations li.is-solid {
+  --recommendation-tone: #c79219;
+}
+
+.player-position-recommendations li.is-developing {
+  --recommendation-tone: #559c55;
+}
+
+.player-position-recommendations li.is-low {
+  --recommendation-tone: #4e839e;
+}
+
+.player-position-recommendations li.is-base {
+  --recommendation-tone: #768390;
 }
 
 .player-position-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 13px;
+  gap: 7px 12px;
   align-items: center;
   align-content: center;
-  min-height: 88px;
-  padding: 13px 15px;
+  min-height: 46px;
+  padding: 9px 12px;
   border: 1px solid rgba(139, 154, 167, 0.22);
   border-radius: 13px;
   background: rgba(248, 250, 251, 0.88);
+}
+
+.player-position-legend > strong {
+  margin-right: 2px;
+  color: #506274;
+  font-size: 9px;
+  font-weight: 900;
 }
 
 .player-position-legend span {
@@ -18938,11 +19050,6 @@ body[data-route="leaderboards"] .main {
     font-size: 18px;
   }
 
-  .player-position-ratings-header > small {
-    padding: 6px 8px;
-    font-size: 9px;
-  }
-
   .player-position-ratings-body {
     padding: 9px;
   }
@@ -19007,24 +19114,59 @@ body[data-route="leaderboards"] .main {
   }
 
   .player-position-ratings-footer {
-    grid-template-columns: 1fr;
     gap: 8px;
     margin-top: 9px;
   }
 
-  .player-position-best {
-    min-height: 78px;
-    padding: 11px 13px;
+  .player-position-recommendations {
+    padding: 10px;
   }
 
-  .player-position-best > b {
-    font-size: 38px;
+  .player-position-recommendations > header {
+    margin-bottom: 8px;
+  }
+
+  .player-position-recommendations h4 {
+    font-size: 15px;
+  }
+
+  .player-position-recommendations p {
+    font-size: 8px;
+  }
+
+  .player-position-recommendations ol {
+    gap: 5px;
+  }
+
+  .player-position-recommendations li {
+    min-height: 70px;
+    gap: 7px;
+    padding: 7px;
+    border-radius: 9px;
+  }
+
+  .player-position-recommendations li i {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+  }
+
+  .player-position-recommendations li > span small {
+    font-size: 7px;
+  }
+
+  .player-position-recommendations li strong {
+    font-size: 13px;
+  }
+
+  .player-position-recommendations li b {
+    font-size: 23px;
   }
 
   .player-position-legend {
     min-height: 0;
-    gap: 7px 11px;
-    padding: 10px 12px;
+    gap: 7px 10px;
+    padding: 9px 10px;
   }
 
   .player-ability-metric {
