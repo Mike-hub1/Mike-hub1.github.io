@@ -1,5 +1,5 @@
 const API = "/api/v1";
-const STATIC_DATA_VERSION = "308";
+const STATIC_DATA_VERSION = "309";
 const PLAYER_STAT_WINDOW_SIZE = 6;
 const ARCHIVE_CONFIG = window.WC26_ARCHIVE_CONFIG || {};
 const ARCHIVE_MODE = Boolean(ARCHIVE_CONFIG.enabled);
@@ -693,13 +693,50 @@ async function archiveSearchApi(index, canonicalPath) {
   ]);
   const items = [];
   (competitions.items || []).forEach((row) => {
-    if (archiveText(row).includes(q)) items.push({ type: "competition", id: row.id, label: row.name, subLabel: row.nameEn, href: `/competitions/${row.slug}` });
+    if (archiveText(row).includes(q)) {
+      items.push({
+        type: "competition",
+        id: row.id,
+        label: row.name,
+        subLabel: row.nameEn,
+        governingBody: row.governingBody,
+        active: row.active,
+        href: `/competitions/${row.slug}`,
+      });
+    }
   });
   (teams.items || []).forEach((row) => {
-    if (archiveText(row).includes(q)) items.push({ type: "team", id: row.id, label: row.name, subLabel: row.code, href: `/teams/${row.id}` });
+    if (archiveText(row).includes(q)) {
+      items.push({
+        type: "team",
+        id: row.id,
+        label: row.name,
+        subLabel: row.nameEn,
+        code: row.code,
+        imageUrl: row.flagUrl || row.logoUrl,
+        flagEmoji: row.flagEmoji,
+        href: `/teams/${row.id}`,
+      });
+    }
   });
   (players.items || []).forEach((row) => {
-    if (archiveText(row).includes(q)) items.push({ type: "player", id: row.id, label: row.name, subLabel: row.position, href: `/players/${row.id}` });
+    if (archiveText(row).includes(q)) {
+      items.push({
+        type: "player",
+        id: row.id,
+        label: row.name,
+        subLabel: row.position,
+        imageUrl: row.photoUrl || row.headshotUrl,
+        nationalityCode: row.nationalityCode,
+        teamName: row.team?.name,
+        teamCode: row.team?.code,
+        teamLogoUrl: row.team?.flagUrl || row.team?.logoUrl,
+        clubName: row.club?.name,
+        clubLogoUrl: row.club?.logoUrl,
+        marketValueLabel: row.marketValueLabelZh || row.marketValueLabel,
+        href: `/players/${row.id}`,
+      });
+    }
   });
   return { q, items: items.slice(0, 20) };
 }
@@ -1333,7 +1370,7 @@ function syncGlobalSearchForRoute(path, params = new URLSearchParams()) {
     return;
   }
   input.placeholder = "搜索球队、球员、小组赛";
-  if (path !== "/search") input.value = "";
+  input.value = path === "/search" ? params.get("q") || "" : "";
 }
 
 function leaderboardFallbackData(metric) {
@@ -11818,35 +11855,259 @@ async function renderPlayer(playerId, params = new URLSearchParams()) {
   initPlayerWorldCupStatsNavigation();
 }
 
+const searchResultTypes = {
+  player: {
+    label: "球员",
+    icon: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="8" r="3.25"></circle>
+        <path d="M5.75 19c.7-3.6 2.78-5.4 6.25-5.4s5.55 1.8 6.25 5.4"></path>
+      </svg>
+    `,
+  },
+  team: {
+    label: "球队",
+    icon: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 4.5h14v5.15c0 4.62-2.35 8.05-7 9.85-4.65-1.8-7-5.23-7-9.85V4.5Z"></path>
+        <path d="m9.2 11.3 1.75 1.75 3.85-4.1"></path>
+      </svg>
+    `,
+  },
+  competition: {
+    label: "赛事",
+    icon: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 4h8v3.25c0 3.05-1.5 5.1-4 6.15-2.5-1.05-4-3.1-4-6.15V4Z"></path>
+        <path d="M8.1 6H5.5v1.1c0 2.3 1.2 3.72 3.58 4.25M15.9 6h2.6v1.1c0 2.3-1.2 3.72-3.58 4.25M12 13.5V17m-3 3h6m-4.5-3h3"></path>
+      </svg>
+    `,
+  },
+};
+
+function searchResultType(type) {
+  return searchResultTypes[type] ? type : "competition";
+}
+
+function highlightSearchMatch(value, query) {
+  const text = String(value || "");
+  const needle = String(query || "").trim();
+  if (!needle) return escapeHtml(text);
+  const matchIndex = text.toLocaleLowerCase().indexOf(needle.toLocaleLowerCase());
+  if (matchIndex < 0) return escapeHtml(text);
+  return [
+    escapeHtml(text.slice(0, matchIndex)),
+    `<mark>${escapeHtml(text.slice(matchIndex, matchIndex + needle.length))}</mark>`,
+    escapeHtml(text.slice(matchIndex + needle.length)),
+  ].join("");
+}
+
+function searchResultVisual(item, type) {
+  if (item.imageUrl) {
+    const fallback = type === "player" ? "/static/assets/player-placeholder.png" : "/static/assets/team-placeholder.png";
+    const altSuffix = type === "player" ? "头像" : "队徽";
+    return `
+      <img
+        src="${escapeHtml(item.imageUrl)}"
+        alt="${escapeHtml(`${item.label || ""}${altSuffix}`)}"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        onerror="this.onerror=null;this.src='${fallback}'"
+      />
+    `;
+  }
+  if (type === "team" && item.flagEmoji) {
+    return `<span class="search-result-flag" role="img" aria-label="${escapeHtml(`${item.label || ""}旗帜`)}">${escapeHtml(item.flagEmoji)}</span>`;
+  }
+  if (type === "competition") {
+    return `
+      <span class="search-result-competition-mark" aria-hidden="true">
+        <strong>26</strong>
+        <small>FIFA</small>
+      </span>
+    `;
+  }
+  return `<img src="/static/assets/${type === "player" ? "player" : "team"}-placeholder.png" alt="" loading="lazy" />`;
+}
+
+function searchResultMeta(item, type) {
+  if (type === "player") {
+    const position = positionLabel(item.position || item.subLabel);
+    const nationalTeam = item.teamName || item.nationalityCode;
+    return [position, nationalTeam].filter(Boolean).map((value) => `<span>${escapeHtml(value)}</span>`).join("");
+  }
+  if (type === "team") {
+    return [item.code, item.subLabel].filter(Boolean).map((value) => `<span>${escapeHtml(value)}</span>`).join("");
+  }
+  return [item.governingBody, item.active === false ? "历史赛事" : "国际赛事"]
+    .filter(Boolean)
+    .map((value) => `<span>${escapeHtml(value)}</span>`)
+    .join("");
+}
+
+function searchResultContext(item, type) {
+  if (type === "player") {
+    const club = item.clubName
+      ? `
+        <span class="search-result-club">
+          ${item.clubLogoUrl ? `<img src="${escapeHtml(item.clubLogoUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()" />` : ""}
+          ${escapeHtml(item.clubName)}
+        </span>
+      `
+      : `<span class="search-result-club">${escapeHtml(item.teamName || "国家队球员")}</span>`;
+    const value = item.marketValueLabel ? `<span class="search-result-value">身价 ${escapeHtml(item.marketValueLabel)}</span>` : "";
+    return `${club}${value}`;
+  }
+  if (type === "team") {
+    return `<span class="search-result-context-copy">查看赛程、阵容与球队数据</span>`;
+  }
+  return `<span class="search-result-context-copy">${escapeHtml(item.subLabel || "查看赛事详情与赛程")}</span>`;
+}
+
+function renderSearchResult(item, query) {
+  const type = searchResultType(item.type);
+  const typeMeta = searchResultTypes[type];
+  return `
+    <a
+      class="search-result-card is-${type}"
+      href="${hashHref(item.href || "/")}"
+      data-search-type="${escapeHtml(type)}"
+      role="listitem"
+      aria-label="查看${escapeHtml(item.label || typeMeta.label)}详情"
+    >
+      <span class="search-result-media is-${type}">
+        ${searchResultVisual(item, type)}
+        <span class="search-result-type-icon">${typeMeta.icon}</span>
+      </span>
+      <span class="search-result-copy">
+        <span class="search-result-overline">
+          <span>${escapeHtml(typeMeta.label)}</span>
+          <i aria-hidden="true"></i>
+          <small>已收录</small>
+        </span>
+        <strong class="search-result-title">${highlightSearchMatch(item.label, query)}</strong>
+        <span class="search-result-meta">${searchResultMeta(item, type)}</span>
+        <span class="search-result-context">${searchResultContext(item, type)}</span>
+      </span>
+      <span class="search-result-cta" aria-hidden="true">
+        <span>查看详情</span>
+        <svg viewBox="0 0 24 24">
+          <path d="M5 12h13m-5-5 5 5-5 5"></path>
+        </svg>
+      </span>
+    </a>
+  `;
+}
+
+function initSearchResultFilters() {
+  const root = document.querySelector(".search-page");
+  if (!root) return;
+  const buttons = [...root.querySelectorAll("[data-search-filter]")];
+  const cards = [...root.querySelectorAll("[data-search-type]")];
+  const status = root.querySelector("[data-search-status]");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.searchFilter || "all";
+      let visibleCount = 0;
+      buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      cards.forEach((card) => {
+        const visible = filter === "all" || card.dataset.searchType === filter;
+        card.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
+      if (status) status.textContent = `当前显示 ${visibleCount} 条结果`;
+    });
+  });
+}
+
 async function renderSearch(params) {
-  const q = params.get("q") || "";
+  const q = (params.get("q") || "").trim();
   const data = await api(`/search?q=${encodeURIComponent(q)}`);
+  const items = Array.isArray(data.items) ? data.items : [];
+  const total = items.length;
+  const counts = items.reduce((result, item) => {
+    const type = searchResultType(item.type);
+    result[type] = (result[type] || 0) + 1;
+    return result;
+  }, { player: 0, team: 0, competition: 0 });
+  const filters = [
+    { type: "all", label: "全部", count: total },
+    ...Object.entries(searchResultTypes)
+      .map(([type, meta]) => ({ type, label: meta.label, count: counts[type] || 0 }))
+      .filter((item) => item.count > 0),
+  ];
   app.innerHTML = `
-    <section class="page-head">
-      <div class="page-title">
-        <p class="eyebrow">Search</p>
-        <h1>搜索结果</h1>
-        <p class="muted">${escapeHtml(q || "请输入关键词")}</p>
-      </div>
-    </section>
-    <section class="panel">
-      <div class="panel-body source-list">
-        ${data.items
-          .map(
-            (item) => `
-              <a class="search-item" href="#${escapeHtml(item.href)}">
-                <div>
-                  <strong>${escapeHtml(item.label)}</strong>
-                  <div class="muted mini">${escapeHtml(item.type)} · ${escapeHtml(item.subLabel || "")}</div>
-                </div>
-                <span class="source-badge">打开</span>
-              </a>
-            `
-          )
-          .join("") || `<div class="empty">暂无结果</div>`}
-      </div>
+    <section class="search-page" aria-labelledby="search-page-title">
+      <header class="search-hero">
+        <div class="search-hero-copy">
+          <span class="search-hero-kicker">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="5.75"></circle>
+              <path d="m15 15 4.5 4.5"></path>
+            </svg>
+            全站搜索
+          </span>
+          <h1 id="search-page-title">
+            ${q ? `关于 <em>“${escapeHtml(q)}”</em> 的搜索结果` : "发现世界杯精彩内容"}
+          </h1>
+          <p>${q ? "从球员、球队与赛事档案中为你精准匹配。" : "输入球员姓名、球队或赛事关键词开始探索。"}</p>
+        </div>
+        <div class="search-hero-summary" aria-label="${total} 条匹配">
+          <span>匹配内容</span>
+          <strong>${String(total).padStart(2, "0")}</strong>
+          <small>${total ? "条相关结果" : "等待搜索"}</small>
+        </div>
+      </header>
+
+      <section class="search-results-shell" aria-labelledby="search-results-title">
+        <header class="search-results-toolbar">
+          <div>
+            <span class="search-section-index">搜索结果</span>
+            <h2 id="search-results-title">${total ? `为你找到 ${total} 条内容` : q ? "暂未找到匹配内容" : "输入关键词开始搜索"}</h2>
+            <p data-search-status aria-live="polite">${total ? `当前显示 ${total} 条结果` : "可搜索球员、球队或赛事"}</p>
+          </div>
+          ${total ? `
+            <div class="search-filter-list" aria-label="按内容类型筛选">
+              ${filters.map((filter, index) => `
+                <button
+                  type="button"
+                  data-search-filter="${escapeHtml(filter.type)}"
+                  aria-pressed="${index === 0 ? "true" : "false"}"
+                >
+                  <span>${escapeHtml(filter.label)}</span>
+                  <strong>${filter.count}</strong>
+                </button>
+              `).join("")}
+            </div>
+          ` : ""}
+        </header>
+        ${total ? `
+          <div class="search-result-grid" role="list">
+            ${items.map((item) => renderSearchResult(item, q)).join("")}
+          </div>
+        ` : `
+          <div class="search-empty-state">
+            <span class="search-empty-visual" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <circle cx="28" cy="28" r="15"></circle>
+                <path d="m39 39 13 13"></path>
+                <path d="M21 28h14M28 21v14"></path>
+              </svg>
+            </span>
+            <div>
+              <strong>${q ? "换个关键词试试看" : "搜索你关注的世界杯内容"}</strong>
+              <p>${q ? "建议使用球员中文名、国家队名称或赛事全称。" : "例如：姆巴佩、法国、2026 世界杯。"}</p>
+            </div>
+            <div class="search-empty-actions">
+              <a href="#/">返回首页</a>
+              <a href="#/leaderboards/players">浏览球员榜</a>
+            </div>
+          </div>
+        `}
+      </section>
     </section>
   `;
+  initSearchResultFilters();
 }
 
 async function renderAdmin() {
